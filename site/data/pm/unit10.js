@@ -1,0 +1,655 @@
+/* CTSPM - unit 10: per-unit configuration and content. */
+
+const UNIT = 10;
+
+let currentUnit = 10;
+
+const mcQuestions = [
+  {
+    "textEn": "1. According to this unit, a church without evangelism is:",
+    "textEs": "1. Según esta unidad, una iglesia sin evangelismo es:",
+    "optionsEn": [
+      "A church on the way to extinction",
+      "Theologically purified",
+      "Stronger in discipleship",
+      "Properly mature"
+    ],
+    "optionsEs": [
+      "Una iglesia en camino a la extinción",
+      "Teológicamente purificada",
+      "Más fuerte en discipulado",
+      "Apropiadamente madura"
+    ],
+    "c": 21,
+    "explEn": "A church without evangelism is a church on the way to extinction.",
+    "explEs": "Una iglesia sin evangelismo es una iglesia en camino a la extinción."
+  },
+  {
+    "textEn": "2. The principal driver of a church's evangelistic life is:",
+    "textEs": "2. El conductor principal de la vida evangelística de una iglesia es:",
+    "optionsEn": [
+      "The deacon board",
+      "The pastor",
+      "The Sunday school director",
+      "The denomination"
+    ],
+    "optionsEs": [
+      "La junta de diáconos",
+      "El pastor",
+      "El director de escuela dominical",
+      "La denominación"
+    ],
+    "c": 29,
+    "explEn": "The principal driver of a church's evangelistic life is the pastor.",
+    "explEs": "El principal motor de la vida evangelística de una iglesia es el pastor."
+  },
+  {
+    "textEn": "3. Paul's permanent charge to Timothy in 2 Timothy 4:5 was to:",
+    "textEs": "3. El encargo permanente de Pablo a Timoteo en 2 Timoteo 4:5 fue:",
+    "optionsEn": [
+      "Build buildings",
+      "Stop preaching to crowds",
+      "Do the work of an evangelist and fulfill his ministry",
+      "Become a denominational leader"
+    ],
+    "optionsEs": [
+      "Edificar edificios",
+      "Dejar de predicar a multitudes",
+      "Hacer obra de evangelista y cumplir su ministerio",
+      "Convertirse en un líder denominacional"
+    ],
+    "c": 37,
+    "explEn": "2 Timothy 4:5 charges Timothy to do the work of an evangelist and fulfill his ministry.",
+    "explEs": "2 Timoteo 4:5 encarga a Timoteo hacer obra de evangelista y cumplir su ministerio."
+  },
+  {
+    "textEn": "4. Romans 1:16 anchors the pastor in evangelism by declaring:",
+    "textEs": "4. Romanos 1:16 ancla al pastor en el evangelismo declarando:",
+    "optionsEn": [
+      "The gospel is for the educated only",
+      "The gospel is for Jews only",
+      "The gospel is optional",
+      "The gospel is the power of God to salvation for everyone who believes"
+    ],
+    "optionsEs": [
+      "El evangelio es solo para los educados",
+      "El evangelio es solo para los judíos",
+      "El evangelio es opcional",
+      "El evangelio es el poder de Dios para salvación a todo aquel que cree"
+    ],
+    "c": 45,
+    "explEn": "Romans 1:16 declares the gospel is the power of God to salvation for everyone who believes.",
+    "explEs": "Romanos 1:16 declara que el evangelio es poder de Dios para salvación a todo aquel que cree."
+  },
+  {
+    "textEn": "5. The three simple methods every pastor can practice and teach are:",
+    "textEs": "5. Los tres métodos sencillos que todo pastor puede practicar y enseñar son:",
+    "optionsEn": [
+      "Invitation to church, personal testimony, and gospel tract",
+      "Doorknocking, debate, and door-to-door surveys",
+      "Television, radio, and internet",
+      "Music, drama, and dance"
+    ],
+    "optionsEs": [
+      "Invitación a la iglesia, testimonio personal, y tratado evangelístico",
+      "Tocar puertas, debate, y encuestas casa por casa",
+      "Televisión, radio, e internet",
+      "Música, drama, y danza"
+    ],
+    "c": 49,
+    "explEn": "The three simple methods are invitation to church, personal testimony, and gospel tract.",
+    "explEs": "Los tres métodos sencillos son la invitación a la iglesia, el testimonio personal y el tratado del evangelio."
+  },
+  {
+    "textEn": "6. The Samaritan woman (John 4) modeled the invitation method by saying to her town:",
+    "textEs": "6. La mujer samaritana (Juan 4) modeló el método de invitación diciendo a su pueblo:",
+    "optionsEn": [
+      "You must repent or perish",
+      "Let me explain Jewish theology",
+      "Come, see a Man who told me all things I ever did. Could this be the Christ?",
+      "I have prepared a five-point sermon"
+    ],
+    "optionsEs": [
+      "Debéis arrepentiros o perecer",
+      "Déjenme explicar la teología judía",
+      "Venid, ved a un hombre que me ha dicho todo cuanto he hecho. ¿No será éste el Cristo?",
+      "He preparado un sermón de cinco puntos"
+    ],
+    "c": 58,
+    "explEn": "The Samaritan woman modeled the invitation: 'Come, see a Man who told me all I ever did.'",
+    "explEs": "La samaritana modeló la invitación: 'Venid, ved a un hombre que me dijo todo lo que he hecho.'"
+  },
+  {
+    "textEn": "7. The blind man's testimony in John 9:25 was:",
+    "textEs": "7. El testimonio del ciego en Juan 9:25 fue:",
+    "optionsEn": [
+      "A long theological argument",
+      "A list of his good works",
+      "An attack on the Pharisees",
+      "Though I was blind, now I see"
+    ],
+    "optionsEs": [
+      "Un largo argumento teológico",
+      "Una lista de sus buenas obras",
+      "Un ataque a los fariseos",
+      "Habiendo yo sido ciego, ahora veo"
+    ],
+    "c": 66,
+    "explEn": "The blind man's testimony in John 9:25 was 'Though I was blind, now I see.'",
+    "explEs": "El testimonio del ciego en Juan 9:25 fue 'habiendo yo sido ciego, ahora veo.'"
+  },
+  {
+    "textEn": "8. The professor's personal habit when meeting people in everyday situations is:",
+    "textEs": "8. La práctica personal del profesor cuando conoce gente en situaciones cotidianas es:",
+    "optionsEn": [
+      "Hand them a tract immediately",
+      "Introduce himself and invite them to come worship with him",
+      "Begin a doctrinal debate",
+      "Avoid the topic of faith"
+    ],
+    "optionsEs": [
+      "Entregarles un tratado inmediatamente",
+      "Presentarse e invitarlos a venir a adorar con él",
+      "Comenzar un debate doctrinal",
+      "Evitar el tema de la fe"
+    ],
+    "c": 71,
+    "explEn": "The professor's habit is to introduce himself and invite people to come worship with him.",
+    "explEs": "El hábito del profesor es presentarse e invitar a la gente a venir a adorar con él."
+  },
+  {
+    "textEn": "9. In Hubbard's essay, Andrew Rowan carried a message through the Cuban jungle to:",
+    "textEs": "9. En el ensayo de Hubbard, Andrew Rowan llevó un mensaje por la selva cubana a:",
+    "optionsEn": [
+      "General Calixto García",
+      "President McKinley",
+      "Theodore Roosevelt",
+      "Fidel Castro"
+    ],
+    "optionsEs": [
+      "El General Calixto García",
+      "El Presidente McKinley",
+      "Theodore Roosevelt",
+      "Fidel Castro"
+    ],
+    "c": 77,
+    "explEn": "In Hubbard's essay, Andrew Rowan carried the message through the jungle to General García.",
+    "explEs": "En el ensayo de Hubbard, Andrew Rowan llevó el mensaje por la selva al General García."
+  },
+  {
+    "textEn": "10. The earliest name for believers, before they were called Christians, was:",
+    "textEs": "10. El primer nombre para los creyentes, antes de ser llamados cristianos, fue:",
+    "optionsEn": [
+      "The Faithful",
+      "The Saints",
+      "The Followers",
+      "The Way"
+    ],
+    "optionsEs": [
+      "Los Fieles",
+      "Los Santos",
+      "Los Seguidores",
+      "El Camino"
+    ],
+    "c": 87,
+    "explEn": "Before they were called Christians, the earliest name for believers was 'the Way.'",
+    "explEs": "Antes de ser llamados cristianos, el nombre más antiguo de los creyentes era 'el Camino.'"
+  },
+  {
+    "textEn": "11. The reference for 'the Way' as the earliest name for believers includes:",
+    "textEs": "11. La referencia para 'el Camino' como el primer nombre de los creyentes incluye:",
+    "optionsEn": [
+      "Acts 2:42 and Hebrews 11:6",
+      "Acts 9:2 and John 14:6",
+      "Romans 8:1 and Ephesians 2:8",
+      "John 3:16 and Acts 1:8"
+    ],
+    "optionsEs": [
+      "Hechos 2:42 y Hebreos 11:6",
+      "Hechos 9:2 y Juan 14:6",
+      "Romanos 8:1 y Efesios 2:8",
+      "Juan 3:16 y Hechos 1:8"
+    ],
+    "c": 92,
+    "explEn": "'The Way' as the earliest name draws on Acts 9:2 and John 14:6.",
+    "explEs": "'El Camino' como nombre más antiguo se basa en Hechos 9:2 y Juan 14:6."
+  },
+  {
+    "textEn": "12. The pastor as evangelistic multiplier means he:",
+    "textEs": "12. El pastor como multiplicador evangelístico significa que él:",
+    "optionsEn": [
+      "Hires more staff",
+      "Schedules more services",
+      "Reduces evangelism programs",
+      "Preaches, trains, celebrates conversions, and builds outreach ministries"
+    ],
+    "optionsEs": [
+      "Contrata más personal",
+      "Programa más servicios",
+      "Reduce los programas evangelísticos",
+      "Predica, entrena, celebra conversiones, y edifica ministerios de alcance"
+    ],
+    "c": 101,
+    "explEn": "The evangelistic multiplier preaches, trains, celebrates conversions, and builds outreach.",
+    "explEs": "El multiplicador evangelístico predica, entrena, celebra conversiones y construye alcance."
+  },
+  {
+    "textEn": "13. Public invitations have biblical warrant from:",
+    "textEs": "13. Las invitaciones públicas tienen autorización bíblica de:",
+    "optionsEn": [
+      "Joshua at the end of his life, Elijah on Mount Carmel, and Peter at Pentecost",
+      "Only the New Testament epistles",
+      "Only Old Testament priests",
+      "Only modern revival traditions"
+    ],
+    "optionsEs": [
+      "Josué al final de su vida, Elías en el Monte Carmelo, y Pedro en Pentecostés",
+      "Solo las epístolas del Nuevo Testamento",
+      "Solo los sacerdotes del Antiguo Testamento",
+      "Solo las tradiciones modernas de avivamiento"
+    ],
+    "c": 105,
+    "explEn": "Public invitations have warrant from Joshua, Elijah on Carmel, and Peter at Pentecost.",
+    "explEs": "Las invitaciones públicas tienen fundamento en Josué, Elías en el Carmelo y Pedro en Pentecostés."
+  },
+  {
+    "textEn": "14. The pastor's primary danger in the public invitation is:",
+    "textEs": "14. El peligro principal del pastor en la invitación pública es:",
+    "optionsEn": [
+      "Being too brief",
+      "Forgetting to extend it",
+      "Manipulating decisions through emotional pressure or psychological tactics",
+      "Singing the wrong hymn"
+    ],
+    "optionsEs": [
+      "Ser muy breve",
+      "Olvidar extenderla",
+      "Manipular decisiones a través de presión emocional o tácticas psicológicas",
+      "Cantar el himno equivocado"
+    ],
+    "c": 114,
+    "explEn": "The primary danger in the public invitation is manipulating decisions through pressure.",
+    "explEs": "El peligro principal en la invitación pública es manipular decisiones mediante presión."
+  },
+  {
+    "textEn": "15. New-believer follow-up should ideally happen:",
+    "textEs": "15. El seguimiento del nuevo creyente idealmente debe suceder:",
+    "optionsEn": [
+      "Six months later",
+      "Within the first week after the decision",
+      "Only if requested",
+      "After baptism"
+    ],
+    "optionsEs": [
+      "Seis meses después",
+      "Dentro de la primera semana después de la decisión",
+      "Solo si se solicita",
+      "Después del bautismo"
+    ],
+    "c": 120,
+    "explEn": "New-believer follow-up should ideally happen within the first week after the decision.",
+    "explEs": "El seguimiento del nuevo creyente debe ocurrir idealmente en la primera semana tras la decisión."
+  },
+  {
+    "textEn": "16. The faithful pastor refuses to choose between:",
+    "textEs": "16. El pastor fiel rehúsa elegir entre:",
+    "optionsEn": [
+      "Preaching and praying",
+      "Prayer and Scripture",
+      "Pulpit and family",
+      "Evangelism and discipleship"
+    ],
+    "optionsEs": [
+      "Predicar y orar",
+      "Oración y Escritura",
+      "Púlpito y familia",
+      "Evangelismo y discipulado"
+    ],
+    "c": 129,
+    "explEn": "The faithful pastor refuses to choose between evangelism and discipleship.",
+    "explEs": "El pastor fiel rehúsa elegir entre el evangelismo y el discipulado."
+  },
+  {
+    "textEn": "17. The soul-winner spirit, according to this unit:",
+    "textEs": "17. El espíritu del ganador de almas, según esta unidad:",
+    "optionsEn": [
+      "Cannot be faked",
+      "Comes naturally to all pastors",
+      "Requires special training certification",
+      "Is unnecessary in modern ministry"
+    ],
+    "optionsEs": [
+      "No se puede fingir",
+      "Viene naturalmente a todos los pastores",
+      "Requiere certificación especial de entrenamiento",
+      "Es innecesario en el ministerio moderno"
+    ],
+    "c": 133,
+    "explEn": "The soul-winner spirit cannot be faked.",
+    "explEs": "El espíritu del ganador de almas no se puede fingir."
+  },
+  {
+    "textEn": "18. To keep the soul-winner spirit alive, the pastor needs:",
+    "textEs": "18. Para mantener vivo el espíritu de ganador de almas, el pastor necesita:",
+    "optionsEn": [
+      "More church meetings",
+      "More committees",
+      "Regular time with lost people, prayer for them by name, and pleading with God for their salvation",
+      "More books on theology"
+    ],
+    "optionsEs": [
+      "Más reuniones de iglesia",
+      "Más comités",
+      "Tiempo regular con personas perdidas, oración por ellos por nombre, y suplicar a Dios por su salvación",
+      "Más libros de teología"
+    ],
+    "c": 142,
+    "explEn": "To keep the spirit alive the pastor needs time with the lost, prayer by name, and pleading for them.",
+    "explEs": "Para mantener vivo el espíritu el pastor necesita tiempo con los perdidos, oración por nombre y súplica por ellos."
+  },
+  {
+    "textEn": "19. Second Corinthians 5:20 describes the pastor as:",
+    "textEs": "19. Segunda Corintios 5:20 describe al pastor como:",
+    "optionsEn": [
+      "A judge",
+      "An ambassador for Christ",
+      "A king",
+      "A scholar"
+    ],
+    "optionsEs": [
+      "Un juez",
+      "Un embajador en nombre de Cristo",
+      "Un rey",
+      "Un erudito"
+    ],
+    "c": 148,
+    "explEn": "2 Corinthians 5:20 describes the pastor as an ambassador for Christ.",
+    "explEs": "2 Corintios 5:20 describe al pastor como un embajador de Cristo."
+  },
+  {
+    "textEn": "20. Romans 10:14-15 establishes the chain that ends with:",
+    "textEs": "20. Romanos 10:14-15 establece la cadena que termina con:",
+    "optionsEn": [
+      "Education funding",
+      "More buildings",
+      "How beautiful are the feet of those who preach the gospel",
+      "Denominational programs"
+    ],
+    "optionsEs": [
+      "Financiamiento educativo",
+      "Más edificios",
+      "¡Cuán hermosos son los pies de los que anuncian el evangelio!",
+      "Programas denominacionales"
+    ],
+    "c": 156,
+    "explEn": "Romans 10:14-15 ends with 'How beautiful are the feet of those who preach the gospel.'",
+    "explEs": "Romanos 10:14-15 termina con '¡Cuán hermosos los pies de los que anuncian el evangelio!'"
+  }
+];
+
+const kwQuestions = [
+  {
+    "textEn": "21. Defend the claim that a church without evangelism is on the way to extinction. Apply this to a typical established church scenario.",
+    "textEs": "21. Defienda la afirmación de que una iglesia sin evangelismo está en camino a la extinción. Aplique esto a un escenario típico de iglesia establecida.",
+    "kw_en": [
+      "evangelism",
+      "extinct",
+      "die",
+      "growth",
+      "mission",
+      "lost",
+      "decline",
+      "church"
+    ],
+    "kw_es": [
+      "evangelismo",
+      "extinción",
+      "morir",
+      "crecimiento",
+      "misión",
+      "perdido",
+      "declive",
+      "iglesia"
+    ],
+    "modelEn": "A church without evangelism is a church on the way to extinction, and this is true of even the most established congregation. A church that stops reaching the lost has only one direction to go: it ages, shrinks, and eventually closes its doors, because no congregation can survive on its existing members alone — they grow old and die, move away, or fall away. The established church is especially vulnerable to this, because it can mistake comfort for health, mistaking a full building of long-time members for a living church. But a body that is not reproducing is, by definition, dying. Evangelism is not an optional program for the energetic church; it is the breathing of a living body. Stop reaching the lost, and within a generation the church becomes a museum, then a memory.",
+    "modelEs": "Una iglesia sin evangelismo es una iglesia en camino a la extinción, y esto es cierto aun de la congregación más establecida. Una iglesia que deja de alcanzar a los perdidos solo tiene una dirección hacia donde ir: envejece, se encoge, y eventualmente cierra sus puertas, porque ninguna congregación puede sobrevivir solo de sus miembros existentes — envejecen y mueren, se mudan, o se apartan. La iglesia establecida es especialmente vulnerable a esto, porque puede confundir la comodidad con la salud, confundiendo un edificio lleno de miembros antiguos con una iglesia viva. Pero un cuerpo que no se reproduce está, por definición, muriendo. El evangelismo no es un programa opcional para la iglesia enérgica; es la respiración de un cuerpo vivo. Deja de alcanzar a los perdidos, y dentro de una generación la iglesia se vuelve un museo, luego un recuerdo."
+  },
+  {
+    "textEn": "22. Explain why Paul's charge in 2 Timothy 4:5 ('do the work of an evangelist') applies to pastors as well as evangelists. Why is this ministry one of the easiest for a busy pastor to neglect?",
+    "textEs": "22. Explique por qué el encargo de Pablo en 2 Timoteo 4:5 ('haz obra de evangelista') aplica a los pastores tanto como a los evangelistas. ¿Por qué es este ministerio uno de los más fáciles de descuidar para un pastor ocupado?",
+    "kw_en": [
+      "timothy",
+      "evangelist",
+      "pastor",
+      "neglect",
+      "busy",
+      "charge",
+      "ministry",
+      "work"
+    ],
+    "kw_es": [
+      "timoteo",
+      "evangelista",
+      "pastor",
+      "descuid",
+      "ocupado",
+      "encargo",
+      "ministerio",
+      "obra"
+    ],
+    "modelEn": "Paul's charge in 2 Timothy 4:5 — 'do the work of an evangelist, fulfill your ministry' — applies to pastors as well as to traveling evangelists, because the pastor is to lead his people in reaching the lost, not merely tend the saved. Timothy was a pastor, not an itinerant evangelist, yet Paul commanded him to do the evangelist's work. This ministry is one of the easiest for a busy pastor to neglect, because the demands of the already-converted are constant and loud: the sick to visit, the sermons to prepare, the meetings to attend, the members to please. The lost make no appointment and file no complaint when they are ignored, so they quietly fall off the pastor's calendar. A pastor can fill every hour caring for the flock he has while never seeking the sheep not yet in the fold. Paul's charge is a permanent guard against that drift.",
+    "modelEs": "El encargo de Pablo en 2 Timoteo 4:5 — 'haz obra de evangelista, cumple tu ministerio' — aplica a los pastores tanto como a los evangelistas itinerantes, porque el pastor debe dirigir a su pueblo en alcanzar a los perdidos, no meramente cuidar a los salvos. Timoteo era un pastor, no un evangelista itinerante, sin embargo Pablo le mandó hacer la obra del evangelista. Este ministerio es uno de los más fáciles de descuidar para un pastor ocupado, porque las demandas de los ya convertidos son constantes y ruidosas: los enfermos que visitar, los sermones que preparar, las reuniones que atender, los miembros que complacer. Los perdidos no hacen citas ni presentan quejas cuando se les ignora, así que silenciosamente se caen del calendario del pastor. Un pastor puede llenar cada hora cuidando del rebaño que tiene sin jamás buscar las ovejas que aún no están en el redil. El encargo de Pablo es un guarda permanente contra esa deriva."
+  },
+  {
+    "textEn": "23. Outline the three simple methods (invitation, testimony, tract) and explain how each removes a barrier that keeps ordinary believers from sharing their faith.",
+    "textEs": "23. Bosqueje los tres métodos sencillos (invitación, testimonio, tratado) y explique cómo cada uno remueve una barrera que evita que los creyentes ordinarios compartan su fe.",
+    "kw_en": [
+      "invitation",
+      "testimony",
+      "tract",
+      "barrier",
+      "simple",
+      "teach",
+      "ordinary",
+      "share"
+    ],
+    "kw_es": [
+      "invitación",
+      "testimonio",
+      "tratado",
+      "barrera",
+      "simple",
+      "enseñar",
+      "ordinario",
+      "compartir"
+    ],
+    "modelEn": "The three simple methods every pastor can practice and teach are invitation, testimony, and tract, and each removes a barrier that keeps ordinary believers from sharing their faith. The invitation — simply asking someone to come to church — removes the fear of having to explain everything, since the believer need only bring the person to where the gospel is preached. The personal testimony — telling one's own story of what Christ has done — removes the fear of not knowing enough theology, since no one can argue with your own experience, as the blind man said, 'though I was blind, now I see.' The gospel tract removes the fear of forgetting what to say, since the words are already printed. These methods are powerful precisely because they are simple enough for any believer to use, which is why the pastor must teach them: evangelism multiplies only when it is within reach of the ordinary member, not reserved for the gifted few.",
+    "modelEs": "Los tres métodos sencillos que todo pastor puede practicar y enseñar son la invitación, el testimonio y el tratado, y cada uno quita una barrera que impide a los creyentes ordinarios compartir su fe. La invitación — simplemente pedirle a alguien que venga a la iglesia — quita el miedo de tener que explicarlo todo, pues el creyente solo necesita traer a la persona a donde se predica el evangelio. El testimonio personal — contar la propia historia de lo que Cristo ha hecho — quita el miedo de no saber suficiente teología, pues nadie puede discutir con tu propia experiencia, como dijo el ciego: 'habiendo yo sido ciego, ahora veo.' El tratado del evangelio quita el miedo de olvidar qué decir, pues las palabras ya están impresas. Estos métodos son poderosos precisamente porque son lo bastante sencillos para que cualquier creyente los use, por lo cual el pastor debe enseñarlos: el evangelismo se multiplica solo cuando está al alcance del miembro ordinario, no reservado para los pocos dotados."
+  },
+  {
+    "textEn": "24. Apply the Samaritan woman of John 4 and the blind man of John 9 as biblical models for personal evangelism. What does each contribute to the pastor's training of his people?",
+    "textEs": "24. Aplique a la mujer samaritana de Juan 4 y al ciego de Juan 9 como modelos bíblicos para el evangelismo personal. ¿Qué aporta cada uno al entrenamiento del pastor a su gente?",
+    "kw_en": [
+      "samaritan",
+      "blind",
+      "john",
+      "testimony",
+      "experience",
+      "invite",
+      "model",
+      "personal"
+    ],
+    "kw_es": [
+      "samaritana",
+      "ciego",
+      "juan",
+      "testimonio",
+      "experiencia",
+      "invitar",
+      "modelo",
+      "personal"
+    ],
+    "modelEn": "The Samaritan woman of John 4 and the blind man of John 9 are biblical models for personal evangelism, and each contributes something to the pastor's training of his people. The Samaritan woman, newly met by Jesus, ran to her town and said, 'Come, see a Man who told me all things I ever did. Could this be the Christ?' — she modeled the invitation method, simply inviting others to come and see. The blind man, pressed by hostile authorities, gave the unanswerable testimony, 'Though I was blind, now I see' — he modeled the power of personal experience over theological debate. Neither was a trained theologian; both simply pointed to what Jesus had done for them. The pastor trains his people with these models to show that you do not need a seminary degree to evangelize — you need only to invite people to Jesus and to tell honestly what He has done in your own life.",
+    "modelEs": "La mujer samaritana de Juan 4 y el ciego de Juan 9 son modelos bíblicos para el evangelismo personal, y cada uno aporta algo al entrenamiento que el pastor da a su pueblo. La samaritana, recién encontrada por Jesús, corrió a su pueblo y dijo: 'Venid, ved a un hombre que me ha dicho todo cuanto he hecho. ¿No será éste el Cristo?' — modeló el método de la invitación, simplemente invitando a otros a venir y ver. El ciego, presionado por autoridades hostiles, dio el testimonio incontestable: 'habiendo yo sido ciego, ahora veo' — modeló el poder de la experiencia personal sobre el debate teológico. Ninguno era un teólogo entrenado; ambos simplemente señalaron a lo que Jesús había hecho por ellos. El pastor entrena a su pueblo con estos modelos para mostrar que no se necesita un título de seminario para evangelizar — solo se necesita invitar a la gente a Jesús y contar honestamente lo que Él ha hecho en la propia vida."
+  },
+  {
+    "textEn": "25. Apply Hubbard's 'A Message to Garcia' (Rowan delivering the message through the Cuban jungle) as a metaphor for the evangelist's spirit. What single-minded determination does the gospel demand?",
+    "textEs": "25. Aplique 'Un Mensaje para García' de Hubbard (Rowan entregando el mensaje por la selva cubana) como una metáfora para el espíritu del evangelista. ¿Qué determinación de mente única demanda el evangelio?",
+    "kw_en": [
+      "garcia",
+      "rowan",
+      "determination",
+      "single",
+      "mission",
+      "deliver",
+      "persever",
+      "spirit"
+    ],
+    "kw_es": [
+      "garcía",
+      "rowan",
+      "determinación",
+      "único",
+      "misión",
+      "entregar",
+      "persever",
+      "espíritu"
+    ],
+    "modelEn": "In Hubbard's essay 'A Message to Garcia,' Andrew Rowan was given a message to deliver to General Calixto García, hidden somewhere in the Cuban jungle, and he simply took the message and got it through — no excuses, no questions about how, just single-minded determination to complete the mission. As a metaphor for the evangelist's spirit, this pictures the determination the gospel demands: the soul-winner does not make excuses about why the lost cannot be reached, does not get bogged down in obstacles, but presses through whatever stands in the way to deliver the message of Christ. The gospel is a message entrusted to us for delivery, and the people perishing without it are like García waiting in the jungle. Rowan's single-mindedness rebukes the half-hearted evangelism that quits at the first difficulty. The faithful pastor and the trained believer carry the message with the resolve of a man who will get it through no matter what.",
+    "modelEs": "En el ensayo de Hubbard 'Un mensaje a García,' a Andrew Rowan se le dio un mensaje para entregar al General Calixto García, escondido en algún lugar de la selva cubana, y él simplemente tomó el mensaje y lo hizo llegar — sin excusas, sin preguntas sobre cómo, solo determinación de un solo propósito para completar la misión. Como metáfora del espíritu del evangelista, esto retrata la determinación que el evangelio exige: el ganador de almas no pone excusas sobre por qué los perdidos no pueden ser alcanzados, no se atasca en obstáculos, sino que presiona a través de lo que se interponga para entregar el mensaje de Cristo. El evangelio es un mensaje confiado a nosotros para su entrega, y la gente que perece sin él es como García esperando en la selva. La determinación de un solo propósito de Rowan reprende el evangelismo a medias que se rinde a la primera dificultad. El pastor fiel y el creyente entrenado llevan el mensaje con la resolución de un hombre que lo hará llegar pase lo que pase."
+  },
+  {
+    "textEn": "26. Discuss what it means for the pastor to be a multiplier of evangelism. How does he move from doing all the evangelism himself to leading a church into mission?",
+    "textEs": "26. Discuta lo que significa para el pastor ser un multiplicador del evangelismo. ¿Cómo se mueve de hacer todo el evangelismo él mismo a dirigir a una iglesia hacia la misión?",
+    "kw_en": [
+      "multiplier",
+      "train",
+      "equip",
+      "celebrate",
+      "mission",
+      "lead",
+      "outreach",
+      "others"
+    ],
+    "kw_es": [
+      "multiplicador",
+      "entrenar",
+      "equipar",
+      "celebrar",
+      "misión",
+      "dirig",
+      "alcance",
+      "otros"
+    ],
+    "modelEn": "For the pastor to be a multiplier of evangelism means he moves from doing all the evangelism himself to leading a whole church into mission. The multiplier preaches the gospel, trains his people in the simple methods, celebrates every conversion publicly so the church catches the joy, and builds outreach ministries that send members into the community. He understands that one pastor evangelizing reaches a few, but a pastor who equips a hundred members to evangelize reaches a multitude. The shift is from being the church's only soul-winner to being the trainer of soul-winners, the same Ephesians 4 principle applied to evangelism. A church where only the pastor evangelizes will grow slowly if at all; a church where the pastor has multiplied the work into the whole body becomes a mission force. The multiplier measures success not by his own conversions but by the evangelistic life he has awakened in his people.",
+    "modelEs": "Que el pastor sea un multiplicador del evangelismo significa que se mueve de hacer todo el evangelismo él mismo a dirigir a toda una iglesia hacia la misión. El multiplicador predica el evangelio, entrena a su pueblo en los métodos sencillos, celebra cada conversión públicamente para que la iglesia capte el gozo, y construye ministerios de alcance que envían a los miembros a la comunidad. Entiende que un pastor evangelizando alcanza a unos pocos, pero un pastor que equipa a cien miembros para evangelizar alcanza a una multitud. El cambio es de ser el único ganador de almas de la iglesia a ser el entrenador de ganadores de almas, el mismo principio de Efesios 4 aplicado al evangelismo. Una iglesia donde solo el pastor evangeliza crecerá lentamente si acaso; una iglesia donde el pastor ha multiplicado la obra en todo el cuerpo se vuelve una fuerza misionera. El multiplicador mide el éxito no por sus propias conversiones sino por la vida evangelística que ha despertado en su pueblo."
+  },
+  {
+    "textEn": "27. Defend the biblical legitimacy of the public invitation. Use Joshua 24:15, Elijah on Mount Carmel, and Peter at Pentecost. How should the pastor avoid manipulation?",
+    "textEs": "27. Defienda la legitimidad bíblica de la invitación pública. Use Josué 24:15, Elías en el Monte Carmelo, y Pedro en Pentecostés. ¿Cómo debe el pastor evitar la manipulación?",
+    "kw_en": [
+      "invitation",
+      "public",
+      "joshua",
+      "elijah",
+      "peter",
+      "manipulat",
+      "decision",
+      "response"
+    ],
+    "kw_es": [
+      "invitación",
+      "pública",
+      "josué",
+      "elías",
+      "pedro",
+      "manipul",
+      "decisión",
+      "respuesta"
+    ],
+    "modelEn": "The public invitation — calling people to a visible response to the gospel — has biblical warrant from Joshua, who at the end of his life called Israel to 'choose this day whom you will serve'; from Elijah on Mount Carmel, who demanded the people decide between the Lord and Baal; and from Peter at Pentecost, who called the convicted crowd to repent and be baptized. Scripture repeatedly calls people to a definite moment of decision. Yet the pastor's primary danger in the public invitation is manipulation — engineering decisions through emotional pressure, manufactured music, guilt, or psychological tactics that produce a response to the pastor rather than to the Spirit. The cure is to call genuinely for a response to the gospel while leaving the work of conviction to the Holy Spirit, trusting God to draw rather than pressuring people to walk an aisle. A real invitation honors both the biblical call to decide and the freedom of the Spirit to convict.",
+    "modelEs": "La invitación pública — llamar a la gente a una respuesta visible al evangelio — tiene fundamento bíblico en Josué, que al final de su vida llamó a Israel a 'escoged hoy a quién sirváis'; en Elías en el Monte Carmelo, que exigió que el pueblo decidiera entre el Señor y Baal; y en Pedro en Pentecostés, que llamó a la multitud convencida a arrepentirse y bautizarse. La Escritura repetidamente llama a la gente a un momento definido de decisión. Sin embargo, el peligro principal del pastor en la invitación pública es la manipulación — fabricar decisiones mediante presión emocional, música manipuladora, culpa o tácticas psicológicas que producen una respuesta al pastor en vez de al Espíritu. La cura es llamar genuinamente a una respuesta al evangelio mientras se deja la obra de convicción al Espíritu Santo, confiando en que Dios atraiga en vez de presionar a la gente a pasar al frente. Una invitación real honra tanto el llamado bíblico a decidir como la libertad del Espíritu para convencer."
+  },
+  {
+    "textEn": "28. Discuss the discipling of the new convert. Why does evangelism without discipleship leave spiritual infants, and how does the pastor build a follow-up system?",
+    "textEs": "28. Discuta el discipulado del nuevo convertido. ¿Por qué el evangelismo sin discipulado deja infantes espirituales, y cómo edifica el pastor un sistema de seguimiento?",
+    "kw_en": [
+      "disciple",
+      "follow-up",
+      "convert",
+      "infant",
+      "week",
+      "system",
+      "grow",
+      "nurture"
+    ],
+    "kw_es": [
+      "discípulo",
+      "seguimiento",
+      "convertido",
+      "infante",
+      "semana",
+      "sistema",
+      "crecer",
+      "nutrir"
+    ],
+    "modelEn": "Evangelism without discipleship leaves spiritual infants, so the discipling of the new convert is essential, not optional. A person who makes a decision but is never followed up is like a newborn left without care — vulnerable, undernourished, and likely to wither. New-believer follow-up should ideally happen within the first week after the decision, while the heart is soft and the commitment fresh, before doubts and old patterns reassert themselves. The pastor builds a follow-up system: someone assigned to make contact quickly, a simple plan to ground the new believer in basic truths, integration into the life of the church, and a relationship that walks alongside them in the early months. The faithful pastor refuses to choose between evangelism and discipleship, because they are two halves of one command — the Great Commission says to make disciples, not merely to gain decisions. A church that evangelizes without discipling fills a nursery that never grows up.",
+    "modelEs": "El evangelismo sin discipulado deja infantes espirituales, así que el discipulado del nuevo convertido es esencial, no opcional. Una persona que toma una decisión pero a quien nunca se le da seguimiento es como un recién nacido dejado sin cuidado — vulnerable, desnutrido y propenso a marchitarse. El seguimiento del nuevo creyente debe ocurrir idealmente dentro de la primera semana después de la decisión, mientras el corazón está blando y el compromiso fresco, antes de que las dudas y los viejos patrones se reafirmen. El pastor construye un sistema de seguimiento: alguien asignado a hacer contacto rápidamente, un plan sencillo para cimentar al nuevo creyente en las verdades básicas, la integración a la vida de la iglesia, y una relación que camine junto a él en los primeros meses. El pastor fiel rehúsa elegir entre el evangelismo y el discipulado, porque son dos mitades de un solo mandato — la Gran Comisión dice hacer discípulos, no meramente obtener decisiones. Una iglesia que evangeliza sin discipular llena una guardería que nunca crece."
+  },
+  {
+    "textEn": "29. Identify the marks of the pastor's soul-winner spirit. What practices keep this spirit alive over decades, and what allows it to die?",
+    "textEs": "29. Identifique las marcas del espíritu del ganador de almas del pastor. ¿Qué prácticas mantienen vivo este espíritu por décadas, y qué permite que muera?",
+    "kw_en": [
+      "soul",
+      "spirit",
+      "fake",
+      "pray",
+      "lost",
+      "burden",
+      "alive",
+      "decades"
+    ],
+    "kw_es": [
+      "alma",
+      "espíritu",
+      "fingir",
+      "orar",
+      "perdido",
+      "carga",
+      "vivo",
+      "décadas"
+    ],
+    "modelEn": "The soul-winner spirit cannot be faked; it is a genuine burden for the lost that either burns in a man or does not. The marks of this spirit are a real love for lost people, a grief over those headed to a Christless eternity, and a joy when one is found. To keep this spirit alive over decades, the pastor needs regular time with lost people — not retreating into a Christian bubble — prayer for them by name, and pleading with God for their salvation. The spirit dies when a pastor surrounds himself only with the converted, stops praying for specific lost souls, and lets the routine of church machinery replace the burden for the perishing. A man can preach evangelistically with no soul-winner spirit, and his people will sense the hollowness. The faithful pastor guards this fire the way he guards his own walk with God, because once it dies, evangelism becomes a program instead of a passion, and the church soon stops reaching anyone.",
+    "modelEs": "El espíritu del ganador de almas no se puede fingir; es una verdadera carga por los perdidos que o arde en un hombre o no. Las marcas de este espíritu son un amor real por los perdidos, un dolor por los que van hacia una eternidad sin Cristo, y un gozo cuando uno es hallado. Para mantener vivo este espíritu por décadas, el pastor necesita tiempo regular con los perdidos — sin replegarse en una burbuja cristiana — oración por ellos por nombre, y suplicar a Dios por su salvación. El espíritu muere cuando un pastor se rodea solo de los convertidos, deja de orar por almas perdidas específicas, y permite que la rutina de la maquinaria eclesial reemplace la carga por los que perecen. Un hombre puede predicar evangelísticamente sin espíritu de ganador de almas, y su pueblo sentirá el vacío. El pastor fiel guarda este fuego como guarda su propio andar con Dios, porque una vez que muere, el evangelismo se vuelve un programa en vez de una pasión, y la iglesia pronto deja de alcanzar a nadie."
+  },
+  {
+    "textEn": "30. Synthesize the entire unit: How does a pastor who personally evangelizes, equips his people, calls for response, disciples new believers, and walks with the soul-winner spirit fulfill 2 Corinthians 5:20 as an ambassador for Christ?",
+    "textEs": "30. Sintetice toda la unidad: ¿Cómo un pastor que evangeliza personalmente, equipa a su gente, llama a la respuesta, discipula a nuevos creyentes, y camina con el espíritu de ganador de almas cumple 2 Corintios 5:20 como un embajador en nombre de Cristo?",
+    "kw_en": [
+      "ambassador",
+      "evangelize",
+      "equip",
+      "disciple",
+      "spirit",
+      "corinthians",
+      "mission",
+      "christ"
+    ],
+    "kw_es": [
+      "embajador",
+      "evangelizar",
+      "equipar",
+      "discípulo",
+      "espíritu",
+      "corintios",
+      "misión",
+      "cristo"
+    ],
+    "modelEn": "A pastor fulfills 2 Corinthians 5:20 as an ambassador for Christ when he personally evangelizes, equips his people, calls for response, disciples new believers, and walks with the soul-winner spirit. An ambassador represents his King and carries his King's message into foreign territory — and the pastor pleads, as though God were making His appeal through him, 'be reconciled to God.' He does not delegate away the burden; he leads from the front by reaching the lost himself, then multiplies it by training his people in the simple methods so the whole church becomes a mission force. He calls for genuine response without manipulation, and he disciples the new convert so that decisions become disciples. Through it all the soul-winner spirit keeps the fire burning, sustained by prayer and time with lost people. This is the undershepherd doing the Chief Shepherd's own work — for the Son of Man came to seek and to save the lost, and the pastor who shares that mission shares His heart.",
+    "modelEs": "Un pastor cumple 2 Corintios 5:20 como embajador de Cristo cuando personalmente evangeliza, equipa a su pueblo, llama a la respuesta, discipula a los nuevos creyentes, y anda con el espíritu del ganador de almas. Un embajador representa a su Rey y lleva el mensaje de su Rey a territorio extranjero — y el pastor ruega, como si Dios hiciera Su súplica por medio de él: 'reconciliaos con Dios.' No delega la carga; dirige desde el frente alcanzando él mismo a los perdidos, luego lo multiplica entrenando a su pueblo en los métodos sencillos para que toda la iglesia se vuelva una fuerza misionera. Llama a una respuesta genuina sin manipulación, y discipula al nuevo convertido para que las decisiones se vuelvan discípulos. A través de todo, el espíritu del ganador de almas mantiene el fuego ardiendo, sostenido por la oración y el tiempo con los perdidos. Este es el subpastor haciendo la obra misma del Príncipe de los pastores — porque el Hijo del Hombre vino a buscar y a salvar lo que se había perdido, y el pastor que comparte esa misión comparte Su corazón."
+  }
+];
+
+const PREV_HREF = 'CTSPMUnit9.html';
+
+const NEXT_HREF = 'CTSPMUnit11.html';

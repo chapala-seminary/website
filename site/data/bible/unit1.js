@@ -1,0 +1,169 @@
+/* CTSBible - unit 1: per-unit configuration and content. */
+
+const UNIT = 1;
+
+const COURSE_PREFIX = 'cts_bible_u1_';
+
+const mcQuestions = [
+  { textEn:`What question drives this course?`, textEs:`¿Qué pregunta impulsa este curso?`,
+    optionsEn:[`How to read Hebrew and Greek`,`Whether we can trust the Bible we actually hold`,`Which English translation is best`,`How to preach from the Old Testament`],
+    optionsEs:[`Cómo leer hebreo y griego`,`Si podemos confiar en la Biblia que en verdad tenemos`,`Cuál traducción es la mejor`,`Cómo predicar del Antiguo Testamento`],
+    correct:1, explanationEn:`The course asks whether the Bible in our hands is trustworthy, and answers with four witnesses.`, explanationEs:`El curso pregunta si la Biblia en nuestras manos es confiable, y responde con cuatro testigos.` },
+
+  { textEn:`In Luke 1:3–4, Luke wrote his orderly account so that Theophilus might have:`, textEs:`En Lucas 1:3–4, Lucas escribió su relato ordenado para que Teófilo tuviera:`,
+    optionsEn:[`A collection of miracles`,`A defense against Rome`,`Certainty about what he had been taught`,`A new law code`],
+    optionsEs:[`Una colección de milagros`,`Una defensa contra Roma`,`Certeza sobre lo que le fue enseñado`,`Un nuevo código de leyes`],
+    correct:2, explanationEn:`Luke's goal was certainty — settled confidence — not doubt.`, explanationEs:`La meta de Lucas era la certeza — confianza asentada — no la duda.` },
+
+  { textEn:`On what does a believer's certainty ultimately rest?`, textEs:`¿En qué descansa finalmente la certeza del creyente?`,
+    optionsEn:[`Archaeological discoveries`,`Answering every objection`,`The number of manuscripts`,`That Scripture is the inspired Word of the God who spoke it`],
+    optionsEs:[`Descubrimientos arqueológicos`,`Responder toda objeción`,`El número de manuscritos`,`Que la Escritura es la Palabra inspirada del Dios que la habló`],
+    correct:3, explanationEn:`Evidence strengthens confidence, but the foundation is inspiration and the character of God.`, explanationEs:`La evidencia fortalece la confianza, pero el fundamento es la inspiración y el carácter de Dios.` },
+
+  { textEn:`"All Scripture is given by inspiration of God" is found in:`, textEs:`"Toda la Escritura es dada por inspiración de Dios" se encuentra en:`,
+    optionsEn:[`2 Timothy 3:16`,`John 1:1`,`Romans 1:20`,`Matthew 24:35`],
+    optionsEs:[`2 Timoteo 3:16`,`Juan 1:1`,`Romanos 1:20`,`Mateo 24:35`],
+    correct:0, explanationEn:`2 Timothy 3:16 is the classic text on inspiration.`, explanationEs:`2 Timoteo 3:16 es el texto clásico sobre la inspiración.` },
+
+  { textEn:`In this course, evidence serves to ______ our confidence, not to ______ it.`, textEs:`En este curso, la evidencia sirve para ______ nuestra confianza, no para ______la.`,
+    optionsEn:[`replace / strengthen`,`prove / illustrate`,`strengthen / ground`,`weaken / support`],
+    optionsEs:[`reemplazar / fortalecer`,`probar / ilustrar`,`fortalecer / fundamentar`,`debilitar / apoyar`],
+    correct:2, explanationEn:`Evidence strengthens confidence; it is never the ground of it.`, explanationEs:`La evidencia fortalece la confianza; nunca es su fundamento.` },
+
+  { textEn:`The course pictures Scripture's authority best as:`, textEs:`El curso describe la autoridad de la Escritura mejor como:`,
+    optionsEn:[`A fortress defended inch by inch`,`A throne that commands and binds`,`A museum piece`,`A debate to be won`],
+    optionsEs:[`Una fortaleza defendida palmo a palmo`,`Un trono que ordena y obliga`,`Una pieza de museo`,`Un debate por ganar`],
+    correct:1, explanationEn:`Absolute authority is an offensive posture — a throne, not a fortress.`, explanationEs:`La autoridad absoluta es una postura de avance — un trono, no una fortaleza.` },
+
+  { textEn:`Why can we say Scripture's authority rests on the Bible the believer actually holds?`, textEs:`¿Por qué podemos decir que la autoridad de la Escritura descansa en la Biblia que el creyente en verdad tiene?`,
+    optionsEn:[`Because the authority travels into the copy, as when the apostles preached from a translation`,`Because modern translations are inspired anew`,`Because the autographs are on display`,`Because authority requires the original language`],
+    optionsEs:[`Porque la autoridad pasa a la copia, como cuando los apóstoles predicaron desde una traducción`,`Porque las traducciones modernas son inspiradas de nuevo`,`Porque los autógrafos están en exhibición`,`Porque la autoridad exige el idioma original`],
+    correct:0, explanationEn:`The apostles preached with full authority from the Greek OT; authority travels into the copy.`, explanationEs:`Los apóstoles predicaron con plena autoridad desde el AT griego; la autoridad pasa a la copia.` },
+
+  { textEn:`"Revelation" is chiefly about ______, while "inspiration" is chiefly about ______.`, textEs:`La "revelación" trata sobre todo del ______, mientras que la "inspiración" trata sobre todo del ______.`,
+    optionsEn:[`content / process`,`process / content`,`Greek / Hebrew`,`history / science`],
+    optionsEs:[`contenido / proceso`,`proceso / contenido`,`griego / hebreo`,`historia / ciencia`],
+    correct:0, explanationEn:`Revelation = what God discloses (content); inspiration = how He moved the writers (process).`, explanationEs:`Revelación = lo que Dios revela (contenido); inspiración = cómo movió a los escritores (proceso).` },
+
+  { textEn:`Romans 1:20 is an example of which kind of revelation?`, textEs:`Romanos 1:20 es un ejemplo de cuál tipo de revelación?`,
+    optionsEn:[`Special`,`Enacted`,`Dictated`,`General`],
+    optionsEs:[`Especial`,`Representada`,`Dictada`,`General`],
+    correct:3, explanationEn:`God's power and Godhead seen in creation is general revelation, given to all.`, explanationEs:`El poder y la Deidad de Dios vistos en la creación son revelación general, dada a todos.` },
+
+  { textEn:`Which is NOT one of the five expressions of the Word taught in this unit?`, textEs:`¿Cuál NO es una de las cinco expresiones de la Palabra enseñadas en esta unidad?`,
+    optionsEn:[`The Living Word (Christ)`,`The written Word`,`The natural Word`,`The philosophical Word`],
+    optionsEs:[`La Palabra Viva (Cristo)`,`La Palabra escrita`,`La Palabra natural`,`La Palabra filosófica`],
+    correct:3, explanationEn:`The five are Living, Preached, Natural, Written, and Enacted.`, explanationEs:`Las cinco son Viva, Predicada, Natural, Escrita y Representada.` },
+
+  { textEn:`The view that God guided the writers while working through their full humanity is the:`, textEs:`La visión de que Dios guió a los escritores obrando por medio de su plena humanidad es la:`,
+    optionsEn:[`Dictation theory`,`Natural theory`,`Dynamic view`,`Partial theory`],
+    optionsEs:[`Teoría del dictado`,`Teoría natural`,`Visión dinámica`,`Teoría parcial`],
+    correct:2, explanationEn:`The dynamic view holds together God's guidance and the writers' full humanity.`, explanationEs:`La visión dinámica une la guía de Dios y la plena humanidad de los escritores.` },
+
+  { textEn:`The dynamic view compares the Bible's Divine/Human character to:`, textEs:`La visión dinámica compara el carácter Divino/Humano de la Biblia con:`,
+    optionsEn:[`The two natures of Christ`,`The two testaments`,`The two languages of Scripture`,`The two covenants`],
+    optionsEs:[`Las dos naturalezas de Cristo`,`Los dos testamentos`,`Los dos idiomas de la Escritura`,`Los dos pactos`],
+    correct:0, explanationEn:`The Bible is Divine/Human as Christ is divine and human, and as preaching is a divine message through a human voice.`, explanationEs:`La Biblia es Divina/Humana como Cristo es divino y humano, y como la predicación es mensaje divino por voz humana.` },
+
+  { textEn:`Because Scripture is God-breathed, the unit concludes it is:`, textEs:`Porque la Escritura es exhalada por Dios, la unidad concluye que es:`,
+    optionsEn:[`True only in matters of faith`,`True in all that it affirms`,`True only in the originals we cannot read`,`Reliable in its main ideas only`],
+    optionsEs:[`Verdadera solo en asuntos de fe`,`Verdadera en todo lo que afirma`,`Verdadera solo en los originales que no podemos leer`,`Confiable solo en sus ideas principales`],
+    correct:1, explanationEn:`God-breathed means true in all it affirms, because the God who spoke does not lie.`, explanationEs:`Exhalada por Dios significa verdadera en todo lo que afirma, porque el Dios que habló no miente.` },
+
+  { textEn:`"Evidence so complete it settles a matter beyond dispute" describes:`, textEs:`"Evidencia tan completa que zanja un asunto sin disputa" describe:`,
+    optionsEn:[`Corroboration`,`Illustration`,`Proof`,`Assumption`],
+    optionsEs:[`Corroboración`,`Ilustración`,`Prueba`,`Suposición`],
+    correct:2, explanationEn:`Proof settles a matter beyond dispute — and in history it is rare.`, explanationEs:`La prueba zanja un asunto sin disputa — y en la historia es rara.` },
+
+  { textEn:`In history, according to the unit, real proof is:`, textEs:`En la historia, según la unidad, la prueba real es:`,
+    optionsEn:[`The usual result of any dig`,`Rare; we almost never get it`,`Provided by every manuscript`,`The same thing as corroboration`],
+    optionsEs:[`El resultado usual de cualquier excavación`,`Rara; casi nunca la obtenemos`,`Provista por cada manuscrito`,`Lo mismo que la corroboración`],
+    correct:1, explanationEn:`Real historical proof is rare; most evidence corroborates rather than proves.`, explanationEs:`La prueba histórica real es rara; la mayoría de la evidencia corrobora en vez de probar.` },
+
+  { textEn:`Archaeology, the unit says, most often provides:`, textEs:`La arqueología, dice la unidad, con más frecuencia aporta:`,
+    optionsEn:[`Proof beyond dispute`,`Contradiction`,`Nothing useful`,`Corroboration and illustration`],
+    optionsEs:[`Prueba sin disputa`,`Contradicción`,`Nada útil`,`Corroboración e ilustración`],
+    correct:3, explanationEn:`Archaeology corroborates and illustrates far more often than it "proves."`, explanationEs:`La arqueología corrobora e ilustra mucho más a menudo de lo que "prueba".` },
+
+  { textEn:`The "camel" the skeptic swallows is:`, textEs:`El "camello" que el escéptico traga es:`,
+    optionsEn:[`A minor spelling variant`,`A confirmed archaeological fact`,`A translation choice`,`An assumption dressed up as a finding`],
+    optionsEs:[`Una variante menor de ortografía`,`Un hecho arqueológico confirmado`,`Una elección de traducción`,`Una suposición disfrazada de hallazgo`],
+    correct:3, explanationEn:`The camel is an unexamined assumption taken as fact.`, explanationEs:`El camello es una suposición no examinada tomada como hecho.` },
+
+  { textEn:`The "gnat-strain" of the over-eager apologist is dangerous because it:`, textEs:`El "colar el mosquito" del apologista demasiado entusiasta es peligroso porque:`,
+    optionsEn:[`Concedes too much`,`Ignores Scripture`,`Manufactures fragility by overclaiming`,`Denies inspiration`],
+    optionsEs:[`Concede demasiado`,`Ignora la Escritura`,`Fabrica fragilidad al exagerar`,`Niega la inspiración`],
+    correct:2, explanationEn:`Overclaiming sets a believer up to lose faith at the first honest dispute.`, explanationEs:`Exagerar prepara al creyente para perder la fe ante la primera disputa honesta.` },
+
+  { textEn:`The unit's stated discipline toward evidence is to:`, textEs:`La disciplina declarada de la unidad hacia la evidencia es:`,
+    optionsEn:[`Doubt everything equally`,`Concede what is open, refuse what is assumed, and stand where the faith is settled`,`Prove everything or believe nothing`,`Avoid all difficult questions`],
+    optionsEs:[`Dudar de todo por igual`,`Conceder lo abierto, rechazar lo supuesto, y mantenerse firme donde la fe está establecida`,`Probar todo o no creer nada`,`Evitar toda pregunta difícil`],
+    correct:1, explanationEn:`Concede the open, refuse the assumed, stand on the settled — cutting both directions.`, explanationEs:`Conceder lo abierto, rechazar lo supuesto, mantenerse en lo establecido — cortando en ambas direcciones.` },
+
+  { textEn:`The four witnesses of the course are canon, text/transmission, archaeology, and:`, textEs:`Los cuatro testigos del curso son canon, texto/transmisión, arqueología y:`,
+    optionsEn:[`Geography`,`Philosophy`,`Church history`,`Liturgy`],
+    optionsEs:[`Geografía`,`Filosofía`,`Historia de la iglesia`,`Liturgia`],
+    correct:0, explanationEn:`Right books (canon), right words (text/transmission/preservation), real events (archaeology), real stage (geography).`, explanationEs:`Libros correctos (canon), palabras correctas (texto/transmisión/preservación), hechos reales (arqueología), escenario real (geografía).` }
+];
+
+const saQuestions = [
+  { promptEn:`State the question this course sets out to answer, and explain why it matters to an ordinary believer.`,
+    promptEs:`Enuncia la pregunta que este curso busca responder, y explica por qué le importa a un creyente común.`,
+    keywords:[`trust`,`confia`,`hold`,`mano`,`cert`,`reliab`,`libro`,`creyente`],
+    modelEn:`The course asks whether we can trust the Bible we actually hold — a translation of a copy, not an original. It matters because ordinary believers stake their lives on this book and deserve to know, with certainty, that what they hold is God's reliable Word.`,
+    modelEs:`El curso pregunta si podemos confiar en la Biblia que en verdad tenemos en la mano — una traducción de una copia, no un original. Importa porque los creyentes comunes ponen su vida sobre este libro y merecen saber, con certeza, que lo que sostienen es la Palabra fiable de Dios.` },
+
+  { promptEn:`On what does a believer's certainty ultimately rest, and what does evidence do?`,
+    promptEs:`¿En qué descansa finalmente la certeza del creyente, y qué hace la evidencia?`,
+    keywords:[`inspir`,`aliento`,`charact`,`carácter`,`strength`,`fortalec`,`spirit`,`espíritu`],
+    modelEn:`Certainty rests on the fact that Scripture is the inspired, God-breathed Word — on the character of the God who spoke and the witness of His Spirit — not on evidence. Evidence strengthens our confidence; it never becomes the ground of it.`,
+    modelEs:`La certeza descansa en que la Escritura es la Palabra inspirada, exhalada por Dios — en el carácter del Dios que habló y el testimonio de su Espíritu — no en la evidencia. La evidencia fortalece nuestra confianza; nunca llega a ser su fundamento.` },
+
+  { promptEn:`Explain why the course prefers to speak of Scripture's "absolute authority," and how that authority reaches the Bible in the believer's hand.`,
+    promptEs:`Explica por qué el curso prefiere hablar de la "autoridad absoluta" de la Escritura, y cómo esa autoridad llega a la Biblia en la mano del creyente.`,
+    keywords:[`author`,`autorid`,`command`,`bind`,`throne`,`trono`,`copy`,`traducc`],
+    modelEn:`Absolute authority is a positive claim: Scripture commands, binds the conscience, and stands over us — a throne, not a fortress to defend. That authority rests on the Bible the believer holds, because authority travels into the copy, just as the apostles preached with full authority from a translation.`,
+    modelEs:`La autoridad absoluta es una afirmación positiva: la Escritura ordena, obliga la conciencia y se levanta sobre nosotros — un trono, no una fortaleza que defender. Esa autoridad descansa en la Biblia que el creyente tiene, porque la autoridad pasa a la copia, así como los apóstoles predicaron con plena autoridad desde una traducción.` },
+
+  { promptEn:`Distinguish revelation from inspiration.`,
+    promptEs:`Distingue la revelación de la inspiración.`,
+    keywords:[`revel`,`conten`,`inspir`,`proces`,`disclos`,`escrib`,`general`,`especial`],
+    modelEn:`Revelation is about content — God disclosing what we could not have reasoned to, whether general (creation, conscience) or special (Scripture, Christ). Inspiration is about process — how God moved human authors to write that word down accurately.`,
+    modelEs:`La revelación trata del contenido — Dios revelando lo que no podríamos razonar, sea general (creación, conciencia) o especial (Escritura, Cristo). La inspiración trata del proceso — cómo Dios movió a los autores humanos para escribir esa palabra con exactitud.` },
+
+  { promptEn:`Describe the dynamic view of inspiration and the analogy the unit draws to it.`,
+    promptEs:`Describe la visión dinámica de la inspiración y la analogía que la unidad traza con ella.`,
+    keywords:[`dynam`,`dinám`,`human`,`personal`,`divin`,`cristo`,`spirit`,`breath`],
+    modelEn:`The dynamic view holds that God's Spirit so guided the writers that what they wrote was His Word, yet He worked through their full humanity — personality, vocabulary, research. The Bible is thus a Divine/Human book, like Christ who is fully divine and fully human, and like preaching.`,
+    modelEs:`La visión dinámica sostiene que el Espíritu de Dios guió a los escritores de modo que lo que escribieron fue su Palabra, y sin embargo obró por medio de su plena humanidad — personalidad, vocabulario, investigación. La Biblia es así un libro Divino/Humano, como Cristo, plenamente divino y humano, y como la predicación.` },
+
+  { promptEn:`Name and define the three things evidence can do.`,
+    promptEs:`Nombra y define las tres cosas que la evidencia puede hacer.`,
+    keywords:[`proof`,`prueb`,`corrobor`,`confirm`,`apoy`,`ilustr`,`vivid`,`support`],
+    modelEn:`Proof settles a matter beyond dispute, and in history it is rare. Corroboration confirms and supports a claim without closing every alternative — the honest workhorse. Illustration makes the real vivid, letting us see the world of the text.`,
+    modelEs:`La prueba resuelve un asunto sin disputa, y en la historia es rara. La corroboración confirma y apoya una afirmación sin cerrar toda alternativa — la herramienta honesta. La ilustración hace vívido lo real, dejándonos ver el mundo del texto.` },
+
+  { promptEn:`Explain what the unit means by the skeptic's "camel," using the idea of an unexamined claim.`,
+    promptEs:`Explica qué entiende la unidad por el "camello" del escéptico, usando la idea de una afirmación no examinada.`,
+    keywords:[`camel`,`camello`,`assum`,`supon`,`finding`,`hallazg`,`check`,`teacher`],
+    modelEn:`The camel is an assumption dressed up as a finding — a scholar's guess or a claim repeated so often it feels like fact, swallowed whole without checking. Whole doctrines have rested on such unexamined claims, carried for decades because a trusted teacher said so.`,
+    modelEs:`El camello es una suposición disfrazada de hallazgo — una conjetura académica o una afirmación tan repetida que parece un hecho, tragada sin comprobarla. Doctrinas enteras han descansado sobre tales afirmaciones no examinadas, sostenidas por décadas porque un maestro de confianza lo dijo.` },
+
+  { promptEn:`Explain the apologist's "gnat-strain" and why overclaiming is dangerous.`,
+    promptEs:`Explica el "colar el mosquito" del apologista y por qué exagerar es peligroso.`,
+    keywords:[`gnat`,`mosquit`,`overclaim`,`exager`,`fragil`,`prueba`,`faith`,`fe`],
+    modelEn:`The gnat-strain is overclaiming — insisting "archaeology proves the Bible" or "there are no real difficulties." It sounds like faith but manufactures fragility, because a believer told that who later meets an honest dispute can lose more faith than the doubt was ever worth.`,
+    modelEs:`El colar el mosquito es exagerar — insistir en que "la arqueología prueba la Biblia" o que "no hay dificultades reales". Suena a fe, pero fabrica fragilidad, porque el creyente al que se le dijo eso, y luego halla una disputa honesta, puede perder más fe de la que la duda jamás valió.` },
+
+  { promptEn:`State the threefold discipline this course adopts toward evidence.`,
+    promptEs:`Enuncia la disciplina triple que este curso adopta hacia la evidencia.`,
+    keywords:[`conced`,`abiert`,`rechaz`,`assum`,`stand`,`firme`,`settled`,`establec`],
+    modelEn:`We concede what is genuinely open, we refuse what is merely assumed, and we stand without apology where the faith is settled. Even a cherished claim must be tested; that testing is honesty, not weakness.`,
+    modelEs:`Concedemos lo que verdaderamente está abierto, rechazamos lo que solo se supone, y nos mantenemos firmes sin disculpa donde la fe está establecida. Aun una afirmación querida debe probarse; esa prueba es honestidad, no debilidad.` },
+
+  { promptEn:`Name the four witnesses of the course and state the honest promise they let us make to the believer.`,
+    promptEs:`Nombra los cuatro testigos del curso y enuncia la promesa honesta que nos permiten hacer al creyente.`,
+    keywords:[`canon`,`text`,`archaeolog`,`arqueolog`,`geograf`,`preserv`,`witness`,`testig`],
+    modelEn:`The four witnesses are the canon (right books), the text and its transmission and preservation (right words), archaeology (real events), and geography (real stage). Together they let us tell the believer honestly: not "trust me, the lost originals were flawless," but "God so preserved His Word that what you hold is His authoritative Word."`,
+    modelEs:`Los cuatro testigos son el canon (los libros correctos), el texto con su transmisión y preservación (las palabras correctas), la arqueología (los hechos reales) y la geografía (el escenario real). Juntos nos permiten decir al creyente con honestidad: no "confía en mí, los originales perdidos eran perfectos", sino "Dios preservó su Palabra de tal modo que lo que tienes es su Palabra con autoridad".` }
+];

@@ -1,0 +1,48 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+button.reset { background: #8a6a4f; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.reg-warning { background: #fae8e8; border: 1px solid #efc2c2; border-radius: 12px; padding: 15px; margin-bottom: 20px; color: #8a1f1f; }
+.track-banner { background: #fff3d6; border: 1px solid #f4c542; border-radius: 12px; padding: 12px 18px; margin-bottom: 20px; color: #5b3a1f; font-size: 0.95rem; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lang-en { border-bottom: 1px dashed #d7cec1; padding-bottom: 2px; margin-bottom: 2px; }
+
+@media print {
+    body { background: white; color: black; font-size: 12pt; padding: 0; }
+    .nav-bar, .toggle-btn, button, .reg-warning, .track-banner { display: none !important; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    h1, h2, h3 { color: black; }
+    .question { page-break-inside: avoid; }
+    body.lang-en .lang-es, body.lang-es .lang-en { display: none !important; }
+    body.lang-en .lang-en, body.lang-es .lang-es { display: inline !important; }
+    a { color: black; text-decoration: none; }
+}
+.model-answer { margin-top: 12px; padding: 14px 16px; background: #fbf3d9; border: 1px solid #d4af37; border-left: 5px solid #d4af37; border-radius: 8px; font-size: 0.92rem; color: #4a3a10; }
+.track-opt { display:block; width:100%; text-align:left; padding:14px 16px; border:2px solid #d7cec1; border-radius:10px; background:#fcfbf8; font-family:inherit; font-size:1rem; cursor:pointer; }
+.track-opt:hover { background:#f6f1e8; }
+.track-opt.selected { background:#2f4f2f; color:#fff; border-color:#2f4f2f; font-weight:bold; }

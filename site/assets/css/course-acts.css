@@ -1,0 +1,71 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.nav-btn:disabled { background: #aaa; cursor: not-allowed; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.sa-model { margin-top: 8px; padding: 10px 14px; background:#fff8e1; color:#5d4a00; border-left:4px solid #d4af37; border-radius:6px; font-size:0.92rem; line-height:1.45; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+
+/* === Retrofit additions === */
+body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+body.lang-both .lang-en { border-bottom: 2px dashed #d7cec1; padding-bottom: 18px; margin-bottom: 18px; }
+.lang-toggle-group { display: inline-flex; gap: 4px; margin-bottom: 15px; }
+.lang-toggle-group button { background: #f4c542; color: #5b3a1f; border: 1px solid #c9a032; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+.lang-toggle-group button.active { background: #5b3a1f; color: white; border-color: #5b3a1f; }
+.track-badge { display: inline-block; background: #f4c542; color: #5b3a1f; padding: 4px 12px; border-radius: 30px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 12px; vertical-align: middle; }
+.exam-status { padding: 12px 16px; margin: 14px 0; border-radius: 8px; font-size: 0.95rem; font-weight: 600; }
+.exam-status.mc-passed { background: #d6e2f0; color: #2c3e6b; border-left: 5px solid #3f5a8a; }
+.exam-status.locked { background: #fae5e3; color: #8a1f1f; border-left: 5px solid #b03a2e; }
+.exam-status.hidden { display: none; }
+.mc-section, .sa-section { margin-top: 20px; }
+.sa-section h3, .mc-section h3 { color: #5b3a1f; border-bottom: 2px solid #f4c542; padding-bottom: 4px; margin-bottom: 12px; font-size: 1.1rem; }
+.sa-badge { display: inline-block; background: #f4c542; color: #5b3a1f; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; margin-left: 8px; vertical-align: middle; }
+.sa-note { margin: 0 0 14px; padding: 10px 14px; background: #f6f1e8; border-left: 3px solid #c9a032; color: #22201d; font-size: 0.9rem; font-style: italic; border-radius: 6px; }
+.question.review-locked { opacity: 0.7; background: #fbfaf6; border-left: 3px solid #f4c542; }
+.question.review-locked .option { pointer-events: none; }
+.question.review-locked .kw-answer, .question.review-locked .check-kw-btn { pointer-events: none; }
+.btn-reset { background: #8a6a4a; color: white; border: none; border-radius: 30px; padding: 6px 16px; cursor: pointer; font-family: inherit; font-size: 0.88rem; margin-left: 8px; }
+.btn-reset:hover { background: #6b5236; }
+.reg-modal { position: fixed; inset: 0; background: rgba(40, 30, 20, 0.65); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.reg-modal.hidden { display: none; }
+.reg-modal-inner { background: #fffdfa; max-width: 520px; width: 100%; border-radius: 16px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 1px solid #d7cec1; }
+.reg-modal-inner h2 { color: #5b3a1f; margin: 0 0 10px; font-size: 1.4rem; }
+.reg-modal-inner p { margin: 10px 0; font-size: 0.95rem; }
+.reg-modal-inner label { display: block; margin: 12px 0 4px; font-weight: 700; font-size: 0.92rem; }
+.reg-modal-inner input[type="text"], .reg-modal-inner input[type="email"] { width: 100%; padding: 9px 12px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; background: #fcfbf8; }
+.reg-modal-inner .track-options { display: flex; gap: 10px; margin-top: 6px; }
+.reg-modal-inner .track-options label { flex: 1; display: flex; align-items: center; gap: 6px; padding: 10px 12px; border: 1px solid #d7cec1; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.92rem; background: #fcfbf8; }
+.reg-modal-inner .track-options input[type="radio"] { margin: 0; }
+.reg-modal-inner .track-options label:has(input:checked) { background: #f4c542; border-color: #c9a032; }
+.reg-modal-inner button { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 9px 22px; cursor: pointer; font-family: inherit; font-size: 1rem; margin-top: 18px; }
+.reg-warn { background: #faecd0; border: 1px solid #f4c542; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.9rem; color: #5b3a1f; }
+.reg-warn.hidden { display: none; }
+@media print {
+  body { background: #fff; color: #000; padding: 0; }
+  .nav-bar, .toggle-btn, .lang-toggle-group, .btn-reset, button.small, .check-kw-btn, .reg-modal, .reg-warn, #submitExamBtn, .exam-status, .sa-badge, .track-badge { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+  body.lang-en .lang-es, body.lang-es .lang-en { display: none; }
+  body.lang-both .lang-en, body.lang-both .lang-es { display: block; }
+}

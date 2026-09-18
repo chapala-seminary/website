@@ -1,0 +1,66 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', 'Times New Roman', Times, serif; line-height: 1.6; background: #f9f7f3; color: #1a2a1f; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+.course-header { background: #2c3e36; color: white; padding: 1.5rem 2rem; text-align: center; }
+.course-header h1 { font-size: 2rem; letter-spacing: 2px; margin-bottom: 0.25rem; }
+.course-header h2 { font-size: 1.2rem; font-weight: normal; opacity: 0.9; }
+.unit-badge { display: inline-block; background: #f4c542; color: #2c3e36; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-top: 0.5rem; }
+.course-author { font-size: 0.8rem; opacity: 0.85; margin-top: 0.4rem; font-style: italic; }
+.controls-bar { background: #e8e4d8; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #cbc3ae; }
+.lang-buttons { display: flex; gap: 10px; }
+.lang-btn { background: white; border: 1px solid #2c3e36; padding: 0.4rem 1rem; cursor: pointer; font-weight: bold; transition: 0.2s; border-radius: 4px; }
+.lang-btn.active { background: #2c3e36; color: white; }
+.track-indicator { background: #2c3e36; color: #f4c542; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+body.lang-en .lang-es { display: none; }
+body.lang-en .lang-both { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-both { display: none; }
+body.lang-both .lang-en, body.lang-both .lang-es { display: inline; }
+body.lang-both .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 900px) {
+    body.lang-both .lesson-grid { grid-template-columns: 1fr; }
+    body.lang-both .lang-es { border-top: 2px dashed #cbc3ae; padding-top: 1rem; margin-top: 1rem; }
+}
+.lesson-section { padding: 2rem; }
+.lesson-section h3 { color: #2c3e36; border-left: 4px solid #f4c542; padding-left: 1rem; margin: 1.5rem 0 1rem 0; }
+.lesson-section h3:first-of-type { margin-top: 0; }
+.scripture { background: #f0ede5; padding: 1rem 1.5rem; border-left: 4px solid #f4c542; font-style: italic; margin: 1rem 0; font-family: 'Courier New', monospace; }
+.illustration { background: #e8f0e5; padding: 1rem 1.5rem; border-radius: 8px; margin: 1rem 0; }
+.registration-card { background: #2c3e36; color: white; padding: 1.5rem; margin: 1rem 2rem; border-radius: 8px; text-align: center; }
+.registration-card input, .registration-card select { padding: 0.5rem; margin: 0.5rem; border: none; border-radius: 4px; }
+.registration-card input { width: 200px; }
+.registration-card button { background: #f4c542; border: none; padding: 0.5rem 1rem; cursor: pointer; font-weight: bold; border-radius: 4px; }
+.exam-section { background: #fefaf0; border-top: 3px solid #2c3e36; padding: 2rem; page-break-before: always; }
+.exam-header { text-align: center; margin-bottom: 2rem; }
+.question-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; page-break-inside: avoid; }
+.question-text { font-weight: bold; margin-bottom: 0.75rem; }
+.options { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+.options label { display: block; margin: 0.4rem 0; cursor: pointer; }
+.feedback { margin-top: 0.75rem; padding: 0.5rem; border-radius: 4px; font-size: 0.9rem; }
+.feedback.correct { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.feedback.incorrect { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.model-answer { background: #fff8e1; border-left: 4px solid #f4c542; color: #4a3c10; padding: 0.6rem 0.8rem; margin-top: 0.6rem; border-radius: 4px; font-style: normal; }
+.essay-question textarea { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+.action-buttons { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+.action-buttons button { background: #2c3e36; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; transition: 0.2s; }
+.action-buttons button:hover { background: #1e2d26; }
+.action-buttons button.reset-btn { background: #8b6b3d; }
+.lockout-timer { text-align: center; padding: 1rem; background: #f8d7da; color: #721c24; margin: 1rem; border-radius: 8px; font-weight: bold; }
+.nav-links { display: flex; justify-content: space-between; padding: 1rem 2rem; background: #e8e4d8; }
+.nav-links a { color: #2c3e36; text-decoration: none; font-weight: bold; }
+@media print {
+    .controls-bar, .action-buttons, .nav-links, .lockout-timer, .registration-card { display: none !important; }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; margin: 0; }
+    .course-header { background: #2c3e36; color: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .scripture, .illustration, .question-card, .exam-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-card { border: 1px solid #ccc; page-break-inside: avoid; }
+    .exam-section { page-break-before: always; }
+    .feedback.correct, .feedback.incorrect { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.lang-both .lesson-grid { display: block; }
+}
+.unitnav{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:14px 0 2px;font-family:'Georgia',serif;}
+.unitnav .nl{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#2c3e36;margin-right:4px;}
+.unitnav a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;height:31px;padding:0 8px;border-radius:16px;background:#fffdf8;border:1px solid #cdbf9d;color:#2c3e36;text-decoration:none;font-size:.85rem;font-weight:700;line-height:1;}
+.unitnav a:hover{border-color:#2c3e36;}
+.unitnav a.active{background:#2c3e36;color:#fff;border-color:#2c3e36;}
