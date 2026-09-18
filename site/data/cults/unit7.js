@@ -1,11 +1,859 @@
-/* CTSCults - unit 7: per-unit configuration and content. */
-
-const UNIT = 7;
-
-const NEXT_UNIT_URL = 'CTSCultsUnit8.html';
-
-const unitTitlesEn = ["Unit 1 - What Is a Cult? The Biblical Test", "Unit 2 - The Trinity and the Deity of Christ", "Unit 3 - Jehovah's Witnesses", "Unit 4 - The Latter-day Saints", "Unit 5 - The Prosperity Gospel", "Unit 6 - Progressive Revelation: Islam and Baha'i", `Unit ${UNIT} - Eastern Religions: Hinduism and Buddhism`, `Unit ${UNIT + 1} - Roman Catholicism`, "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism", "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"];
-
-const mcQuestions = [{"textEn": "1. The great Eastern religions share a framework in which the self is bound to a cycle of rebirth (samsara) by:", "textEs": "1. Las grandes religiones orientales comparten un marco en el cual el yo está atado a un ciclo de renacer (samsara) por:", "optionsEn": ["Karma (one's deeds)", "Grace", "Blind chance", "Faith"], "optionsEs": ["El karma (las obras de uno)", "La gracia", "El azar ciego", "La fe"], "explanationEn": "Karma binds the self to samsara, the cycle of rebirth — the shared Eastern framework.", "explanationEs": "El karma ata al yo al samsara, el ciclo de renacer — el marco oriental compartido.", "correct": 0}, {"textEn": "2. In this shared framework, the goal of salvation is generally to:", "textEs": "2. En este marco compartido, la meta de la salvación es generalmente:", "optionsEn": ["Be reborn into a higher caste forever", "Escape the cycle of rebirth and reach liberation", "Please as many gods as possible", "Build a great temple"], "optionsEs": ["Renacer en una casta más alta para siempre", "Escapar del ciclo de renacer y alcanzar la liberación", "Agradar a tantos dioses como sea posible", "Construir un gran templo"], "explanationEn": "The goal is release from samsara — to escape the wheel of rebirth.", "explanationEs": "La meta es la liberación del samsara — escapar de la rueda del renacer.", "correct": 1}, {"textEn": "3. In Hinduism, the one ultimate reality behind all things is called:", "textEs": "3. En el hinduismo, la única realidad última detrás de todas las cosas se llama:", "optionsEn": ["Nirvana", "Maya", "The Buddha", "Brahman"], "optionsEs": ["Nirvana", "Maya", "El Buda", "Brahman"], "explanationEn": "Brahman is the one ultimate reality; the many gods are seen as its expressions.", "explanationEs": "Brahman es la única realidad última; los muchos dioses se ven como sus expresiones.", "correct": 3}, {"textEn": "4. The famous Hindu saying 'tat tvam asi' ('you are that') means the individual self (atman) is ultimately:", "textEs": "4. El famoso dicho hindú 'tat tvam asi' ('tú eres eso') significa que el yo individual (atman) es en última instancia:", "optionsEn": ["Destroyed by the gods", "Wholly unrelated to God", "Identical with the ultimate reality (Brahman)", "Reborn as an animal"], "optionsEs": ["Destruido por los dioses", "Del todo ajeno a Dios", "Idéntico con la realidad última (Brahman)", "Renacido como un animal"], "explanationEn": "In its highest teaching Hinduism holds the atman to be identical with Brahman.", "explanationEs": "En su enseñanza más alta el hinduismo sostiene que el atman es idéntico con Brahman.", "correct": 2}, {"textEn": "5. Concerning Jesus, much of Hinduism is willing to:", "textEs": "5. Acerca de Jesús, mucho del hinduismo está dispuesto a:", "optionsEn": ["Welcome Him as one avatar or guru among many", "Reject Him entirely", "Deny that He ever existed", "Worship Him alone"], "optionsEs": ["Recibirlo como un avatar o gurú entre muchos", "Rechazarlo por completo", "Negar que jamás existió", "Adorarlo solo a Él"], "explanationEn": "Hinduism generously welcomes Jesus as one avatar among many — honoring Him by making Him less than He is.", "explanationEs": "El hinduismo recibe generosamente a Jesús como un avatar entre muchos — honrándolo al hacerlo menos de lo que es.", "correct": 0}, {"textEn": "6. The founder of Buddhism, who taught the way to escape suffering, was:", "textEs": "6. El fundador del budismo, que enseñó el camino para escapar del sufrimiento, fue:", "optionsEn": ["Confucius", "Krishna", "Muhammad", "Siddhartha Gautama, the Buddha"], "optionsEs": ["Confucio", "Krishna", "Mahoma", "Siddhartha Gautama, el Buda"], "explanationEn": "Siddhartha Gautama became the Buddha, the 'awakened one.'", "explanationEs": "Siddhartha Gautama llegó a ser el Buda, el 'despierto'.", "correct": 3}, {"textEn": "7. The Four Noble Truths teach that life is suffering (dukkha), and that suffering arises from:", "textEs": "7. Las Cuatro Nobles Verdades enseñan que la vida es sufrimiento (dukkha), y que el sufrimiento surge de:", "optionsEn": ["Other people", "The anger of the gods", "Craving and attachment", "The body only"], "optionsEs": ["Otras personas", "La ira de los dioses", "El deseo y el apego", "Solo el cuerpo"], "explanationEn": "Buddhism traces suffering to craving and attachment; the goal is to extinguish craving.", "explanationEs": "El budismo atribuye el sufrimiento al deseo y el apego; la meta es extinguir el deseo.", "correct": 2}, {"textEn": "8. The Buddhist teaching of anatta ('no-self') holds that the permanent self or soul is:", "textEs": "8. La enseñanza budista de anatta ('no-yo') sostiene que el yo o alma permanente es:", "optionsEn": ["Eternal and divine", "An illusion; there is no abiding self", "Reborn unchanged", "The same as Brahman"], "optionsEs": ["Eterno y divino", "Una ilusión; no hay un yo perdurable", "Renacido sin cambio", "Lo mismo que Brahman"], "explanationEn": "Anatta teaches there is no permanent self; the belief in an abiding 'I' is an illusion.", "explanationEs": "Anatta enseña que no hay un yo permanente; la creencia en un 'yo' perdurable es una ilusión.", "correct": 1}, {"textEn": "9. The Buddhist goal of nirvana is best described as:", "textEs": "9. La meta budista del nirvana se describe mejor como:", "optionsEn": ["Heaven with a personal God", "Rebirth into wealth", "The extinguishing of craving and the self, release from the cycle", "Union with Brahman"], "optionsEs": ["El cielo con un Dios personal", "Renacer en la riqueza", "La extinción del deseo y del yo, la liberación del ciclo", "Unión con Brahman"], "explanationEn": "Nirvana is the extinguishing of craving and the self, and release from the round of rebirth.", "explanationEs": "El nirvana es la extinción del deseo y del yo, y la liberación de la ronda del renacer.", "correct": 2}, {"textEn": "10. Original Buddhism, as the Buddha taught it, is essentially:", "textEs": "10. El budismo original, como lo enseñó el Buda, es esencialmente:", "optionsEn": ["A branch of Islam", "Strictly monotheistic", "The worship of Vishnu", "Non-theistic — it does not look to a creator God"], "optionsEs": ["Una rama del islam", "Estrictamente monoteísta", "La adoración de Vishnu", "No teísta — no mira a un Dios creador"], "explanationEn": "The Buddha set the question of God aside; original Buddhism is non-theistic.", "explanationEs": "El Buda dejó a un lado la cuestión de Dios; el budismo original es no teísta.", "correct": 3}, {"textEn": "11. Against 'all is one' (pantheism) or the idea that there is no God, Scripture teaches that God is:", "textEs": "11. Contra 'todo es uno' (panteísmo) o la idea de que no hay Dios, la Escritura enseña que Dios es:", "optionsEn": ["The one personal Creator, distinct from what He has made", "A part of the world", "Many gods", "Unknowable and silent"], "optionsEs": ["El único Creador personal, distinto de lo que ha hecho", "Una parte del mundo", "Muchos dioses", "Incognoscible y callado"], "explanationEn": "God is the one personal Creator, distinct from His creation — not the world itself, and not absent.", "explanationEs": "Dios es el único Creador personal, distinto de su creación — no el mundo mismo, y no ausente.", "correct": 0}, {"textEn": "12. At Athens (Acts 17:24-25), Paul said the God who made the world:", "textEs": "12. En Atenas (Hechos 17:24-25), Pablo dijo que el Dios que hizo el mundo:", "optionsEn": ["Lives in temples made by hands", "Does not dwell in temples and gives life and breath to all", "Needs our service", "Is one with the universe"], "optionsEs": ["Habita en templos hechos de manos", "No habita en templos y da vida y aliento a todos", "Necesita nuestro servicio", "Es uno con el universo"], "explanationEn": "Paul proclaimed a Maker distinct from creation, who needs nothing and gives life to all.", "explanationEs": "Pablo proclamó un Hacedor distinto de la creación, que de nada necesita y da vida a todos.", "correct": 1}, {"textEn": "13. Against the teaching that the self is an illusion or is absorbed into the Absolute, Scripture teaches that each person is:", "textEs": "13. Contra la enseñanza de que el yo es una ilusión o se absorbe en el Absoluto, la Escritura enseña que cada persona es:", "optionsEn": ["A real, distinct soul made in God's image", "An illusion to see through", "Reborn endlessly", "A spark to be dissolved"], "optionsEs": ["Un alma real y distinta hecha a imagen de Dios", "Una ilusión que atravesar", "Renacida sin fin", "Una chispa que disolver"], "explanationEn": "Each person is a real, distinct soul in God's image, who stands before Him and lives forever.", "explanationEs": "Cada persona es un alma real y distinta a imagen de Dios, que está delante de Él y vive para siempre.", "correct": 0}, {"textEn": "14. Concerning how a person is set right with God, the Eastern path of self-effort across many lifetimes is answered by:", "textEs": "14. En cuanto a cómo una persona es reconciliada con Dios, el camino oriental de esfuerzo propio a través de muchas vidas es respondido por:", "optionsEn": ["Simply more works", "Grace — salvation is God's free gift, not earned by works (Ephesians 2:8-9)", "Stricter meditation", "Hope for a better rebirth"], "optionsEs": ["Simplemente más obras", "La gracia — la salvación es el don gratuito de Dios, no ganado por obras (Efesios 2:8-9)", "Una meditación más estricta", "La esperanza de un mejor renacer"], "explanationEn": "Salvation is by grace, God's free gift, not earned by the self through works.", "explanationEs": "La salvación es por gracia, el don gratuito de Dios, no ganada por el yo mediante obras.", "correct": 1}, {"textEn": "15. Hebrews 9:27 answers the idea of reincarnation by teaching that it is appointed for men to:", "textEs": "15. Hebreos 9:27 responde a la idea de la reencarnación al enseñar que está establecido a los hombres:", "optionsEn": ["Be reborn many times", "Escape the body", "Die once, and after this the judgment", "Become gods"], "optionsEs": ["Renacer muchas veces", "Escapar del cuerpo", "Morir una sola vez, y después de esto el juicio", "Llegar a ser dioses"], "explanationEn": "It is appointed to die once, then the judgment — one life, not an endless cycle of rebirth.", "explanationEs": "Está establecido morir una sola vez, luego el juicio — una vida, no un ciclo sin fin de renacer.", "correct": 2}, {"textEn": "16. The Christian hope for the body and the self is not extinction or absorption but:", "textEs": "16. La esperanza cristiana para el cuerpo y el yo no es la extinción ni la absorción sino:", "optionsEn": ["Endless rebirth", "Becoming Brahman", "Nothingness", "Resurrection and eternal, personal life with God"], "optionsEs": ["El renacer sin fin", "Llegar a ser Brahman", "La nada", "La resurrección y la vida eterna, personal, con Dios"], "explanationEn": "The hope is resurrection and eternal, personal life — to know and be known by God forever.", "explanationEs": "La esperanza es la resurrección y la vida eterna, personal — conocer y ser conocido por Dios para siempre.", "correct": 3}, {"textEn": "17. Because Scripture says there is one way to God, the sincerity and wisdom of these religions, though real, cannot:", "textEs": "17. Porque la Escritura dice que hay un solo camino a Dios, la sinceridad y la sabiduría de estas religiones, aunque reales, no pueden:", "optionsEn": ["Be admired at all", "Contain any truth", "Save, for salvation is in Christ alone", "Be studied"], "optionsEs": ["Ser admiradas en absoluto", "Contener verdad alguna", "Salvar, pues la salvación está en Cristo solo", "Ser estudiadas"], "explanationEn": "Sincerity and wisdom are real, but cannot save; salvation is in Christ alone (Acts 4:12).", "explanationEs": "La sinceridad y la sabiduría son reales, pero no pueden salvar; la salvación está en Cristo solo (Hechos 4:12).", "correct": 2}, {"textEn": "18. To the weariness of endless striving across lifetimes, Jesus says (Matthew 11:28):", "textEs": "18. A la fatiga del esfuerzo sin fin a través de las vidas, Jesús dice (Mateo 11:28):", "optionsEn": ["'Empty yourself of all desire'", "'Try harder next time'", "'Return in the next life'", "'Come to Me, all you who labor and are heavy laden, and I will give you rest'"], "optionsEs": ["'Vacíate de todo deseo'", "'Esfuérzate más la próxima vez'", "'Vuelve en la próxima vida'", "'Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar'"], "explanationEn": "Christ freely gives the rest that endless effort could never earn.", "explanationEs": "Cristo da gratuitamente el descanso que el esfuerzo sin fin nunca podría ganar.", "correct": 3}, {"textEn": "19. The deepest reason the Eastern path is 'another way' and not the way is that it offers salvation by:", "textEs": "19. La razón más profunda por la que el camino oriental es 'otro camino' y no el camino es que ofrece salvación por:", "optionsEn": ["Grace", "Self-effort and works rather than the free grace of God in Christ", "Faith alone", "The cross"], "optionsEs": ["La gracia", "El esfuerzo propio y las obras en lugar de la gracia gratuita de Dios en Cristo", "La fe sola", "La cruz"], "explanationEn": "It offers salvation by the self, through works — the opposite of free grace in Christ.", "explanationEs": "Ofrece salvación por el yo, mediante obras — lo opuesto de la gracia gratuita en Cristo.", "correct": 1}, {"textEn": "20. Our redemptive aim toward a Hindu or a Buddhist is to:", "textEs": "20. Nuestro fin redentor hacia un hindú o un budista es:", "optionsEn": ["Honor their longing for release and point them to the Christ who gives true rest and eternal life", "Ignore them", "Mock their beliefs", "Argue with them endlessly"], "optionsEs": ["Honrar su anhelo de liberación y señalarlos al Cristo que da verdadero descanso y vida eterna", "Ignorarlos", "Burlarnos de sus creencias", "Discutir con ellos sin fin"], "explanationEn": "We honor their longing for release and point them to the Christ who gives rest and eternal life.", "explanationEs": "Honramos su anhelo de liberación y los señalamos al Cristo que da descanso y vida eterna.", "correct": 0}];
-
-const kwQuestions = [{"textEn": "21. State the shared framework of the great Eastern religions (samsara, karma, the goal of escape) and how it differs from the biblical view.", "textEs": "21. Exponga el marco compartido de las grandes religiones orientales (samsara, karma, la meta de escapar) y en qué difiere de la visión bíblica.", "kw_en": ["samsara", "karma", "rebirth", "cycle", "escape", "suffering", "liberation", "self"], "kw_es": ["samsara", "karma", "renacer", "ciclo", "escapar", "sufrimiento", "liberaci", "alma"], "modelEn": "The great Eastern religions share a framework in which the self is caught on a wheel of rebirth called samsara, bound by karma, the law by which one's deeds shape one's next life. Time is a vast cycle rather than a line, and the world is passing, for many an illusion. The great problem is not sin against a holy God but bondage to this cycle and ignorance of one's condition, and the great hope is release, to escape the wheel and end suffering. This differs from the biblical view at the foundation: Scripture teaches a real, God-made world, one life rather than endless rebirth, and a personal Creator before whom each soul stands. So the very picture of the world, and the nature of the problem and the hope, are different.", "modelEs": "Las grandes religiones orientales comparten un marco en el cual el yo está atrapado en una rueda de renacer llamada samsara, atado por el karma, la ley por la cual las obras de uno moldean su próxima vida. El tiempo es un vasto ciclo en lugar de una línea, y el mundo es pasajero, para muchos una ilusión. El gran problema no es el pecado contra un Dios santo sino la esclavitud a este ciclo y la ignorancia de la condición de uno, y la gran esperanza es la liberación, escapar de la rueda y terminar el sufrimiento. Esto difiere de la visión bíblica en el fundamento: la Escritura enseña un mundo real hecho por Dios, una vida en lugar del renacer sin fin, y un Creador personal ante quien está cada alma. Así que el cuadro mismo del mundo, y la naturaleza del problema y de la esperanza, son diferentes."}, {"textEn": "22. Fairly summarize what Hindus teach about Brahman, the self (atman), and liberation (moksha).", "textEs": "22. Resuma justamente lo que los hindúes enseñan acerca de Brahman, el yo (atman), y la liberación (moksha).", "kw_en": ["brahman", "atman", "self", "moksha", "liberation", "reincarnation", "one", "god"], "kw_es": ["brahman", "atman", "alma", "moksha", "liberaci", "reencarnaci", "uno", "dios"], "modelEn": "Hindus teach that behind all things is Brahman, the one ultimate reality, often conceived as an impersonal Absolute, and that the many gods are faces or expressions of that one reality. In its highest teaching, the individual self, the atman, is identical with Brahman, so that one's deepest self is the divine, captured in the saying you are that. Bound by karma to reincarnation, the soul seeks moksha, liberation, the release of the self into the Absolute, pursued across many lifetimes through knowledge, works, or loving devotion. Alongside this runs a warm stream of personal devotion to chosen gods. In short, Hinduism seeks liberation from the cycle by realizing the oneness of the self with Brahman, the one reality.", "modelEs": "Los hindúes enseñan que detrás de todas las cosas está Brahman, la única realidad última, a menudo concebida como un Absoluto impersonal, y que los muchos dioses son rostros o expresiones de esa única realidad. En su enseñanza más alta, el yo individual, el atman, es idéntico con Brahman, de modo que el yo más profundo de uno es lo divino, captado en el dicho tú eres eso. Atado por el karma a la reencarnación, el alma busca moksha, la liberación, la suelta del yo en el Absoluto, buscada a través de muchas vidas por el conocimiento, las obras, o la devoción amorosa. Junto a esto corre una cálida corriente de devoción personal a dioses escogidos. En resumen, el hinduismo busca la liberación del ciclo al realizar la unidad del yo con Brahman, la única realidad, un solo fundamento de todo lo que es de Dios o divino."}, {"textEn": "23. Fairly summarize the Buddha's Four Noble Truths, the teaching of no-self (anatta), and nirvana.", "textEs": "23. Resuma justamente las Cuatro Nobles Verdades del Buda, la enseñanza del no-yo (anatta), y el nirvana.", "kw_en": ["buddha", "suffering", "craving", "noble", "anatta", "self", "nirvana", "path"], "kw_es": ["buda", "sufrimiento", "deseo", "nobles", "anatta", "alma", "nirvana", "camino"], "modelEn": "The Buddha taught the Four Noble Truths: that life is marked by suffering, that suffering arises from craving and attachment, that suffering ends when craving is extinguished, and that the way to extinguish it is the Eightfold Path. He did not point to a creator God, so original Buddhism is non-theistic. He also taught anatta, no-self: that there is no permanent self or soul, and that the belief in an abiding I is itself an illusion. Bound by karma to rebirth, the follower seeks nirvana, the blowing out of the flame of craving and of the self, the end of suffering and release from the cycle, reached by one's own effort along the path. So Buddhism seeks release from suffering by extinguishing craving and the self.", "modelEs": "El Buda enseñó las Cuatro Nobles Verdades: que la vida está marcada por el sufrimiento, que el sufrimiento surge del deseo y el apego, que el sufrimiento termina cuando el deseo se extingue, y que el camino para extinguirlo es el Óctuple Sendero. No señaló a un Dios creador, así que el budismo original es no teísta. También enseñó anatta, el no-yo: que no hay un yo o alma permanente, y que la creencia en un yo perdurable es ella misma una ilusión. Atado por el karma al renacer, el seguidor busca el nirvana, el soplar hacia afuera de la llama del deseo y del yo, el fin del sufrimiento y la liberación del ciclo, alcanzado por el propio esfuerzo a lo largo del sendero. Así que el budismo busca la liberación del sufrimiento al extinguir el deseo y el yo."}, {"textEn": "24. From Scripture, show that God is one personal Creator distinct from the world (against pantheism and non-theism).", "textEs": "24. Desde la Escritura, muestre que Dios es un solo Creador personal distinto del mundo (contra el panteísmo y el no teísmo).", "kw_en": ["god", "creator", "personal", "distinct", "world", "made", "athens", "one"], "kw_es": ["dios", "creador", "personal", "distinto", "mundo", "hizo", "atenas", "uno"], "modelEn": "Scripture teaches that God is one personal Creator, distinct from the world, against the idea that all is one or that there is no God. In the beginning God created the heavens and the earth, and He says, I am the LORD, and there is no other. Paul told the philosophers at Athens that the God who made the world and everything in it does not dwell in temples made with hands, and needs nothing, but gives to all life and breath. So the world is not God, and God is not the world; He is its Maker, personal and near, yet other than His creation. This one personal Creator is not an impersonal Absolute to be merged with, nor a question to be set aside, but the living God who made us and gives us breath.", "modelEs": "La Escritura enseña que Dios es un solo Creador personal, distinto del mundo, contra la idea de que todo es uno o de que no hay Dios. En el principio creó Dios los cielos y la tierra, y dice: Yo soy Jehová, y no hay otro. Pablo dijo a los filósofos en Atenas que el Dios que hizo el mundo y todas las cosas que en él hay no habita en templos hechos de manos, y de nada necesita, sino que da a todos vida y aliento. Así que el mundo no es Dios, y Dios no es el mundo; es su Hacedor, personal y cercano, y sin embargo otro que su creación. Este único Creador personal no es un Absoluto impersonal con el cual fundirse, ni una cuestión que dejar a un lado, sino el Dios vivo que nos hizo y nos da aliento."}, {"textEn": "25. From Scripture, show that each person is a real, distinct soul (against no-self and absorption).", "textEs": "25. Desde la Escritura, muestre que cada persona es un alma real y distinta (contra el no-yo y la absorción).", "kw_en": ["soul", "person", "image", "distinct", "real", "god", "stand", "eternal"], "kw_es": ["alma", "persona", "imagen", "distinta", "real", "dios", "eterno", "creado"], "modelEn": "Scripture teaches that each person is a real and distinct soul, against the idea that the self is an illusion or a drop to be lost in the Absolute. God created man in His own image, so the person has real and lasting worth as a distinct soul, not a passing bundle of states to be seen through. We do not dissolve into the Absolute or vanish in nirvana; each person stands before his Maker and gives account, and lives forever. The Christian hope is not the loss of the self but eternal, personal life, to know and be known by God. So the self is real, distinct, made in God's image, and kept forever, not extinguished or absorbed.", "modelEs": "La Escritura enseña que cada persona es un alma real y distinta, contra la idea de que el yo es una ilusión o una gota que perder en el Absoluto. Dios creó al hombre a su imagen, así que la persona tiene valor real y duradero como un alma distinta, no un manojo pasajero de estados que atravesar. No nos disolvemos en el Absoluto ni nos desvanecemos en el nirvana; cada persona está delante de su Hacedor y da cuenta, y vive para siempre. La esperanza cristiana no es la pérdida del yo sino la vida eterna, personal, conocer y ser conocido por Dios. Así que el yo es real, distinto, hecho a imagen de Dios, y guardado para siempre, no extinguido ni absorbido."}, {"textEn": "26. Using Hebrews 9:27 and Ephesians 2:8-9, answer the ideas of reincarnation and salvation by self-effort.", "textEs": "26. Usando Hebreos 9:27 y Efesios 2:8-9, responda a las ideas de la reencarnación y la salvación por esfuerzo propio.", "kw_en": ["once", "die", "judgment", "reincarnation", "grace", "faith", "works", "gift"], "kw_es": ["una", "muer", "juicio", "reencarnaci", "gracia", "fe", "obras", "don"], "modelEn": "Scripture answers reincarnation directly: it is appointed for men to die once, and after this the judgment. That is one life, not an endless cycle of rebirth to try again; after death we stand before God. And Scripture answers salvation by self-effort just as directly: by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast. The Eastern path climbs to release by one's own effort across many lifetimes, but no one climbs to God; salvation is His free gift, received by faith, not earned by works. So both the endless wheel and the ladder of self-effort are answered: one life, then judgment, and salvation by grace, not by works.", "modelEs": "La Escritura responde a la reencarnación directamente: está establecido a los hombres que mueran una sola vez, y después de esto el juicio. Eso es una vida, no un ciclo sin fin de renacer para intentar de nuevo; después de la muerte estamos delante de Dios. Y la Escritura responde a la salvación por esfuerzo propio con igual claridad: por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios, no por obras, para que nadie se gloríe. El camino oriental sube a la liberación por el propio esfuerzo a través de muchas vidas, pero nadie sube a Dios; la salvación es su don gratuito, recibido por la fe, no ganado por obras. Así que tanto la rueda sin fin como la escalera del esfuerzo propio son respondidas: una vida, luego el juicio, y la salvación por gracia, no por obras."}, {"textEn": "27. Explain the Christian hope for the self and the body (resurrection and eternal life with God) against nirvana and absorption.", "textEs": "27. Explique la esperanza cristiana para el yo y el cuerpo (la resurrección y la vida eterna con Dios) contra el nirvana y la absorción.", "kw_en": ["resurrection", "body", "eternal", "person", "god", "life", "nirvana", "absorption"], "kw_es": ["resurrecci", "cuerpo", "eterna", "persona", "dios", "vida", "nirvana", "conoce"], "modelEn": "The Christian hope is not the loss of the self but its fullness. Against nirvana, which is the extinguishing of the self, and against absorption into the Absolute, Scripture teaches the resurrection of the body and eternal, personal, conscious life. Jesus said, this is eternal life, that they may know You, the only true God. So the goal is to know and be known, forever, by a God who loves us, and to live as ourselves, distinct persons, not dissolved or blown out. The body is not a prison to escape but is raised and glorified, and the person is kept, not lost. This is the very opposite of nirvana and absorption: not the end of the self, but everlasting life with a personal God.", "modelEs": "La esperanza cristiana no es la pérdida del yo sino su plenitud. Contra el nirvana, que es la extinción del yo, y contra la absorción en el Absoluto, la Escritura enseña la resurrección del cuerpo y la vida eterna, personal, consciente. Jesús dijo: esta es la vida eterna, que te conozcan a ti, el único Dios verdadero. Así que la meta es conocer y ser conocido, para siempre, por un Dios que nos ama, y vivir como nosotros mismos, personas distintas, no disueltas ni apagadas. El cuerpo no es una cárcel de la cual escapar sino que es resucitado y glorificado, y la persona es guardada, no perdida. Esto es lo opuesto mismo del nirvana y la absorción: no el fin del yo, sino la vida eterna con un Dios personal que nos conoce."}, {"textEn": "28. Explain why these religions, however sincere and wise, cannot save (one way, Acts 4:12; John 14:6).", "textEs": "28. Explique por qué estas religiones, por sinceras y sabias que sean, no pueden salvar (un solo camino, Hechos 4:12; Juan 14:6).", "kw_en": ["one", "way", "christ", "salvation", "sincere", "truth", "saved", "only"], "kw_es": ["camino", "cristo", "salvaci", "sincero", "verdad", "solo", "salva", "nombre"], "modelEn": "These religions, however sincere and wise, cannot save, because Scripture teaches that there is only one way to God. Jesus said, I am the way, the truth, and the life; no one comes to the Father except through Me. He said the way, not a way. And the apostles preached that there is no other name under heaven given among men by which we must be saved. Sincerity cannot make a false path true, and wisdom about many things cannot supply the one thing needful. However rich these religions are, they cannot bear our sin, conquer our death, or bring us to God, for only Christ can do that. So we honor what is good and true in them, yet hold firmly that salvation is in Christ alone, the only Savior and the only way.", "modelEs": "Estas religiones, por sinceras y sabias que sean, no pueden salvar, porque la Escritura enseña que hay un solo camino a Dios. Jesús dijo: Yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí. Dijo el camino, no un camino. Y los apóstoles predicaron que no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos. La sinceridad no puede hacer verdadero un camino falso, y la sabiduría acerca de muchas cosas no puede suplir la única cosa necesaria. Por ricas que sean estas religiones, no pueden llevar nuestro pecado, vencer nuestra muerte, ni traernos a Dios, pues solo Cristo puede hacer eso. Así que honramos lo que es bueno y verdadero en ellas, y sostenemos firmemente que la salvación está en Cristo solo, el único Salvador y el único camino."}, {"textEn": "29. Describe the redemptive aim toward a Hindu or a Buddhist, and how the gospel meets their longing for release.", "textEs": "29. Describa el fin redentor hacia un hindú o un budista, y cómo el evangelio se encuentra con su anhelo de liberación.", "kw_en": ["rest", "longing", "release", "christ", "grace", "love", "gospel", "respect"], "kw_es": ["descanso", "anhelo", "cristo", "gracia", "amor", "evangelio", "respeto", "paz"], "modelEn": "The redemptive aim is to meet the deep longing of the Hindu and the Buddhist, not to take it away. They long for release from suffering and for peace, and the gospel answers that longing better than they know. To the weariness of endless striving, Jesus says, Come to Me, all you who labor and are heavy laden, and I will give you rest. The rest that a thousand lifetimes could never earn, He gives freely by grace, because He has done the work. To the fear of losing oneself, He offers not extinction but everlasting life and the love of a personal God. So we listen to their desire for peace and release, we honor them as neighbors with respect, and we point them with patience, prayer, and an open Bible to the Christ who gives true rest.", "modelEs": "El fin redentor es encontrarse con el anhelo profundo del hindú y del budista, no quitárselo. Anhelan la liberación del sufrimiento y la paz, y el evangelio responde a ese anhelo mejor de lo que saben. A la fatiga del esfuerzo sin fin, Jesús dice: Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar. El descanso que mil vidas nunca podrían ganar, Él lo da gratuitamente por gracia, porque Él ha hecho la obra. Al temor de perderse a sí mismo, ofrece no la extinción sino la vida eterna y el amor de un Dios personal. Así que escuchamos su deseo de paz y liberación, los honramos como prójimos con respeto, y los señalamos con paciencia, oración, y la Biblia abierta al Cristo que da verdadero descanso."}, {"textEn": `30. Summarize Unit ${UNIT}: the shared Eastern framework, the two roots tested, and the redemptive aim.`, "textEs": `30. Resuma la Unidad ${UNIT}: el marco oriental compartido, las dos raíces probadas, y el fin redentor.`, "kw_en": ["karma", "god", "self", "salvation", "grace", "christ", "reincarnation", "redemptive"], "kw_es": ["karma", "dios", "alma", "salvaci", "gracia", "cristo", "reencarnaci", "redentor"], "modelEn": `Unit ${UNIT} examines Hinduism and Buddhism, which share a framework of a world bound by karma to a cycle of rebirth, with the goal of escape. We test this at two roots. First, God and the self: against pantheism and non-theism, Scripture teaches one personal Creator distinct from the world, and against no-self and absorption, that each person is a real soul made in God's image, and that Christ is the unique Son, not one teacher among many. Second, salvation: against release earned by the self across many lifetimes, Scripture teaches grace, one life then judgment rather than reincarnation, and resurrection rather than absorption. So these are another way, not the way, for salvation is in Christ alone. Yet the aim is redemptive: we meet their longing for release with the Christ who gives true rest and eternal life.`, "modelEs": `La Unidad ${UNIT} examina el hinduismo y el budismo, que comparten un marco de un mundo atado por el karma a un ciclo de renacer, con la meta de escapar. Probamos esto en dos raíces. Primera, Dios y el yo: contra el panteísmo y el no teísmo, la Escritura enseña un solo Creador personal distinto del mundo, y contra el no-yo y la absorción, que cada persona es un alma real hecha a imagen de Dios, y que Cristo es el Hijo único, no un maestro entre muchos. Segunda, la salvación: contra la liberación ganada por el yo a través de muchas vidas, la Escritura enseña la gracia, una vida y luego el juicio en lugar de la reencarnación, y la resurrección en lugar de la absorción. Así que estos son otro camino, no el camino, pues la salvación está en Cristo solo. Sin embargo, el fin es redentor: nos encontramos con su anhelo de liberación con el Cristo que da verdadero descanso y vida eterna.`}];
+/* CTSCults — unit 7. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "cults",
+ "unit": 7,
+ "totalUnits": 10,
+ "filePrefix": "CTSCults",
+ "prevHref": "CTSCultsUnit6.html",
+ "nextHref": "CTSCultsUnit8.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - What Is a Cult? The Biblical Test",
+   "Unit 2 - The Trinity and the Deity of Christ",
+   "Unit 3 - Jehovah's Witnesses",
+   "Unit 4 - The Latter-day Saints",
+   "Unit 5 - The Prosperity Gospel",
+   "Unit 6 - Progressive Revelation: Islam and Baha'i",
+   "Unit 7 - Eastern Religions: Hinduism and Buddhism",
+   "Unit 8 - Roman Catholicism",
+   "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism",
+   "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"
+  ],
+  "es": [
+   "Unit 1 - What Is a Cult? The Biblical Test",
+   "Unit 2 - The Trinity and the Deity of Christ",
+   "Unit 3 - Jehovah's Witnesses",
+   "Unit 4 - The Latter-day Saints",
+   "Unit 5 - The Prosperity Gospel",
+   "Unit 6 - Progressive Revelation: Islam and Baha'i",
+   "Unit 7 - Eastern Religions: Hinduism and Buddhism",
+   "Unit 8 - Roman Catholicism",
+   "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism",
+   "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "The great Eastern religions share a framework in which the self is bound to a cycle of rebirth (samsara) by:",
+    "es": "Las grandes religiones orientales comparten un marco en el cual el yo está atado a un ciclo de renacer (samsara) por:"
+   },
+   "options": {
+    "en": [
+     "Karma (one's deeds)",
+     "Grace",
+     "Blind chance",
+     "Faith"
+    ],
+    "es": [
+     "El karma (las obras de uno)",
+     "La gracia",
+     "El azar ciego",
+     "La fe"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Karma binds the self to samsara, the cycle of rebirth — the shared Eastern framework.",
+    "es": "El karma ata al yo al samsara, el ciclo de renacer — el marco oriental compartido."
+   }
+  },
+  {
+   "stem": {
+    "en": "In this shared framework, the goal of salvation is generally to:",
+    "es": "En este marco compartido, la meta de la salvación es generalmente:"
+   },
+   "options": {
+    "en": [
+     "Be reborn into a higher caste forever",
+     "Escape the cycle of rebirth and reach liberation",
+     "Please as many gods as possible",
+     "Build a great temple"
+    ],
+    "es": [
+     "Renacer en una casta más alta para siempre",
+     "Escapar del ciclo de renacer y alcanzar la liberación",
+     "Agradar a tantos dioses como sea posible",
+     "Construir un gran templo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The goal is release from samsara — to escape the wheel of rebirth.",
+    "es": "La meta es la liberación del samsara — escapar de la rueda del renacer."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Hinduism, the one ultimate reality behind all things is called:",
+    "es": "En el hinduismo, la única realidad última detrás de todas las cosas se llama:"
+   },
+   "options": {
+    "en": [
+     "Nirvana",
+     "Maya",
+     "The Buddha",
+     "Brahman"
+    ],
+    "es": [
+     "Nirvana",
+     "Maya",
+     "El Buda",
+     "Brahman"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Brahman is the one ultimate reality; the many gods are seen as its expressions.",
+    "es": "Brahman es la única realidad última; los muchos dioses se ven como sus expresiones."
+   }
+  },
+  {
+   "stem": {
+    "en": "The famous Hindu saying 'tat tvam asi' ('you are that') means the individual self (atman) is ultimately:",
+    "es": "El famoso dicho hindú 'tat tvam asi' ('tú eres eso') significa que el yo individual (atman) es en última instancia:"
+   },
+   "options": {
+    "en": [
+     "Destroyed by the gods",
+     "Wholly unrelated to God",
+     "Identical with the ultimate reality (Brahman)",
+     "Reborn as an animal"
+    ],
+    "es": [
+     "Destruido por los dioses",
+     "Del todo ajeno a Dios",
+     "Idéntico con la realidad última (Brahman)",
+     "Renacido como un animal"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "In its highest teaching Hinduism holds the atman to be identical with Brahman.",
+    "es": "En su enseñanza más alta el hinduismo sostiene que el atman es idéntico con Brahman."
+   }
+  },
+  {
+   "stem": {
+    "en": "Concerning Jesus, much of Hinduism is willing to:",
+    "es": "Acerca de Jesús, mucho del hinduismo está dispuesto a:"
+   },
+   "options": {
+    "en": [
+     "Welcome Him as one avatar or guru among many",
+     "Reject Him entirely",
+     "Deny that He ever existed",
+     "Worship Him alone"
+    ],
+    "es": [
+     "Recibirlo como un avatar o gurú entre muchos",
+     "Rechazarlo por completo",
+     "Negar que jamás existió",
+     "Adorarlo solo a Él"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Hinduism generously welcomes Jesus as one avatar among many — honoring Him by making Him less than He is.",
+    "es": "El hinduismo recibe generosamente a Jesús como un avatar entre muchos — honrándolo al hacerlo menos de lo que es."
+   }
+  },
+  {
+   "stem": {
+    "en": "The founder of Buddhism, who taught the way to escape suffering, was:",
+    "es": "El fundador del budismo, que enseñó el camino para escapar del sufrimiento, fue:"
+   },
+   "options": {
+    "en": [
+     "Confucius",
+     "Krishna",
+     "Muhammad",
+     "Siddhartha Gautama, the Buddha"
+    ],
+    "es": [
+     "Confucio",
+     "Krishna",
+     "Mahoma",
+     "Siddhartha Gautama, el Buda"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Siddhartha Gautama became the Buddha, the 'awakened one.'",
+    "es": "Siddhartha Gautama llegó a ser el Buda, el 'despierto'."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Four Noble Truths teach that life is suffering (dukkha), and that suffering arises from:",
+    "es": "Las Cuatro Nobles Verdades enseñan que la vida es sufrimiento (dukkha), y que el sufrimiento surge de:"
+   },
+   "options": {
+    "en": [
+     "Other people",
+     "The anger of the gods",
+     "Craving and attachment",
+     "The body only"
+    ],
+    "es": [
+     "Otras personas",
+     "La ira de los dioses",
+     "El deseo y el apego",
+     "Solo el cuerpo"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Buddhism traces suffering to craving and attachment; the goal is to extinguish craving.",
+    "es": "El budismo atribuye el sufrimiento al deseo y el apego; la meta es extinguir el deseo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Buddhist teaching of anatta ('no-self') holds that the permanent self or soul is:",
+    "es": "La enseñanza budista de anatta ('no-yo') sostiene que el yo o alma permanente es:"
+   },
+   "options": {
+    "en": [
+     "Eternal and divine",
+     "An illusion; there is no abiding self",
+     "Reborn unchanged",
+     "The same as Brahman"
+    ],
+    "es": [
+     "Eterno y divino",
+     "Una ilusión; no hay un yo perdurable",
+     "Renacido sin cambio",
+     "Lo mismo que Brahman"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Anatta teaches there is no permanent self; the belief in an abiding 'I' is an illusion.",
+    "es": "Anatta enseña que no hay un yo permanente; la creencia en un 'yo' perdurable es una ilusión."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Buddhist goal of nirvana is best described as:",
+    "es": "La meta budista del nirvana se describe mejor como:"
+   },
+   "options": {
+    "en": [
+     "Heaven with a personal God",
+     "Rebirth into wealth",
+     "The extinguishing of craving and the self, release from the cycle",
+     "Union with Brahman"
+    ],
+    "es": [
+     "El cielo con un Dios personal",
+     "Renacer en la riqueza",
+     "La extinción del deseo y del yo, la liberación del ciclo",
+     "Unión con Brahman"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Nirvana is the extinguishing of craving and the self, and release from the round of rebirth.",
+    "es": "El nirvana es la extinción del deseo y del yo, y la liberación de la ronda del renacer."
+   }
+  },
+  {
+   "stem": {
+    "en": "Original Buddhism, as the Buddha taught it, is essentially:",
+    "es": "El budismo original, como lo enseñó el Buda, es esencialmente:"
+   },
+   "options": {
+    "en": [
+     "A branch of Islam",
+     "Strictly monotheistic",
+     "The worship of Vishnu",
+     "Non-theistic — it does not look to a creator God"
+    ],
+    "es": [
+     "Una rama del islam",
+     "Estrictamente monoteísta",
+     "La adoración de Vishnu",
+     "No teísta — no mira a un Dios creador"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Buddha set the question of God aside; original Buddhism is non-theistic.",
+    "es": "El Buda dejó a un lado la cuestión de Dios; el budismo original es no teísta."
+   }
+  },
+  {
+   "stem": {
+    "en": "Against 'all is one' (pantheism) or the idea that there is no God, Scripture teaches that God is:",
+    "es": "Contra 'todo es uno' (panteísmo) o la idea de que no hay Dios, la Escritura enseña que Dios es:"
+   },
+   "options": {
+    "en": [
+     "The one personal Creator, distinct from what He has made",
+     "A part of the world",
+     "Many gods",
+     "Unknowable and silent"
+    ],
+    "es": [
+     "El único Creador personal, distinto de lo que ha hecho",
+     "Una parte del mundo",
+     "Muchos dioses",
+     "Incognoscible y callado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "God is the one personal Creator, distinct from His creation — not the world itself, and not absent.",
+    "es": "Dios es el único Creador personal, distinto de su creación — no el mundo mismo, y no ausente."
+   }
+  },
+  {
+   "stem": {
+    "en": "At Athens (Acts 17:24-25), Paul said the God who made the world:",
+    "es": "En Atenas (Hechos 17:24-25), Pablo dijo que el Dios que hizo el mundo:"
+   },
+   "options": {
+    "en": [
+     "Lives in temples made by hands",
+     "Does not dwell in temples and gives life and breath to all",
+     "Needs our service",
+     "Is one with the universe"
+    ],
+    "es": [
+     "Habita en templos hechos de manos",
+     "No habita en templos y da vida y aliento a todos",
+     "Necesita nuestro servicio",
+     "Es uno con el universo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Paul proclaimed a Maker distinct from creation, who needs nothing and gives life to all.",
+    "es": "Pablo proclamó un Hacedor distinto de la creación, que de nada necesita y da vida a todos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Against the teaching that the self is an illusion or is absorbed into the Absolute, Scripture teaches that each person is:",
+    "es": "Contra la enseñanza de que el yo es una ilusión o se absorbe en el Absoluto, la Escritura enseña que cada persona es:"
+   },
+   "options": {
+    "en": [
+     "A real, distinct soul made in God's image",
+     "An illusion to see through",
+     "Reborn endlessly",
+     "A spark to be dissolved"
+    ],
+    "es": [
+     "Un alma real y distinta hecha a imagen de Dios",
+     "Una ilusión que atravesar",
+     "Renacida sin fin",
+     "Una chispa que disolver"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Each person is a real, distinct soul in God's image, who stands before Him and lives forever.",
+    "es": "Cada persona es un alma real y distinta a imagen de Dios, que está delante de Él y vive para siempre."
+   }
+  },
+  {
+   "stem": {
+    "en": "Concerning how a person is set right with God, the Eastern path of self-effort across many lifetimes is answered by:",
+    "es": "En cuanto a cómo una persona es reconciliada con Dios, el camino oriental de esfuerzo propio a través de muchas vidas es respondido por:"
+   },
+   "options": {
+    "en": [
+     "Simply more works",
+     "Grace — salvation is God's free gift, not earned by works (Ephesians 2:8-9)",
+     "Stricter meditation",
+     "Hope for a better rebirth"
+    ],
+    "es": [
+     "Simplemente más obras",
+     "La gracia — la salvación es el don gratuito de Dios, no ganado por obras (Efesios 2:8-9)",
+     "Una meditación más estricta",
+     "La esperanza de un mejor renacer"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Salvation is by grace, God's free gift, not earned by the self through works.",
+    "es": "La salvación es por gracia, el don gratuito de Dios, no ganada por el yo mediante obras."
+   }
+  },
+  {
+   "stem": {
+    "en": "Hebrews 9:27 answers the idea of reincarnation by teaching that it is appointed for men to:",
+    "es": "Hebreos 9:27 responde a la idea de la reencarnación al enseñar que está establecido a los hombres:"
+   },
+   "options": {
+    "en": [
+     "Be reborn many times",
+     "Escape the body",
+     "Die once, and after this the judgment",
+     "Become gods"
+    ],
+    "es": [
+     "Renacer muchas veces",
+     "Escapar del cuerpo",
+     "Morir una sola vez, y después de esto el juicio",
+     "Llegar a ser dioses"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "It is appointed to die once, then the judgment — one life, not an endless cycle of rebirth.",
+    "es": "Está establecido morir una sola vez, luego el juicio — una vida, no un ciclo sin fin de renacer."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Christian hope for the body and the self is not extinction or absorption but:",
+    "es": "La esperanza cristiana para el cuerpo y el yo no es la extinción ni la absorción sino:"
+   },
+   "options": {
+    "en": [
+     "Endless rebirth",
+     "Becoming Brahman",
+     "Nothingness",
+     "Resurrection and eternal, personal life with God"
+    ],
+    "es": [
+     "El renacer sin fin",
+     "Llegar a ser Brahman",
+     "La nada",
+     "La resurrección y la vida eterna, personal, con Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The hope is resurrection and eternal, personal life — to know and be known by God forever.",
+    "es": "La esperanza es la resurrección y la vida eterna, personal — conocer y ser conocido por Dios para siempre."
+   }
+  },
+  {
+   "stem": {
+    "en": "Because Scripture says there is one way to God, the sincerity and wisdom of these religions, though real, cannot:",
+    "es": "Porque la Escritura dice que hay un solo camino a Dios, la sinceridad y la sabiduría de estas religiones, aunque reales, no pueden:"
+   },
+   "options": {
+    "en": [
+     "Be admired at all",
+     "Contain any truth",
+     "Save, for salvation is in Christ alone",
+     "Be studied"
+    ],
+    "es": [
+     "Ser admiradas en absoluto",
+     "Contener verdad alguna",
+     "Salvar, pues la salvación está en Cristo solo",
+     "Ser estudiadas"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Sincerity and wisdom are real, but cannot save; salvation is in Christ alone (Acts 4:12).",
+    "es": "La sinceridad y la sabiduría son reales, pero no pueden salvar; la salvación está en Cristo solo (Hechos 4:12)."
+   }
+  },
+  {
+   "stem": {
+    "en": "To the weariness of endless striving across lifetimes, Jesus says (Matthew 11:28):",
+    "es": "A la fatiga del esfuerzo sin fin a través de las vidas, Jesús dice (Mateo 11:28):"
+   },
+   "options": {
+    "en": [
+     "'Empty yourself of all desire'",
+     "'Try harder next time'",
+     "'Return in the next life'",
+     "'Come to Me, all you who labor and are heavy laden, and I will give you rest'"
+    ],
+    "es": [
+     "'Vacíate de todo deseo'",
+     "'Esfuérzate más la próxima vez'",
+     "'Vuelve en la próxima vida'",
+     "'Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar'"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Christ freely gives the rest that endless effort could never earn.",
+    "es": "Cristo da gratuitamente el descanso que el esfuerzo sin fin nunca podría ganar."
+   }
+  },
+  {
+   "stem": {
+    "en": "The deepest reason the Eastern path is 'another way' and not the way is that it offers salvation by:",
+    "es": "La razón más profunda por la que el camino oriental es 'otro camino' y no el camino es que ofrece salvación por:"
+   },
+   "options": {
+    "en": [
+     "Grace",
+     "Self-effort and works rather than the free grace of God in Christ",
+     "Faith alone",
+     "The cross"
+    ],
+    "es": [
+     "La gracia",
+     "El esfuerzo propio y las obras en lugar de la gracia gratuita de Dios en Cristo",
+     "La fe sola",
+     "La cruz"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "It offers salvation by the self, through works — the opposite of free grace in Christ.",
+    "es": "Ofrece salvación por el yo, mediante obras — lo opuesto de la gracia gratuita en Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Our redemptive aim toward a Hindu or a Buddhist is to:",
+    "es": "Nuestro fin redentor hacia un hindú o un budista es:"
+   },
+   "options": {
+    "en": [
+     "Honor their longing for release and point them to the Christ who gives true rest and eternal life",
+     "Ignore them",
+     "Mock their beliefs",
+     "Argue with them endlessly"
+    ],
+    "es": [
+     "Honrar su anhelo de liberación y señalarlos al Cristo que da verdadero descanso y vida eterna",
+     "Ignorarlos",
+     "Burlarnos de sus creencias",
+     "Discutir con ellos sin fin"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "We honor their longing for release and point them to the Christ who gives rest and eternal life.",
+    "es": "Honramos su anhelo de liberación y los señalamos al Cristo que da descanso y vida eterna."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "State the shared framework of the great Eastern religions (samsara, karma, the goal of escape) and how it differs from the biblical view.",
+    "es": "Exponga el marco compartido de las grandes religiones orientales (samsara, karma, la meta de escapar) y en qué difiere de la visión bíblica."
+   },
+   "keywords": {
+    "en": [
+     "samsara",
+     "karma",
+     "rebirth",
+     "cycle",
+     "escape",
+     "suffering",
+     "liberation",
+     "self"
+    ],
+    "es": [
+     "samsara",
+     "karma",
+     "renacer",
+     "ciclo",
+     "escapar",
+     "sufrimiento",
+     "liberaci",
+     "alma"
+    ]
+   },
+   "model": {
+    "en": "The great Eastern religions share a framework in which the self is caught on a wheel of rebirth called samsara, bound by karma, the law by which one's deeds shape one's next life. Time is a vast cycle rather than a line, and the world is passing, for many an illusion. The great problem is not sin against a holy God but bondage to this cycle and ignorance of one's condition, and the great hope is release, to escape the wheel and end suffering. This differs from the biblical view at the foundation: Scripture teaches a real, God-made world, one life rather than endless rebirth, and a personal Creator before whom each soul stands. So the very picture of the world, and the nature of the problem and the hope, are different.",
+    "es": "Las grandes religiones orientales comparten un marco en el cual el yo está atrapado en una rueda de renacer llamada samsara, atado por el karma, la ley por la cual las obras de uno moldean su próxima vida. El tiempo es un vasto ciclo en lugar de una línea, y el mundo es pasajero, para muchos una ilusión. El gran problema no es el pecado contra un Dios santo sino la esclavitud a este ciclo y la ignorancia de la condición de uno, y la gran esperanza es la liberación, escapar de la rueda y terminar el sufrimiento. Esto difiere de la visión bíblica en el fundamento: la Escritura enseña un mundo real hecho por Dios, una vida en lugar del renacer sin fin, y un Creador personal ante quien está cada alma. Así que el cuadro mismo del mundo, y la naturaleza del problema y de la esperanza, son diferentes."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Fairly summarize what Hindus teach about Brahman, the self (atman), and liberation (moksha).",
+    "es": "Resuma justamente lo que los hindúes enseñan acerca de Brahman, el yo (atman), y la liberación (moksha)."
+   },
+   "keywords": {
+    "en": [
+     "brahman",
+     "atman",
+     "self",
+     "moksha",
+     "liberation",
+     "reincarnation",
+     "one",
+     "god"
+    ],
+    "es": [
+     "brahman",
+     "atman",
+     "alma",
+     "moksha",
+     "liberaci",
+     "reencarnaci",
+     "uno",
+     "dios"
+    ]
+   },
+   "model": {
+    "en": "Hindus teach that behind all things is Brahman, the one ultimate reality, often conceived as an impersonal Absolute, and that the many gods are faces or expressions of that one reality. In its highest teaching, the individual self, the atman, is identical with Brahman, so that one's deepest self is the divine, captured in the saying you are that. Bound by karma to reincarnation, the soul seeks moksha, liberation, the release of the self into the Absolute, pursued across many lifetimes through knowledge, works, or loving devotion. Alongside this runs a warm stream of personal devotion to chosen gods. In short, Hinduism seeks liberation from the cycle by realizing the oneness of the self with Brahman, the one reality.",
+    "es": "Los hindúes enseñan que detrás de todas las cosas está Brahman, la única realidad última, a menudo concebida como un Absoluto impersonal, y que los muchos dioses son rostros o expresiones de esa única realidad. En su enseñanza más alta, el yo individual, el atman, es idéntico con Brahman, de modo que el yo más profundo de uno es lo divino, captado en el dicho tú eres eso. Atado por el karma a la reencarnación, el alma busca moksha, la liberación, la suelta del yo en el Absoluto, buscada a través de muchas vidas por el conocimiento, las obras, o la devoción amorosa. Junto a esto corre una cálida corriente de devoción personal a dioses escogidos. En resumen, el hinduismo busca la liberación del ciclo al realizar la unidad del yo con Brahman, la única realidad, un solo fundamento de todo lo que es de Dios o divino."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Fairly summarize the Buddha's Four Noble Truths, the teaching of no-self (anatta), and nirvana.",
+    "es": "Resuma justamente las Cuatro Nobles Verdades del Buda, la enseñanza del no-yo (anatta), y el nirvana."
+   },
+   "keywords": {
+    "en": [
+     "buddha",
+     "suffering",
+     "craving",
+     "noble",
+     "anatta",
+     "self",
+     "nirvana",
+     "path"
+    ],
+    "es": [
+     "buda",
+     "sufrimiento",
+     "deseo",
+     "nobles",
+     "anatta",
+     "alma",
+     "nirvana",
+     "camino"
+    ]
+   },
+   "model": {
+    "en": "The Buddha taught the Four Noble Truths: that life is marked by suffering, that suffering arises from craving and attachment, that suffering ends when craving is extinguished, and that the way to extinguish it is the Eightfold Path. He did not point to a creator God, so original Buddhism is non-theistic. He also taught anatta, no-self: that there is no permanent self or soul, and that the belief in an abiding I is itself an illusion. Bound by karma to rebirth, the follower seeks nirvana, the blowing out of the flame of craving and of the self, the end of suffering and release from the cycle, reached by one's own effort along the path. So Buddhism seeks release from suffering by extinguishing craving and the self.",
+    "es": "El Buda enseñó las Cuatro Nobles Verdades: que la vida está marcada por el sufrimiento, que el sufrimiento surge del deseo y el apego, que el sufrimiento termina cuando el deseo se extingue, y que el camino para extinguirlo es el Óctuple Sendero. No señaló a un Dios creador, así que el budismo original es no teísta. También enseñó anatta, el no-yo: que no hay un yo o alma permanente, y que la creencia en un yo perdurable es ella misma una ilusión. Atado por el karma al renacer, el seguidor busca el nirvana, el soplar hacia afuera de la llama del deseo y del yo, el fin del sufrimiento y la liberación del ciclo, alcanzado por el propio esfuerzo a lo largo del sendero. Así que el budismo busca la liberación del sufrimiento al extinguir el deseo y el yo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "From Scripture, show that God is one personal Creator distinct from the world (against pantheism and non-theism).",
+    "es": "Desde la Escritura, muestre que Dios es un solo Creador personal distinto del mundo (contra el panteísmo y el no teísmo)."
+   },
+   "keywords": {
+    "en": [
+     "god",
+     "creator",
+     "personal",
+     "distinct",
+     "world",
+     "made",
+     "athens",
+     "one"
+    ],
+    "es": [
+     "dios",
+     "creador",
+     "personal",
+     "distinto",
+     "mundo",
+     "hizo",
+     "atenas",
+     "uno"
+    ]
+   },
+   "model": {
+    "en": "Scripture teaches that God is one personal Creator, distinct from the world, against the idea that all is one or that there is no God. In the beginning God created the heavens and the earth, and He says, I am the LORD, and there is no other. Paul told the philosophers at Athens that the God who made the world and everything in it does not dwell in temples made with hands, and needs nothing, but gives to all life and breath. So the world is not God, and God is not the world; He is its Maker, personal and near, yet other than His creation. This one personal Creator is not an impersonal Absolute to be merged with, nor a question to be set aside, but the living God who made us and gives us breath.",
+    "es": "La Escritura enseña que Dios es un solo Creador personal, distinto del mundo, contra la idea de que todo es uno o de que no hay Dios. En el principio creó Dios los cielos y la tierra, y dice: Yo soy Jehová, y no hay otro. Pablo dijo a los filósofos en Atenas que el Dios que hizo el mundo y todas las cosas que en él hay no habita en templos hechos de manos, y de nada necesita, sino que da a todos vida y aliento. Así que el mundo no es Dios, y Dios no es el mundo; es su Hacedor, personal y cercano, y sin embargo otro que su creación. Este único Creador personal no es un Absoluto impersonal con el cual fundirse, ni una cuestión que dejar a un lado, sino el Dios vivo que nos hizo y nos da aliento."
+   }
+  },
+  {
+   "prompt": {
+    "en": "From Scripture, show that each person is a real, distinct soul (against no-self and absorption).",
+    "es": "Desde la Escritura, muestre que cada persona es un alma real y distinta (contra el no-yo y la absorción)."
+   },
+   "keywords": {
+    "en": [
+     "soul",
+     "person",
+     "image",
+     "distinct",
+     "real",
+     "god",
+     "stand",
+     "eternal"
+    ],
+    "es": [
+     "alma",
+     "persona",
+     "imagen",
+     "distinta",
+     "real",
+     "dios",
+     "eterno",
+     "creado"
+    ]
+   },
+   "model": {
+    "en": "Scripture teaches that each person is a real and distinct soul, against the idea that the self is an illusion or a drop to be lost in the Absolute. God created man in His own image, so the person has real and lasting worth as a distinct soul, not a passing bundle of states to be seen through. We do not dissolve into the Absolute or vanish in nirvana; each person stands before his Maker and gives account, and lives forever. The Christian hope is not the loss of the self but eternal, personal life, to know and be known by God. So the self is real, distinct, made in God's image, and kept forever, not extinguished or absorbed.",
+    "es": "La Escritura enseña que cada persona es un alma real y distinta, contra la idea de que el yo es una ilusión o una gota que perder en el Absoluto. Dios creó al hombre a su imagen, así que la persona tiene valor real y duradero como un alma distinta, no un manojo pasajero de estados que atravesar. No nos disolvemos en el Absoluto ni nos desvanecemos en el nirvana; cada persona está delante de su Hacedor y da cuenta, y vive para siempre. La esperanza cristiana no es la pérdida del yo sino la vida eterna, personal, conocer y ser conocido por Dios. Así que el yo es real, distinto, hecho a imagen de Dios, y guardado para siempre, no extinguido ni absorbido."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using Hebrews 9:27 and Ephesians 2:8-9, answer the ideas of reincarnation and salvation by self-effort.",
+    "es": "Usando Hebreos 9:27 y Efesios 2:8-9, responda a las ideas de la reencarnación y la salvación por esfuerzo propio."
+   },
+   "keywords": {
+    "en": [
+     "once",
+     "die",
+     "judgment",
+     "reincarnation",
+     "grace",
+     "faith",
+     "works",
+     "gift"
+    ],
+    "es": [
+     "una",
+     "muer",
+     "juicio",
+     "reencarnaci",
+     "gracia",
+     "fe",
+     "obras",
+     "don"
+    ]
+   },
+   "model": {
+    "en": "Scripture answers reincarnation directly: it is appointed for men to die once, and after this the judgment. That is one life, not an endless cycle of rebirth to try again; after death we stand before God. And Scripture answers salvation by self-effort just as directly: by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast. The Eastern path climbs to release by one's own effort across many lifetimes, but no one climbs to God; salvation is His free gift, received by faith, not earned by works. So both the endless wheel and the ladder of self-effort are answered: one life, then judgment, and salvation by grace, not by works.",
+    "es": "La Escritura responde a la reencarnación directamente: está establecido a los hombres que mueran una sola vez, y después de esto el juicio. Eso es una vida, no un ciclo sin fin de renacer para intentar de nuevo; después de la muerte estamos delante de Dios. Y la Escritura responde a la salvación por esfuerzo propio con igual claridad: por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios, no por obras, para que nadie se gloríe. El camino oriental sube a la liberación por el propio esfuerzo a través de muchas vidas, pero nadie sube a Dios; la salvación es su don gratuito, recibido por la fe, no ganado por obras. Así que tanto la rueda sin fin como la escalera del esfuerzo propio son respondidas: una vida, luego el juicio, y la salvación por gracia, no por obras."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the Christian hope for the self and the body (resurrection and eternal life with God) against nirvana and absorption.",
+    "es": "Explique la esperanza cristiana para el yo y el cuerpo (la resurrección y la vida eterna con Dios) contra el nirvana y la absorción."
+   },
+   "keywords": {
+    "en": [
+     "resurrection",
+     "body",
+     "eternal",
+     "person",
+     "god",
+     "life",
+     "nirvana",
+     "absorption"
+    ],
+    "es": [
+     "resurrecci",
+     "cuerpo",
+     "eterna",
+     "persona",
+     "dios",
+     "vida",
+     "nirvana",
+     "conoce"
+    ]
+   },
+   "model": {
+    "en": "The Christian hope is not the loss of the self but its fullness. Against nirvana, which is the extinguishing of the self, and against absorption into the Absolute, Scripture teaches the resurrection of the body and eternal, personal, conscious life. Jesus said, this is eternal life, that they may know You, the only true God. So the goal is to know and be known, forever, by a God who loves us, and to live as ourselves, distinct persons, not dissolved or blown out. The body is not a prison to escape but is raised and glorified, and the person is kept, not lost. This is the very opposite of nirvana and absorption: not the end of the self, but everlasting life with a personal God.",
+    "es": "La esperanza cristiana no es la pérdida del yo sino su plenitud. Contra el nirvana, que es la extinción del yo, y contra la absorción en el Absoluto, la Escritura enseña la resurrección del cuerpo y la vida eterna, personal, consciente. Jesús dijo: esta es la vida eterna, que te conozcan a ti, el único Dios verdadero. Así que la meta es conocer y ser conocido, para siempre, por un Dios que nos ama, y vivir como nosotros mismos, personas distintas, no disueltas ni apagadas. El cuerpo no es una cárcel de la cual escapar sino que es resucitado y glorificado, y la persona es guardada, no perdida. Esto es lo opuesto mismo del nirvana y la absorción: no el fin del yo, sino la vida eterna con un Dios personal que nos conoce."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why these religions, however sincere and wise, cannot save (one way, Acts 4:12; John 14:6).",
+    "es": "Explique por qué estas religiones, por sinceras y sabias que sean, no pueden salvar (un solo camino, Hechos 4:12; Juan 14:6)."
+   },
+   "keywords": {
+    "en": [
+     "one",
+     "way",
+     "christ",
+     "salvation",
+     "sincere",
+     "truth",
+     "saved",
+     "only"
+    ],
+    "es": [
+     "camino",
+     "cristo",
+     "salvaci",
+     "sincero",
+     "verdad",
+     "solo",
+     "salva",
+     "nombre"
+    ]
+   },
+   "model": {
+    "en": "These religions, however sincere and wise, cannot save, because Scripture teaches that there is only one way to God. Jesus said, I am the way, the truth, and the life; no one comes to the Father except through Me. He said the way, not a way. And the apostles preached that there is no other name under heaven given among men by which we must be saved. Sincerity cannot make a false path true, and wisdom about many things cannot supply the one thing needful. However rich these religions are, they cannot bear our sin, conquer our death, or bring us to God, for only Christ can do that. So we honor what is good and true in them, yet hold firmly that salvation is in Christ alone, the only Savior and the only way.",
+    "es": "Estas religiones, por sinceras y sabias que sean, no pueden salvar, porque la Escritura enseña que hay un solo camino a Dios. Jesús dijo: Yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí. Dijo el camino, no un camino. Y los apóstoles predicaron que no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos. La sinceridad no puede hacer verdadero un camino falso, y la sabiduría acerca de muchas cosas no puede suplir la única cosa necesaria. Por ricas que sean estas religiones, no pueden llevar nuestro pecado, vencer nuestra muerte, ni traernos a Dios, pues solo Cristo puede hacer eso. Así que honramos lo que es bueno y verdadero en ellas, y sostenemos firmemente que la salvación está en Cristo solo, el único Salvador y el único camino."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the redemptive aim toward a Hindu or a Buddhist, and how the gospel meets their longing for release.",
+    "es": "Describa el fin redentor hacia un hindú o un budista, y cómo el evangelio se encuentra con su anhelo de liberación."
+   },
+   "keywords": {
+    "en": [
+     "rest",
+     "longing",
+     "release",
+     "christ",
+     "grace",
+     "love",
+     "gospel",
+     "respect"
+    ],
+    "es": [
+     "descanso",
+     "anhelo",
+     "cristo",
+     "gracia",
+     "amor",
+     "evangelio",
+     "respeto",
+     "paz"
+    ]
+   },
+   "model": {
+    "en": "The redemptive aim is to meet the deep longing of the Hindu and the Buddhist, not to take it away. They long for release from suffering and for peace, and the gospel answers that longing better than they know. To the weariness of endless striving, Jesus says, Come to Me, all you who labor and are heavy laden, and I will give you rest. The rest that a thousand lifetimes could never earn, He gives freely by grace, because He has done the work. To the fear of losing oneself, He offers not extinction but everlasting life and the love of a personal God. So we listen to their desire for peace and release, we honor them as neighbors with respect, and we point them with patience, prayer, and an open Bible to the Christ who gives true rest.",
+    "es": "El fin redentor es encontrarse con el anhelo profundo del hindú y del budista, no quitárselo. Anhelan la liberación del sufrimiento y la paz, y el evangelio responde a ese anhelo mejor de lo que saben. A la fatiga del esfuerzo sin fin, Jesús dice: Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar. El descanso que mil vidas nunca podrían ganar, Él lo da gratuitamente por gracia, porque Él ha hecho la obra. Al temor de perderse a sí mismo, ofrece no la extinción sino la vida eterna y el amor de un Dios personal. Así que escuchamos su deseo de paz y liberación, los honramos como prójimos con respeto, y los señalamos con paciencia, oración, y la Biblia abierta al Cristo que da verdadero descanso."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize Unit 7: the shared Eastern framework, the two roots tested, and the redemptive aim.",
+    "es": "Resuma la Unidad 7: el marco oriental compartido, las dos raíces probadas, y el fin redentor."
+   },
+   "keywords": {
+    "en": [
+     "karma",
+     "god",
+     "self",
+     "salvation",
+     "grace",
+     "christ",
+     "reincarnation",
+     "redemptive"
+    ],
+    "es": [
+     "karma",
+     "dios",
+     "alma",
+     "salvaci",
+     "gracia",
+     "cristo",
+     "reencarnaci",
+     "redentor"
+    ]
+   },
+   "model": {
+    "en": "Unit 7 examines Hinduism and Buddhism, which share a framework of a world bound by karma to a cycle of rebirth, with the goal of escape. We test this at two roots. First, God and the self: against pantheism and non-theism, Scripture teaches one personal Creator distinct from the world, and against no-self and absorption, that each person is a real soul made in God's image, and that Christ is the unique Son, not one teacher among many. Second, salvation: against release earned by the self across many lifetimes, Scripture teaches grace, one life then judgment rather than reincarnation, and resurrection rather than absorption. So these are another way, not the way, for salvation is in Christ alone. Yet the aim is redemptive: we meet their longing for release with the Christ who gives true rest and eternal life.",
+    "es": "La Unidad 7 examina el hinduismo y el budismo, que comparten un marco de un mundo atado por el karma a un ciclo de renacer, con la meta de escapar. Probamos esto en dos raíces. Primera, Dios y el yo: contra el panteísmo y el no teísmo, la Escritura enseña un solo Creador personal distinto del mundo, y contra el no-yo y la absorción, que cada persona es un alma real hecha a imagen de Dios, y que Cristo es el Hijo único, no un maestro entre muchos. Segunda, la salvación: contra la liberación ganada por el yo a través de muchas vidas, la Escritura enseña la gracia, una vida y luego el juicio en lugar de la reencarnación, y la resurrección en lugar de la absorción. Así que estos son otro camino, no el camino, pues la salvación está en Cristo solo. Sin embargo, el fin es redentor: nos encontramos con su anhelo de liberación con el Cristo que da verdadero descanso y vida eterna."
+   }
+  }
+ ]
+};

@@ -1,156 +1,865 @@
-/* CTSST - unit 1: per-unit configuration and content. */
-
-const UNIT = 1;
-
-const NEXT_UNIT_URL = 'CTSSTUnit2.html';
-
-const unitTitlesEn = [
-    `Unit ${UNIT} - The Doctrine of Revelation`,
-    `Unit ${UNIT + 1} - The Doctrine of God`,
-    "Unit 3 - The Doctrine of Christ",
-    "Unit 4 - The Holy Spirit",
-    "Unit 5 - The Doctrine of Man",
-    "Unit 6 - Sin",
-    "Unit 7 - Salvation",
-    "Unit 8 - The Church",
-    "Unit 9 - Denominations and the Gospel",
-    "Unit 10 - Last Things",
-    "Unit 11 - Apologetics",
-    "Unit 12 - The Kingdom of God",
-    "Unit 13 - Church, State, and Nationalism"
-];
-
-const mcQuestions = [
-    { textEn: "1. What is the starting point of all theology?", textEs: "1. ¿Cuál es el punto de partida de toda teología?",
-      optionsEn: ["God's decision to make Himself known", "Man's search for God", "Church tradition", "Human reason"],
-      optionsEs: ["La decisión de Dios de darse a conocer", "La búsqueda del hombre por Dios", "La tradición de la iglesia", "La razón humana"], explanationEn: "God's decision to make Himself known, not man's search for God.", explanationEs: "La decisión de Dios de darse a conocer, no la búsqueda del hombre.", correct: 0 },
-    { textEn: "2. Why must God reveal Himself for us to know Him?", textEs: "2. ¿Por qué debe Dios revelarse a Sí mismo para que podamos conocerle?",
-      optionsEn: ["Because we are too busy", "Because the finite cannot reach the Infinite", "Because God is hiding", "Because we don't want to know"],
-      optionsEs: ["Porque estamos demasiado ocupados", "Porque lo finito no puede alcanzar al Infinito", "Porque Dios se está escondiendo", "Porque no queremos saber"], explanationEn: "The finite cannot reach the Infinite; God must reveal Himself.", explanationEs: "Lo finito no puede alcanzar al Infinito; Dios debe revelarse.", correct: 1 },
-    { textEn: "3. Which is the final written authority for Christian theology?", textEs: "3. ¿Cuál es la autoridad escrita final para la teología cristiana?",
-      optionsEn: ["Tradition", "Existential encounter", "The Bible", "Human reason"],
-      optionsEs: ["La tradición", "El encuentro existencial", "La Biblia", "La razón humana"], explanationEn: "The Bible stands as the final written authority.", explanationEs: "La Biblia es la autoridad escrita final.", correct: 2 },
-    { textEn: "4. What is the Living Word of God?", textEs: "4. ¿Cuál es la Palabra Viva de Dios?",
-      optionsEn: ["Jesus Christ", "The Bible", "Baptism and the Lord's Supper", "Creation"],
-      optionsEs: ["Jesucristo", "La Biblia", "El Bautismo y la Cena del Señor", "La creación"], explanationEn: "Jesus Christ is the Living Word.", explanationEs: "Jesucristo es la Palabra Viva.", correct: 0 },
-    { textEn: "5. What does General Revelation reveal?", textEs: "5. ¿Qué revela la Revelación General?",
-      optionsEn: ["The full plan of salvation", "The church ordinances only", "The New Testament canon", "God exists, God is powerful, and man is accountable"],
-      optionsEs: ["El plan completo de salvación", "Solo las ordenanzas de la iglesia", "El canon del Nuevo Testamento", "Dios existe, Dios es poderoso, y el hombre es responsable"], explanationEn: "General revelation reveals God's existence, power, and human accountability.", explanationEs: "La revelación general revela la existencia de Dios, su poder y la responsabilidad humana.", correct: 3 },
-    { textEn: "6. Can General Revelation save?", textEs: "6. ¿Puede la Revelación General salvar?",
-      optionsEn: ["Yes, if joined with reason", "Yes, if a person is sincere", "Only in the Old Testament", "No"],
-      optionsEs: ["Sí, si se une con la razón", "Sí, si una persona es sincera", "Solo en el Antiguo Testamento", "No"], explanationEn: "General revelation cannot save; it only gives awareness.", explanationEs: "La revelación general no puede salvar; solo da conciencia.", correct: 3 },
-    { textEn: "7. Where is Special Revelation primarily found?", textEs: "7. ¿Dónde se encuentra principalmente la Revelación Especial?",
-      optionsEn: ["Nature, conscience, and history alone", "Israel's history, Jesus Christ, and the Bible", "Philosophy and science", "Church councils only"],
-      optionsEs: ["Solo la naturaleza, la conciencia y la historia", "La historia de Israel, Jesucristo y la Biblia", "La filosofía y la ciencia", "Solo los concilios de la iglesia"], explanationEn: "Special revelation is found in Israel's history, Christ, and Scripture.", explanationEs: "La revelación especial se encuentra en la historia de Israel, Cristo y las Escrituras.", correct: 1 },
-    { textEn: "8. What does John 14:9 teach?", textEs: "8. ¿Qué enseña Juan 14:9?",
-      optionsEn: ["The prophets fully replace Christ", "The Father cannot be known", "He who has seen Christ has seen the Father", "Nature is greater than Scripture"],
-      optionsEs: ["Los profetas reemplazan completamente a Cristo", "El Padre no puede ser conocido", "El que ha visto a Cristo ha visto al Padre", "La naturaleza es mayor que la Escritura"], explanationEn: "Jesus said, 'He who has seen Me has seen the Father.'", explanationEs: "Jesús dijo: 'El que me ha visto a mí, ha visto al Padre.'", correct: 2 },
-    { textEn: "9. What does 'God-breathed' mean?", textEs: "9. ¿Qué significa 'inspirada por Dios'?",
-      optionsEn: ["Scripture came from God", "Scripture was copied without error", "Only the ideas are inspired", "Scripture was dictated word-for-word"],
-      optionsEs: ["La Escritura vino de Dios", "La Escritura fue copiada sin error", "Solo las ideas son inspiradas", "La Escritura fue dictada palabra por palabra"], explanationEn: "'God-breathed' means Scripture originated with God.", explanationEs: "'Inspirada por Dios' significa que la Escritura se originó en Dios.", correct: 0 },
-    { textEn: "10. What is Plenary Inspiration?", textEs: "10. ¿Qué es la Inspiración Plenaria?",
-      optionsEn: ["Only the moral parts inspired", "Only the words inspired", "Inspired like great literature", "All parts of Scripture are fully inspired"],
-      optionsEs: ["Solo las partes morales inspiradas", "Solo las palabras inspiradas", "Inspirada como la gran literatura", "Todas las partes de la Escritura están plenamente inspiradas"], explanationEn: "Plenary Inspiration affirms all parts are fully inspired.", explanationEs: "La Inspiración Plenaria afirma que todas las partes están plenamente inspiradas.", correct: 3 },
-    { textEn: "11. What is Illumination?", textEs: "11. ¿Qué es la Iluminación?",
-      optionsEn: ["The church choosing the canon", "The Holy Spirit enabling believers to understand Scripture", "God dictating Scripture", "Copyists preserving manuscripts"],
-      optionsEs: ["La iglesia eligiendo el canon", "El Espíritu Santo capacitando a los creyentes para entender la Escritura", "Dios dictando la Escritura", "Copistas preservando manuscritos"], explanationEn: "Illumination is the Spirit's work helping believers understand.", explanationEs: "La Iluminación es la obra del Espíritu ayudando a los creyentes a entender.", correct: 1 },
-    { textEn: "12. How many books are in the New Testament?", textEs: "12. ¿Cuántos libros tiene el Nuevo Testamento?",
-      optionsEn: ["39", "66", "27", "24"],
-      optionsEs: ["39", "66", "27", "24"], explanationEn: "The New Testament has 27 books.", explanationEs: "El Nuevo Testamento tiene 27 libros.", correct: 2 },
-    { textEn: "13. What is Transmission?", textEs: "13. ¿Qué es la Transmisión?",
-      optionsEn: ["The Holy Spirit helping believers understand", "God revealing truth only through nature", "Jesus becoming flesh", "God preserving His Word through canonization, copying, translation, and preservation"],
-      optionsEs: ["El Espíritu Santo ayudando a los creyentes a entender", "Dios revelando verdad solo a través de la naturaleza", "Jesús haciéndose carne", "Dios preservando Su Palabra a través de canonización, copia, traducción y preservación"], explanationEn: "Transmission is God's preservation of His Word through history.", explanationEs: "La Transmisión es la preservación de la Palabra de Dios a través de la historia.", correct: 3 },
-    { textEn: "14. What does Romans 1:19 teach?", textEs: "14. ¿Qué enseña Romanos 1:19?",
-      optionsEn: ["God has made knowledge of Himself plain through creation", "Only Israel can know God", "Salvation comes through conscience", "Scripture is unnecessary"],
-      optionsEs: ["Dios ha hecho claro el conocimiento de Sí mismo a través de la creación", "Solo Israel puede conocer a Dios", "La salvación viene a través de la conciencia", "La Escritura es innecesaria"], explanationEn: "God has made Himself plain through creation.", explanationEs: "Dios se ha manifestado claramente a través de la creación.", correct: 0 },
-    { textEn: "15. What is the Enacted Word?", textEs: "15. ¿Cuál es la Palabra Actuada?",
-      optionsEn: ["Baptism and the Lord's Supper", "The preaching of the prophets", "Creation", "The Bible"],
-      optionsEs: ["El Bautismo y la Cena del Señor", "La predicación de los profetas", "La creación", "La Biblia"], explanationEn: "The Enacted Word refers to Baptism and the Lord's Supper.", explanationEs: "La Palabra Actuada se refiere al Bautismo y la Cena del Señor.", correct: 0 },
-    { textEn: "16. What must be true if God has spoken?", textEs: "16. ¿Qué debe ser verdad si Dios ha hablado?",
-      optionsEn: ["Nothing can be known", "Everything must be understood through that revelation", "Tradition replaces Scripture", "Human reason becomes unnecessary"],
-      optionsEs: ["Nada puede ser conocido", "Todo debe ser entendido a través de esa revelación", "La tradición reemplaza a la Escritura", "La razón humana se vuelve innecesaria"], explanationEn: "If God has spoken, everything must be understood through that revelation.", explanationEs: "Si Dios ha hablado, todo debe ser entendido a través de esa revelación.", correct: 1 },
-    { textEn: "17. What is the final response to God's revelation?", textEs: "17. ¿Cuál es la respuesta final a la revelación de Dios?",
-      optionsEn: ["Mere curiosity", "Intellectual mastery", "Personal preference", "Obedience"],
-      optionsEs: ["Mera curiosidad", "Dominio intelectual", "Preferencia personal", "Obediencia"], explanationEn: "The final response is obedience.", explanationEs: "La respuesta final es la obediencia.", correct: 3 },
-    { textEn: "18. Which theory says God dictated word-for-word?", textEs: "18. ¿Qué teoría dice que Dios dictó palabra por palabra?",
-      optionsEn: ["Dynamic Theory", "Plenary Inspiration", "Dictation Theory", "Natural Theory"],
-      optionsEs: ["Teoría Dinámica", "Inspiración Plenaria", "Teoría del Dictado", "Teoría Natural"], explanationEn: "Dictation Theory suggests God dictated word-for-word.", explanationEs: "La Teoría del Dictado sugiere que Dios dictó palabra por palabra.", correct: 2 },
-    { textEn: "19. What is the purpose of theology?", textEs: "19. ¿Cuál es el propósito de la teología?",
-      optionsEn: ["To win arguments", "To collect information", "To know God truly, trust Him fully, and live in obedience", "To become famous"],
-      optionsEs: ["Ganar discusiones", "Coleccionar información", "Conocer a Dios verdaderamente, confiar en Él y vivir en obediencia", "Volverse famoso"], explanationEn: "The purpose is to know God, trust Him, and live in obedience.", explanationEs: "El propósito es conocer a Dios, confiar en Él y vivir en obediencia.", correct: 2 },
-    { textEn: "20. According to the course, what must theology move from and to?", textEs: "20. Según el curso, ¿de qué debe pasar la teología y a qué?",
-      optionsEn: ["From faith to works", "From knowledge to transformation", "From tradition to innovation", "From doubt to certainty"],
-      optionsEs: ["De fe a obras", "De conocimiento a transformación", "De tradición a innovación", "De duda a certeza"], explanationEn: "Theology must move from knowledge to transformation.", explanationEs: "La teología debe pasar del conocimiento a la transformación.", correct: 1 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain why God's self-disclosure is necessary for true knowledge of Him. Why can we not reach God on our own?",
-      textEs: "21. Explique por qué la auto-revelación de Dios es necesaria para un verdadero conocimiento de Él. ¿Por qué no podemos alcanzar a Dios por nuestra cuenta?",
-      kw_en: ["finite", "infinite", "reveal", "speak", "known", "starting point", "initiative", "search"],
-      kw_es: ["finito", "infinito", "revelar", "hablar", "conocer", "punto de partida", "iniciativa", "búsqueda"],
-      modelEn: "The starting point of all theology is not man's search for God but God's decision to make Himself known. The reason is that the finite cannot reach the Infinite; a creature cannot climb up to the Creator by its own effort or cleverness. If God chose to remain hidden, He simply could not be known. Therefore, if God is to be known at all, He must take the initiative and speak. Knowledge of God always begins on His side, not ours, and that is why revelation is the foundation of everything else we believe.",
-      modelEs: "El punto de partida de toda teología no es la búsqueda del hombre por Dios, sino la decisión de Dios de darse a conocer. La razón es que lo finito no puede alcanzar al Infinito; una criatura no puede subir hasta el Creador por su propio esfuerzo o ingenio. Si Dios escogiera permanecer oculto, simplemente no podría ser conocido. Por lo tanto, si Dios ha de ser conocido, debe tomar la iniciativa y hablar. El conocimiento de Dios siempre comienza de Su lado, no del nuestro, y por eso la revelación es el fundamento de todo lo demás que creemos." },
-
-    { textEn: "22. What does it mean that the Bible is the final written authority, and how does that compare with tradition, reason, and experience?",
-      textEs: "22. ¿Qué significa que la Biblia es la autoridad escrita final, y cómo se compara eso con la tradición, la razón y la experiencia?",
-      kw_en: ["Bible", "final", "authority", "tradition", "reason", "experience", "written", "source"],
-      kw_es: ["Biblia", "final", "autoridad", "tradición", "razón", "experiencia", "escrita", "fuente"],
-      modelEn: "Several sources influence religious belief: tradition, human reason, existential encounter, and the Bible. Each one shapes what people think about God, and the course does not deny that they have real influence. But for Christian theology the Bible stands above them all as the final written authority. Tradition, reason, and experience must all be tested by Scripture, never the other way around. To say the Bible is the final authority means it is the benchmark by which every other claim of truth is measured, and we submit our thinking to it rather than judging it by our own ideas.",
-      modelEs: "Varias fuentes influyen en la creencia religiosa: la tradición, la razón humana, el encuentro existencial y la Biblia. Cada una moldea lo que la gente piensa sobre Dios, y el curso no niega que tengan una influencia real. Pero para la teología cristiana la Biblia se levanta por encima de todas como la autoridad escrita final. La tradición, la razón y la experiencia deben ser probadas por la Escritura, nunca al revés. Decir que la Biblia es la autoridad final significa que es la norma por la cual se mide todo otro reclamo de verdad, y sometemos nuestro pensamiento a ella en lugar de juzgarla por nuestras propias ideas." },
-
-    { textEn: "23. Describe the five forms in which the Word of God is expressed, and what each one means.",
-      textEs: "23. Describa las cinco formas en que se expresa la Palabra de Dios, y qué significa cada una.",
-      kw_en: ["living", "preached", "natural", "written", "enacted", "Jesus", "creation", "Bible"],
-      kw_es: ["viva", "predicada", "natural", "escrita", "actuada", "Jesús", "creación", "Biblia"],
-      modelEn: "In the Bible, God's revelation is called the Word of God, and it is expressed in five ways. The Living Word is Jesus Christ Himself, the Word who became flesh. The Preached or Prophetic Word is the proclamation of God's truth. The Natural Word is God's revelation through creation. The Written Word is the Bible. And the Enacted Word is seen in baptism and the Lord's Supper, where the truth is acted out. A word is both a means of communication and an expression of thought, so to know what God is like we must know His Word, because it expresses His mind.",
-      modelEs: "En la Biblia, la revelación de Dios se llama la Palabra de Dios, y se expresa de cinco maneras. La Palabra Viva es Jesucristo mismo, el Verbo que se hizo carne. La Palabra Predicada o Profética es la proclamación de la verdad de Dios. La Palabra Natural es la revelación de Dios a través de la creación. La Palabra Escrita es la Biblia. Y la Palabra Actuada se ve en el bautismo y la Cena del Señor, donde la verdad se representa. Una palabra es tanto un medio de comunicación como una expresión del pensamiento, así que para saber cómo es Dios debemos conocer Su Palabra, porque expresa Su mente." },
-
-    { textEn: "24. Explain the difference between General Revelation and Special Revelation. What does each reveal, and what are the limits of General Revelation?",
-      textEs: "24. Explique la diferencia entre la Revelación General y la Revelación Especial. ¿Qué revela cada una, y cuáles son los límites de la Revelación General?",
-      kw_en: ["general", "special", "nature", "conscience", "salvation", "creation", "Christ", "accountable"],
-      kw_es: ["general", "especial", "naturaleza", "conciencia", "salvación", "creación", "Cristo", "responsable"],
-      modelEn: "General revelation is God's self-disclosure through nature, history, and conscience, and it is available to all people everywhere. It reveals that God exists, that God is powerful, and that man is accountable to Him. What it cannot do is save; it gives awareness but not the way of salvation. Because general revelation cannot save, God gave special revelation, His direct and redemptive disclosure of Himself in the history of Israel, in the person and work of Jesus Christ, and in the Bible. Special revelation is progressive, unfolding through history from early glimpses in Genesis to the fullness of truth in Christ.",
-      modelEs: "La revelación general es la auto-revelación de Dios a través de la naturaleza, la historia y la conciencia, y está disponible para todas las personas en todo lugar. Revela que Dios existe, que Dios es poderoso, y que el hombre es responsable ante Él. Lo que no puede hacer es salvar; da conciencia pero no el camino de salvación. Porque la revelación general no puede salvar, Dios dio la revelación especial, Su revelación directa y redentora de Sí mismo en la historia de Israel, en la persona y obra de Jesucristo, y en la Biblia. La revelación especial es progresiva, desplegándose a través de la historia desde los primeros destellos en Génesis hasta la plenitud de la verdad en Cristo." },
-
-    { textEn: "25. Why is Jesus Christ called the final and most complete revelation of God? What does John 14:9 add to this?",
-      textEs: "25. ¿Por qué se llama a Jesucristo la revelación final y más completa de Dios? ¿Qué añade Juan 14:9 a esto?",
-      kw_en: ["Jesus", "final", "complete", "Father", "seen", "Son", "look", "God"],
-      kw_es: ["Jesús", "final", "completa", "Padre", "visto", "Hijo", "mirar", "Dios"],
-      modelEn: "God has spoken in many ways, through nature, through the prophets, and through experience, but His Son is the final and most complete revelation of God Himself. If you want to know what God is like, you must look at Jesus. John 14:9 makes this direct and personal: Jesus said, \"He who has seen Me has seen the Father.\" That means the character, heart, and will of the invisible God are made visible in Christ. The prophets spoke God's words, but the Son is God's own self stepped into our world, so He is the clearest revelation we will ever have.",
-      modelEs: "Dios ha hablado de muchas maneras, a través de la naturaleza, de los profetas y de la experiencia, pero Su Hijo es la revelación final y más completa de Dios mismo. Si quieres saber cómo es Dios, debes mirar a Jesús. Juan 14:9 lo hace directo y personal: Jesús dijo: \"El que me ha visto a mí, ha visto al Padre.\" Eso significa que el carácter, el corazón y la voluntad del Dios invisible se hacen visibles en Cristo. Los profetas hablaron las palabras de Dios, pero el Hijo es Dios mismo entrado en nuestro mundo, así que es la revelación más clara que jamás tendremos." },
-
-    { textEn: "26. Compare the Dictation Theory and the Dynamic Theory of inspiration. What does each say about how Scripture was written?",
-      textEs: "26. Compare la Teoría del Dictado y la Teoría Dinámica de la inspiración. ¿Qué dice cada una sobre cómo se escribió la Escritura?",
-      kw_en: ["dictation", "dynamic", "word", "guidance", "personality", "freedom", "human", "Spirit"],
-      kw_es: ["dictado", "dinámica", "palabra", "guía", "personalidad", "libertad", "humano", "Espíritu"],
-      modelEn: "The Dictation Theory holds that God dictated Scripture word for word, so the human writers were essentially taking down exactly what they were told. The Dynamic Theory holds instead that divine guidance worked through the human writer's own personality and freedom, so that the result is fully God's Word and yet still reflects the style of the man who wrote it. The course notes that the exact process may be debated among these theories, but the result is clear either way: Scripture is from God. What matters most is not which theory we hold but that we confess Scripture is God-breathed and carried along by the Holy Spirit.",
-      modelEs: "La Teoría del Dictado sostiene que Dios dictó la Escritura palabra por palabra, de modo que los escritores humanos esencialmente anotaban exactamente lo que se les decía. La Teoría Dinámica sostiene en cambio que la guía divina obró a través de la personalidad y la libertad propias del escritor humano, de modo que el resultado es plenamente la Palabra de Dios y a la vez refleja el estilo del hombre que la escribió. El curso señala que el proceso exacto puede debatirse entre estas teorías, pero el resultado es claro de cualquier manera: la Escritura viene de Dios. Lo que más importa no es qué teoría sostengamos, sino que confesemos que la Escritura es inspirada por Dios y llevada por el Espíritu Santo." },
-
-    { textEn: "27. What is the difference between Plenary Inspiration and Verbal Inspiration?",
-      textEs: "27. ¿Cuál es la diferencia entre la Inspiración Plenaria y la Inspiración Verbal?",
-      kw_en: ["plenary", "verbal", "all", "parts", "words", "inspired", "Scripture", "fully"],
-      kw_es: ["plenaria", "verbal", "todas", "partes", "palabras", "inspirada", "Escritura", "plenamente"],
-      modelEn: "These two terms describe the extent of inspiration from two angles. Plenary Inspiration means that all parts of Scripture are fully inspired, not just the moral teachings or the doctrinal sections, but the whole. Verbal Inspiration means that the very words of Scripture, and not merely the general ideas, are inspired. Taken together they affirm that inspiration reaches both to every part of the Bible and down to its actual words. This guards against the Partial Theory, which says only certain portions are inspired, and against the idea that God gave only loose concepts and left the wording to chance.",
-      modelEs: "Estos dos términos describen el alcance de la inspiración desde dos ángulos. La Inspiración Plenaria significa que todas las partes de la Escritura están plenamente inspiradas, no solo las enseñanzas morales o las secciones doctrinales, sino el todo. La Inspiración Verbal significa que las mismas palabras de la Escritura, y no meramente las ideas generales, son inspiradas. Tomadas juntas, afirman que la inspiración alcanza tanto a cada parte de la Biblia como hasta sus palabras mismas. Esto protege contra la Teoría Parcial, que dice que solo ciertas porciones son inspiradas, y contra la idea de que Dios dio solo conceptos sueltos y dejó la redacción al azar." },
-
-    { textEn: "28. Why does this course prefer the term \"Absolute Authority\" over \"inerrancy\" or \"infallibility\"?",
-      textEs: "28. ¿Por qué este curso prefiere el término \"Autoridad Absoluta\" sobre \"inerrancia\" o \"infalibilidad\"?",
-      kw_en: ["absolute", "authority", "positive", "affirmation", "submission", "negative", "standard", "practice"],
-      kw_es: ["absoluta", "autoridad", "positiva", "afirmación", "sumisión", "negativo", "norma", "práctica"],
-      modelEn: "Terms like inerrancy and infallibility have historical value, but they are framed as negatives, telling us what the Bible is not: not errant, not fallible. Absolute Authority is preferred because it is a positive affirmation of what we believe and how we live. It moves the conversation away from technical debates about the mechanics of the text and toward the practical reality of submission to God's Word. To say the Bible has absolute authority is to declare that it is the final, supreme standard for all faith and practice. We do not stand in judgment of the Word; the Word stands in judgment of us.",
-      modelEs: "Términos como inerrancia e infalibilidad tienen valor histórico, pero se expresan como negativos, diciéndonos lo que la Biblia no es: no errante, no falible. Se prefiere la Autoridad Absoluta porque es una afirmación positiva de lo que creemos y de cómo vivimos. Aleja la conversación de los debates técnicos sobre los mecanismos del texto y la dirige hacia la realidad práctica de la sumisión a la Palabra de Dios. Decir que la Biblia tiene autoridad absoluta es declarar que es la norma final y suprema para toda fe y práctica. No nos paramos en juicio sobre la Palabra; la Palabra se para en juicio sobre nosotros." },
-
-    { textEn: "29. Explain how Illumination differs from Inspiration. Who works each, and what is accomplished?",
-      textEs: "29. Explique cómo la Iluminación difiere de la Inspiración. ¿Quién realiza cada obra, y qué se logra?",
-      kw_en: ["illumination", "inspiration", "Spirit", "understand", "wrote", "believer", "ongoing", "Scripture"],
-      kw_es: ["iluminación", "inspiración", "Espíritu", "entender", "escribió", "creyente", "continua", "Escritura"],
-      modelEn: "Inspiration and illumination are both works of the Holy Spirit, but they are not the same. Inspiration was the Spirit's work in causing Scripture to be written: holy men of God spoke as they were moved by the Holy Spirit, so the text itself is God-breathed. Illumination is the Spirit's ongoing work that enables the believer to understand and apply what was written. Knowledge alone is insufficient, because the person without the Spirit cannot grasp the things of God; the Spirit must open our eyes to perceive the spiritual significance of the text. So inspiration gave us the Word once for all, and illumination opens that Word to each reader.",
-      modelEs: "La inspiración y la iluminación son ambas obras del Espíritu Santo, pero no son lo mismo. La inspiración fue la obra del Espíritu al causar que la Escritura fuera escrita: los santos hombres de Dios hablaron siendo movidos por el Espíritu Santo, de modo que el texto mismo es inspirado por Dios. La iluminación es la obra continua del Espíritu que capacita al creyente para entender y aplicar lo que fue escrito. El conocimiento por sí solo es insuficiente, porque la persona sin el Espíritu no puede captar las cosas de Dios; el Espíritu debe abrir nuestros ojos para percibir el significado espiritual del texto. Así que la inspiración nos dio la Palabra una vez para siempre, y la iluminación abre esa Palabra a cada lector." },
-
-    { textEn: `30. Summarize the main point of Unit ${UNIT}. Why does revelation matter for the Christian life?`,
-      textEs: `30. Resuma el punto principal de la Unidad ${UNIT}. ¿Por qué es importante la revelación para la vida cristiana?`,
-      kw_en: ["spoken", "known", "trusted", "obeyed", "revelation", "creation", "Son", "transformation"],
-      kw_es: ["hablado", "conocido", "confiado", "obedecido", "revelación", "creación", "Hijo", "transformación"],
-      modelEn: "The whole unit turns on one truth: God has spoken. If God had not spoken, nothing could be known of Him; but because He has spoken, everything must be understood in the light of that revelation. God has revealed Himself in creation, in history, in Scripture, and supremely in His Son. The unit ties this into a chain for the Christian life: because He has spoken, He can be known; because He can be known, He can be trusted; and because He can be trusted, He must be obeyed. So revelation is never merely academic. Theology must move from knowledge to transformation, shaping the life and not only informing the mind.",
-      modelEs: "Toda la unidad gira en torno a una verdad: Dios ha hablado. Si Dios no hubiera hablado, nada podría conocerse de Él; pero porque ha hablado, todo debe entenderse a la luz de esa revelación. Dios se ha revelado en la creación, en la historia, en la Escritura, y supremamente en Su Hijo. La unidad enlaza esto en una cadena para la vida cristiana: porque ha hablado, puede ser conocido; porque puede ser conocido, puede confiarse en Él; y porque se puede confiar en Él, debe ser obedecido. Así que la revelación nunca es meramente académica. La teología debe pasar del conocimiento a la transformación, moldeando la vida y no solo informando la mente." }
-];
+/* CTSST — unit 1. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "st",
+ "unit": 1,
+ "totalUnits": 13,
+ "filePrefix": "CTSST",
+ "prevHref": null,
+ "nextHref": "CTSSTUnit2.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - The Doctrine of Revelation",
+   "Unit 2 - The Doctrine of God",
+   "Unit 3 - The Doctrine of Christ",
+   "Unit 4 - The Holy Spirit",
+   "Unit 5 - The Doctrine of Man",
+   "Unit 6 - Sin",
+   "Unit 7 - Salvation",
+   "Unit 8 - The Church",
+   "Unit 9 - Denominations and the Gospel",
+   "Unit 10 - Last Things",
+   "Unit 11 - Apologetics",
+   "Unit 12 - The Kingdom of God",
+   "Unit 13 - Church, State, and Nationalism"
+  ],
+  "es": [
+   "Unit 1 - The Doctrine of Revelation",
+   "Unit 2 - The Doctrine of God",
+   "Unit 3 - The Doctrine of Christ",
+   "Unit 4 - The Holy Spirit",
+   "Unit 5 - The Doctrine of Man",
+   "Unit 6 - Sin",
+   "Unit 7 - Salvation",
+   "Unit 8 - The Church",
+   "Unit 9 - Denominations and the Gospel",
+   "Unit 10 - Last Things",
+   "Unit 11 - Apologetics",
+   "Unit 12 - The Kingdom of God",
+   "Unit 13 - Church, State, and Nationalism"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "What is the starting point of all theology?",
+    "es": "¿Cuál es el punto de partida de toda teología?"
+   },
+   "options": {
+    "en": [
+     "God's decision to make Himself known",
+     "Man's search for God",
+     "Church tradition",
+     "Human reason"
+    ],
+    "es": [
+     "La decisión de Dios de darse a conocer",
+     "La búsqueda del hombre por Dios",
+     "La tradición de la iglesia",
+     "La razón humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "God's decision to make Himself known, not man's search for God.",
+    "es": "La decisión de Dios de darse a conocer, no la búsqueda del hombre."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why must God reveal Himself for us to know Him?",
+    "es": "¿Por qué debe Dios revelarse a Sí mismo para que podamos conocerle?"
+   },
+   "options": {
+    "en": [
+     "Because we are too busy",
+     "Because the finite cannot reach the Infinite",
+     "Because God is hiding",
+     "Because we don't want to know"
+    ],
+    "es": [
+     "Porque estamos demasiado ocupados",
+     "Porque lo finito no puede alcanzar al Infinito",
+     "Porque Dios se está escondiendo",
+     "Porque no queremos saber"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The finite cannot reach the Infinite; God must reveal Himself.",
+    "es": "Lo finito no puede alcanzar al Infinito; Dios debe revelarse."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which is the final written authority for Christian theology?",
+    "es": "¿Cuál es la autoridad escrita final para la teología cristiana?"
+   },
+   "options": {
+    "en": [
+     "Tradition",
+     "Existential encounter",
+     "The Bible",
+     "Human reason"
+    ],
+    "es": [
+     "La tradición",
+     "El encuentro existencial",
+     "La Biblia",
+     "La razón humana"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Bible stands as the final written authority.",
+    "es": "La Biblia es la autoridad escrita final."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the Living Word of God?",
+    "es": "¿Cuál es la Palabra Viva de Dios?"
+   },
+   "options": {
+    "en": [
+     "Jesus Christ",
+     "The Bible",
+     "Baptism and the Lord's Supper",
+     "Creation"
+    ],
+    "es": [
+     "Jesucristo",
+     "La Biblia",
+     "El Bautismo y la Cena del Señor",
+     "La creación"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Jesus Christ is the Living Word.",
+    "es": "Jesucristo es la Palabra Viva."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does General Revelation reveal?",
+    "es": "¿Qué revela la Revelación General?"
+   },
+   "options": {
+    "en": [
+     "The full plan of salvation",
+     "The church ordinances only",
+     "The New Testament canon",
+     "God exists, God is powerful, and man is accountable"
+    ],
+    "es": [
+     "El plan completo de salvación",
+     "Solo las ordenanzas de la iglesia",
+     "El canon del Nuevo Testamento",
+     "Dios existe, Dios es poderoso, y el hombre es responsable"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "General revelation reveals God's existence, power, and human accountability.",
+    "es": "La revelación general revela la existencia de Dios, su poder y la responsabilidad humana."
+   }
+  },
+  {
+   "stem": {
+    "en": "Can General Revelation save?",
+    "es": "¿Puede la Revelación General salvar?"
+   },
+   "options": {
+    "en": [
+     "Yes, if joined with reason",
+     "Yes, if a person is sincere",
+     "Only in the Old Testament",
+     "No"
+    ],
+    "es": [
+     "Sí, si se une con la razón",
+     "Sí, si una persona es sincera",
+     "Solo en el Antiguo Testamento",
+     "No"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "General revelation cannot save; it only gives awareness.",
+    "es": "La revelación general no puede salvar; solo da conciencia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Where is Special Revelation primarily found?",
+    "es": "¿Dónde se encuentra principalmente la Revelación Especial?"
+   },
+   "options": {
+    "en": [
+     "Nature, conscience, and history alone",
+     "Israel's history, Jesus Christ, and the Bible",
+     "Philosophy and science",
+     "Church councils only"
+    ],
+    "es": [
+     "Solo la naturaleza, la conciencia y la historia",
+     "La historia de Israel, Jesucristo y la Biblia",
+     "La filosofía y la ciencia",
+     "Solo los concilios de la iglesia"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Special revelation is found in Israel's history, Christ, and Scripture.",
+    "es": "La revelación especial se encuentra en la historia de Israel, Cristo y las Escrituras."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does John 14:9 teach?",
+    "es": "¿Qué enseña Juan 14:9?"
+   },
+   "options": {
+    "en": [
+     "The prophets fully replace Christ",
+     "The Father cannot be known",
+     "He who has seen Christ has seen the Father",
+     "Nature is greater than Scripture"
+    ],
+    "es": [
+     "Los profetas reemplazan completamente a Cristo",
+     "El Padre no puede ser conocido",
+     "El que ha visto a Cristo ha visto al Padre",
+     "La naturaleza es mayor que la Escritura"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Jesus said, 'He who has seen Me has seen the Father.'",
+    "es": "Jesús dijo: 'El que me ha visto a mí, ha visto al Padre.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "What does 'God-breathed' mean?",
+    "es": "¿Qué significa 'inspirada por Dios'?"
+   },
+   "options": {
+    "en": [
+     "Scripture came from God",
+     "Scripture was copied without error",
+     "Only the ideas are inspired",
+     "Scripture was dictated word-for-word"
+    ],
+    "es": [
+     "La Escritura vino de Dios",
+     "La Escritura fue copiada sin error",
+     "Solo las ideas son inspiradas",
+     "La Escritura fue dictada palabra por palabra"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "'God-breathed' means Scripture originated with God.",
+    "es": "'Inspirada por Dios' significa que la Escritura se originó en Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is Plenary Inspiration?",
+    "es": "¿Qué es la Inspiración Plenaria?"
+   },
+   "options": {
+    "en": [
+     "Only the moral parts inspired",
+     "Only the words inspired",
+     "Inspired like great literature",
+     "All parts of Scripture are fully inspired"
+    ],
+    "es": [
+     "Solo las partes morales inspiradas",
+     "Solo las palabras inspiradas",
+     "Inspirada como la gran literatura",
+     "Todas las partes de la Escritura están plenamente inspiradas"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Plenary Inspiration affirms all parts are fully inspired.",
+    "es": "La Inspiración Plenaria afirma que todas las partes están plenamente inspiradas."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is Illumination?",
+    "es": "¿Qué es la Iluminación?"
+   },
+   "options": {
+    "en": [
+     "The church choosing the canon",
+     "The Holy Spirit enabling believers to understand Scripture",
+     "God dictating Scripture",
+     "Copyists preserving manuscripts"
+    ],
+    "es": [
+     "La iglesia eligiendo el canon",
+     "El Espíritu Santo capacitando a los creyentes para entender la Escritura",
+     "Dios dictando la Escritura",
+     "Copistas preservando manuscritos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Illumination is the Spirit's work helping believers understand.",
+    "es": "La Iluminación es la obra del Espíritu ayudando a los creyentes a entender."
+   }
+  },
+  {
+   "stem": {
+    "en": "How many books are in the New Testament?",
+    "es": "¿Cuántos libros tiene el Nuevo Testamento?"
+   },
+   "options": {
+    "en": [
+     "39",
+     "66",
+     "27",
+     "24"
+    ],
+    "es": [
+     "39",
+     "66",
+     "27",
+     "24"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The New Testament has 27 books.",
+    "es": "El Nuevo Testamento tiene 27 libros."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is Transmission?",
+    "es": "¿Qué es la Transmisión?"
+   },
+   "options": {
+    "en": [
+     "The Holy Spirit helping believers understand",
+     "God revealing truth only through nature",
+     "Jesus becoming flesh",
+     "God preserving His Word through canonization, copying, translation, and preservation"
+    ],
+    "es": [
+     "El Espíritu Santo ayudando a los creyentes a entender",
+     "Dios revelando verdad solo a través de la naturaleza",
+     "Jesús haciéndose carne",
+     "Dios preservando Su Palabra a través de canonización, copia, traducción y preservación"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Transmission is God's preservation of His Word through history.",
+    "es": "La Transmisión es la preservación de la Palabra de Dios a través de la historia."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Romans 1:19 teach?",
+    "es": "¿Qué enseña Romanos 1:19?"
+   },
+   "options": {
+    "en": [
+     "God has made knowledge of Himself plain through creation",
+     "Only Israel can know God",
+     "Salvation comes through conscience",
+     "Scripture is unnecessary"
+    ],
+    "es": [
+     "Dios ha hecho claro el conocimiento de Sí mismo a través de la creación",
+     "Solo Israel puede conocer a Dios",
+     "La salvación viene a través de la conciencia",
+     "La Escritura es innecesaria"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "God has made Himself plain through creation.",
+    "es": "Dios se ha manifestado claramente a través de la creación."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the Enacted Word?",
+    "es": "¿Cuál es la Palabra Actuada?"
+   },
+   "options": {
+    "en": [
+     "Baptism and the Lord's Supper",
+     "The preaching of the prophets",
+     "Creation",
+     "The Bible"
+    ],
+    "es": [
+     "El Bautismo y la Cena del Señor",
+     "La predicación de los profetas",
+     "La creación",
+     "La Biblia"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Enacted Word refers to Baptism and the Lord's Supper.",
+    "es": "La Palabra Actuada se refiere al Bautismo y la Cena del Señor."
+   }
+  },
+  {
+   "stem": {
+    "en": "What must be true if God has spoken?",
+    "es": "¿Qué debe ser verdad si Dios ha hablado?"
+   },
+   "options": {
+    "en": [
+     "Nothing can be known",
+     "Everything must be understood through that revelation",
+     "Tradition replaces Scripture",
+     "Human reason becomes unnecessary"
+    ],
+    "es": [
+     "Nada puede ser conocido",
+     "Todo debe ser entendido a través de esa revelación",
+     "La tradición reemplaza a la Escritura",
+     "La razón humana se vuelve innecesaria"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "If God has spoken, everything must be understood through that revelation.",
+    "es": "Si Dios ha hablado, todo debe ser entendido a través de esa revelación."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the final response to God's revelation?",
+    "es": "¿Cuál es la respuesta final a la revelación de Dios?"
+   },
+   "options": {
+    "en": [
+     "Mere curiosity",
+     "Intellectual mastery",
+     "Personal preference",
+     "Obedience"
+    ],
+    "es": [
+     "Mera curiosidad",
+     "Dominio intelectual",
+     "Preferencia personal",
+     "Obediencia"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The final response is obedience.",
+    "es": "La respuesta final es la obediencia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which theory says God dictated word-for-word?",
+    "es": "¿Qué teoría dice que Dios dictó palabra por palabra?"
+   },
+   "options": {
+    "en": [
+     "Dynamic Theory",
+     "Plenary Inspiration",
+     "Dictation Theory",
+     "Natural Theory"
+    ],
+    "es": [
+     "Teoría Dinámica",
+     "Inspiración Plenaria",
+     "Teoría del Dictado",
+     "Teoría Natural"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Dictation Theory suggests God dictated word-for-word.",
+    "es": "La Teoría del Dictado sugiere que Dios dictó palabra por palabra."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the purpose of theology?",
+    "es": "¿Cuál es el propósito de la teología?"
+   },
+   "options": {
+    "en": [
+     "To win arguments",
+     "To collect information",
+     "To know God truly, trust Him fully, and live in obedience",
+     "To become famous"
+    ],
+    "es": [
+     "Ganar discusiones",
+     "Coleccionar información",
+     "Conocer a Dios verdaderamente, confiar en Él y vivir en obediencia",
+     "Volverse famoso"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The purpose is to know God, trust Him, and live in obedience.",
+    "es": "El propósito es conocer a Dios, confiar en Él y vivir en obediencia."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the course, what must theology move from and to?",
+    "es": "Según el curso, ¿de qué debe pasar la teología y a qué?"
+   },
+   "options": {
+    "en": [
+     "From faith to works",
+     "From knowledge to transformation",
+     "From tradition to innovation",
+     "From doubt to certainty"
+    ],
+    "es": [
+     "De fe a obras",
+     "De conocimiento a transformación",
+     "De tradición a innovación",
+     "De duda a certeza"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Theology must move from knowledge to transformation.",
+    "es": "La teología debe pasar del conocimiento a la transformación."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain why God's self-disclosure is necessary for true knowledge of Him. Why can we not reach God on our own?",
+    "es": "Explique por qué la auto-revelación de Dios es necesaria para un verdadero conocimiento de Él. ¿Por qué no podemos alcanzar a Dios por nuestra cuenta?"
+   },
+   "keywords": {
+    "en": [
+     "finite",
+     "infinite",
+     "reveal",
+     "speak",
+     "known",
+     "starting point",
+     "initiative",
+     "search"
+    ],
+    "es": [
+     "finito",
+     "infinito",
+     "revelar",
+     "hablar",
+     "conocer",
+     "punto de partida",
+     "iniciativa",
+     "búsqueda"
+    ]
+   },
+   "model": {
+    "en": "The starting point of all theology is not man's search for God but God's decision to make Himself known. The reason is that the finite cannot reach the Infinite; a creature cannot climb up to the Creator by its own effort or cleverness. If God chose to remain hidden, He simply could not be known. Therefore, if God is to be known at all, He must take the initiative and speak. Knowledge of God always begins on His side, not ours, and that is why revelation is the foundation of everything else we believe.",
+    "es": "El punto de partida de toda teología no es la búsqueda del hombre por Dios, sino la decisión de Dios de darse a conocer. La razón es que lo finito no puede alcanzar al Infinito; una criatura no puede subir hasta el Creador por su propio esfuerzo o ingenio. Si Dios escogiera permanecer oculto, simplemente no podría ser conocido. Por lo tanto, si Dios ha de ser conocido, debe tomar la iniciativa y hablar. El conocimiento de Dios siempre comienza de Su lado, no del nuestro, y por eso la revelación es el fundamento de todo lo demás que creemos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does it mean that the Bible is the final written authority, and how does that compare with tradition, reason, and experience?",
+    "es": "¿Qué significa que la Biblia es la autoridad escrita final, y cómo se compara eso con la tradición, la razón y la experiencia?"
+   },
+   "keywords": {
+    "en": [
+     "Bible",
+     "final",
+     "authority",
+     "tradition",
+     "reason",
+     "experience",
+     "written",
+     "source"
+    ],
+    "es": [
+     "Biblia",
+     "final",
+     "autoridad",
+     "tradición",
+     "razón",
+     "experiencia",
+     "escrita",
+     "fuente"
+    ]
+   },
+   "model": {
+    "en": "Several sources influence religious belief: tradition, human reason, existential encounter, and the Bible. Each one shapes what people think about God, and the course does not deny that they have real influence. But for Christian theology the Bible stands above them all as the final written authority. Tradition, reason, and experience must all be tested by Scripture, never the other way around. To say the Bible is the final authority means it is the benchmark by which every other claim of truth is measured, and we submit our thinking to it rather than judging it by our own ideas.",
+    "es": "Varias fuentes influyen en la creencia religiosa: la tradición, la razón humana, el encuentro existencial y la Biblia. Cada una moldea lo que la gente piensa sobre Dios, y el curso no niega que tengan una influencia real. Pero para la teología cristiana la Biblia se levanta por encima de todas como la autoridad escrita final. La tradición, la razón y la experiencia deben ser probadas por la Escritura, nunca al revés. Decir que la Biblia es la autoridad final significa que es la norma por la cual se mide todo otro reclamo de verdad, y sometemos nuestro pensamiento a ella en lugar de juzgarla por nuestras propias ideas."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the five forms in which the Word of God is expressed, and what each one means.",
+    "es": "Describa las cinco formas en que se expresa la Palabra de Dios, y qué significa cada una."
+   },
+   "keywords": {
+    "en": [
+     "living",
+     "preached",
+     "natural",
+     "written",
+     "enacted",
+     "Jesus",
+     "creation",
+     "Bible"
+    ],
+    "es": [
+     "viva",
+     "predicada",
+     "natural",
+     "escrita",
+     "actuada",
+     "Jesús",
+     "creación",
+     "Biblia"
+    ]
+   },
+   "model": {
+    "en": "In the Bible, God's revelation is called the Word of God, and it is expressed in five ways. The Living Word is Jesus Christ Himself, the Word who became flesh. The Preached or Prophetic Word is the proclamation of God's truth. The Natural Word is God's revelation through creation. The Written Word is the Bible. And the Enacted Word is seen in baptism and the Lord's Supper, where the truth is acted out. A word is both a means of communication and an expression of thought, so to know what God is like we must know His Word, because it expresses His mind.",
+    "es": "En la Biblia, la revelación de Dios se llama la Palabra de Dios, y se expresa de cinco maneras. La Palabra Viva es Jesucristo mismo, el Verbo que se hizo carne. La Palabra Predicada o Profética es la proclamación de la verdad de Dios. La Palabra Natural es la revelación de Dios a través de la creación. La Palabra Escrita es la Biblia. Y la Palabra Actuada se ve en el bautismo y la Cena del Señor, donde la verdad se representa. Una palabra es tanto un medio de comunicación como una expresión del pensamiento, así que para saber cómo es Dios debemos conocer Su Palabra, porque expresa Su mente."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the difference between General Revelation and Special Revelation. What does each reveal, and what are the limits of General Revelation?",
+    "es": "Explique la diferencia entre la Revelación General y la Revelación Especial. ¿Qué revela cada una, y cuáles son los límites de la Revelación General?"
+   },
+   "keywords": {
+    "en": [
+     "general",
+     "special",
+     "nature",
+     "conscience",
+     "salvation",
+     "creation",
+     "Christ",
+     "accountable"
+    ],
+    "es": [
+     "general",
+     "especial",
+     "naturaleza",
+     "conciencia",
+     "salvación",
+     "creación",
+     "Cristo",
+     "responsable"
+    ]
+   },
+   "model": {
+    "en": "General revelation is God's self-disclosure through nature, history, and conscience, and it is available to all people everywhere. It reveals that God exists, that God is powerful, and that man is accountable to Him. What it cannot do is save; it gives awareness but not the way of salvation. Because general revelation cannot save, God gave special revelation, His direct and redemptive disclosure of Himself in the history of Israel, in the person and work of Jesus Christ, and in the Bible. Special revelation is progressive, unfolding through history from early glimpses in Genesis to the fullness of truth in Christ.",
+    "es": "La revelación general es la auto-revelación de Dios a través de la naturaleza, la historia y la conciencia, y está disponible para todas las personas en todo lugar. Revela que Dios existe, que Dios es poderoso, y que el hombre es responsable ante Él. Lo que no puede hacer es salvar; da conciencia pero no el camino de salvación. Porque la revelación general no puede salvar, Dios dio la revelación especial, Su revelación directa y redentora de Sí mismo en la historia de Israel, en la persona y obra de Jesucristo, y en la Biblia. La revelación especial es progresiva, desplegándose a través de la historia desde los primeros destellos en Génesis hasta la plenitud de la verdad en Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is Jesus Christ called the final and most complete revelation of God? What does John 14:9 add to this?",
+    "es": "¿Por qué se llama a Jesucristo la revelación final y más completa de Dios? ¿Qué añade Juan 14:9 a esto?"
+   },
+   "keywords": {
+    "en": [
+     "Jesus",
+     "final",
+     "complete",
+     "Father",
+     "seen",
+     "Son",
+     "look",
+     "God"
+    ],
+    "es": [
+     "Jesús",
+     "final",
+     "completa",
+     "Padre",
+     "visto",
+     "Hijo",
+     "mirar",
+     "Dios"
+    ]
+   },
+   "model": {
+    "en": "God has spoken in many ways, through nature, through the prophets, and through experience, but His Son is the final and most complete revelation of God Himself. If you want to know what God is like, you must look at Jesus. John 14:9 makes this direct and personal: Jesus said, \"He who has seen Me has seen the Father.\" That means the character, heart, and will of the invisible God are made visible in Christ. The prophets spoke God's words, but the Son is God's own self stepped into our world, so He is the clearest revelation we will ever have.",
+    "es": "Dios ha hablado de muchas maneras, a través de la naturaleza, de los profetas y de la experiencia, pero Su Hijo es la revelación final y más completa de Dios mismo. Si quieres saber cómo es Dios, debes mirar a Jesús. Juan 14:9 lo hace directo y personal: Jesús dijo: \"El que me ha visto a mí, ha visto al Padre.\" Eso significa que el carácter, el corazón y la voluntad del Dios invisible se hacen visibles en Cristo. Los profetas hablaron las palabras de Dios, pero el Hijo es Dios mismo entrado en nuestro mundo, así que es la revelación más clara que jamás tendremos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Compare the Dictation Theory and the Dynamic Theory of inspiration. What does each say about how Scripture was written?",
+    "es": "Compare la Teoría del Dictado y la Teoría Dinámica de la inspiración. ¿Qué dice cada una sobre cómo se escribió la Escritura?"
+   },
+   "keywords": {
+    "en": [
+     "dictation",
+     "dynamic",
+     "word",
+     "guidance",
+     "personality",
+     "freedom",
+     "human",
+     "Spirit"
+    ],
+    "es": [
+     "dictado",
+     "dinámica",
+     "palabra",
+     "guía",
+     "personalidad",
+     "libertad",
+     "humano",
+     "Espíritu"
+    ]
+   },
+   "model": {
+    "en": "The Dictation Theory holds that God dictated Scripture word for word, so the human writers were essentially taking down exactly what they were told. The Dynamic Theory holds instead that divine guidance worked through the human writer's own personality and freedom, so that the result is fully God's Word and yet still reflects the style of the man who wrote it. The course notes that the exact process may be debated among these theories, but the result is clear either way: Scripture is from God. What matters most is not which theory we hold but that we confess Scripture is God-breathed and carried along by the Holy Spirit.",
+    "es": "La Teoría del Dictado sostiene que Dios dictó la Escritura palabra por palabra, de modo que los escritores humanos esencialmente anotaban exactamente lo que se les decía. La Teoría Dinámica sostiene en cambio que la guía divina obró a través de la personalidad y la libertad propias del escritor humano, de modo que el resultado es plenamente la Palabra de Dios y a la vez refleja el estilo del hombre que la escribió. El curso señala que el proceso exacto puede debatirse entre estas teorías, pero el resultado es claro de cualquier manera: la Escritura viene de Dios. Lo que más importa no es qué teoría sostengamos, sino que confesemos que la Escritura es inspirada por Dios y llevada por el Espíritu Santo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the difference between Plenary Inspiration and Verbal Inspiration?",
+    "es": "¿Cuál es la diferencia entre la Inspiración Plenaria y la Inspiración Verbal?"
+   },
+   "keywords": {
+    "en": [
+     "plenary",
+     "verbal",
+     "all",
+     "parts",
+     "words",
+     "inspired",
+     "Scripture",
+     "fully"
+    ],
+    "es": [
+     "plenaria",
+     "verbal",
+     "todas",
+     "partes",
+     "palabras",
+     "inspirada",
+     "Escritura",
+     "plenamente"
+    ]
+   },
+   "model": {
+    "en": "These two terms describe the extent of inspiration from two angles. Plenary Inspiration means that all parts of Scripture are fully inspired, not just the moral teachings or the doctrinal sections, but the whole. Verbal Inspiration means that the very words of Scripture, and not merely the general ideas, are inspired. Taken together they affirm that inspiration reaches both to every part of the Bible and down to its actual words. This guards against the Partial Theory, which says only certain portions are inspired, and against the idea that God gave only loose concepts and left the wording to chance.",
+    "es": "Estos dos términos describen el alcance de la inspiración desde dos ángulos. La Inspiración Plenaria significa que todas las partes de la Escritura están plenamente inspiradas, no solo las enseñanzas morales o las secciones doctrinales, sino el todo. La Inspiración Verbal significa que las mismas palabras de la Escritura, y no meramente las ideas generales, son inspiradas. Tomadas juntas, afirman que la inspiración alcanza tanto a cada parte de la Biblia como hasta sus palabras mismas. Esto protege contra la Teoría Parcial, que dice que solo ciertas porciones son inspiradas, y contra la idea de que Dios dio solo conceptos sueltos y dejó la redacción al azar."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does this course prefer the term \"Absolute Authority\" over \"inerrancy\" or \"infallibility\"?",
+    "es": "¿Por qué este curso prefiere el término \"Autoridad Absoluta\" sobre \"inerrancia\" o \"infalibilidad\"?"
+   },
+   "keywords": {
+    "en": [
+     "absolute",
+     "authority",
+     "positive",
+     "affirmation",
+     "submission",
+     "negative",
+     "standard",
+     "practice"
+    ],
+    "es": [
+     "absoluta",
+     "autoridad",
+     "positiva",
+     "afirmación",
+     "sumisión",
+     "negativo",
+     "norma",
+     "práctica"
+    ]
+   },
+   "model": {
+    "en": "Terms like inerrancy and infallibility have historical value, but they are framed as negatives, telling us what the Bible is not: not errant, not fallible. Absolute Authority is preferred because it is a positive affirmation of what we believe and how we live. It moves the conversation away from technical debates about the mechanics of the text and toward the practical reality of submission to God's Word. To say the Bible has absolute authority is to declare that it is the final, supreme standard for all faith and practice. We do not stand in judgment of the Word; the Word stands in judgment of us.",
+    "es": "Términos como inerrancia e infalibilidad tienen valor histórico, pero se expresan como negativos, diciéndonos lo que la Biblia no es: no errante, no falible. Se prefiere la Autoridad Absoluta porque es una afirmación positiva de lo que creemos y de cómo vivimos. Aleja la conversación de los debates técnicos sobre los mecanismos del texto y la dirige hacia la realidad práctica de la sumisión a la Palabra de Dios. Decir que la Biblia tiene autoridad absoluta es declarar que es la norma final y suprema para toda fe y práctica. No nos paramos en juicio sobre la Palabra; la Palabra se para en juicio sobre nosotros."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how Illumination differs from Inspiration. Who works each, and what is accomplished?",
+    "es": "Explique cómo la Iluminación difiere de la Inspiración. ¿Quién realiza cada obra, y qué se logra?"
+   },
+   "keywords": {
+    "en": [
+     "illumination",
+     "inspiration",
+     "Spirit",
+     "understand",
+     "wrote",
+     "believer",
+     "ongoing",
+     "Scripture"
+    ],
+    "es": [
+     "iluminación",
+     "inspiración",
+     "Espíritu",
+     "entender",
+     "escribió",
+     "creyente",
+     "continua",
+     "Escritura"
+    ]
+   },
+   "model": {
+    "en": "Inspiration and illumination are both works of the Holy Spirit, but they are not the same. Inspiration was the Spirit's work in causing Scripture to be written: holy men of God spoke as they were moved by the Holy Spirit, so the text itself is God-breathed. Illumination is the Spirit's ongoing work that enables the believer to understand and apply what was written. Knowledge alone is insufficient, because the person without the Spirit cannot grasp the things of God; the Spirit must open our eyes to perceive the spiritual significance of the text. So inspiration gave us the Word once for all, and illumination opens that Word to each reader.",
+    "es": "La inspiración y la iluminación son ambas obras del Espíritu Santo, pero no son lo mismo. La inspiración fue la obra del Espíritu al causar que la Escritura fuera escrita: los santos hombres de Dios hablaron siendo movidos por el Espíritu Santo, de modo que el texto mismo es inspirado por Dios. La iluminación es la obra continua del Espíritu que capacita al creyente para entender y aplicar lo que fue escrito. El conocimiento por sí solo es insuficiente, porque la persona sin el Espíritu no puede captar las cosas de Dios; el Espíritu debe abrir nuestros ojos para percibir el significado espiritual del texto. Así que la inspiración nos dio la Palabra una vez para siempre, y la iluminación abre esa Palabra a cada lector."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize the main point of Unit 1. Why does revelation matter for the Christian life?",
+    "es": "Resuma el punto principal de la Unidad 1. ¿Por qué es importante la revelación para la vida cristiana?"
+   },
+   "keywords": {
+    "en": [
+     "spoken",
+     "known",
+     "trusted",
+     "obeyed",
+     "revelation",
+     "creation",
+     "Son",
+     "transformation"
+    ],
+    "es": [
+     "hablado",
+     "conocido",
+     "confiado",
+     "obedecido",
+     "revelación",
+     "creación",
+     "Hijo",
+     "transformación"
+    ]
+   },
+   "model": {
+    "en": "The whole unit turns on one truth: God has spoken. If God had not spoken, nothing could be known of Him; but because He has spoken, everything must be understood in the light of that revelation. God has revealed Himself in creation, in history, in Scripture, and supremely in His Son. The unit ties this into a chain for the Christian life: because He has spoken, He can be known; because He can be known, He can be trusted; and because He can be trusted, He must be obeyed. So revelation is never merely academic. Theology must move from knowledge to transformation, shaping the life and not only informing the mind.",
+    "es": "Toda la unidad gira en torno a una verdad: Dios ha hablado. Si Dios no hubiera hablado, nada podría conocerse de Él; pero porque ha hablado, todo debe entenderse a la luz de esa revelación. Dios se ha revelado en la creación, en la historia, en la Escritura, y supremamente en Su Hijo. La unidad enlaza esto en una cadena para la vida cristiana: porque ha hablado, puede ser conocido; porque puede ser conocido, puede confiarse en Él; y porque se puede confiar en Él, debe ser obedecido. Así que la revelación nunca es meramente académica. La teología debe pasar del conocimiento a la transformación, moldeando la vida y no solo informando la mente."
+   }
+  }
+ ]
+};

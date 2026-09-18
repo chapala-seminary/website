@@ -1,11 +1,859 @@
-/* CTSDP - unit 6: per-unit configuration and content. */
-
-const UNIT = 6;
-
-const NEXT_UNIT_URL = 'CTSDPUnit7.html';
-
-const unitTitlesEn = ["Unit 1 - What Is Doctrinal Preaching?", "Unit 2 - The Method: Text, Interrogative, Keyword", "Unit 3 - Preaching the Doctrine of Revelation", "Unit 4 - Preaching the Doctrine of God", "Unit 5 - Preaching the Doctrine of Man", `Unit ${UNIT} - Preaching the Life and Work of Christ`, `Unit ${UNIT + 1} - Preaching the Holy Spirit`, "Unit 8 - Preaching the Doctrine of Salvation", "Unit 9 - Preaching the Doctrine of the Church", "Unit 10 - Preaching the Doctrine of Last Things"];
-
-const mcQuestions = [{"textEn": "1. Paul resolved to know nothing among the Corinthians except:", "textEs": "1. Pablo se propuso no saber nada entre los corintios sino:", "optionsEn": ["The history of Israel", "Greek philosophy", "The law of Moses", "Jesus Christ and Him crucified"], "optionsEs": ["La historia de Israel", "La filosofía griega", "La ley de Moisés", "A Jesucristo, y a éste crucificado"], "explanationEn": "“I determined not to know anything among you except Jesus Christ and Him crucified” (1 Cor 2:2).", "explanationEs": "“No me propuse saber otra cosa entre vosotros, sino a Jesucristo, y a éste crucificado” (1 Cor 2:2).", "correct": 3}, {"textEn": "2. A sermon on Christ that leaves the hearer merely admiring a great teacher has:", "textEs": "2. Un sermón sobre Cristo que deja al oyente solo admirando a un gran maestro ha:", "optionsEn": ["Honored Him rightly", "Failed — it must present a Savior and Lord", "Succeeded fully", "Avoided error"], "optionsEs": ["Honrado correctamente a Él", "Fracasado — debe presentar a un Salvador y Señor", "Tenido pleno éxito", "Evitado el error"], "explanationEn": "The sermon must present Christ as Savior and Lord, not merely a great teacher to admire.", "explanationEs": "El sermón debe presentar a Cristo como Salvador y Señor, no solo un gran maestro que admirar.", "correct": 1}, {"textEn": "3. The doctrine of the incarnation means that Jesus Christ is:", "textEs": "3. La doctrina de la encarnación significa que Jesucristo es:", "optionsEn": ["Only a man adopted by God", "Only God appearing as a man", "An angel sent from heaven", "Fully God and fully man"], "optionsEs": ["Solo un hombre adoptado por Dios", "Solo Dios apareciendo como hombre", "Un ángel enviado del cielo", "Plenamente Dios y plenamente hombre"], "explanationEn": "The incarnation: the eternal Son became flesh, fully God and fully man.", "explanationEs": "La encarnación: el Hijo eterno se hizo carne, plenamente Dios y plenamente hombre.", "correct": 3}, {"textEn": "4. The keyword “movements” gathers Christ’s:", "textEs": "4. La palabra clave “movimientos” reúne de Cristo:", "optionsEn": ["Great saving acts", "Family relationships", "Famous sayings", "Travels through Galilee"], "optionsEs": ["Sus grandes actos salvadores", "Sus relaciones familiares", "Sus dichos famosos", "Sus viajes por Galilea"], "explanationEn": "The keyword gathers the great saving acts: incarnation, cross, resurrection, return.", "explanationEs": "La palabra clave reúne los grandes actos salvadores: encarnación, cruz, resurrección, regreso.", "correct": 0}, {"textEn": "5. “He came down” (the Incarnation) rests on which texts?", "textEs": "5. “Él descendió” (la Encarnación) se apoya en qué textos?", "optionsEn": ["1 Corinthians 15", "John 1:14; Philippians 2:6–7", "Isaiah 53", "1 Thessalonians 4"], "optionsEs": ["1 Corintios 15", "Juan 1:14; Filipenses 2:6–7", "Isaías 53", "1 Tesalonicenses 4"], "explanationEn": "The incarnation rests on John 1:14 and Philippians 2:6–7.", "explanationEs": "La encarnación se apoya en Juan 1:14 y Filipenses 2:6–7.", "correct": 1}, {"textEn": "6. “He died for us” (the Cross) rests on which texts?", "textEs": "6. “Él murió por nosotros” (la Cruz) se apoya en qué textos?", "optionsEn": ["John 1:14", "Philippians 2:6", "Matthew 28:6", "Isaiah 53:5–6; 1 Peter 2:24"], "optionsEs": ["Juan 1:14", "Filipenses 2:6", "Mateo 28:6", "Isaías 53:5–6; 1 Pedro 2:24"], "explanationEn": "The cross rests on Isaiah 53:5–6 and 1 Peter 2:24.", "explanationEs": "La cruz se apoya en Isaías 53:5–6 y 1 Pedro 2:24.", "correct": 3}, {"textEn": "7. “He rose again” (the Resurrection) rests on which text?", "textEs": "7. “Él resucitó” (la Resurrección) se apoya en qué texto?", "optionsEn": ["Philippians 2", "John 1:14", "1 Corinthians 15:3–4", "Isaiah 53"], "optionsEs": ["Filipenses 2", "Juan 1:14", "1 Corintios 15:3–4", "Isaías 53"], "explanationEn": "The resurrection rests on 1 Corinthians 15:3–4.", "explanationEs": "La resurrección se apoya en 1 Corintios 15:3–4.", "correct": 2}, {"textEn": "8. “He is coming back” (the Return) rests on which text?", "textEs": "8. “Él vuelve” (el Regreso) se apoya en qué texto?", "optionsEn": ["1 Thessalonians 4:16–17", "1 Corinthians 15", "Isaiah 53", "John 1:14"], "optionsEs": ["1 Tesalonicenses 4:16–17", "1 Corintios 15", "Isaías 53", "Juan 1:14"], "explanationEn": "The return rests on 1 Thessalonians 4:16–17.", "explanationEs": "El regreso se apoya en 1 Tesalonicenses 4:16–17.", "correct": 0}, {"textEn": "9. The four movements form an arc that moves:", "textEs": "9. Los cuatro movimientos forman un arco que va:", "optionsEn": ["From Galilee to Jerusalem", "Backward in time", "From heaven to earth and back to heaven", "Through the genealogies"], "optionsEs": ["De Galilea a Jerusalén", "Hacia atrás en el tiempo", "Del cielo a la tierra y de vuelta al cielo", "Por las genealogías"], "explanationEn": "The arc moves heaven→earth→back to heaven: incarnation, cross, resurrection, return.", "explanationEs": "El arco va cielo→tierra→de vuelta al cielo: encarnación, cruz, resurrección, regreso.", "correct": 2}, {"textEn": "10. In Isaiah 53, the key idea behind “the Lord has laid on Him the iniquity of us all” is:", "textEs": "10. En Isaías 53, la idea clave tras “cargó en Él el pecado de todos nosotros” es:", "optionsEn": ["Imitation", "Substitution", "Reincarnation", "Coincidence"], "optionsEs": ["Imitación", "Sustitución", "Reencarnación", "Coincidencia"], "explanationEn": "Isaiah 53 teaches substitution: the punishment that was ours fell on Him.", "explanationEs": "Isaías 53 enseña la sustitución: el castigo que era nuestro cayó sobre Él.", "correct": 1}, {"textEn": "11. The Application of “He died for us” warns the hearer not to:", "textEs": "11. La Aplicación de “Él murió por nosotros” advierte al oyente que no:", "optionsEn": ["Sing hymns", "Attend church", "Read Isaiah", "Try to pay a debt already paid"], "optionsEs": ["Cante himnos", "Asista a la iglesia", "Lea Isaías", "Trate de pagar una deuda ya pagada"], "explanationEn": "The debt is paid; the hearer must not try to pay what Christ already paid.", "explanationEs": "La deuda está pagada; el oyente no debe tratar de pagar lo que Cristo ya pagó.", "correct": 3}, {"textEn": "12. The cross does more than show God’s love; it also:", "textEs": "12. La cruz hace más que mostrar el amor de Dios; también:", "optionsEn": ["Sets a good example only", "Accomplishes our forgiveness", "Ignores sin", "Postpones judgment"], "optionsEs": ["Solo da buen ejemplo", "Logra nuestro perdón", "Ignora el pecado", "Pospone el juicio"], "explanationEn": "The cross does not merely display love; it accomplishes our forgiveness.", "explanationEs": "La cruz no solo muestra amor; logra nuestro perdón.", "correct": 1}, {"textEn": "13. The danger of a “Christmas-only” Christ is that it presents:", "textEs": "13. El peligro de un Cristo “solo de Navidad” es que presenta:", "optionsEn": ["The whole gospel", "Half a Savior", "Too much doctrine", "An angry God"], "optionsEs": ["Todo el evangelio", "Medio Salvador", "Demasiada doctrina", "Un Dios enojado"], "explanationEn": "Stopping at the manger gives half a Savior; preach through to cross and empty tomb.", "explanationEs": "Detenerse en el pesebre da medio Salvador; predica hasta la cruz y la tumba vacía.", "correct": 1}, {"textEn": "14. “Preach the work, not just the facts” means always pressing from:", "textEs": "14. “Predica la obra, no solo los hechos” significa pasar siempre del:", "optionsEn": ["Event to benefit", "Doctrine to debate", "Text to title", "Past to future"], "optionsEs": ["Suceso al beneficio", "Doctrina al debate", "Texto al título", "Pasado al futuro"], "explanationEn": "Always move from the event to its benefit: the resurrection not only happened, it saves.", "explanationEs": "Pasa siempre del suceso al beneficio: la resurrección no solo sucedió, salva.", "correct": 0}, {"textEn": "15. The natural peak (the most powerful last point) of this sermon is:", "textEs": "15. El punto culminante natural (el último punto más poderoso) de este sermón es:", "optionsEn": ["The incarnation", "The genealogy", "The return", "The cross"], "optionsEs": ["La encarnación", "La genealogía", "El regreso", "La cruz"], "explanationEn": "The return is the natural peak: because He is coming, the hearer must be ready.", "explanationEs": "El regreso es el punto culminante natural: porque Él viene, el oyente debe estar listo.", "correct": 2}, {"textEn": "16. The substitution illustration (another bearing the penalty) shows the guilty go free because:", "textEs": "16. La ilustración de la sustitución (otro lleva la pena) muestra que el culpable sale libre porque:", "optionsEn": ["The judge was weak", "The crime was ignored", "The law was abolished", "Another paid the penalty"], "optionsEs": ["El juez fue débil", "El crimen se ignoró", "La ley fue abolida", "Otro pagó la pena"], "explanationEn": "The guilty go free not because the crime was ignored but because another paid the penalty.", "explanationEs": "El culpable sale libre no porque el crimen se ignorara sino porque otro pagó la pena.", "correct": 3}, {"textEn": "17. That Christ kept the law we could not keep refers to His:", "textEs": "17. Que Cristo guardó la ley que nosotros no pudimos guardar se refiere a su:", "optionsEn": ["Sinless life", "Burial", "Return", "Ascension"], "optionsEs": ["Vida sin pecado", "Sepultura", "Regreso", "Ascensión"], "explanationEn": "His sinless life: He kept perfectly the law we could not keep.", "explanationEs": "Su vida sin pecado: guardó perfectamente la ley que nosotros no pudimos guardar.", "correct": 0}, {"textEn": "18. After His resurrection, Christ ascended and now:", "textEs": "18. Tras su resurrección, Cristo ascendió y ahora:", "optionsEn": ["Has no role", "Sleeps until the end", "Reigns as Lord", "Waits powerless"], "optionsEs": ["No tiene papel", "Duerme hasta el fin", "Reina como Señor", "Espera sin poder"], "explanationEn": "He ascended and now reigns as Lord.", "explanationEs": "Ascendió y ahora reina como Señor.", "correct": 2}, {"textEn": "19. The interrogative that generates this sermon on Christ is:", "textEs": "19. El interrogativo que genera este sermón sobre Cristo es:", "optionsEn": ["What has Christ done for us?", "How tall was Christ?", "When was Christ born?", "Where did Christ live?"], "optionsEs": ["¿ Qué ha hecho Cristo por nosotros?", "¿Qué altura tenía Cristo?", "¿Cuándo nació Cristo?", "¿Dónde vivió Cristo?"], "explanationEn": "“What has Christ done for us?” yields the keyword ‘movements.’", "explanationEs": "“¿Qué ha hecho Cristo por nosotros?” produce la palabra clave ‘movimientos.’", "correct": 0}, {"textEn": "20. According to Matthew 28:6, the angel’s word at the tomb was:", "textEs": "20. Según Mateo 28:6, la palabra del ángel en la tumba fue:", "optionsEn": ["He is sleeping", "Come back later", "He is not here; for He is risen", "He was never here"], "optionsEs": ["Está durmiendo", "Vuelvan después", "No está aquí, pues ha resucitado", "Nunca estuvo aquí"], "explanationEn": "“He is not here; for He is risen, as He said.”", "explanationEs": "“No está aquí, pues ha resucitado, como dijo.”", "correct": 2}];
-
-const kwQuestions = [{"textEn": "21. What is the aim of preaching the life and work of Christ, and what must the sermon avoid?", "textEs": "21. ¿Cuál es el objetivo de predicar la vida y obra de Cristo, y qué debe evitar el sermón?", "kw_en": ["Christ", "Savior", "Lord", "follow", "believ", "teacher", "faith", "crucif"], "kw_es": ["Cristo", "Salvador", "Señor", "maestro", "contempl", "crucific", "fe", "discipul"], "modelEn": "The aim is to set the living Christ at the center, so that the hearer beholds Him, believes in Him, and follows Him as Savior and Lord. Paul resolved to know nothing among the Corinthians but Christ crucified, and that resolve governs this unit. The sermon must avoid leaving the hearer merely admiring a great moral teacher; a Christ who is only an example to copy is half a Savior. The preacher presents the One who came, died, rose, and will return, and presses for the response of faith and discipleship rather than admiration.", "modelEs": "El objetivo es poner al Cristo vivo en el centro, para que el oyente lo contemple, crea en Él y lo siga como Salvador y Señor. Pablo se propuso no saber entre los corintios sino a Cristo crucificado, y ese propósito gobierna esta unidad. El sermón debe evitar dejar al oyente solo admirando a un gran maestro moral; un Cristo que es solo un ejemplo a copiar es medio Salvador. El predicador presenta al que vino, murió, resucitó y volverá, y urge la respuesta de fe y discipulado en vez de la admiración."}, {"textEn": "22. Summarize the doctrinal backbone of the person and work of Christ.", "textEs": "22. Resuma el fundamento doctrinal de la persona y obra de Cristo.", "kw_en": ["God", "man", "incarnation", "sinless", "cross", "resurrection", "ascension", "return"], "kw_es": ["Dios", "hombre", "encarnaci", "sin pecado", "cruz", "resurrecci", "ascensi", "regreso"], "modelEn": "The backbone holds the person and the work together. In His person, Jesus Christ is fully God and fully man, the eternal Son who became flesh in the incarnation. In His work, He lived a sinless life, keeping the law we could not keep; He died on the cross as our substitute, bearing the penalty of sin; He rose bodily on the third day, conquering death; He ascended and now reigns as Lord; and He will return. Each of these saving acts, especially the cross, the resurrection, and the return, is rich enough to carry its own sermon, but together they are the whole gospel.", "modelEs": "El fundamento sostiene juntas la persona y la obra. En su persona, Jesucristo es plenamente Dios y plenamente hombre, el Hijo eterno que se hizo carne en la encarnación. En su obra, vivió una vida sin pecado, guardando la ley que nosotros no pudimos guardar; murió en la cruz como nuestro sustituto, llevando la pena del pecado; resucitó corporalmente al tercer día, venciendo la muerte; ascendió y ahora reina como Señor; y volverá. Cada uno de estos actos salvadores, en especial la cruz, la resurrección y el regreso, es bastante rico para llevar su propio sermón, pero juntos son todo el evangelio."}, {"textEn": "23. Lay out the homiletical move: subject, interrogative, keyword, and the four movements with their texts.", "textEs": "23. Exponga el movimiento homilético: tema, interrogativo, palabra clave y los cuatro movimientos con sus textos.", "kw_en": ["subject", "keyword", "movements", "cross", "resurrection", "point", "text", "work"], "kw_es": ["tema", "clave", "movimientos", "cruz", "resurrecci", "punto", "texto", "obra"], "modelEn": "The subject is the work of Christ. The interrogative asked of it is, what has Christ done for us? The keyword that answers is movements, the great saving acts, and from it grow four points, each on its own text. He came down, the incarnation, on John 1:14 and Philippians 2:6–7. He died for us, the cross, on Isaiah 53:5–6 and 1 Peter 2:24. He rose again, the resurrection, on 1 Corinthians 15:3–4. He is coming back, the return, on 1 Thessalonians 4:16–17. The preacher arranged the acts in order, which makes the sermon topical and deductive, yet each rests on its own passage, and the arc from heaven to earth and back to heaven itself preaches.", "modelEs": "El tema es la obra de Cristo. El interrogativo que se le hace es: ¿qué ha hecho Cristo por nosotros? La palabra clave que responde es movimientos, los grandes actos salvadores, y de ella crecen cuatro puntos, cada uno sobre su propio texto. Él descendió, la encarnación, en Juan 1:14 y Filipenses 2:6–7. Él murió por nosotros, la cruz, en Isaías 53:5–6 y 1 Pedro 2:24. Él resucitó, la resurrección, en 1 Corintios 15:3–4. Él vuelve, el regreso, en 1 Tesalonicenses 4:16–17. El predicador ordenó los actos, lo que hace el sermón tópico y deductivo, y sin embargo cada uno descansa en su propio pasaje, y el arco del cielo a la tierra y de vuelta al cielo predica por sí mismo."}, {"textEn": "24. Develop “He died for us” (Isaiah 53:5–6) as a sermon point using Explanation, Application, and Illustration.", "textEs": "24. Desarrolle “Él murió por nosotros” (Isaías 53:5–6) como punto de sermón usando Explicación, Aplicación e Ilustración.", "kw_en": ["explanation", "application", "illustration", "substitution", "penalty", "forgiveness", "wounds", "paid"], "kw_es": ["explicaci", "aplicaci", "ilustraci", "sustituci", "pena", "perdón", "heridas", "pag"], "modelEn": "The Explanation is that “He was wounded for our transgressions… the Lord has laid on Him the iniquity of us all” describes substitution: the punishment that was ours fell on Him, and Isaiah foresaw a sufferer bearing not His own guilt but ours. The Application is that the hearer must not try to pay a debt already paid, for the cross does not merely show that God loves us but accomplishes our forgiveness; to trust Christ crucified is to let His wounds stand in the place of our condemnation. The Illustration is a prisoner awaiting sentence when another steps forward and says, put his penalty on me, so the verdict is satisfied and the guilty walks free, not because the crime was ignored but because another paid.", "modelEs": "La Explicación es que “Él herido fue por nuestras rebeliones… cargó en Él el pecado de todos nosotros” describe la sustitución: el castigo que era nuestro cayó sobre Él, e Isaías previó a un doliente que lleva no su propia culpa sino la nuestra. La Aplicación es que el oyente no debe tratar de pagar una deuda ya pagada, pues la cruz no solo muestra que Dios nos ama sino que logra nuestro perdón; confiar en Cristo crucificado es dejar que sus heridas estén en el lugar de nuestra condenación. La Ilustración es un preso esperando sentencia cuando otro se adelanta y dice, pongan su pena sobre mí, de modo que la sentencia queda satisfecha y el culpable sale libre, no porque el crimen se ignorara sino porque otro pagó."}, {"textEn": "25. What does it mean that Christ’s death was substitutionary, and why does that matter for the hearer?", "textEs": "25. ¿Qué significa que la muerte de Cristo fue sustitutiva, y por qué importa para el oyente?", "kw_en": ["substitut", "penalty", "place", "debt", "sin", "forgiveness", "free", "trust"], "kw_es": ["sustitut", "pena", "lugar", "deuda", "pecado", "perdón", "libre", "confiar"], "modelEn": "To say Christ’s death was substitutionary means He took our place, bearing the penalty for sin that was due to us, as Isaiah said the Lord laid on Him the iniquity of us all. It matters to the hearer because it changes what the cross is: not merely a moving example of love or a tragic death, but the actual payment of the debt we owed. If Christ bore our penalty, then there is no penalty left for the one who trusts Him; he is free, and his forgiveness is accomplished, not merely hoped for. The right response is therefore not to try to earn what is finished but to rest in the substitute who already paid.", "modelEs": "Decir que la muerte de Cristo fue sustitutiva significa que tomó nuestro lugar, llevando la pena por el pecado que nos correspondía, como dijo Isaías que el Señor cargó en Él el pecado de todos nosotros. Importa al oyente porque cambia lo que es la cruz: no solo un ejemplo conmovedor de amor o una muerte trágica, sino el pago real de la deuda que debíamos. Si Cristo llevó nuestra pena, no queda pena para el que confía en Él; está libre, y su perdón está logrado, no solo esperado. La respuesta correcta no es tratar de ganar lo que está terminado sino descansar en el sustituto que ya pagó."}, {"textEn": "26. Why must the preacher not stop at the manger or at Christ’s teaching?", "textEs": "26. ¿Por qué no debe el predicador detenerse en el pesebre ni en la enseñanza de Cristo?", "kw_en": ["manger", "teacher", "half", "cross", "tomb", "Savior", "gospel", "through"], "kw_es": ["pesebre", "maestro", "medio", "cruz", "tumba", "Salvador", "evangelio", "hasta"], "modelEn": "The preacher must not stop at the manger or at Christ’s teaching because a Christmas-only Christ or a teacher-only Christ is only half a Savior. The birth is precious and the teaching is true, but neither saves by itself; salvation was accomplished at the cross and sealed by the empty tomb. To preach the baby or the moral instructor and stop there leaves the hearer with admiration but not redemption. So the preacher must preach all the way through, from incarnation to cross to resurrection to return, because only the whole work of Christ is the whole gospel.", "modelEs": "El predicador no debe detenerse en el pesebre ni en la enseñanza de Cristo porque un Cristo solo de Navidad o solo maestro es solo medio Salvador. El nacimiento es precioso y la enseñanza es verdadera, pero ninguno salva por sí mismo; la salvación se logró en la cruz y se selló con la tumba vacía. Predicar al bebé o al instructor moral y detenerse allí deja al oyente con admiración pero sin redención. Así que el predicador debe predicar hasta el final, de la encarnación a la cruz a la resurrección al regreso, porque solo la obra completa de Cristo es el evangelio completo."}, {"textEn": "27. Explain “preach the work, not just the facts,” using the resurrection as your example.", "textEs": "27. Explique “predica la obra, no solo los hechos,” usando la resurrección como ejemplo.", "kw_en": ["work", "facts", "event", "benefit", "resurrection", "saves", "happened", "press"], "kw_es": ["obra", "hechos", "suceso", "beneficio", "resurrecci", "salva", "sucedi", "pasar"], "modelEn": "To preach the work and not just the facts means always pressing from the event to its benefit, from what happened to what it does for the hearer. The resurrection is the clearest example. It is a fact that Christ rose bodily on the third day, but if the sermon stops at the fact, the hearer learns history without hope. So the preacher must press on: because Christ rose, death is conquered, the believer is justified, and there is a living Lord to trust today. The resurrection is not only something that happened; it is something that saves, and the sermon must carry the hearer from the empty tomb to that benefit.", "modelEs": "Predicar la obra y no solo los hechos significa pasar siempre del suceso a su beneficio, de lo que sucedió a lo que hace por el oyente. La resurrección es el ejemplo más claro. Es un hecho que Cristo resucitó corporalmente al tercer día, pero si el sermón se detiene en el hecho, el oyente aprende historia sin esperanza. Así que el predicador debe seguir: porque Cristo resucitó, la muerte está vencida, el creyente es justificado, y hay un Señor vivo en quien confiar hoy. La resurrección no es solo algo que sucedió; es algo que salva, y el sermón debe llevar al oyente de la tumba vacía a ese beneficio."}, {"textEn": "28. Why is the return of Christ the natural peak of this sermon, and how should it be preached?", "textEs": "28. ¿Por qué es el regreso de Cristo el punto culminante natural de este sermón, y cómo debe predicarse?", "kw_en": ["return", "peak", "ready", "coming", "response", "invitation", "movement", "powerful"], "kw_es": ["regreso", "culmin", "listo", "viene", "respuesta", "invitaci", "movimiento", "poderoso"], "modelEn": "The return of Christ is the natural peak of the sermon because it is the last of the four movements and the most powerful place to land, since the marks of a good outline call for the last point to peak. The earlier movements look back to what Christ has done; the return looks forward to what He will do, and it presses directly on the hearer: because He is coming, you must be ready. So it should be preached not as cold prediction but as urgent appeal, bending the whole sermon toward response. The hearer who has beheld the One who came, died, and rose is now summoned to be found ready when He comes again.", "modelEs": "El regreso de Cristo es el punto culminante natural del sermón porque es el último de los cuatro movimientos y el lugar más poderoso para aterrizar, ya que las marcas de un buen bosquejo piden que el último punto culmine. Los movimientos anteriores miran atrás a lo que Cristo ha hecho; el regreso mira adelante a lo que hará, y urge directamente al oyente: porque Él viene, debes estar listo. Así que debe predicarse no como fría predicción sino como apelación urgente, inclinando todo el sermón hacia la respuesta. El oyente que ha contemplado al que vino, murió y resucitó es ahora llamado a ser hallado listo cuando Él vuelva."}, {"textEn": "29. What does the incarnation mean, and why does it belong first among the movements?", "textEs": "29. ¿Qué significa la encarnación, y por qué va primero entre los movimientos?", "kw_en": ["incarnation", "flesh", "God", "man", "came", "down", "first", "Son"], "kw_es": ["encarnaci", "carne", "Dios", "hombre", "descend", "baj", "primero", "Hijo"], "modelEn": "The incarnation means that the eternal Son of God became flesh, taking on a true human nature so that He is fully God and fully man at once. The Word who was God became the Word made flesh and dwelt among us, and Philippians says He emptied Himself and took the form of a servant. It belongs first among the movements because everything else depends on it: there could be no sinless life to offer, no substitute on the cross, and no risen Lord if He had not first come down. The arc of the sermon begins in heaven with the Son coming down, and that descent makes possible all that follows.", "modelEs": "La encarnación significa que el Hijo eterno de Dios se hizo carne, tomando una verdadera naturaleza humana de modo que es plenamente Dios y plenamente hombre a la vez. El Verbo que era Dios se hizo carne y habitó entre nosotros, y Filipenses dice que se despojó a sí mismo y tomó forma de siervo. Va primero entre los movimientos porque todo lo demás depende de ella: no podría haber vida sin pecado que ofrecer, ni sustituto en la cruz, ni Señor resucitado si no hubiera descendido primero. El arco del sermón comienza en el cielo con el Hijo que desciende, y ese descenso hace posible todo lo que sigue."}, {"textEn": `30. Summarize how Unit ${UNIT} turns the work of Christ into a sermon, from backbone to arc.`, "textEs": `30. Resuma cómo la Unidad ${UNIT} convierte la obra de Cristo en un sermón, del fundamento al arco.`, "kw_en": ["backbone", "subject", "movements", "cross", "resurrection", "text", "response", "method"], "kw_es": ["fundament", "tema", "movimientos", "cruz", "resurrecci", "texto", "respuesta", "método"], "modelEn": `Unit ${UNIT} runs the whole method on the central doctrine. It begins with a lean backbone from Systematic Theology: Christ’s person as fully God and man, and His work in incarnation, sinless life, cross, resurrection, ascension, and return. Then it makes the homiletical move: the subject is the work of Christ, the interrogative asks what He has done for us, and the keyword movements yields four points, He came down, He died for us, He rose again, and He is coming back, each on its own text. One point, the cross, is developed by Explanation, Application, and Illustration. The craft notes warn against stopping at the manger and urge preaching the benefit, not just the fact, and the sermon arcs through the return toward the response of faith. Backbone, method, worked example, and arc: the same template every doctrine unit follows.`, "modelEs": `La Unidad ${UNIT} corre todo el método sobre la doctrina central. Comienza con un fundamento breve de la Teología Sistemática: la persona de Cristo como plenamente Dios y hombre, y su obra en la encarnación, la vida sin pecado, la cruz, la resurrección, la ascensión y el regreso. Luego hace el movimiento homilético: el tema es la obra de Cristo, el interrogativo pregunta qué ha hecho por nosotros, y la palabra clave movimientos produce cuatro puntos, Él descendió, Él murió por nosotros, Él resucitó y Él vuelve, cada uno sobre su propio texto. Un punto, la cruz, se desarrolla por Explicación, Aplicación e Ilustración. Las notas de oficio advierten contra detenerse en el pesebre y urgen a predicar el beneficio, no solo el hecho, y el sermón se inclina por el regreso hacia la respuesta de fe. Fundamento, método, ejemplo desarrollado y arco: la misma plantilla que sigue cada unidad de doctrina.`}];
+/* CTSDP — unit 6. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "dp",
+ "unit": 6,
+ "totalUnits": 10,
+ "filePrefix": "CTSDP",
+ "prevHref": "CTSDPUnit5.html",
+ "nextHref": "CTSDPUnit7.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - What Is Doctrinal Preaching?",
+   "Unit 2 - The Method: Text, Interrogative, Keyword",
+   "Unit 3 - Preaching the Doctrine of Revelation",
+   "Unit 4 - Preaching the Doctrine of God",
+   "Unit 5 - Preaching the Doctrine of Man",
+   "Unit 6 - Preaching the Life and Work of Christ",
+   "Unit 7 - Preaching the Holy Spirit",
+   "Unit 8 - Preaching the Doctrine of Salvation",
+   "Unit 9 - Preaching the Doctrine of the Church",
+   "Unit 10 - Preaching the Doctrine of Last Things"
+  ],
+  "es": [
+   "Unit 1 - What Is Doctrinal Preaching?",
+   "Unit 2 - The Method: Text, Interrogative, Keyword",
+   "Unit 3 - Preaching the Doctrine of Revelation",
+   "Unit 4 - Preaching the Doctrine of God",
+   "Unit 5 - Preaching the Doctrine of Man",
+   "Unit 6 - Preaching the Life and Work of Christ",
+   "Unit 7 - Preaching the Holy Spirit",
+   "Unit 8 - Preaching the Doctrine of Salvation",
+   "Unit 9 - Preaching the Doctrine of the Church",
+   "Unit 10 - Preaching the Doctrine of Last Things"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "Paul resolved to know nothing among the Corinthians except:",
+    "es": "Pablo se propuso no saber nada entre los corintios sino:"
+   },
+   "options": {
+    "en": [
+     "The history of Israel",
+     "Greek philosophy",
+     "The law of Moses",
+     "Jesus Christ and Him crucified"
+    ],
+    "es": [
+     "La historia de Israel",
+     "La filosofía griega",
+     "La ley de Moisés",
+     "A Jesucristo, y a éste crucificado"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "“I determined not to know anything among you except Jesus Christ and Him crucified” (1 Cor 2:2).",
+    "es": "“No me propuse saber otra cosa entre vosotros, sino a Jesucristo, y a éste crucificado” (1 Cor 2:2)."
+   }
+  },
+  {
+   "stem": {
+    "en": "A sermon on Christ that leaves the hearer merely admiring a great teacher has:",
+    "es": "Un sermón sobre Cristo que deja al oyente solo admirando a un gran maestro ha:"
+   },
+   "options": {
+    "en": [
+     "Honored Him rightly",
+     "Failed — it must present a Savior and Lord",
+     "Succeeded fully",
+     "Avoided error"
+    ],
+    "es": [
+     "Honrado correctamente a Él",
+     "Fracasado — debe presentar a un Salvador y Señor",
+     "Tenido pleno éxito",
+     "Evitado el error"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The sermon must present Christ as Savior and Lord, not merely a great teacher to admire.",
+    "es": "El sermón debe presentar a Cristo como Salvador y Señor, no solo un gran maestro que admirar."
+   }
+  },
+  {
+   "stem": {
+    "en": "The doctrine of the incarnation means that Jesus Christ is:",
+    "es": "La doctrina de la encarnación significa que Jesucristo es:"
+   },
+   "options": {
+    "en": [
+     "Only a man adopted by God",
+     "Only God appearing as a man",
+     "An angel sent from heaven",
+     "Fully God and fully man"
+    ],
+    "es": [
+     "Solo un hombre adoptado por Dios",
+     "Solo Dios apareciendo como hombre",
+     "Un ángel enviado del cielo",
+     "Plenamente Dios y plenamente hombre"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The incarnation: the eternal Son became flesh, fully God and fully man.",
+    "es": "La encarnación: el Hijo eterno se hizo carne, plenamente Dios y plenamente hombre."
+   }
+  },
+  {
+   "stem": {
+    "en": "The keyword “movements” gathers Christ’s:",
+    "es": "La palabra clave “movimientos” reúne de Cristo:"
+   },
+   "options": {
+    "en": [
+     "Great saving acts",
+     "Family relationships",
+     "Famous sayings",
+     "Travels through Galilee"
+    ],
+    "es": [
+     "Sus grandes actos salvadores",
+     "Sus relaciones familiares",
+     "Sus dichos famosos",
+     "Sus viajes por Galilea"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The keyword gathers the great saving acts: incarnation, cross, resurrection, return.",
+    "es": "La palabra clave reúne los grandes actos salvadores: encarnación, cruz, resurrección, regreso."
+   }
+  },
+  {
+   "stem": {
+    "en": "“He came down” (the Incarnation) rests on which texts?",
+    "es": "“Él descendió” (la Encarnación) se apoya en qué textos?"
+   },
+   "options": {
+    "en": [
+     "1 Corinthians 15",
+     "John 1:14; Philippians 2:6–7",
+     "Isaiah 53",
+     "1 Thessalonians 4"
+    ],
+    "es": [
+     "1 Corintios 15",
+     "Juan 1:14; Filipenses 2:6–7",
+     "Isaías 53",
+     "1 Tesalonicenses 4"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The incarnation rests on John 1:14 and Philippians 2:6–7.",
+    "es": "La encarnación se apoya en Juan 1:14 y Filipenses 2:6–7."
+   }
+  },
+  {
+   "stem": {
+    "en": "“He died for us” (the Cross) rests on which texts?",
+    "es": "“Él murió por nosotros” (la Cruz) se apoya en qué textos?"
+   },
+   "options": {
+    "en": [
+     "John 1:14",
+     "Philippians 2:6",
+     "Matthew 28:6",
+     "Isaiah 53:5–6; 1 Peter 2:24"
+    ],
+    "es": [
+     "Juan 1:14",
+     "Filipenses 2:6",
+     "Mateo 28:6",
+     "Isaías 53:5–6; 1 Pedro 2:24"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The cross rests on Isaiah 53:5–6 and 1 Peter 2:24.",
+    "es": "La cruz se apoya en Isaías 53:5–6 y 1 Pedro 2:24."
+   }
+  },
+  {
+   "stem": {
+    "en": "“He rose again” (the Resurrection) rests on which text?",
+    "es": "“Él resucitó” (la Resurrección) se apoya en qué texto?"
+   },
+   "options": {
+    "en": [
+     "Philippians 2",
+     "John 1:14",
+     "1 Corinthians 15:3–4",
+     "Isaiah 53"
+    ],
+    "es": [
+     "Filipenses 2",
+     "Juan 1:14",
+     "1 Corintios 15:3–4",
+     "Isaías 53"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The resurrection rests on 1 Corinthians 15:3–4.",
+    "es": "La resurrección se apoya en 1 Corintios 15:3–4."
+   }
+  },
+  {
+   "stem": {
+    "en": "“He is coming back” (the Return) rests on which text?",
+    "es": "“Él vuelve” (el Regreso) se apoya en qué texto?"
+   },
+   "options": {
+    "en": [
+     "1 Thessalonians 4:16–17",
+     "1 Corinthians 15",
+     "Isaiah 53",
+     "John 1:14"
+    ],
+    "es": [
+     "1 Tesalonicenses 4:16–17",
+     "1 Corintios 15",
+     "Isaías 53",
+     "Juan 1:14"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The return rests on 1 Thessalonians 4:16–17.",
+    "es": "El regreso se apoya en 1 Tesalonicenses 4:16–17."
+   }
+  },
+  {
+   "stem": {
+    "en": "The four movements form an arc that moves:",
+    "es": "Los cuatro movimientos forman un arco que va:"
+   },
+   "options": {
+    "en": [
+     "From Galilee to Jerusalem",
+     "Backward in time",
+     "From heaven to earth and back to heaven",
+     "Through the genealogies"
+    ],
+    "es": [
+     "De Galilea a Jerusalén",
+     "Hacia atrás en el tiempo",
+     "Del cielo a la tierra y de vuelta al cielo",
+     "Por las genealogías"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The arc moves heaven→earth→back to heaven: incarnation, cross, resurrection, return.",
+    "es": "El arco va cielo→tierra→de vuelta al cielo: encarnación, cruz, resurrección, regreso."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Isaiah 53, the key idea behind “the Lord has laid on Him the iniquity of us all” is:",
+    "es": "En Isaías 53, la idea clave tras “cargó en Él el pecado de todos nosotros” es:"
+   },
+   "options": {
+    "en": [
+     "Imitation",
+     "Substitution",
+     "Reincarnation",
+     "Coincidence"
+    ],
+    "es": [
+     "Imitación",
+     "Sustitución",
+     "Reencarnación",
+     "Coincidencia"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Isaiah 53 teaches substitution: the punishment that was ours fell on Him.",
+    "es": "Isaías 53 enseña la sustitución: el castigo que era nuestro cayó sobre Él."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Application of “He died for us” warns the hearer not to:",
+    "es": "La Aplicación de “Él murió por nosotros” advierte al oyente que no:"
+   },
+   "options": {
+    "en": [
+     "Sing hymns",
+     "Attend church",
+     "Read Isaiah",
+     "Try to pay a debt already paid"
+    ],
+    "es": [
+     "Cante himnos",
+     "Asista a la iglesia",
+     "Lea Isaías",
+     "Trate de pagar una deuda ya pagada"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The debt is paid; the hearer must not try to pay what Christ already paid.",
+    "es": "La deuda está pagada; el oyente no debe tratar de pagar lo que Cristo ya pagó."
+   }
+  },
+  {
+   "stem": {
+    "en": "The cross does more than show God’s love; it also:",
+    "es": "La cruz hace más que mostrar el amor de Dios; también:"
+   },
+   "options": {
+    "en": [
+     "Sets a good example only",
+     "Accomplishes our forgiveness",
+     "Ignores sin",
+     "Postpones judgment"
+    ],
+    "es": [
+     "Solo da buen ejemplo",
+     "Logra nuestro perdón",
+     "Ignora el pecado",
+     "Pospone el juicio"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The cross does not merely display love; it accomplishes our forgiveness.",
+    "es": "La cruz no solo muestra amor; logra nuestro perdón."
+   }
+  },
+  {
+   "stem": {
+    "en": "The danger of a “Christmas-only” Christ is that it presents:",
+    "es": "El peligro de un Cristo “solo de Navidad” es que presenta:"
+   },
+   "options": {
+    "en": [
+     "The whole gospel",
+     "Half a Savior",
+     "Too much doctrine",
+     "An angry God"
+    ],
+    "es": [
+     "Todo el evangelio",
+     "Medio Salvador",
+     "Demasiada doctrina",
+     "Un Dios enojado"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Stopping at the manger gives half a Savior; preach through to cross and empty tomb.",
+    "es": "Detenerse en el pesebre da medio Salvador; predica hasta la cruz y la tumba vacía."
+   }
+  },
+  {
+   "stem": {
+    "en": "“Preach the work, not just the facts” means always pressing from:",
+    "es": "“Predica la obra, no solo los hechos” significa pasar siempre del:"
+   },
+   "options": {
+    "en": [
+     "Event to benefit",
+     "Doctrine to debate",
+     "Text to title",
+     "Past to future"
+    ],
+    "es": [
+     "Suceso al beneficio",
+     "Doctrina al debate",
+     "Texto al título",
+     "Pasado al futuro"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Always move from the event to its benefit: the resurrection not only happened, it saves.",
+    "es": "Pasa siempre del suceso al beneficio: la resurrección no solo sucedió, salva."
+   }
+  },
+  {
+   "stem": {
+    "en": "The natural peak (the most powerful last point) of this sermon is:",
+    "es": "El punto culminante natural (el último punto más poderoso) de este sermón es:"
+   },
+   "options": {
+    "en": [
+     "The incarnation",
+     "The genealogy",
+     "The return",
+     "The cross"
+    ],
+    "es": [
+     "La encarnación",
+     "La genealogía",
+     "El regreso",
+     "La cruz"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The return is the natural peak: because He is coming, the hearer must be ready.",
+    "es": "El regreso es el punto culminante natural: porque Él viene, el oyente debe estar listo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The substitution illustration (another bearing the penalty) shows the guilty go free because:",
+    "es": "La ilustración de la sustitución (otro lleva la pena) muestra que el culpable sale libre porque:"
+   },
+   "options": {
+    "en": [
+     "The judge was weak",
+     "The crime was ignored",
+     "The law was abolished",
+     "Another paid the penalty"
+    ],
+    "es": [
+     "El juez fue débil",
+     "El crimen se ignoró",
+     "La ley fue abolida",
+     "Otro pagó la pena"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The guilty go free not because the crime was ignored but because another paid the penalty.",
+    "es": "El culpable sale libre no porque el crimen se ignorara sino porque otro pagó la pena."
+   }
+  },
+  {
+   "stem": {
+    "en": "That Christ kept the law we could not keep refers to His:",
+    "es": "Que Cristo guardó la ley que nosotros no pudimos guardar se refiere a su:"
+   },
+   "options": {
+    "en": [
+     "Sinless life",
+     "Burial",
+     "Return",
+     "Ascension"
+    ],
+    "es": [
+     "Vida sin pecado",
+     "Sepultura",
+     "Regreso",
+     "Ascensión"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "His sinless life: He kept perfectly the law we could not keep.",
+    "es": "Su vida sin pecado: guardó perfectamente la ley que nosotros no pudimos guardar."
+   }
+  },
+  {
+   "stem": {
+    "en": "After His resurrection, Christ ascended and now:",
+    "es": "Tras su resurrección, Cristo ascendió y ahora:"
+   },
+   "options": {
+    "en": [
+     "Has no role",
+     "Sleeps until the end",
+     "Reigns as Lord",
+     "Waits powerless"
+    ],
+    "es": [
+     "No tiene papel",
+     "Duerme hasta el fin",
+     "Reina como Señor",
+     "Espera sin poder"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "He ascended and now reigns as Lord.",
+    "es": "Ascendió y ahora reina como Señor."
+   }
+  },
+  {
+   "stem": {
+    "en": "The interrogative that generates this sermon on Christ is:",
+    "es": "El interrogativo que genera este sermón sobre Cristo es:"
+   },
+   "options": {
+    "en": [
+     "What has Christ done for us?",
+     "How tall was Christ?",
+     "When was Christ born?",
+     "Where did Christ live?"
+    ],
+    "es": [
+     "¿ Qué ha hecho Cristo por nosotros?",
+     "¿Qué altura tenía Cristo?",
+     "¿Cuándo nació Cristo?",
+     "¿Dónde vivió Cristo?"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "“What has Christ done for us?” yields the keyword ‘movements.’",
+    "es": "“¿Qué ha hecho Cristo por nosotros?” produce la palabra clave ‘movimientos.’"
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Matthew 28:6, the angel’s word at the tomb was:",
+    "es": "Según Mateo 28:6, la palabra del ángel en la tumba fue:"
+   },
+   "options": {
+    "en": [
+     "He is sleeping",
+     "Come back later",
+     "He is not here; for He is risen",
+     "He was never here"
+    ],
+    "es": [
+     "Está durmiendo",
+     "Vuelvan después",
+     "No está aquí, pues ha resucitado",
+     "Nunca estuvo aquí"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "“He is not here; for He is risen, as He said.”",
+    "es": "“No está aquí, pues ha resucitado, como dijo.”"
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "What is the aim of preaching the life and work of Christ, and what must the sermon avoid?",
+    "es": "¿Cuál es el objetivo de predicar la vida y obra de Cristo, y qué debe evitar el sermón?"
+   },
+   "keywords": {
+    "en": [
+     "Christ",
+     "Savior",
+     "Lord",
+     "follow",
+     "believ",
+     "teacher",
+     "faith",
+     "crucif"
+    ],
+    "es": [
+     "Cristo",
+     "Salvador",
+     "Señor",
+     "maestro",
+     "contempl",
+     "crucific",
+     "fe",
+     "discipul"
+    ]
+   },
+   "model": {
+    "en": "The aim is to set the living Christ at the center, so that the hearer beholds Him, believes in Him, and follows Him as Savior and Lord. Paul resolved to know nothing among the Corinthians but Christ crucified, and that resolve governs this unit. The sermon must avoid leaving the hearer merely admiring a great moral teacher; a Christ who is only an example to copy is half a Savior. The preacher presents the One who came, died, rose, and will return, and presses for the response of faith and discipleship rather than admiration.",
+    "es": "El objetivo es poner al Cristo vivo en el centro, para que el oyente lo contemple, crea en Él y lo siga como Salvador y Señor. Pablo se propuso no saber entre los corintios sino a Cristo crucificado, y ese propósito gobierna esta unidad. El sermón debe evitar dejar al oyente solo admirando a un gran maestro moral; un Cristo que es solo un ejemplo a copiar es medio Salvador. El predicador presenta al que vino, murió, resucitó y volverá, y urge la respuesta de fe y discipulado en vez de la admiración."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize the doctrinal backbone of the person and work of Christ.",
+    "es": "Resuma el fundamento doctrinal de la persona y obra de Cristo."
+   },
+   "keywords": {
+    "en": [
+     "God",
+     "man",
+     "incarnation",
+     "sinless",
+     "cross",
+     "resurrection",
+     "ascension",
+     "return"
+    ],
+    "es": [
+     "Dios",
+     "hombre",
+     "encarnaci",
+     "sin pecado",
+     "cruz",
+     "resurrecci",
+     "ascensi",
+     "regreso"
+    ]
+   },
+   "model": {
+    "en": "The backbone holds the person and the work together. In His person, Jesus Christ is fully God and fully man, the eternal Son who became flesh in the incarnation. In His work, He lived a sinless life, keeping the law we could not keep; He died on the cross as our substitute, bearing the penalty of sin; He rose bodily on the third day, conquering death; He ascended and now reigns as Lord; and He will return. Each of these saving acts, especially the cross, the resurrection, and the return, is rich enough to carry its own sermon, but together they are the whole gospel.",
+    "es": "El fundamento sostiene juntas la persona y la obra. En su persona, Jesucristo es plenamente Dios y plenamente hombre, el Hijo eterno que se hizo carne en la encarnación. En su obra, vivió una vida sin pecado, guardando la ley que nosotros no pudimos guardar; murió en la cruz como nuestro sustituto, llevando la pena del pecado; resucitó corporalmente al tercer día, venciendo la muerte; ascendió y ahora reina como Señor; y volverá. Cada uno de estos actos salvadores, en especial la cruz, la resurrección y el regreso, es bastante rico para llevar su propio sermón, pero juntos son todo el evangelio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Lay out the homiletical move: subject, interrogative, keyword, and the four movements with their texts.",
+    "es": "Exponga el movimiento homilético: tema, interrogativo, palabra clave y los cuatro movimientos con sus textos."
+   },
+   "keywords": {
+    "en": [
+     "subject",
+     "keyword",
+     "movements",
+     "cross",
+     "resurrection",
+     "point",
+     "text",
+     "work"
+    ],
+    "es": [
+     "tema",
+     "clave",
+     "movimientos",
+     "cruz",
+     "resurrecci",
+     "punto",
+     "texto",
+     "obra"
+    ]
+   },
+   "model": {
+    "en": "The subject is the work of Christ. The interrogative asked of it is, what has Christ done for us? The keyword that answers is movements, the great saving acts, and from it grow four points, each on its own text. He came down, the incarnation, on John 1:14 and Philippians 2:6–7. He died for us, the cross, on Isaiah 53:5–6 and 1 Peter 2:24. He rose again, the resurrection, on 1 Corinthians 15:3–4. He is coming back, the return, on 1 Thessalonians 4:16–17. The preacher arranged the acts in order, which makes the sermon topical and deductive, yet each rests on its own passage, and the arc from heaven to earth and back to heaven itself preaches.",
+    "es": "El tema es la obra de Cristo. El interrogativo que se le hace es: ¿qué ha hecho Cristo por nosotros? La palabra clave que responde es movimientos, los grandes actos salvadores, y de ella crecen cuatro puntos, cada uno sobre su propio texto. Él descendió, la encarnación, en Juan 1:14 y Filipenses 2:6–7. Él murió por nosotros, la cruz, en Isaías 53:5–6 y 1 Pedro 2:24. Él resucitó, la resurrección, en 1 Corintios 15:3–4. Él vuelve, el regreso, en 1 Tesalonicenses 4:16–17. El predicador ordenó los actos, lo que hace el sermón tópico y deductivo, y sin embargo cada uno descansa en su propio pasaje, y el arco del cielo a la tierra y de vuelta al cielo predica por sí mismo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Develop “He died for us” (Isaiah 53:5–6) as a sermon point using Explanation, Application, and Illustration.",
+    "es": "Desarrolle “Él murió por nosotros” (Isaías 53:5–6) como punto de sermón usando Explicación, Aplicación e Ilustración."
+   },
+   "keywords": {
+    "en": [
+     "explanation",
+     "application",
+     "illustration",
+     "substitution",
+     "penalty",
+     "forgiveness",
+     "wounds",
+     "paid"
+    ],
+    "es": [
+     "explicaci",
+     "aplicaci",
+     "ilustraci",
+     "sustituci",
+     "pena",
+     "perdón",
+     "heridas",
+     "pag"
+    ]
+   },
+   "model": {
+    "en": "The Explanation is that “He was wounded for our transgressions… the Lord has laid on Him the iniquity of us all” describes substitution: the punishment that was ours fell on Him, and Isaiah foresaw a sufferer bearing not His own guilt but ours. The Application is that the hearer must not try to pay a debt already paid, for the cross does not merely show that God loves us but accomplishes our forgiveness; to trust Christ crucified is to let His wounds stand in the place of our condemnation. The Illustration is a prisoner awaiting sentence when another steps forward and says, put his penalty on me, so the verdict is satisfied and the guilty walks free, not because the crime was ignored but because another paid.",
+    "es": "La Explicación es que “Él herido fue por nuestras rebeliones… cargó en Él el pecado de todos nosotros” describe la sustitución: el castigo que era nuestro cayó sobre Él, e Isaías previó a un doliente que lleva no su propia culpa sino la nuestra. La Aplicación es que el oyente no debe tratar de pagar una deuda ya pagada, pues la cruz no solo muestra que Dios nos ama sino que logra nuestro perdón; confiar en Cristo crucificado es dejar que sus heridas estén en el lugar de nuestra condenación. La Ilustración es un preso esperando sentencia cuando otro se adelanta y dice, pongan su pena sobre mí, de modo que la sentencia queda satisfecha y el culpable sale libre, no porque el crimen se ignorara sino porque otro pagó."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does it mean that Christ’s death was substitutionary, and why does that matter for the hearer?",
+    "es": "¿Qué significa que la muerte de Cristo fue sustitutiva, y por qué importa para el oyente?"
+   },
+   "keywords": {
+    "en": [
+     "substitut",
+     "penalty",
+     "place",
+     "debt",
+     "sin",
+     "forgiveness",
+     "free",
+     "trust"
+    ],
+    "es": [
+     "sustitut",
+     "pena",
+     "lugar",
+     "deuda",
+     "pecado",
+     "perdón",
+     "libre",
+     "confiar"
+    ]
+   },
+   "model": {
+    "en": "To say Christ’s death was substitutionary means He took our place, bearing the penalty for sin that was due to us, as Isaiah said the Lord laid on Him the iniquity of us all. It matters to the hearer because it changes what the cross is: not merely a moving example of love or a tragic death, but the actual payment of the debt we owed. If Christ bore our penalty, then there is no penalty left for the one who trusts Him; he is free, and his forgiveness is accomplished, not merely hoped for. The right response is therefore not to try to earn what is finished but to rest in the substitute who already paid.",
+    "es": "Decir que la muerte de Cristo fue sustitutiva significa que tomó nuestro lugar, llevando la pena por el pecado que nos correspondía, como dijo Isaías que el Señor cargó en Él el pecado de todos nosotros. Importa al oyente porque cambia lo que es la cruz: no solo un ejemplo conmovedor de amor o una muerte trágica, sino el pago real de la deuda que debíamos. Si Cristo llevó nuestra pena, no queda pena para el que confía en Él; está libre, y su perdón está logrado, no solo esperado. La respuesta correcta no es tratar de ganar lo que está terminado sino descansar en el sustituto que ya pagó."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why must the preacher not stop at the manger or at Christ’s teaching?",
+    "es": "¿Por qué no debe el predicador detenerse en el pesebre ni en la enseñanza de Cristo?"
+   },
+   "keywords": {
+    "en": [
+     "manger",
+     "teacher",
+     "half",
+     "cross",
+     "tomb",
+     "Savior",
+     "gospel",
+     "through"
+    ],
+    "es": [
+     "pesebre",
+     "maestro",
+     "medio",
+     "cruz",
+     "tumba",
+     "Salvador",
+     "evangelio",
+     "hasta"
+    ]
+   },
+   "model": {
+    "en": "The preacher must not stop at the manger or at Christ’s teaching because a Christmas-only Christ or a teacher-only Christ is only half a Savior. The birth is precious and the teaching is true, but neither saves by itself; salvation was accomplished at the cross and sealed by the empty tomb. To preach the baby or the moral instructor and stop there leaves the hearer with admiration but not redemption. So the preacher must preach all the way through, from incarnation to cross to resurrection to return, because only the whole work of Christ is the whole gospel.",
+    "es": "El predicador no debe detenerse en el pesebre ni en la enseñanza de Cristo porque un Cristo solo de Navidad o solo maestro es solo medio Salvador. El nacimiento es precioso y la enseñanza es verdadera, pero ninguno salva por sí mismo; la salvación se logró en la cruz y se selló con la tumba vacía. Predicar al bebé o al instructor moral y detenerse allí deja al oyente con admiración pero sin redención. Así que el predicador debe predicar hasta el final, de la encarnación a la cruz a la resurrección al regreso, porque solo la obra completa de Cristo es el evangelio completo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain “preach the work, not just the facts,” using the resurrection as your example.",
+    "es": "Explique “predica la obra, no solo los hechos,” usando la resurrección como ejemplo."
+   },
+   "keywords": {
+    "en": [
+     "work",
+     "facts",
+     "event",
+     "benefit",
+     "resurrection",
+     "saves",
+     "happened",
+     "press"
+    ],
+    "es": [
+     "obra",
+     "hechos",
+     "suceso",
+     "beneficio",
+     "resurrecci",
+     "salva",
+     "sucedi",
+     "pasar"
+    ]
+   },
+   "model": {
+    "en": "To preach the work and not just the facts means always pressing from the event to its benefit, from what happened to what it does for the hearer. The resurrection is the clearest example. It is a fact that Christ rose bodily on the third day, but if the sermon stops at the fact, the hearer learns history without hope. So the preacher must press on: because Christ rose, death is conquered, the believer is justified, and there is a living Lord to trust today. The resurrection is not only something that happened; it is something that saves, and the sermon must carry the hearer from the empty tomb to that benefit.",
+    "es": "Predicar la obra y no solo los hechos significa pasar siempre del suceso a su beneficio, de lo que sucedió a lo que hace por el oyente. La resurrección es el ejemplo más claro. Es un hecho que Cristo resucitó corporalmente al tercer día, pero si el sermón se detiene en el hecho, el oyente aprende historia sin esperanza. Así que el predicador debe seguir: porque Cristo resucitó, la muerte está vencida, el creyente es justificado, y hay un Señor vivo en quien confiar hoy. La resurrección no es solo algo que sucedió; es algo que salva, y el sermón debe llevar al oyente de la tumba vacía a ese beneficio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is the return of Christ the natural peak of this sermon, and how should it be preached?",
+    "es": "¿Por qué es el regreso de Cristo el punto culminante natural de este sermón, y cómo debe predicarse?"
+   },
+   "keywords": {
+    "en": [
+     "return",
+     "peak",
+     "ready",
+     "coming",
+     "response",
+     "invitation",
+     "movement",
+     "powerful"
+    ],
+    "es": [
+     "regreso",
+     "culmin",
+     "listo",
+     "viene",
+     "respuesta",
+     "invitaci",
+     "movimiento",
+     "poderoso"
+    ]
+   },
+   "model": {
+    "en": "The return of Christ is the natural peak of the sermon because it is the last of the four movements and the most powerful place to land, since the marks of a good outline call for the last point to peak. The earlier movements look back to what Christ has done; the return looks forward to what He will do, and it presses directly on the hearer: because He is coming, you must be ready. So it should be preached not as cold prediction but as urgent appeal, bending the whole sermon toward response. The hearer who has beheld the One who came, died, and rose is now summoned to be found ready when He comes again.",
+    "es": "El regreso de Cristo es el punto culminante natural del sermón porque es el último de los cuatro movimientos y el lugar más poderoso para aterrizar, ya que las marcas de un buen bosquejo piden que el último punto culmine. Los movimientos anteriores miran atrás a lo que Cristo ha hecho; el regreso mira adelante a lo que hará, y urge directamente al oyente: porque Él viene, debes estar listo. Así que debe predicarse no como fría predicción sino como apelación urgente, inclinando todo el sermón hacia la respuesta. El oyente que ha contemplado al que vino, murió y resucitó es ahora llamado a ser hallado listo cuando Él vuelva."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the incarnation mean, and why does it belong first among the movements?",
+    "es": "¿Qué significa la encarnación, y por qué va primero entre los movimientos?"
+   },
+   "keywords": {
+    "en": [
+     "incarnation",
+     "flesh",
+     "God",
+     "man",
+     "came",
+     "down",
+     "first",
+     "Son"
+    ],
+    "es": [
+     "encarnaci",
+     "carne",
+     "Dios",
+     "hombre",
+     "descend",
+     "baj",
+     "primero",
+     "Hijo"
+    ]
+   },
+   "model": {
+    "en": "The incarnation means that the eternal Son of God became flesh, taking on a true human nature so that He is fully God and fully man at once. The Word who was God became the Word made flesh and dwelt among us, and Philippians says He emptied Himself and took the form of a servant. It belongs first among the movements because everything else depends on it: there could be no sinless life to offer, no substitute on the cross, and no risen Lord if He had not first come down. The arc of the sermon begins in heaven with the Son coming down, and that descent makes possible all that follows.",
+    "es": "La encarnación significa que el Hijo eterno de Dios se hizo carne, tomando una verdadera naturaleza humana de modo que es plenamente Dios y plenamente hombre a la vez. El Verbo que era Dios se hizo carne y habitó entre nosotros, y Filipenses dice que se despojó a sí mismo y tomó forma de siervo. Va primero entre los movimientos porque todo lo demás depende de ella: no podría haber vida sin pecado que ofrecer, ni sustituto en la cruz, ni Señor resucitado si no hubiera descendido primero. El arco del sermón comienza en el cielo con el Hijo que desciende, y ese descenso hace posible todo lo que sigue."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize how Unit 6 turns the work of Christ into a sermon, from backbone to arc.",
+    "es": "Resuma cómo la Unidad 6 convierte la obra de Cristo en un sermón, del fundamento al arco."
+   },
+   "keywords": {
+    "en": [
+     "backbone",
+     "subject",
+     "movements",
+     "cross",
+     "resurrection",
+     "text",
+     "response",
+     "method"
+    ],
+    "es": [
+     "fundament",
+     "tema",
+     "movimientos",
+     "cruz",
+     "resurrecci",
+     "texto",
+     "respuesta",
+     "método"
+    ]
+   },
+   "model": {
+    "en": "Unit 6 runs the whole method on the central doctrine. It begins with a lean backbone from Systematic Theology: Christ’s person as fully God and man, and His work in incarnation, sinless life, cross, resurrection, ascension, and return. Then it makes the homiletical move: the subject is the work of Christ, the interrogative asks what He has done for us, and the keyword movements yields four points, He came down, He died for us, He rose again, and He is coming back, each on its own text. One point, the cross, is developed by Explanation, Application, and Illustration. The craft notes warn against stopping at the manger and urge preaching the benefit, not just the fact, and the sermon arcs through the return toward the response of faith. Backbone, method, worked example, and arc: the same template every doctrine unit follows.",
+    "es": "La Unidad 6 corre todo el método sobre la doctrina central. Comienza con un fundamento breve de la Teología Sistemática: la persona de Cristo como plenamente Dios y hombre, y su obra en la encarnación, la vida sin pecado, la cruz, la resurrección, la ascensión y el regreso. Luego hace el movimiento homilético: el tema es la obra de Cristo, el interrogativo pregunta qué ha hecho por nosotros, y la palabra clave movimientos produce cuatro puntos, Él descendió, Él murió por nosotros, Él resucitó y Él vuelve, cada uno sobre su propio texto. Un punto, la cruz, se desarrolla por Explicación, Aplicación e Ilustración. Las notas de oficio advierten contra detenerse en el pesebre y urgen a predicar el beneficio, no solo el hecho, y el sermón se inclina por el regreso hacia la respuesta de fe. Fundamento, método, ejemplo desarrollado y arco: la misma plantilla que sigue cada unidad de doctrina."
+   }
+  }
+ ]
+};

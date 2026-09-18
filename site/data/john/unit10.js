@@ -1,22 +1,863 @@
-/* CTSJohn - unit 10: per-unit configuration and content. */
-
-const UNIT = 10;
-
-const NEXT_UNIT_URL = 'CTSJohnUnit11.html';
-
-const unitTitlesEn = ["Unit 1 - The Word Made Flesh", "Unit 2 - You Must Be Born Again", "Unit 3 - Living Water", "Unit 4 - The Bread of Life", "Unit 5 - The Light of the World", "Unit 6 - The Witnesses to Christ", "Unit 7 - The Door and the Good Shepherd", "Unit 8 - The Resurrection and the Life", "Unit 9 - The Hour of Glory", `Unit ${UNIT} - The Way, the Truth, and the Life`, `Unit ${UNIT + 1} - The Spirit and the High-Priestly Prayer`, "Unit 12 - It Is Finished"];
-
-const mcQuestions = [{"textEn": "John 14–17 is often called:", "textEs": "Juan 14–17 se llama a menudo:", "optionsEn": ["the parables of the kingdom", "the Sermon on the Mount", "the Olivet prophecy", "the Upper Room Discourse, Jesus' final teaching to His disciples"], "optionsEs": ["las parábolas del reino", "el Sermón del Monte", "la profecía del Olivar", "el Discurso del Aposento Alto, la enseñanza final de Jesús a sus discípulos"], "explanationEn": "On the night before the cross, Jesus gave His most intimate final teaching in the upper room.", "explanationEs": "La noche antes de la cruz, Jesús dio su enseñanza final más íntima en el aposento alto.", "correct": 3}, {"textEn": "Jesus opens by comforting His troubled disciples with:", "textEs": "Jesús comienza consolando a sus discípulos turbados con:", "optionsEn": ["a sharp rebuke", "a warning of judgment", "a command to fast", "\"Let not your heart be troubled... in My Father's house are many mansions; I go to prepare a place for you\""], "optionsEs": ["una dura reprensión", "una advertencia de juicio", "un mandato de ayunar", "\"No se turbe vuestro corazón... en la casa de mi Padre muchas moradas hay; voy a preparar lugar para vosotros\""], "explanationEn": "John 14:1-3 — He promises a prepared place and His own return to receive them.", "explanationEs": "Juan 14:1-3 — promete un lugar preparado y su propio regreso para recibirlos.", "correct": 3}, {"textEn": "Cook says that heaven is:", "textEs": "Cook dice que el cielo es:", "optionsEn": ["a state of mind", "a real place, the Father's house and the believer's home", "unknowable", "a religious metaphor only"], "optionsEs": ["un estado mental", "un lugar real, la casa del Padre y el hogar del creyente", "incognoscible", "solo una metáfora religiosa"], "explanationEn": "Not \"pie in the sky\" but a real home prepared by Christ Himself.", "explanationEs": "No \"pastel en el cielo\" sino un hogar real preparado por Cristo mismo.", "correct": 1}, {"textEn": "Thomas objected that they did not know the way, prompting Jesus to say:", "textEs": "Tomás objetó que no sabían el camino, llevando a Jesús a decir:", "optionsEn": ["\"ask the Father\"", "\"I am the way, the truth, and the life. No one comes to the Father except through Me\"", "\"wait here\"", "\"follow the map\""], "optionsEs": ["\"pregúntenle al Padre\"", "\"Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí\"", "\"esperen aquí\"", "\"sigan el mapa\""], "explanationEn": "John 14:6 — He gave not directions but Himself.", "explanationEs": "Juan 14:6 — no dio indicaciones sino a sí mismo.", "correct": 1}, {"textEn": "Cook stresses that Jesus did not give the disciples directions but:", "textEs": "Cook recalca que Jesús no dio a los discípulos indicaciones sino:", "optionsEn": ["drew a chart", "appointed a human guide", "gave Himself — He is the Way, a Person, not a map", "named a distant city"], "optionsEs": ["dibujó un diagrama", "designó un guía humano", "se dio a sí mismo — él es el Camino, una Persona, no un mapa", "nombró una ciudad lejana"], "explanationEn": "The Way is not a route to follow but a Person to know and trust.", "explanationEs": "El Camino no es una ruta a seguir sino una Persona a conocer y en quien confiar.", "correct": 2}, {"textEn": "\"I am the way\" means, Cook teaches, that Jesus is:", "textEs": "\"Yo soy el camino\" significa, enseña Cook, que Jesús es:", "optionsEn": ["the only way to the Father", "one path among many", "a good example only", "a teacher of many paths"], "optionsEs": ["el único camino al Padre", "un camino entre muchos", "solo un buen ejemplo", "un maestro de muchos caminos"], "explanationEn": "Every other road that promises to reach God while going around Him falls short.", "explanationEs": "Todo otro camino que promete llegar a Dios rodeándole se queda corto.", "correct": 0}, {"textEn": "Jesus elsewhere described two roads: the broad way that leads to destruction, and:", "textEs": "Jesús describió en otro lugar dos caminos: el ancho que lleva a destrucción, y:", "optionsEn": ["a royal road", "a hidden way", "a circular way", "the narrow way of humility, service, and obedience, which few take"], "optionsEs": ["un camino real", "un camino oculto", "un camino circular", "el camino angosto de humildad, servicio y obediencia, que pocos toman"], "explanationEn": "Not every road reaches the destination, however sincerely it is traveled.", "explanationEs": "No todo camino llega al destino, por sincero que sea quien lo recorre.", "correct": 3}, {"textEn": "\"I am the truth\" means that Jesus:", "textEs": "\"Yo soy la verdad\" significa que Jesús:", "optionsEn": ["is the Truth in person", "merely teaches true things", "only points to truth", "debates about truth"], "optionsEs": ["es la Verdad en persona", "meramente enseña cosas verdaderas", "solo señala la verdad", "debate sobre la verdad"], "explanationEn": "To know Him is to know what is real; He does not merely teach truth, He is the Truth.", "explanationEs": "Conocerle es conocer lo real; no solo enseña la verdad, él es la Verdad.", "correct": 0}, {"textEn": "\"I am the life\" speaks to the condition of the unsaved, who are:", "textEs": "\"Yo soy la vida\" habla de la condición del no salvo, que está:", "optionsEn": ["simply unlucky", "spiritually dead, alive to the world but dead to God", "merely uneducated", "physically ill"], "optionsEs": ["simplemente sin suerte", "espiritualmente muerto, vivo al mundo pero muerto a Dios", "meramente sin educación", "físicamente enfermo"], "explanationEn": "Only Christ can make such a one truly alive, with abundant and eternal life.", "explanationEs": "Solo Cristo puede hacer vivo de veras a tal persona, con vida abundante y eterna.", "correct": 1}, {"textEn": "Josh McDowell's testimony turned when a believer answered his scorn for \"religion\" by saying:", "textEs": "El testimonio de Josh McDowell cambió cuando una creyente respondió a su desprecio por la \"religión\" diciendo:", "optionsEn": ["\"leave us alone\"", "\"try harder\"", "\"I didn't say religion; I said Jesus Christ\"", "\"read more books\""], "optionsEs": ["\"déjanos en paz\"", "\"esfþrzate más\"", "\"no dije religión; dije Jesucristo\"", "\"lee más libros\""], "explanationEn": "The distinction between religion and the Person of Christ undid him and led to faith.", "explanationEs": "La distinción entre la religión y la Persona de Cristo lo deshizo y lo llevó a la fe.", "correct": 2}, {"textEn": "\"I am the true vine, and My Father is the ___\" (15:1):", "textEs": "\"Yo soy la vid verdadera, y mi Padre es el ___\" (15:1):", "optionsEn": ["shepherd", "vinedresser (gardener)", "harvester", "builder"], "optionsEs": ["pastor", "labrador (viñador)", "segador", "constructor"], "explanationEn": "Jesus is the true source of life; the Father tends the vine.", "explanationEs": "Jesús es la fuente verdadera de vida; el Padre cuida la vid.", "correct": 1}, {"textEn": "Cook describes the vinedresser as one who:", "textEs": "Cook describe al viñador como uno que:", "optionsEn": ["only plants", "sells the grapes", "knows each vine intimately and prunes it to make it more fruitful", "ignores the vines"], "optionsEs": ["solo planta", "vende las uvas", "conoce cada vid íntimamente y la poda para hacerla más fructífera", "ignora las vides"], "explanationEn": "A good vinedresser knows what each vine needs and exactly where to cut.", "explanationEs": "Un buen viñador sabe lo que cada vid necesita y exactamente dónde cortar.", "correct": 2}, {"textEn": "Pruning, Cook says, sometimes cuts away even the good and the better:", "textEs": "La poda, dice Cook, a veces corta aun lo bueno y lo mejor:", "optionsEn": ["so that we might enjoy the best", "to kill the branch", "to punish the vine", "for no reason"], "optionsEs": ["para que disfrutemos lo mejor", "para matar la rama", "para castigar la vid", "sin razón alguna"], "explanationEn": "Pruning is love with a knife; it hurts, but it helps — as with Paul's thorn.", "explanationEs": "La poda es amor con un cuchillo; duele, pero ayuda — como con el aguijón de Pablo.", "correct": 0}, {"textEn": "The word \"abide\" is related to \"abode,\" meaning to:", "textEs": "La palabra \"permanecer\" se relaciona con \"morada,\" que significa:", "optionsEn": ["keep a list of rules", "visit briefly", "live with Christ in a close, family relationship, aware of Him every moment", "study about Him"], "optionsEs": ["guardar una lista de reglas", "visitar brevemente", "vivir con Cristo en una relación estrecha, de familia, conscientes de él cada momento", "estudiar acerca de él"], "explanationEn": "Abiding is a living, moment-by-moment relationship, not mere knowledge about Christ.", "explanationEs": "Permanecer es una relación viva, momento a momento, no mero conocimiento acerca de Cristo.", "correct": 2}, {"textEn": "Cook insists that bearing fruit is:", "textEs": "Cook insiste en que llevar fruto es:", "optionsEn": ["impossible for anyone", "not automatic — it comes only by abiding in Christ, which is itself not automatic", "automatic for every Christian", "unimportant"], "optionsEs": ["imposible para cualquiera", "no automático — viene solo por permanecer en Cristo, lo cual tampoco es automático", "automático para todo cristiano", "sin importancia"], "explanationEn": "Jesus had to command abiding; that very night the disciples failed to abide.", "explanationEs": "Jesús tuvo que mandar permanecer; esa misma noche los discípulos fallaron en permanecer.", "correct": 1}, {"textEn": "\"I am the vine, you are the branches... apart from Me you can do ___\" (15:5):", "textEs": "\"Yo soy la vid, vosotros los pámpanos... sin mí nada podéis ___\" (15:5):", "optionsEn": ["better", "a little", "nothing", "much"], "optionsEs": ["mejor", "poco", "nada (hacer)", "mucho"], "explanationEn": "Apart from Christ we can do nothing of eternal worth; abiding in Him, the fruit comes.", "explanationEs": "Aparte de Cristo no podemos hacer nada de valor eterno; permaneciendo en él, el fruto viene.", "correct": 2}, {"textEn": "The believers in Poland, after Briscoe preached on abiding, spent much of the night on their knees because:", "textEs": "Los creyentes en Polonia, tras predicar Briscoe sobre permanecer, pasaron gran parte de la noche de rodillas porque:", "optionsEn": ["they were afraid", "they were ordered to", "the lights had failed", "they wanted to be sure they were abiding in Christ"], "optionsEs": ["tenían miedo", "se les ordenó", "las luces habían fallado", "querían asegurarse de estar permaneciendo en Cristo"], "explanationEn": "The teaching was new to them, and they took abiding in Christ with utter seriousness.", "explanationEs": "La enseñanza era nueva para ellos, y tomaron con toda seriedad el permanecer en Cristo.", "correct": 3}, {"textEn": "Cook teaches that bearing fruit is:", "textEs": "Cook enseña que llevar fruto es:", "optionsEn": ["not only evangelism but every believer's use of his gifts, including the fruit of the Spirit", "only evangelism", "only for pastors", "only baptism"], "optionsEs": ["no solo evangelización sino el uso de los dones de cada creyente, incluyendo el fruto del Espíritu", "solo evangelización", "solo para pastores", "solo el bautismo"], "explanationEn": "Teaching, hospitality, mercy, prayer, and the fruit of the Spirit are all fruit.", "explanationEs": "Enseñar, hospedar, misericordia, oración, y el fruto del Espíritu son todos fruto.", "correct": 0}, {"textEn": "If a believer bears no fruit, Cook says the issue is:", "textEs": "Si un creyente no lleva fruto, Cook dice que el problema es:", "optionsEn": ["God's failure", "the weather", "bad luck", "an attachment problem — something blocking the flow, calling for the purging of sin and renewed abiding"], "optionsEs": ["el fracaso de Dios", "el clima", "mala suerte", "un problema de conexión — algo bloquea el flujo, lo que pide quitar el pecado y permanecer de nuevo"], "explanationEn": "The cure is not to give up but to clear away the sin and abide afresh in the Vine.", "explanationEs": "El remedio no es rendirse sino quitar el pecado y permanecer de nuevo en la Vid.", "correct": 3}, {"textEn": "\"The Way\" and \"the true vine\" complete the seven great \"I AM\" sayings of John, which the world is meant to:", "textEs": "\"El camino\" y \"la vid verdadera\" completan las siete grandes declaraciones \"YO SOY\" de Juan, que el mundo ha de:", "optionsEn": ["believe — that Jesus is the Christ", "debate endlessly", "fear", "ignore"], "optionsEs": ["creer — que Jesús es el Cristo", "debatir sin fin", "temer", "ignorar"], "explanationEn": "All seven \"I AM\" sayings point to the one purpose of the Gospel: that we believe and have life in His name.", "explanationEs": "Las siete declaraciones \"YO SOY\" apuntan al único propósito del Evangelio: que creamos y tengamos vida en su nombre.", "correct": 0}];
-
-const kwQuestions = [
-{"textEn":"Explain how Jesus comforts His troubled disciples with the promise of the Father's house (John 14:1-3).","textEs":"Explique c\u00f3mo Jes\u00fas consuela a sus disc\u00edpulos turbados con la promesa de la casa del Padre (Juan 14:1-3).","kw_en":["trouble","heart","father","house","place","prepare","heaven","home"],"kw_es":["turba","corazon","padre","casa","lugar","prepara","cielo","hogar"],"modelEn":"With their hearts breaking, Jesus said, Let not your heart be troubled; you believe in God, believe also in Me. In My Father's house are many mansions, and I go to prepare a place for you, and I will come again and receive you to Myself. He comforts them by promising that heaven is a real place, the Father's house, the believer's true home, not wishful thinking. The word for mansions means rooms or abiding places, prepared by Christ Himself, and one day He will return to bring His people there.","modelEs":"Con sus corazones rompi\u00e9ndose, Jes\u00fas dijo: No se turbe vuestro coraz\u00f3n; cre\u00e9is en Dios, creed tambi\u00e9n en m\u00ed. En la casa de mi Padre muchas moradas hay, y voy a preparar lugar para vosotros, y vendr\u00e9 otra vez y os tomar\u00e9 a m\u00ed mismo. Los consuela prometiendo que el cielo es un lugar real, la casa del Padre, el verdadero hogar del creyente, no una ilusi\u00f3n. La palabra para moradas significa habitaciones o lugares para morar, preparados por Cristo mismo, y un d\u00eda volver\u00e1 para llevar a su pueblo all\u00ed."},
-{"textEn":"Explain \"I am the way\" and why Jesus is the only way to the Father (John 14:6).","textEs":"Explique \"Yo soy el camino\" y por qu\u00e9 Jes\u00fas es el \u00fanico camino al Padre (Juan 14:6).","kw_en":["way","only","father","jesus","come","lost","person","road"],"kw_es":["camino","unico","padre","jesus","viene","perdid","persona","via"],"modelEn":"When Thomas said they did not know the way, Jesus answered, I am the way, the truth, and the life; no one comes to the Father except through Me. He did not give a map but Himself, a Person. The opposite of the way is being lost, and not every road reaches God however sincerely it is traveled. Jesus said there are only two roads, the broad way to destruction and the narrow way few find. He is the only way to the Father; every other road that bypasses Him falls short, for no one comes to the Father except through Him.","modelEs":"Cuando Tom\u00e1s dijo que no sab\u00edan el camino, Jes\u00fas respondi\u00f3: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por m\u00ed. No dio un mapa sino a s\u00ed mismo, una Persona. Lo opuesto del camino es estar perdido, y no toda v\u00eda llega a Dios por sincero que sea quien la recorre. Jes\u00fas dijo que hay solo dos caminos, el ancho a destrucci\u00f3n y el angosto que pocos hallan. \u00c9l es el \u00fanico camino al Padre; todo otro camino que lo rodea se queda corto, pues nadie viene al Padre sino por \u00e9l."},
-{"textEn":"Explain \"I am the truth\" and \"I am the life\" (John 14:6).","textEs":"Explique \"Yo soy la verdad\" y \"Yo soy la vida\" (Juan 14:6).","kw_en":["truth","life","jesus","dead","spiritual","eternal","abundant","is"],"kw_es":["verdad","vida","jesus","muerto","espiritual","eterna","abundante","es"],"modelEn":"Jesus is the truth, not merely a teacher of true things but the Truth in person, so that to know Him is to know what is real. He is also the life. The person without Christ is spiritually dead, alive to the world but dead to God. Only Jesus can make such a one truly alive, giving both an abundant life now and eternal life forever. So the Way, the Truth, and the Life are not three separate gifts but the one Christ who brings us to the Father, shows us reality, and raises us from spiritual death.","modelEs":"Jes\u00fas es la verdad, no meramente un maestro de cosas verdaderas sino la Verdad en persona, de modo que conocerle es conocer lo real. Tambi\u00e9n es la vida. La persona sin Cristo est\u00e1 espiritualmente muerta, viva al mundo pero muerta a Dios. Solo Jes\u00fas puede hacer vivo de veras a tal persona, dando tanto vida abundante ahora como vida eterna para siempre. As\u00ed que el Camino, la Verdad y la Vida no son tres regalos separados sino el \u00fanico Cristo que nos lleva al Padre, nos muestra la realidad y nos levanta de la muerte espiritual."},
-{"textEn":"Explain \"I am the true vine, and My Father is the vinedresser\" (John 15:1).","textEs":"Explique \"Yo soy la vid verdadera, y mi Padre es el labrador\" (Juan 15:1).","kw_en":["vine","true","father","vinedresser","gardener","jesus","source","life"],"kw_es":["vid","verdadera","padre","labrador","jardinero","jesus","fuente","vida"],"modelEn":"Jesus said, I am the true vine, and My Father is the vinedresser. He is the true vine, the real source of spiritual life and nourishment, just as branches draw everything they have from the vine. The Father is the gardener, the vinedresser, who is far more than a farmer: He knows each vine intimately, what it needs and when, and even the exact place to cut. So Jesus is the life and the Father lovingly tends His people, working to make each one more fruitful as a good vinedresser tends his vines.","modelEs":"Jes\u00fas dijo: Yo soy la vid verdadera, y mi Padre es el labrador. \u00c9l es la vid verdadera, la fuente real de vida y alimento espiritual, as\u00ed como los p\u00e1mpanos sacan todo lo que tienen de la vid. El Padre es el jardinero, el labrador, que es mucho m\u00e1s que un granjero: conoce cada vid \u00edntimamente, lo que necesita y cu\u00e1ndo, y aun el lugar exacto donde cortar. As\u00ed que Jes\u00fas es la vida y el Padre cuida amorosamente a su pueblo, obrando para hacer a cada uno m\u00e1s fruct\u00edfero como un buen vi\u00f1ador cuida sus vides."},
-{"textEn":"Explain how and why the Father prunes the branches (John 15:2).","textEs":"Explique c\u00f3mo y por qu\u00e9 el Padre poda los p\u00e1mpanos (Juan 15:2).","kw_en":["prune","branch","fruit","father","cut","more","grow","best"],"kw_es":["poda","rama","fruto","padre","corta","mas","crece","mejor"],"modelEn":"Jesus said that every branch that bears fruit the Father prunes, that it may bear more fruit. Pruning is not punishment but love with a knife. Sometimes the Father cuts away what is plainly dead, but often He cuts away even the good and the better so that we may have the best. It hurts, but it helps us grow. Paul begged three times for his thorn to be removed, and was told instead, My grace is sufficient for you; the very thing he wanted gone was the Gardener's tool to make him more fruitful.","modelEs":"Jes\u00fas dijo que todo p\u00e1mpano que lleva fruto el Padre lo poda, para que lleve m\u00e1s fruto. La poda no es castigo sino amor con un cuchillo. A veces el Padre corta lo que est\u00e1 claramente muerto, pero a menudo corta aun lo bueno y lo mejor para que tengamos lo mejor de todo. Duele, pero nos ayuda a crecer. Pablo rog\u00f3 tres veces que le quitaran su aguij\u00f3n, y en cambio se le dijo: B\u00e1state mi gracia; lo mismo que quer\u00eda quitar era la herramienta del Labrador para hacerlo m\u00e1s fruct\u00edfero."},
-{"textEn":"Explain what it means to \"abide in Me\" (John 15:4).","textEs":"Explique qu\u00e9 significa \"permaneced en m\u00ed\" (Juan 15:4).","kw_en":["abide","remain","christ","relationship","connect","live","word","daily"],"kw_es":["permanece","abide","cristo","relacion","conecta","vive","palabra","diario"],"modelEn":"Jesus said, Abide in Me, and I in you; the branch cannot bear fruit unless it abides in the vine. The word abide is the verb behind the word abode, a dwelling place. To abide in Christ is not merely to know facts about Him, nor even only to pray, but to remain connected to Him and live with Him in a close, family relationship, aware of Him beside us every day. As His word remains in us we stay joined to Him, and only by this daily abiding can the life of the vine flow into the branch.","modelEs":"Jes\u00fas dijo: Permaneced en m\u00ed, y yo en vosotros; el p\u00e1mpano no puede llevar fruto si no permanece en la vid. La palabra permanecer es el verbo detr\u00e1s de la palabra morada, un lugar donde se habita. Permanecer en Cristo no es meramente saber datos acerca de \u00e9l, ni siquiera solo orar, sino seguir conectados a \u00e9l y vivir con \u00e9l en una relaci\u00f3n estrecha, de familia, conscientes de \u00e9l a nuestro lado cada d\u00eda. Al permanecer su palabra en nosotros seguimos unidos a \u00e9l, y solo por este permanecer diario puede la vida de la vid fluir al p\u00e1mpano."},
-{"textEn":"Explain \"apart from Me you can do nothing\" (John 15:5).","textEs":"Explique \"sin m\u00ed nada pod\u00e9is hacer\" (Juan 15:5).","kw_en":["apart","nothing","branch","vine","fruit","christ","depend","connect"],"kw_es":["sin","nada","rama","vid","fruto","cristo","depende","conecta"],"modelEn":"Jesus said, I am the vine, you are the branches; he who abides in Me bears much fruit, for without Me you can do nothing. A branch cut off from the vine can produce nothing; so apart from Christ we can do nothing of eternal worth. We depend on Him entirely, as a branch depends on the vine for all its life and sap. It is like a phone that runs only while it stays connected to the power. As long as we remain connected to Christ, His life flows through us and the fruit comes; cut off from Him, we wither.","modelEs":"Jes\u00fas dijo: Yo soy la vid, vosotros los p\u00e1mpanos; el que permanece en m\u00ed lleva mucho fruto, porque sin m\u00ed nada pod\u00e9is hacer. Un p\u00e1mpano cortado de la vid no puede producir nada; as\u00ed que aparte de Cristo no podemos hacer nada de valor eterno. Dependemos de \u00e9l por completo, como el p\u00e1mpano depende de la vid para toda su vida y savia. Es como un tel\u00e9fono que funciona solo mientras se conecta a la corriente. Mientras permanecemos conectados a Cristo, su vida fluye por nosotros y el fruto viene; cortados de \u00e9l, nos secamos."},
-{"textEn":"Explain why bearing fruit is not automatic and how it comes (John 15:4-5).","textEs":"Explique por qu\u00e9 llevar fruto no es autom\u00e1tico y c\u00f3mo viene (Juan 15:4-5).","kw_en":["fruit","automatic","abide","christ","bear","connect","come","branch"],"kw_es":["fruto","automatico","permanece","cristo","lleva","conecta","viene","rama"],"modelEn":"Many imagine that a real Christian will automatically produce fruit, but Cook insists this is not what Jesus says. Fruit comes only by abiding in Christ, and abiding is not automatic either, or Jesus would not have had to command it; that very night the disciples failed to abide, Peter most of all. The branch bears fruit only while it stays connected to the vine. So fruit comes not by trying harder on our own but by remaining joined to Christ, letting His life flow through us, the way a branch draws from the vine.","modelEs":"Muchos imaginan que un verdadero cristiano producir\u00e1 fruto autom\u00e1ticamente, pero Cook insiste en que no es lo que dice Jes\u00fas. El fruto viene solo por permanecer en Cristo, y permanecer tampoco es autom\u00e1tico, o Jes\u00fas no habr\u00eda tenido que mandarlo; esa misma noche los disc\u00edpulos fallaron en permanecer, Pedro m\u00e1s que todos. El p\u00e1mpano lleva fruto solo mientras sigue conectado a la vid. As\u00ed que el fruto viene no por esforzarnos m\u00e1s por nuestra cuenta sino por seguir unidos a Cristo, dejando que su vida fluya por nosotros, como la rama saca de la vid."},
-{"textEn":"Describe the kinds of fruit the abiding believer bears (John 15:5-8; Galatians 5).","textEs":"Describa las clases de fruto que lleva el creyente que permanece (Juan 15:5-8; G\u00e1latas 5).","kw_en":["fruit","love","joy","peace","prayer","service","gift","spirit"],"kw_es":["fruto","amor","gozo","paz","oracion","servicio","don","espiritu"],"modelEn":"Cook teaches that fruit is more than evangelism alone, though it surely includes winning souls. Every believer bears fruit by exercising the gifts God has given, such as teaching, hospitality, mercy, and prayer, and above all the fruit of the Spirit named in Galatians 5: love, joy, peace, and the rest. Abiding in Christ also leads to persistent prayer and selfless service to others. When the watching world sees a people marked by such love and fruit, it sees something it cannot explain or produce on its own, and it is drawn to Christ.","modelEs":"Cook ense\u00f1a que el fruto es m\u00e1s que la evangelizaci\u00f3n sola, aunque ciertamente incluye ganar almas. Todo creyente lleva fruto al ejercer los dones que Dios le ha dado, como ense\u00f1ar, hospedar, misericordia y oraci\u00f3n, y sobre todo el fruto del Esp\u00edritu nombrado en G\u00e1latas 5: amor, gozo, paz, y lo dem\u00e1s. Permanecer en Cristo lleva tambi\u00e9n a la oraci\u00f3n persistente y al servicio desinteresado a otros. Cuando el mundo que observa ve a un pueblo marcado por tal amor y fruto, ve algo que no puede explicar ni producir por s\u00ed mismo, y es atra\u00eddo a Cristo."},
-{"textEn":"How do \"the Way\" and \"the true Vine\" fit together, and what do they call us to?","textEs":"\u00bfC\u00f3mo encajan \"el Camino\" y \"la Vid verdadera,\" y a qu\u00e9 nos llaman?","kw_en":["way","vine","father","abide","fruit","home","follow","christ"],"kw_es":["camino","vid","padre","permanece","fruto","hogar","sigue","cristo"],"modelEn":"The two sayings answer the two deepest questions of the soul. As the Way, Jesus brings us home to the Father, for no one comes to the Father except through Him. As the true Vine, He keeps us alive and fruitful all the way there, since apart from Him we can do nothing. So the Way gets us to the Father's house, and the Vine sustains us on the journey. Together they call us to come to the Father by the one Way, Christ, and then to abide close to the Vine so that His life bears much fruit through us.","modelEs":"Las dos declaraciones responden las dos preguntas m\u00e1s hondas del alma. Como el Camino, Jes\u00fas nos lleva a casa, al Padre, pues nadie viene al Padre sino por \u00e9l. Como la Vid verdadera, nos mantiene vivos y fruct\u00edferos todo el trayecto, ya que sin \u00e9l nada podemos hacer. As\u00ed que el Camino nos lleva a la casa del Padre, y la Vid nos sostiene en el viaje. Juntas nos llaman a venir al Padre por el \u00fanico Camino, Cristo, y luego a permanecer cerca de la Vid para que su vida lleve mucho fruto a trav\u00e9s de nosotros, y as\u00ed sigamos a Cristo hasta el hogar."}
-];
+/* CTSJohn — unit 10. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "john",
+ "unit": 10,
+ "totalUnits": 12,
+ "filePrefix": "CTSJohn",
+ "prevHref": "CTSJohnUnit9.html",
+ "nextHref": "CTSJohnUnit11.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - The Word Made Flesh",
+   "Unit 2 - You Must Be Born Again",
+   "Unit 3 - Living Water",
+   "Unit 4 - The Bread of Life",
+   "Unit 5 - The Light of the World",
+   "Unit 6 - The Witnesses to Christ",
+   "Unit 7 - The Door and the Good Shepherd",
+   "Unit 8 - The Resurrection and the Life",
+   "Unit 9 - The Hour of Glory",
+   "Unit 10 - The Way, the Truth, and the Life",
+   "Unit 11 - The Spirit and the High-Priestly Prayer",
+   "Unit 12 - It Is Finished"
+  ],
+  "es": [
+   "Unit 1 - The Word Made Flesh",
+   "Unit 2 - You Must Be Born Again",
+   "Unit 3 - Living Water",
+   "Unit 4 - The Bread of Life",
+   "Unit 5 - The Light of the World",
+   "Unit 6 - The Witnesses to Christ",
+   "Unit 7 - The Door and the Good Shepherd",
+   "Unit 8 - The Resurrection and the Life",
+   "Unit 9 - The Hour of Glory",
+   "Unit 10 - The Way, the Truth, and the Life",
+   "Unit 11 - The Spirit and the High-Priestly Prayer",
+   "Unit 12 - It Is Finished"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "John 14–17 is often called:",
+    "es": "Juan 14–17 se llama a menudo:"
+   },
+   "options": {
+    "en": [
+     "the parables of the kingdom",
+     "the Sermon on the Mount",
+     "the Olivet prophecy",
+     "the Upper Room Discourse, Jesus' final teaching to His disciples"
+    ],
+    "es": [
+     "las parábolas del reino",
+     "el Sermón del Monte",
+     "la profecía del Olivar",
+     "el Discurso del Aposento Alto, la enseñanza final de Jesús a sus discípulos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "On the night before the cross, Jesus gave His most intimate final teaching in the upper room.",
+    "es": "La noche antes de la cruz, Jesús dio su enseñanza final más íntima en el aposento alto."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus opens by comforting His troubled disciples with:",
+    "es": "Jesús comienza consolando a sus discípulos turbados con:"
+   },
+   "options": {
+    "en": [
+     "a sharp rebuke",
+     "a warning of judgment",
+     "a command to fast",
+     "\"Let not your heart be troubled... in My Father's house are many mansions; I go to prepare a place for you\""
+    ],
+    "es": [
+     "una dura reprensión",
+     "una advertencia de juicio",
+     "un mandato de ayunar",
+     "\"No se turbe vuestro corazón... en la casa de mi Padre muchas moradas hay; voy a preparar lugar para vosotros\""
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "John 14:1-3 — He promises a prepared place and His own return to receive them.",
+    "es": "Juan 14:1-3 — promete un lugar preparado y su propio regreso para recibirlos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Cook says that heaven is:",
+    "es": "Cook dice que el cielo es:"
+   },
+   "options": {
+    "en": [
+     "a state of mind",
+     "a real place, the Father's house and the believer's home",
+     "unknowable",
+     "a religious metaphor only"
+    ],
+    "es": [
+     "un estado mental",
+     "un lugar real, la casa del Padre y el hogar del creyente",
+     "incognoscible",
+     "solo una metáfora religiosa"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Not \"pie in the sky\" but a real home prepared by Christ Himself.",
+    "es": "No \"pastel en el cielo\" sino un hogar real preparado por Cristo mismo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Thomas objected that they did not know the way, prompting Jesus to say:",
+    "es": "Tomás objetó que no sabían el camino, llevando a Jesús a decir:"
+   },
+   "options": {
+    "en": [
+     "\"ask the Father\"",
+     "\"I am the way, the truth, and the life. No one comes to the Father except through Me\"",
+     "\"wait here\"",
+     "\"follow the map\""
+    ],
+    "es": [
+     "\"pregúntenle al Padre\"",
+     "\"Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí\"",
+     "\"esperen aquí\"",
+     "\"sigan el mapa\""
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "John 14:6 — He gave not directions but Himself.",
+    "es": "Juan 14:6 — no dio indicaciones sino a sí mismo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Cook stresses that Jesus did not give the disciples directions but:",
+    "es": "Cook recalca que Jesús no dio a los discípulos indicaciones sino:"
+   },
+   "options": {
+    "en": [
+     "drew a chart",
+     "appointed a human guide",
+     "gave Himself — He is the Way, a Person, not a map",
+     "named a distant city"
+    ],
+    "es": [
+     "dibujó un diagrama",
+     "designó un guía humano",
+     "se dio a sí mismo — él es el Camino, una Persona, no un mapa",
+     "nombró una ciudad lejana"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Way is not a route to follow but a Person to know and trust.",
+    "es": "El Camino no es una ruta a seguir sino una Persona a conocer y en quien confiar."
+   }
+  },
+  {
+   "stem": {
+    "en": "\"I am the way\" means, Cook teaches, that Jesus is:",
+    "es": "\"Yo soy el camino\" significa, enseña Cook, que Jesús es:"
+   },
+   "options": {
+    "en": [
+     "the only way to the Father",
+     "one path among many",
+     "a good example only",
+     "a teacher of many paths"
+    ],
+    "es": [
+     "el único camino al Padre",
+     "un camino entre muchos",
+     "solo un buen ejemplo",
+     "un maestro de muchos caminos"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Every other road that promises to reach God while going around Him falls short.",
+    "es": "Todo otro camino que promete llegar a Dios rodeándole se queda corto."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus elsewhere described two roads: the broad way that leads to destruction, and:",
+    "es": "Jesús describió en otro lugar dos caminos: el ancho que lleva a destrucción, y:"
+   },
+   "options": {
+    "en": [
+     "a royal road",
+     "a hidden way",
+     "a circular way",
+     "the narrow way of humility, service, and obedience, which few take"
+    ],
+    "es": [
+     "un camino real",
+     "un camino oculto",
+     "un camino circular",
+     "el camino angosto de humildad, servicio y obediencia, que pocos toman"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Not every road reaches the destination, however sincerely it is traveled.",
+    "es": "No todo camino llega al destino, por sincero que sea quien lo recorre."
+   }
+  },
+  {
+   "stem": {
+    "en": "\"I am the truth\" means that Jesus:",
+    "es": "\"Yo soy la verdad\" significa que Jesús:"
+   },
+   "options": {
+    "en": [
+     "is the Truth in person",
+     "merely teaches true things",
+     "only points to truth",
+     "debates about truth"
+    ],
+    "es": [
+     "es la Verdad en persona",
+     "meramente enseña cosas verdaderas",
+     "solo señala la verdad",
+     "debate sobre la verdad"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "To know Him is to know what is real; He does not merely teach truth, He is the Truth.",
+    "es": "Conocerle es conocer lo real; no solo enseña la verdad, él es la Verdad."
+   }
+  },
+  {
+   "stem": {
+    "en": "\"I am the life\" speaks to the condition of the unsaved, who are:",
+    "es": "\"Yo soy la vida\" habla de la condición del no salvo, que está:"
+   },
+   "options": {
+    "en": [
+     "simply unlucky",
+     "spiritually dead, alive to the world but dead to God",
+     "merely uneducated",
+     "physically ill"
+    ],
+    "es": [
+     "simplemente sin suerte",
+     "espiritualmente muerto, vivo al mundo pero muerto a Dios",
+     "meramente sin educación",
+     "físicamente enfermo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Only Christ can make such a one truly alive, with abundant and eternal life.",
+    "es": "Solo Cristo puede hacer vivo de veras a tal persona, con vida abundante y eterna."
+   }
+  },
+  {
+   "stem": {
+    "en": "Josh McDowell's testimony turned when a believer answered his scorn for \"religion\" by saying:",
+    "es": "El testimonio de Josh McDowell cambió cuando una creyente respondió a su desprecio por la \"religión\" diciendo:"
+   },
+   "options": {
+    "en": [
+     "\"leave us alone\"",
+     "\"try harder\"",
+     "\"I didn't say religion; I said Jesus Christ\"",
+     "\"read more books\""
+    ],
+    "es": [
+     "\"déjanos en paz\"",
+     "\"esfþrzate más\"",
+     "\"no dije religión; dije Jesucristo\"",
+     "\"lee más libros\""
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The distinction between religion and the Person of Christ undid him and led to faith.",
+    "es": "La distinción entre la religión y la Persona de Cristo lo deshizo y lo llevó a la fe."
+   }
+  },
+  {
+   "stem": {
+    "en": "\"I am the true vine, and My Father is the ___\" (15:1):",
+    "es": "\"Yo soy la vid verdadera, y mi Padre es el ___\" (15:1):"
+   },
+   "options": {
+    "en": [
+     "shepherd",
+     "vinedresser (gardener)",
+     "harvester",
+     "builder"
+    ],
+    "es": [
+     "pastor",
+     "labrador (viñador)",
+     "segador",
+     "constructor"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Jesus is the true source of life; the Father tends the vine.",
+    "es": "Jesús es la fuente verdadera de vida; el Padre cuida la vid."
+   }
+  },
+  {
+   "stem": {
+    "en": "Cook describes the vinedresser as one who:",
+    "es": "Cook describe al viñador como uno que:"
+   },
+   "options": {
+    "en": [
+     "only plants",
+     "sells the grapes",
+     "knows each vine intimately and prunes it to make it more fruitful",
+     "ignores the vines"
+    ],
+    "es": [
+     "solo planta",
+     "vende las uvas",
+     "conoce cada vid íntimamente y la poda para hacerla más fructífera",
+     "ignora las vides"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "A good vinedresser knows what each vine needs and exactly where to cut.",
+    "es": "Un buen viñador sabe lo que cada vid necesita y exactamente dónde cortar."
+   }
+  },
+  {
+   "stem": {
+    "en": "Pruning, Cook says, sometimes cuts away even the good and the better:",
+    "es": "La poda, dice Cook, a veces corta aun lo bueno y lo mejor:"
+   },
+   "options": {
+    "en": [
+     "so that we might enjoy the best",
+     "to kill the branch",
+     "to punish the vine",
+     "for no reason"
+    ],
+    "es": [
+     "para que disfrutemos lo mejor",
+     "para matar la rama",
+     "para castigar la vid",
+     "sin razón alguna"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Pruning is love with a knife; it hurts, but it helps — as with Paul's thorn.",
+    "es": "La poda es amor con un cuchillo; duele, pero ayuda — como con el aguijón de Pablo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The word \"abide\" is related to \"abode,\" meaning to:",
+    "es": "La palabra \"permanecer\" se relaciona con \"morada,\" que significa:"
+   },
+   "options": {
+    "en": [
+     "keep a list of rules",
+     "visit briefly",
+     "live with Christ in a close, family relationship, aware of Him every moment",
+     "study about Him"
+    ],
+    "es": [
+     "guardar una lista de reglas",
+     "visitar brevemente",
+     "vivir con Cristo en una relación estrecha, de familia, conscientes de él cada momento",
+     "estudiar acerca de él"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Abiding is a living, moment-by-moment relationship, not mere knowledge about Christ.",
+    "es": "Permanecer es una relación viva, momento a momento, no mero conocimiento acerca de Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Cook insists that bearing fruit is:",
+    "es": "Cook insiste en que llevar fruto es:"
+   },
+   "options": {
+    "en": [
+     "impossible for anyone",
+     "not automatic — it comes only by abiding in Christ, which is itself not automatic",
+     "automatic for every Christian",
+     "unimportant"
+    ],
+    "es": [
+     "imposible para cualquiera",
+     "no automático — viene solo por permanecer en Cristo, lo cual tampoco es automático",
+     "automático para todo cristiano",
+     "sin importancia"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Jesus had to command abiding; that very night the disciples failed to abide.",
+    "es": "Jesús tuvo que mandar permanecer; esa misma noche los discípulos fallaron en permanecer."
+   }
+  },
+  {
+   "stem": {
+    "en": "\"I am the vine, you are the branches... apart from Me you can do ___\" (15:5):",
+    "es": "\"Yo soy la vid, vosotros los pámpanos... sin mí nada podéis ___\" (15:5):"
+   },
+   "options": {
+    "en": [
+     "better",
+     "a little",
+     "nothing",
+     "much"
+    ],
+    "es": [
+     "mejor",
+     "poco",
+     "nada (hacer)",
+     "mucho"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Apart from Christ we can do nothing of eternal worth; abiding in Him, the fruit comes.",
+    "es": "Aparte de Cristo no podemos hacer nada de valor eterno; permaneciendo en él, el fruto viene."
+   }
+  },
+  {
+   "stem": {
+    "en": "The believers in Poland, after Briscoe preached on abiding, spent much of the night on their knees because:",
+    "es": "Los creyentes en Polonia, tras predicar Briscoe sobre permanecer, pasaron gran parte de la noche de rodillas porque:"
+   },
+   "options": {
+    "en": [
+     "they were afraid",
+     "they were ordered to",
+     "the lights had failed",
+     "they wanted to be sure they were abiding in Christ"
+    ],
+    "es": [
+     "tenían miedo",
+     "se les ordenó",
+     "las luces habían fallado",
+     "querían asegurarse de estar permaneciendo en Cristo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The teaching was new to them, and they took abiding in Christ with utter seriousness.",
+    "es": "La enseñanza era nueva para ellos, y tomaron con toda seriedad el permanecer en Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Cook teaches that bearing fruit is:",
+    "es": "Cook enseña que llevar fruto es:"
+   },
+   "options": {
+    "en": [
+     "not only evangelism but every believer's use of his gifts, including the fruit of the Spirit",
+     "only evangelism",
+     "only for pastors",
+     "only baptism"
+    ],
+    "es": [
+     "no solo evangelización sino el uso de los dones de cada creyente, incluyendo el fruto del Espíritu",
+     "solo evangelización",
+     "solo para pastores",
+     "solo el bautismo"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Teaching, hospitality, mercy, prayer, and the fruit of the Spirit are all fruit.",
+    "es": "Enseñar, hospedar, misericordia, oración, y el fruto del Espíritu son todos fruto."
+   }
+  },
+  {
+   "stem": {
+    "en": "If a believer bears no fruit, Cook says the issue is:",
+    "es": "Si un creyente no lleva fruto, Cook dice que el problema es:"
+   },
+   "options": {
+    "en": [
+     "God's failure",
+     "the weather",
+     "bad luck",
+     "an attachment problem — something blocking the flow, calling for the purging of sin and renewed abiding"
+    ],
+    "es": [
+     "el fracaso de Dios",
+     "el clima",
+     "mala suerte",
+     "un problema de conexión — algo bloquea el flujo, lo que pide quitar el pecado y permanecer de nuevo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The cure is not to give up but to clear away the sin and abide afresh in the Vine.",
+    "es": "El remedio no es rendirse sino quitar el pecado y permanecer de nuevo en la Vid."
+   }
+  },
+  {
+   "stem": {
+    "en": "\"The Way\" and \"the true vine\" complete the seven great \"I AM\" sayings of John, which the world is meant to:",
+    "es": "\"El camino\" y \"la vid verdadera\" completan las siete grandes declaraciones \"YO SOY\" de Juan, que el mundo ha de:"
+   },
+   "options": {
+    "en": [
+     "believe — that Jesus is the Christ",
+     "debate endlessly",
+     "fear",
+     "ignore"
+    ],
+    "es": [
+     "creer — que Jesús es el Cristo",
+     "debatir sin fin",
+     "temer",
+     "ignorar"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "All seven \"I AM\" sayings point to the one purpose of the Gospel: that we believe and have life in His name.",
+    "es": "Las siete declaraciones \"YO SOY\" apuntan al único propósito del Evangelio: que creamos y tengamos vida en su nombre."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain how Jesus comforts His troubled disciples with the promise of the Father's house (John 14:1-3).",
+    "es": "Explique cómo Jesús consuela a sus discípulos turbados con la promesa de la casa del Padre (Juan 14:1-3)."
+   },
+   "keywords": {
+    "en": [
+     "trouble",
+     "heart",
+     "father",
+     "house",
+     "place",
+     "prepare",
+     "heaven",
+     "home"
+    ],
+    "es": [
+     "turba",
+     "corazon",
+     "padre",
+     "casa",
+     "lugar",
+     "prepara",
+     "cielo",
+     "hogar"
+    ]
+   },
+   "model": {
+    "en": "With their hearts breaking, Jesus said, Let not your heart be troubled; you believe in God, believe also in Me. In My Father's house are many mansions, and I go to prepare a place for you, and I will come again and receive you to Myself. He comforts them by promising that heaven is a real place, the Father's house, the believer's true home, not wishful thinking. The word for mansions means rooms or abiding places, prepared by Christ Himself, and one day He will return to bring His people there.",
+    "es": "Con sus corazones rompiéndose, Jesús dijo: No se turbe vuestro corazón; creéis en Dios, creed también en mí. En la casa de mi Padre muchas moradas hay, y voy a preparar lugar para vosotros, y vendré otra vez y os tomaré a mí mismo. Los consuela prometiendo que el cielo es un lugar real, la casa del Padre, el verdadero hogar del creyente, no una ilusión. La palabra para moradas significa habitaciones o lugares para morar, preparados por Cristo mismo, y un día volverá para llevar a su pueblo allí."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain \"I am the way\" and why Jesus is the only way to the Father (John 14:6).",
+    "es": "Explique \"Yo soy el camino\" y por qué Jesús es el único camino al Padre (Juan 14:6)."
+   },
+   "keywords": {
+    "en": [
+     "way",
+     "only",
+     "father",
+     "jesus",
+     "come",
+     "lost",
+     "person",
+     "road"
+    ],
+    "es": [
+     "camino",
+     "unico",
+     "padre",
+     "jesus",
+     "viene",
+     "perdid",
+     "persona",
+     "via"
+    ]
+   },
+   "model": {
+    "en": "When Thomas said they did not know the way, Jesus answered, I am the way, the truth, and the life; no one comes to the Father except through Me. He did not give a map but Himself, a Person. The opposite of the way is being lost, and not every road reaches God however sincerely it is traveled. Jesus said there are only two roads, the broad way to destruction and the narrow way few find. He is the only way to the Father; every other road that bypasses Him falls short, for no one comes to the Father except through Him.",
+    "es": "Cuando Tomás dijo que no sabían el camino, Jesús respondió: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí. No dio un mapa sino a sí mismo, una Persona. Lo opuesto del camino es estar perdido, y no toda vía llega a Dios por sincero que sea quien la recorre. Jesús dijo que hay solo dos caminos, el ancho a destrucción y el angosto que pocos hallan. Él es el único camino al Padre; todo otro camino que lo rodea se queda corto, pues nadie viene al Padre sino por él."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain \"I am the truth\" and \"I am the life\" (John 14:6).",
+    "es": "Explique \"Yo soy la verdad\" y \"Yo soy la vida\" (Juan 14:6)."
+   },
+   "keywords": {
+    "en": [
+     "truth",
+     "life",
+     "jesus",
+     "dead",
+     "spiritual",
+     "eternal",
+     "abundant",
+     "is"
+    ],
+    "es": [
+     "verdad",
+     "vida",
+     "jesus",
+     "muerto",
+     "espiritual",
+     "eterna",
+     "abundante",
+     "es"
+    ]
+   },
+   "model": {
+    "en": "Jesus is the truth, not merely a teacher of true things but the Truth in person, so that to know Him is to know what is real. He is also the life. The person without Christ is spiritually dead, alive to the world but dead to God. Only Jesus can make such a one truly alive, giving both an abundant life now and eternal life forever. So the Way, the Truth, and the Life are not three separate gifts but the one Christ who brings us to the Father, shows us reality, and raises us from spiritual death.",
+    "es": "Jesús es la verdad, no meramente un maestro de cosas verdaderas sino la Verdad en persona, de modo que conocerle es conocer lo real. También es la vida. La persona sin Cristo está espiritualmente muerta, viva al mundo pero muerta a Dios. Solo Jesús puede hacer vivo de veras a tal persona, dando tanto vida abundante ahora como vida eterna para siempre. Así que el Camino, la Verdad y la Vida no son tres regalos separados sino el único Cristo que nos lleva al Padre, nos muestra la realidad y nos levanta de la muerte espiritual."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain \"I am the true vine, and My Father is the vinedresser\" (John 15:1).",
+    "es": "Explique \"Yo soy la vid verdadera, y mi Padre es el labrador\" (Juan 15:1)."
+   },
+   "keywords": {
+    "en": [
+     "vine",
+     "true",
+     "father",
+     "vinedresser",
+     "gardener",
+     "jesus",
+     "source",
+     "life"
+    ],
+    "es": [
+     "vid",
+     "verdadera",
+     "padre",
+     "labrador",
+     "jardinero",
+     "jesus",
+     "fuente",
+     "vida"
+    ]
+   },
+   "model": {
+    "en": "Jesus said, I am the true vine, and My Father is the vinedresser. He is the true vine, the real source of spiritual life and nourishment, just as branches draw everything they have from the vine. The Father is the gardener, the vinedresser, who is far more than a farmer: He knows each vine intimately, what it needs and when, and even the exact place to cut. So Jesus is the life and the Father lovingly tends His people, working to make each one more fruitful as a good vinedresser tends his vines.",
+    "es": "Jesús dijo: Yo soy la vid verdadera, y mi Padre es el labrador. Él es la vid verdadera, la fuente real de vida y alimento espiritual, así como los pámpanos sacan todo lo que tienen de la vid. El Padre es el jardinero, el labrador, que es mucho más que un granjero: conoce cada vid íntimamente, lo que necesita y cuándo, y aun el lugar exacto donde cortar. Así que Jesús es la vida y el Padre cuida amorosamente a su pueblo, obrando para hacer a cada uno más fructífero como un buen viñador cuida sus vides."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how and why the Father prunes the branches (John 15:2).",
+    "es": "Explique cómo y por qué el Padre poda los pámpanos (Juan 15:2)."
+   },
+   "keywords": {
+    "en": [
+     "prune",
+     "branch",
+     "fruit",
+     "father",
+     "cut",
+     "more",
+     "grow",
+     "best"
+    ],
+    "es": [
+     "poda",
+     "rama",
+     "fruto",
+     "padre",
+     "corta",
+     "mas",
+     "crece",
+     "mejor"
+    ]
+   },
+   "model": {
+    "en": "Jesus said that every branch that bears fruit the Father prunes, that it may bear more fruit. Pruning is not punishment but love with a knife. Sometimes the Father cuts away what is plainly dead, but often He cuts away even the good and the better so that we may have the best. It hurts, but it helps us grow. Paul begged three times for his thorn to be removed, and was told instead, My grace is sufficient for you; the very thing he wanted gone was the Gardener's tool to make him more fruitful.",
+    "es": "Jesús dijo que todo pámpano que lleva fruto el Padre lo poda, para que lleve más fruto. La poda no es castigo sino amor con un cuchillo. A veces el Padre corta lo que está claramente muerto, pero a menudo corta aun lo bueno y lo mejor para que tengamos lo mejor de todo. Duele, pero nos ayuda a crecer. Pablo rogó tres veces que le quitaran su aguijón, y en cambio se le dijo: Bástate mi gracia; lo mismo que quería quitar era la herramienta del Labrador para hacerlo más fructífero."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain what it means to \"abide in Me\" (John 15:4).",
+    "es": "Explique qué significa \"permaneced en mí\" (Juan 15:4)."
+   },
+   "keywords": {
+    "en": [
+     "abide",
+     "remain",
+     "christ",
+     "relationship",
+     "connect",
+     "live",
+     "word",
+     "daily"
+    ],
+    "es": [
+     "permanece",
+     "abide",
+     "cristo",
+     "relacion",
+     "conecta",
+     "vive",
+     "palabra",
+     "diario"
+    ]
+   },
+   "model": {
+    "en": "Jesus said, Abide in Me, and I in you; the branch cannot bear fruit unless it abides in the vine. The word abide is the verb behind the word abode, a dwelling place. To abide in Christ is not merely to know facts about Him, nor even only to pray, but to remain connected to Him and live with Him in a close, family relationship, aware of Him beside us every day. As His word remains in us we stay joined to Him, and only by this daily abiding can the life of the vine flow into the branch.",
+    "es": "Jesús dijo: Permaneced en mí, y yo en vosotros; el pámpano no puede llevar fruto si no permanece en la vid. La palabra permanecer es el verbo detrás de la palabra morada, un lugar donde se habita. Permanecer en Cristo no es meramente saber datos acerca de él, ni siquiera solo orar, sino seguir conectados a él y vivir con él en una relación estrecha, de familia, conscientes de él a nuestro lado cada día. Al permanecer su palabra en nosotros seguimos unidos a él, y solo por este permanecer diario puede la vida de la vid fluir al pámpano."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain \"apart from Me you can do nothing\" (John 15:5).",
+    "es": "Explique \"sin mí nada podéis hacer\" (Juan 15:5)."
+   },
+   "keywords": {
+    "en": [
+     "apart",
+     "nothing",
+     "branch",
+     "vine",
+     "fruit",
+     "christ",
+     "depend",
+     "connect"
+    ],
+    "es": [
+     "sin",
+     "nada",
+     "rama",
+     "vid",
+     "fruto",
+     "cristo",
+     "depende",
+     "conecta"
+    ]
+   },
+   "model": {
+    "en": "Jesus said, I am the vine, you are the branches; he who abides in Me bears much fruit, for without Me you can do nothing. A branch cut off from the vine can produce nothing; so apart from Christ we can do nothing of eternal worth. We depend on Him entirely, as a branch depends on the vine for all its life and sap. It is like a phone that runs only while it stays connected to the power. As long as we remain connected to Christ, His life flows through us and the fruit comes; cut off from Him, we wither.",
+    "es": "Jesús dijo: Yo soy la vid, vosotros los pámpanos; el que permanece en mí lleva mucho fruto, porque sin mí nada podéis hacer. Un pámpano cortado de la vid no puede producir nada; así que aparte de Cristo no podemos hacer nada de valor eterno. Dependemos de él por completo, como el pámpano depende de la vid para toda su vida y savia. Es como un teléfono que funciona solo mientras se conecta a la corriente. Mientras permanecemos conectados a Cristo, su vida fluye por nosotros y el fruto viene; cortados de él, nos secamos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why bearing fruit is not automatic and how it comes (John 15:4-5).",
+    "es": "Explique por qué llevar fruto no es automático y cómo viene (Juan 15:4-5)."
+   },
+   "keywords": {
+    "en": [
+     "fruit",
+     "automatic",
+     "abide",
+     "christ",
+     "bear",
+     "connect",
+     "come",
+     "branch"
+    ],
+    "es": [
+     "fruto",
+     "automatico",
+     "permanece",
+     "cristo",
+     "lleva",
+     "conecta",
+     "viene",
+     "rama"
+    ]
+   },
+   "model": {
+    "en": "Many imagine that a real Christian will automatically produce fruit, but Cook insists this is not what Jesus says. Fruit comes only by abiding in Christ, and abiding is not automatic either, or Jesus would not have had to command it; that very night the disciples failed to abide, Peter most of all. The branch bears fruit only while it stays connected to the vine. So fruit comes not by trying harder on our own but by remaining joined to Christ, letting His life flow through us, the way a branch draws from the vine.",
+    "es": "Muchos imaginan que un verdadero cristiano producirá fruto automáticamente, pero Cook insiste en que no es lo que dice Jesús. El fruto viene solo por permanecer en Cristo, y permanecer tampoco es automático, o Jesús no habría tenido que mandarlo; esa misma noche los discípulos fallaron en permanecer, Pedro más que todos. El pámpano lleva fruto solo mientras sigue conectado a la vid. Así que el fruto viene no por esforzarnos más por nuestra cuenta sino por seguir unidos a Cristo, dejando que su vida fluya por nosotros, como la rama saca de la vid."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the kinds of fruit the abiding believer bears (John 15:5-8; Galatians 5).",
+    "es": "Describa las clases de fruto que lleva el creyente que permanece (Juan 15:5-8; Gálatas 5)."
+   },
+   "keywords": {
+    "en": [
+     "fruit",
+     "love",
+     "joy",
+     "peace",
+     "prayer",
+     "service",
+     "gift",
+     "spirit"
+    ],
+    "es": [
+     "fruto",
+     "amor",
+     "gozo",
+     "paz",
+     "oracion",
+     "servicio",
+     "don",
+     "espiritu"
+    ]
+   },
+   "model": {
+    "en": "Cook teaches that fruit is more than evangelism alone, though it surely includes winning souls. Every believer bears fruit by exercising the gifts God has given, such as teaching, hospitality, mercy, and prayer, and above all the fruit of the Spirit named in Galatians 5: love, joy, peace, and the rest. Abiding in Christ also leads to persistent prayer and selfless service to others. When the watching world sees a people marked by such love and fruit, it sees something it cannot explain or produce on its own, and it is drawn to Christ.",
+    "es": "Cook enseña que el fruto es más que la evangelización sola, aunque ciertamente incluye ganar almas. Todo creyente lleva fruto al ejercer los dones que Dios le ha dado, como enseñar, hospedar, misericordia y oración, y sobre todo el fruto del Espíritu nombrado en Gálatas 5: amor, gozo, paz, y lo demás. Permanecer en Cristo lleva también a la oración persistente y al servicio desinteresado a otros. Cuando el mundo que observa ve a un pueblo marcado por tal amor y fruto, ve algo que no puede explicar ni producir por sí mismo, y es atraído a Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How do \"the Way\" and \"the true Vine\" fit together, and what do they call us to?",
+    "es": "¿Cómo encajan \"el Camino\" y \"la Vid verdadera,\" y a qué nos llaman?"
+   },
+   "keywords": {
+    "en": [
+     "way",
+     "vine",
+     "father",
+     "abide",
+     "fruit",
+     "home",
+     "follow",
+     "christ"
+    ],
+    "es": [
+     "camino",
+     "vid",
+     "padre",
+     "permanece",
+     "fruto",
+     "hogar",
+     "sigue",
+     "cristo"
+    ]
+   },
+   "model": {
+    "en": "The two sayings answer the two deepest questions of the soul. As the Way, Jesus brings us home to the Father, for no one comes to the Father except through Him. As the true Vine, He keeps us alive and fruitful all the way there, since apart from Him we can do nothing. So the Way gets us to the Father's house, and the Vine sustains us on the journey. Together they call us to come to the Father by the one Way, Christ, and then to abide close to the Vine so that His life bears much fruit through us.",
+    "es": "Las dos declaraciones responden las dos preguntas más hondas del alma. Como el Camino, Jesús nos lleva a casa, al Padre, pues nadie viene al Padre sino por él. Como la Vid verdadera, nos mantiene vivos y fructíferos todo el trayecto, ya que sin él nada podemos hacer. Así que el Camino nos lleva a la casa del Padre, y la Vid nos sostiene en el viaje. Juntas nos llaman a venir al Padre por el único Camino, Cristo, y luego a permanecer cerca de la Vid para que su vida lleve mucho fruto a través de nosotros, y así sigamos a Cristo hasta el hogar."
+   }
+  }
+ ]
+};

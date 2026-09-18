@@ -1,11 +1,859 @@
-/* CTSCults - unit 6: per-unit configuration and content. */
-
-const UNIT = 6;
-
-const NEXT_UNIT_URL = 'CTSCultsUnit7.html';
-
-const unitTitlesEn = ["Unit 1 - What Is a Cult? The Biblical Test", "Unit 2 - The Trinity and the Deity of Christ", "Unit 3 - Jehovah's Witnesses", "Unit 4 - The Latter-day Saints", "Unit 5 - The Prosperity Gospel", `Unit ${UNIT} - Progressive Revelation: Islam and Baha'i`, `Unit ${UNIT + 1} - Eastern Religions: Hinduism and Buddhism`, "Unit 8 - Roman Catholicism", "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism", "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"];
-
-const mcQuestions = [{"textEn": "1. The single claim Islam and the Bahá'í Faith share, which this unit tests, is that:", "textEs": "1. La única afirmación que el islam y la fe bahá'í comparten, y que esta unidad prueba, es que:", "optionsEn": ["There is no God at all", "Jesus never lived", "All religions are simply false", "God keeps sending a newer messenger who supersedes those before him"], "optionsEs": ["No hay Dios en absoluto", "Jesús nunca vivió", "Todas las religiones son simplemente falsas", "Dios sigue enviando un mensajero más nuevo que supera a los anteriores"], "explanationEn": "Both hold that God keeps sending a newer messenger who surpasses the ones before — the claim this unit tests.", "explanationEs": "Ambas sostienen que Dios sigue enviando un mensajero más nuevo que supera a los anteriores — la afirmación que esta unidad prueba.", "correct": 3}, {"textEn": "2. In Islam, the last and greatest prophet, the 'Seal of the Prophets,' is:", "textEs": "2. En el islam, el último y más grande profeta, el 'Sello de los Profetas', es:", "optionsEn": ["Muhammad", "Abraham", "Moses", "Jesus"], "optionsEs": ["Mahoma", "Abraham", "Moisés", "Jesús"], "explanationEn": "Islam names Muhammad the Seal of the Prophets, whose revelation is final.", "explanationEs": "El islam nombra a Mahoma el Sello de los Profetas, cuya revelación es final.", "correct": 0}, {"textEn": "3. Muslims hold the oneness of God (tawhid) so strictly that they regard as the gravest sin:", "textEs": "3. Los musulmanes sostienen la unicidad de Dios (tawhid) tan estrictamente que consideran como el pecado más grave:", "optionsEn": ["Fasting", "Praying five times a day", "Giving to the poor", "Associating any partner with God"], "optionsEs": ["El ayuno", "Orar cinco veces al día", "Dar a los pobres", "Asociar cualquier socio con Dios"], "explanationEn": "To associate a partner with God is, in Islam, the gravest sin — which is why they reject the deity of Christ.", "explanationEs": "Asociar un socio con Dios es, en el islam, el pecado más grave — por eso rechazan la deidad de Cristo.", "correct": 3}, {"textEn": "4. Concerning Jesus, Islam teaches that He is:", "textEs": "4. Acerca de Jesús, el islam enseña que Él es:", "optionsEn": ["A revered but created human prophet, not divine", "The eternal Son of God", "God come in the flesh", "One of three gods"], "optionsEs": ["Un profeta humano creado y reverenciado, pero no divino", "El eterno Hijo de Dios", "Dios venido en carne", "Uno de tres dioses"], "explanationEn": "Islam honors Jesus as a prophet and Messiah, but denies that He is the Son of God or divine.", "explanationEs": "El islam honra a Jesús como profeta y Mesías, pero niega que sea el Hijo de Dios o divino.", "correct": 0}, {"textEn": "5. Concerning the crucifixion, the Qur'an (as commonly understood) teaches that Jesus:", "textEs": "5. Acerca de la crucifixión, el Corán (según se entiende comúnmente) enseña que Jesús:", "optionsEn": ["Died and rose again", "Was never in Jerusalem", "Died of old age", "Was not truly crucified; it only appeared so"], "optionsEs": ["Murió y resucitó", "Nunca estuvo en Jerusalén", "Murió de vejez", "No fue verdaderamente crucificado; solo lo pareció"], "explanationEn": "Islam commonly denies the crucifixion, teaching it only appeared so and that God took Jesus up.", "explanationEs": "El islam comúnmente niega la crucifixión, enseñando que solo lo pareció y que Dios tomó a Jesús consigo.", "correct": 3}, {"textEn": "6. Muslims believe the Qur'an:", "textEs": "6. Los musulmanes creen que el Corán:", "optionsEn": ["Is the final word of God that supersedes the earlier (corrupted) Scriptures", "Agrees fully with the Bible as it stands", "Is one holy book among equals", "Was written by Jesus"], "optionsEs": ["Es la palabra final de Dios que supera a las Escrituras anteriores (corrompidas)", "Concuerda plenamente con la Biblia tal como está", "Es un libro santo entre iguales", "Fue escrito por Jesús"], "explanationEn": "Islam holds the Qur'an to be God's final word, superseding the Law and Gospel it regards as corrupted.", "explanationEs": "El islam sostiene que el Corán es la palabra final de Dios, superando la Ley y el Evangelio que considera corrompidos.", "correct": 0}, {"textEn": "7. The Bahá'í Faith arose in the nineteenth century in Persia through:", "textEs": "7. La fe bahá'í surgió en el siglo diecinueve en Persia por medio de:", "optionsEn": ["Muhammad", "Joseph Smith", "Krishna", "The Báb and then Bahá'u'lláh"], "optionsEs": ["Mahoma", "José Smith", "Krishna", "El Báb y luego Bahá'u'lláh"], "explanationEn": "Bahá'u'lláh, following his forerunner the Báb, founded the Bahá'í Faith in nineteenth-century Persia.", "explanationEs": "Bahá'u'lláh, siguiendo a su precursor el Báb, fundó la fe bahá'í en la Persia del siglo diecinueve.", "correct": 3}, {"textEn": "8. The central Bahá'í idea of 'progressive revelation' teaches that:", "textEs": "8. La idea central bahá'í de la 'revelación progresiva' enseña que:", "optionsEn": ["The Bible is God's final word", "There is no God", "Only Jesus reveals God", "God sends a succession of 'Manifestations,' each for his own age"], "optionsEs": ["La Biblia es la palabra final de Dios", "No hay Dios", "Solo Jesús revela a Dios", "Dios envía una sucesión de 'Manifestaciones', cada una para su propia edad"], "explanationEn": "Progressive revelation holds that God sends a line of Manifestations, each suited to a particular age.", "explanationEs": "La revelación progresiva sostiene que Dios envía una línea de Manifestaciones, cada una adecuada a una edad particular.", "correct": 3}, {"textEn": "9. In the Bahá'í scheme, Jesus is:", "textEs": "9. En el esquema bahá'í, Jesús es:", "optionsEn": ["One Manifestation now superseded by Bahá'u'lláh", "The only Savior", "Never mentioned", "A merely legendary figure"], "optionsEs": ["Una Manifestación ahora superada por Bahá'u'lláh", "El único Salvador", "Nunca mencionado", "Una figura meramente legendaria"], "explanationEn": "Bahá'í honors Jesus as one Manifestation, now fulfilled and surpassed by Bahá'u'lláh.", "explanationEs": "El bahaísmo honra a Jesús como una Manifestación, ahora cumplida y superada por Bahá'u'lláh.", "correct": 0}, {"textEn": "10. Both faiths honor Jesus, yet both ultimately:", "textEs": "10. Ambas fes honran a Jesús, pero ambas al final:", "optionsEn": ["Worship Him as God", "Leave Him behind, surpassed by a later voice", "Reject Him entirely", "Call Him the final prophet"], "optionsEs": ["Lo adoran como Dios", "Lo dejan atrás, superado por una voz posterior", "Lo rechazan por completo", "Lo llaman el profeta final"], "explanationEn": "In both, Jesus is honored and then surpassed by a later messenger — the shared move this unit tests.", "explanationEs": "En ambas, Jesús es honrado y luego superado por un mensajero posterior — el movimiento compartido que esta unidad prueba.", "correct": 1}, {"textEn": "11. The first root-test asks about the person of Christ; on this both Islam and Bahá'í:", "textEs": "11. La primera prueba de la raíz pregunta acerca de la persona de Cristo; en esto tanto el islam como el bahaísmo:", "optionsEn": ["Confess His full deity", "Deny that He is the eternal God the Son", "Agree with the Trinity", "Say He never existed"], "optionsEs": ["Confiesan su plena deidad", "Niegan que Él sea el eterno Dios el Hijo", "Concuerdan con la Trinidad", "Dicen que nunca existió"], "explanationEn": "Both deny the deity of Christ — Islam outright, Bahá'í by making Him one Manifestation among many.", "explanationEs": "Ambas niegan la deidad de Cristo — el islam abiertamente, el bahaísmo al hacerlo una Manifestación entre muchas.", "correct": 1}, {"textEn": "12. Jesus said in John 14:6, 'I am the way, the truth, and the life. No one comes to the Father':", "textEs": "12. Jesús dijo en Juan 14:6: 'Yo soy el camino, la verdad, y la vida; nadie viene al Padre':", "optionsEn": ["through many prophets", "by good works", "except through Me", "after Muhammad"], "optionsEs": ["por medio de muchos profetas", "por buenas obras", "sino por mí", "después de Mahoma"], "explanationEn": "Christ is the only way to the Father — not one path among many.", "explanationEs": "Cristo es el único camino al Padre — no un sendero entre muchos.", "correct": 2}, {"textEn": "13. To the claim that 'God has no son,' 1 John 2:23 answers:", "textEs": "13. A la afirmación de que 'Dios no tiene hijo', 1 Juan 2:23 responde:", "optionsEn": ["That claim is correct", "'Whoever denies the Son does not have the Father either'", "The Son is an angel", "Sons are unimportant"], "optionsEs": ["Esa afirmación es correcta", "'Cualquiera que niega al Hijo, tampoco tiene al Padre'", "El Hijo es un ángel", "Los hijos no importan"], "explanationEn": "To deny the Son is to lose the Father also — the two cannot be separated.", "explanationEs": "Negar al Hijo es perder también al Padre — los dos no pueden separarse.", "correct": 1}, {"textEn": "14. The denial of the cross strikes at the gospel because, per 1 Corinthians 15:3-4 and Hebrews 9:22:", "textEs": "14. La negación de la cruz hiere el evangelio porque, según 1 Corintios 15:3-4 y Hebreos 9:22:", "optionsEn": ["The cross was only symbolic", "Christ's death and shed blood are essential — without them there is no remission", "Jesus only fainted on the cross", "The resurrection did not happen"], "optionsEs": ["La cruz fue solo simbólica", "La muerte y la sangre derramada de Cristo son esenciales — sin ellas no hay remisión", "Jesús solo se desmayó en la cruz", "La resurrección no ocurrió"], "explanationEn": "Without Christ's death and shed blood there is no remission of sins; the cross is the heart of the gospel.", "explanationEs": "Sin la muerte y la sangre derramada de Cristo no hay remisión de pecados; la cruz es el corazón del evangelio.", "correct": 1}, {"textEn": "15. Hebrews 1:1-3 teaches that, whereas God once spoke by the prophets, in these last days He has spoken to us by:", "textEs": "15. Hebreos 1:1-3 enseña que, mientras que Dios habló antes por los profetas, en estos postreros días nos ha hablado por:", "optionsEn": ["another, greater prophet", "an angel from heaven", "His Son, who is the express image of His person", "a newly given book"], "optionsEs": ["otro profeta mayor", "un ángel del cielo", "su Hijo, que es la imagen misma de su sustancia", "un libro recién dado"], "explanationEn": "God's final speech is not another prophet but His Son, the express image of His person.", "explanationEs": "El habla final de Dios no es otro profeta sino su Hijo, la imagen misma de su sustancia.", "correct": 2}, {"textEn": "16. The point of Hebrews 1 against the shared claim is that:", "textEs": "16. El punto de Hebreos 1 contra la afirmación compartida es que:", "optionsEn": ["more prophets are always coming", "the Son is God's final word, for none is greater than God Himself", "Jesus was only the first prophet", "revelation never ends"], "optionsEs": ["siempre vienen más profetas", "el Hijo es la palabra final de Dios, pues ninguno es mayor que Dios mismo", "Jesús fue solo el primer profeta", "la revelación nunca termina"], "explanationEn": "Because the Son is God Himself, no greater messenger can follow — He is the final word.", "explanationEs": "Porque el Hijo es Dios mismo, ningún mensajero mayor puede seguir — Él es la palabra final.", "correct": 1}, {"textEn": "17. Jude 3 calls us to contend for 'the faith which was once for all delivered,' meaning the gospel:", "textEs": "17. Judas 3 nos llama a contender por 'la fe que ha sido una vez dada', lo que significa que el evangelio:", "optionsEn": ["changes with each age", "is revised by new prophets", "is fixed, not superseded by later voices", "was lost long ago"], "optionsEs": ["cambia con cada edad", "es revisado por nuevos profetas", "es fijo, no superado por voces posteriores", "se perdió hace mucho"], "explanationEn": "The faith was delivered once for all; later voices do not revise or supersede it.", "explanationEs": "La fe fue dada una vez para siempre; las voces posteriores no la revisan ni la superan.", "correct": 2}, {"textEn": "18. That Muhammad claimed to receive the Qur'an from an angel gives special force to which warning?", "textEs": "18. Que Mahoma afirmara recibir el Corán de un ángel da fuerza especial a ¿cuál advertencia?", "optionsEn": ["Galatians 1:8 — even an angel preaching another gospel is accursed", "A blessing pronounced on angels", "A command to fast in Ramadan", "None at all"], "optionsEs": ["Gálatas 1:8 — aun un ángel que predique otro evangelio sea anatema", "Una bendición pronunciada sobre los ángeles", "Un mandato de ayunar en Ramadán", "Ninguna"], "explanationEn": "Galatians 1:8 warns that even an angel preaching another gospel is accursed — pointed here.", "explanationEs": "Gálatas 1:8 advierte que aun un ángel que predique otro evangelio sea anatema — muy al caso aquí.", "correct": 0}, {"textEn": "19. Both faiths are 'another gospel' because each gives another Jesus, sets a later book above Scripture, and offers salvation by:", "textEs": "19. Ambas fes son 'otro evangelio' porque cada una da otro Jesús, coloca un libro posterior por encima de la Escritura, y ofrece salvación por:", "optionsEn": ["grace alone", "faith alone in Christ", "submission and works rather than free grace in the crucified and risen Christ", "nothing at all"], "optionsEs": ["gracia sola", "la fe sola en Cristo", "sumisión y obras en lugar de la gracia gratuita en el Cristo crucificado y resucitado", "nada en absoluto"], "explanationEn": "Another Jesus, an added authority, and salvation by works instead of grace — a different gospel.", "explanationEs": "Otro Jesús, una autoridad añadida, y salvación por obras en lugar de gracia — otro evangelio.", "correct": 2}, {"textEn": "20. Our redemptive aim toward Muslims and Bahá'ís is to show them that the Jesus they revere is:", "textEs": "20. Nuestro fin redentor hacia los musulmanes y los bahá'ís es mostrarles que el Jesús que reverencian es:", "optionsEn": ["less than they had thought", "merely a prophet after all", "the eternal Son, God's final and complete Word, the only way to the Father", "unimportant"], "optionsEs": ["menos de lo que habían pensado", "meramente un profeta después de todo", "el eterno Hijo, la Palabra final y completa de Dios, el único camino al Padre", "sin importancia"], "explanationEn": "We show them the One they revere is far greater — the eternal Son and only way to the Father.", "explanationEs": "Les mostramos que Aquel a quien reverencian es mucho mayor — el eterno Hijo y único camino al Padre.", "correct": 2}];
-
-const kwQuestions = [{"textEn": "21. State the single claim that Islam and the Bahá'í Faith share, and explain why this unit tests it.", "textEs": "21. Exponga la única afirmación que el islam y la fe bahá'í comparten, y explique por qué esta unidad la prueba.", "kw_en": ["newer", "prophet", "supersede", "muhammad", "manifestation", "christ", "final", "claim"], "kw_es": ["nuevo", "profeta", "supera", "mahoma", "manifestaci", "cristo", "postrer", "afirma"], "modelEn": "Islam and the Bahá'í Faith share the claim that God keeps sending a newer messenger who supersedes those before him. In Islam, Muhammad is the last and greatest prophet, the Seal of the Prophets, whose revelation is final. In the Bahá'í Faith, a succession of Manifestations culminates for now in Bahá'u'lláh, the newest. In both, Jesus is honored and then surpassed by a later voice. This unit tests that claim because everything turns on one question: is Christ one prophet in a continuing series, or is He God's final and complete Word? If the Son is God's last word, then no newer prophet or manifestation can supersede Him.", "modelEs": "El islam y la fe bahá'í comparten la afirmación de que Dios sigue enviando un mensajero más nuevo que supera a los anteriores. En el islam, Mahoma es el último y más grande profeta, el Sello de los Profetas, cuya revelación es final. En la fe bahá'í, una sucesión de Manifestaciones culmina por ahora en Bahá'u'lláh, el más nuevo. En ambas, Jesús es honrado y luego superado por una voz posterior. Esta unidad prueba esa afirmación porque todo gira en torno a una pregunta: ¿es Cristo un profeta en una serie continua, o es la Palabra final y completa de Dios? Si el Hijo es la palabra postrera de Dios, entonces ningún profeta o manifestación más nuevo puede superarlo."}, {"textEn": "22. Fairly summarize what Muslims teach about Jesus, the Qur'an, and how a person is saved.", "textEs": "22. Resuma justamente lo que los musulmanes enseñan acerca de Jesús, el Corán, y cómo es salva una persona.", "kw_en": ["jesus", "prophet", "son", "crucified", "quran", "supersede", "submission", "works"], "kw_es": ["profeta", "hijo", "cristo", "pilares", "supera", "sumisi", "obras", "cruz"], "modelEn": "Muslims honor Jesus as a great prophet, the Messiah, born of a virgin and a worker of miracles, but they deny that He is the Son of God or divine, and they deny that He was truly crucified, teaching that it only appeared so. They believe the Qur'an is the final, perfect word of God, given to Muhammad, which supersedes the earlier Scriptures they regard as corrupted. Salvation is by submission to God and by the works of faith, especially the Five Pillars, with a person's deeds weighed at the Day of Judgment and no certainty of the outcome. In short, they revere Jesus as a prophet while denying His deity, His cross, and salvation by grace.", "modelEs": "Los musulmanes honran a Jesús como un gran profeta, el Mesías, nacido de una virgen y obrador de milagros, pero niegan que sea el Hijo de Dios o divino, y niegan que fuera verdaderamente crucificado, enseñando que solo lo pareció. Creen que el Corán es la palabra final y perfecta de Dios, dada a Mahoma, que supera a las Escrituras anteriores que consideran corrompidas. La salvación es por sumisión a Dios y por las obras de la fe, especialmente los Cinco Pilares, con las obras de una persona pesadas en el Día del Juicio y sin certeza del resultado. En resumen, reverencian a Jesús como profeta mientras niegan su deidad, su cruz, y la salvación por gracia."}, {"textEn": "23. Fairly summarize what Bahá'ís teach about progressive revelation, the Manifestations, and Jesus.", "textEs": "23. Resuma justamente lo que los bahá'ís enseñan acerca de la revelación progresiva, las Manifestaciones, y Jesús.", "kw_en": ["progressive", "revelation", "manifestation", "christ", "bahaullah", "supersede", "age", "unity"], "kw_es": ["progresiva", "revelaci", "manifestaci", "cristo", "supera", "edad", "unidad", "religiones"], "modelEn": "Bahá'ís teach progressive revelation: that God, unknowable in Himself, sends a succession of Manifestations, each bringing truth suited to his own age, so that the world's religions are at heart one unfolding faith. These Manifestations include Abraham, Moses, Krishna, Buddha, Zoroaster, Jesus, Muhammad, and finally Bahá'u'lláh, the one for today. Jesus, in this scheme, is one Manifestation among many, genuinely from God but for His time, now fulfilled and superseded by Bahá'u'lláh, whose writings are the newest scripture. They emphasize the unity of God, of religion, and of humanity, along with world peace and the harmony of science and religion. Here again Jesus is honored, and then set aside for a newer voice.", "modelEs": "Los bahá'ís enseñan la revelación progresiva: que Dios, incognoscible en sí mismo, envía una sucesión de Manifestaciones, cada una trayendo verdad adecuada a su propia edad, de modo que las religiones del mundo son en el fondo una sola fe que se despliega. Estas Manifestaciones incluyen a Abraham, Moisés, Krishna, Buda, Zoroastro, Jesús, Mahoma, y finalmente Bahá'u'lláh, el que es para hoy. Jesús, en este esquema, es una Manifestación entre muchas, genuinamente de Dios pero para su tiempo, ahora cumplida y superada por Bahá'u'lláh, cuyos escritos son la escritura más nueva. Enfatizan la unidad de Dios, de la religión, y de la humanidad, junto con la paz mundial y la armonía de la ciencia y la religión. Aquí de nuevo Jesús es honrado, y luego apartado por una voz más nueva."}, {"textEn": "24. From Scripture, show that Jesus is the eternal God the Son, not merely a prophet or one manifestation among many.", "textEs": "24. Desde la Escritura, muestre que Jesús es el eterno Dios el Hijo, no meramente un profeta ni una manifestación entre muchas.", "kw_en": ["god", "son", "word", "deity", "fullness", "way", "eternal", "christ"], "kw_es": ["dios", "hijo", "verbo", "deidad", "plenitud", "camino", "eterno", "cristo"], "modelEn": "Scripture teaches that Jesus is the eternal God the Son, not merely a prophet. John says the Word was God, and that in Christ dwells all the fullness of the Godhead bodily, so He is not one manifestation among many but God Himself. He is eternal, for before Abraham was, He said, I AM. And He is not one way among many: He said, I am the way, the truth, and the life; no one comes to the Father except through Me. To make Jesus a mere prophet, or one Manifestation now superseded, is to deny what Scripture plainly says about His deity. The Son shares the very being of God, and therefore cannot be surpassed by any later messenger.", "modelEs": "La Escritura enseña que Jesús es el eterno Dios el Hijo, no meramente un profeta. Juan dice que el Verbo era Dios, y que en Cristo habita corporalmente toda la plenitud de la Deidad, así que no es una manifestación entre muchas sino Dios mismo. Es eterno, pues antes que Abraham fuese, Él dijo: yo soy. Y no es un camino entre muchos: dijo, yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí. Hacer a Jesús un mero profeta, o una Manifestación ahora superada, es negar lo que la Escritura dice claramente acerca de su deidad. El Hijo comparte el ser mismo de Dios, y por tanto no puede ser superado por ningún mensajero posterior."}, {"textEn": "25. Explain why the denial of the cross (in Islam) strikes at the very heart of the gospel.", "textEs": "25. Explique por qué la negación de la cruz (en el islam) hiere el corazón mismo del evangelio.", "kw_en": ["cross", "death", "crucified", "blood", "remission", "gospel", "sin", "risen"], "kw_es": ["cruz", "muerte", "sangre", "remisi", "evangelio", "pecado", "resucit", "salva"], "modelEn": "The denial of the cross strikes at the very heart of the gospel because the death of Christ is not an accident to be explained away but the ground of our salvation. Paul says that Christ died for our sins according to the Scriptures and rose again the third day, and this is the gospel itself. Hebrews says that without the shedding of blood there is no remission of sin, so if Jesus did not die, there is no sacrifice and no forgiveness. Islam teaches that Jesus was not truly crucified but only appeared to be, and God took Him up. But a Christ who did not die for sinners is a Christ who cannot save them. Take away the cross and the risen Christ, and nothing remains by which sin can be remitted.", "modelEs": "La negación de la cruz hiere el corazón mismo del evangelio porque la muerte de Cristo no es un accidente que explicar sino el fundamento de nuestra salvación. Pablo dice que Cristo murió por nuestros pecados conforme a las Escrituras y resucitó al tercer día, y esto es el evangelio mismo. Hebreos dice que sin derramamiento de sangre no hay remisión del pecado, así que si Jesús no murió, no hay sacrificio ni perdón. El islam enseña que Jesús no fue verdaderamente crucificado sino que solo lo pareció, y Dios lo tomó consigo. Pero un Cristo que no murió por los pecadores es un Cristo que no puede salvarlos. Quite la cruz y el Cristo resucitado, y no queda nada por lo cual el pecado pueda ser remitido."}, {"textEn": "26. Using Hebrews 1:1-3, explain why Christ is God's final word and not one prophet in a continuing series.", "textEs": "26. Usando Hebreos 1:1-3, explique por qué Cristo es la palabra final de Dios y no un profeta en una serie continua.", "kw_en": ["hebrews", "prophet", "son", "final", "god", "image", "last", "spoken"], "kw_es": ["hebreos", "profeta", "hijo", "final", "dios", "imagen", "postrer", "hablado"], "modelEn": "Hebrews teaches that in time past God spoke to the fathers by the prophets in many pieces and in various ways, but in these last days He has spoken to us by His Son, who is the brightness of His glory and the express image of His person. The prophets came first and partially; but the final word is not another prophet, it is the Son, who is God Himself. This is why Christ cannot be one messenger in a continuing series: after God has spoken by His own Son, there is no greater messenger to come, for none is greater than God. So the claim that a later prophet supersedes Jesus fails, because the Son is the last and highest word, being the very image of God.", "modelEs": "Hebreos enseña que en otro tiempo Dios habló a los padres por los profetas en muchas partes y de muchas maneras, pero en estos postreros días nos ha hablado por su Hijo, que es el resplandor de su gloria y la imagen misma de su sustancia. Los profetas vinieron primero y en parte; pero la palabra final no es otro profeta, es el Hijo, que es Dios mismo. Por eso Cristo no puede ser un mensajero en una serie continua: después que Dios ha hablado por su propio Hijo, no hay mensajero mayor por venir, pues ninguno es mayor que Dios. Así que la afirmación de que un profeta posterior supera a Jesús falla, porque el Hijo es la palabra postrera y más alta, siendo la imagen misma de Dios."}, {"textEn": "27. Using Jude 3 and Galatians 1:8, explain why a later prophet who changes the gospel is under God's warning, and note the force of 'even an angel.'", "textEs": "27. Usando Judas 3 y Gálatas 1:8, explique por qué un profeta posterior que cambia el evangelio está bajo la advertencia de Dios, y note la fuerza de 'aun un ángel'.", "kw_en": ["jude", "faith", "delivered", "gospel", "angel", "accursed", "another", "change"], "kw_es": ["fe", "dada", "evangelio", "anatema", "otro", "cambia", "profeta", "santos"], "modelEn": "Jude commands us to contend earnestly for the faith which was once for all delivered to the saints. The word once for all means the gospel is fixed and complete, not revised by each new age or superseded by a later prophet. So when Islam or the Bahá'í Faith brings a newer messenger who changes the gospel of Christ, it falls under Paul's warning in Galatians: even if an angel from heaven preaches another gospel, let him be accursed. The force of even an angel is sharp here, because Muhammad claimed to receive the Qur'an from the angel Gabriel. Yet no angel, and no later prophet, however sincere, may set aside the once-delivered gospel. To change it is to fall under this solemn warning.", "modelEs": "Judas nos manda contender ardientemente por la fe que ha sido una vez dada a los santos. La palabra una vez significa que el evangelio es fijo y completo, no revisado con cada nueva edad ni superado por un profeta posterior. Así que cuando el islam o la fe bahá'í trae un mensajero más nuevo que cambia el evangelio de Cristo, cae bajo la advertencia de Pablo en Gálatas: si un ángel del cielo predica otro evangelio, sea anatema. La fuerza de aun un ángel es aguda aquí, porque Mahoma afirmó recibir el Corán del ángel Gabriel. Sin embargo, ningún ángel, y ningún profeta posterior, por sincero que sea, puede desechar el evangelio una vez dado. Cambiarlo es caer bajo esta advertencia solemne."}, {"textEn": "28. Explain why, despite honoring Jesus, both Islam and the Bahá'í Faith teach 'another gospel.'", "textEs": "28. Explique por qué, a pesar de honrar a Jesús, tanto el islam como la fe bahá'í enseñan 'otro evangelio'.", "kw_en": ["another", "gospel", "christ", "authority", "scripture", "works", "grace", "root"], "kw_es": ["otro", "evangelio", "cristo", "autoridad", "escritura", "obras", "gracia", "fundamento"], "modelEn": "Despite honoring Jesus, both faiths teach another gospel because each changes the root at the points that matter most. Each gives us another Christ: a prophet or a manifestation rather than the eternal incarnate Son. Each sets a later authority above the Scriptures: the Qur'an, or the writings of Bahá'u'lláh. And each offers salvation by submission and works rather than the free grace of God in the crucified and risen Christ. The reverence of the Muslim and the gentleness of the Bahá'í are real, but neither can change the root. A message that surpasses the Son, denies or ignores His cross, and adds a newer prophet is, in Paul's words, a different gospel, which is not really another but a departure from the true one.", "modelEs": "A pesar de honrar a Jesús, ambas fes enseñan otro evangelio porque cada una cambia el fundamento en los puntos que más importan. Cada una nos da otro Cristo: un profeta o una manifestación en lugar del eterno Hijo encarnado. Cada una coloca una autoridad posterior por encima de las Escrituras: el Corán, o los escritos de Bahá'u'lláh. Y cada una ofrece salvación por sumisión y obras en lugar de la gracia gratuita de Dios en el Cristo crucificado y resucitado. La reverencia del musulmán y la mansedumbre del bahá'í son reales, pero ninguna puede cambiar el fundamento. Un mensaje que supera al Hijo, niega o ignora su cruz, y añade un profeta más nuevo es, en palabras de Pablo, otro evangelio, que no es realmente otro sino una desviación del verdadero."}, {"textEn": "29. Describe the redemptive aim toward a Muslim or a Bahá'í, and how their existing honor for Jesus becomes a door.", "textEs": "29. Describa el fin redentor hacia un musulmán o un bahá'í, y cómo su honor existente por Jesús se vuelve una puerta.", "kw_en": ["honor", "jesus", "door", "son", "greater", "love", "christ", "truth"], "kw_es": ["honra", "cristo", "puerta", "hijo", "mayor", "amor", "verdad", "respeto"], "modelEn": "The redemptive aim is not to make a Muslim or a Bahá'í think less of Jesus, but far more. Because they already honor Jesus, that honor becomes a door: we can start where they already stand and lead them further. Our message is that the One they revere as a prophet is greater than they have been told. He is not a voice awaiting a successor but the eternal Son, God's final word; He did not merely appear to die but truly gave His life and rose again; and He is not one way among many but the only way to the Father. We come not to win an argument but to introduce a Person, the real Christ, in love and with respect. We treat each one as a neighbor, with patience, prayer, and an open Bible, longing for them to see the truth about the Lord they already admire.", "modelEs": "El fin redentor no es hacer que un musulmán o un bahá'í piense menos de Jesús, sino mucho más. Porque ya honran a Jesús, ese honor se vuelve una puerta: podemos comenzar donde ya están y llevarlos más allá. Nuestro mensaje es que Aquel a quien reverencian como profeta es mayor de lo que se les ha dicho. No es una voz que espera un sucesor sino el eterno Hijo, la palabra final de Dios; no solo pareció morir sino que verdaderamente dio su vida y resucitó; y no es un camino entre muchos sino el único camino al Padre. Venimos no a ganar una discusión sino a presentar a una Persona, el Cristo real, en amor y con respeto. Tratamos a cada uno como un prójimo, con paciencia, oración, y la Biblia abierta, anhelando que vean la verdad acerca del Señor que ya admiran."}, {"textEn": `30. Summarize Unit ${UNIT}: the shared claim, the two roots tested, the verdict, and the redemptive aim.`, "textEs": `30. Resuma la Unidad ${UNIT}: la afirmación compartida, las dos raíces probadas, el veredicto, y el fin redentor.`, "kw_en": ["prophet", "christ", "final", "cross", "gospel", "supersede", "redemptive", "son"], "kw_es": ["profeta", "cristo", "final", "cruz", "evangelio", "supera", "redentor", "hijo"], "modelEn": `Unit ${UNIT} tests the claim that Islam and the Bahá'í Faith share: that God keeps sending a newer prophet who supersedes Jesus, whether Muhammad or Bahá'u'lláh. We test this at two roots. First, the person of Christ: both deny that He is the eternal Son, and Islam denies His cross, but Scripture shows His full deity and that His death and resurrection are the heart of the gospel. Second, the finality of the Son: Hebrews teaches that God's last word is not another prophet but His Son, and Jude that the faith was delivered once for all, so a later voice that changes the gospel is under Galatians' warning. The verdict is that both, for all their honor of Jesus, teach another gospel. Yet the aim is redemptive: because they already revere Jesus, we point them to the greater truth, that He is the eternal Son and the only way to the Father.`, "modelEs": `La Unidad ${UNIT} prueba la afirmación que el islam y la fe bahá'í comparten: que Dios sigue enviando un profeta más nuevo que supera a Jesús, sea Mahoma o Bahá'u'lláh. Probamos esto en dos raíces. Primera, la persona de Cristo: ambas niegan que sea el eterno Hijo, y el islam niega su cruz, pero la Escritura muestra su plena deidad y que su muerte y resurrección son el corazón del evangelio. Segunda, la finalidad del Hijo: Hebreos enseña que la palabra postrera de Dios no es otro profeta sino su Hijo, y Judas que la fe fue dada una vez para siempre, así que una voz posterior que cambia el evangelio está bajo la advertencia de Gálatas. El veredicto es que ambas, a pesar de todo su honor por Jesús, enseñan otro evangelio. Sin embargo, el fin es redentor: porque ya reverencian a Jesús, los señalamos a la verdad mayor, que Él es el eterno Hijo y el único camino al Padre.`}];
+/* CTSCults — unit 6. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "cults",
+ "unit": 6,
+ "totalUnits": 10,
+ "filePrefix": "CTSCults",
+ "prevHref": "CTSCultsUnit5.html",
+ "nextHref": "CTSCultsUnit7.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - What Is a Cult? The Biblical Test",
+   "Unit 2 - The Trinity and the Deity of Christ",
+   "Unit 3 - Jehovah's Witnesses",
+   "Unit 4 - The Latter-day Saints",
+   "Unit 5 - The Prosperity Gospel",
+   "Unit 6 - Progressive Revelation: Islam and Baha'i",
+   "Unit 7 - Eastern Religions: Hinduism and Buddhism",
+   "Unit 8 - Roman Catholicism",
+   "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism",
+   "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"
+  ],
+  "es": [
+   "Unit 1 - What Is a Cult? The Biblical Test",
+   "Unit 2 - The Trinity and the Deity of Christ",
+   "Unit 3 - Jehovah's Witnesses",
+   "Unit 4 - The Latter-day Saints",
+   "Unit 5 - The Prosperity Gospel",
+   "Unit 6 - Progressive Revelation: Islam and Baha'i",
+   "Unit 7 - Eastern Religions: Hinduism and Buddhism",
+   "Unit 8 - Roman Catholicism",
+   "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism",
+   "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "The single claim Islam and the Bahá'í Faith share, which this unit tests, is that:",
+    "es": "La única afirmación que el islam y la fe bahá'í comparten, y que esta unidad prueba, es que:"
+   },
+   "options": {
+    "en": [
+     "There is no God at all",
+     "Jesus never lived",
+     "All religions are simply false",
+     "God keeps sending a newer messenger who supersedes those before him"
+    ],
+    "es": [
+     "No hay Dios en absoluto",
+     "Jesús nunca vivió",
+     "Todas las religiones son simplemente falsas",
+     "Dios sigue enviando un mensajero más nuevo que supera a los anteriores"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Both hold that God keeps sending a newer messenger who surpasses the ones before — the claim this unit tests.",
+    "es": "Ambas sostienen que Dios sigue enviando un mensajero más nuevo que supera a los anteriores — la afirmación que esta unidad prueba."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Islam, the last and greatest prophet, the 'Seal of the Prophets,' is:",
+    "es": "En el islam, el último y más grande profeta, el 'Sello de los Profetas', es:"
+   },
+   "options": {
+    "en": [
+     "Muhammad",
+     "Abraham",
+     "Moses",
+     "Jesus"
+    ],
+    "es": [
+     "Mahoma",
+     "Abraham",
+     "Moisés",
+     "Jesús"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Islam names Muhammad the Seal of the Prophets, whose revelation is final.",
+    "es": "El islam nombra a Mahoma el Sello de los Profetas, cuya revelación es final."
+   }
+  },
+  {
+   "stem": {
+    "en": "Muslims hold the oneness of God (tawhid) so strictly that they regard as the gravest sin:",
+    "es": "Los musulmanes sostienen la unicidad de Dios (tawhid) tan estrictamente que consideran como el pecado más grave:"
+   },
+   "options": {
+    "en": [
+     "Fasting",
+     "Praying five times a day",
+     "Giving to the poor",
+     "Associating any partner with God"
+    ],
+    "es": [
+     "El ayuno",
+     "Orar cinco veces al día",
+     "Dar a los pobres",
+     "Asociar cualquier socio con Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "To associate a partner with God is, in Islam, the gravest sin — which is why they reject the deity of Christ.",
+    "es": "Asociar un socio con Dios es, en el islam, el pecado más grave — por eso rechazan la deidad de Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Concerning Jesus, Islam teaches that He is:",
+    "es": "Acerca de Jesús, el islam enseña que Él es:"
+   },
+   "options": {
+    "en": [
+     "A revered but created human prophet, not divine",
+     "The eternal Son of God",
+     "God come in the flesh",
+     "One of three gods"
+    ],
+    "es": [
+     "Un profeta humano creado y reverenciado, pero no divino",
+     "El eterno Hijo de Dios",
+     "Dios venido en carne",
+     "Uno de tres dioses"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Islam honors Jesus as a prophet and Messiah, but denies that He is the Son of God or divine.",
+    "es": "El islam honra a Jesús como profeta y Mesías, pero niega que sea el Hijo de Dios o divino."
+   }
+  },
+  {
+   "stem": {
+    "en": "Concerning the crucifixion, the Qur'an (as commonly understood) teaches that Jesus:",
+    "es": "Acerca de la crucifixión, el Corán (según se entiende comúnmente) enseña que Jesús:"
+   },
+   "options": {
+    "en": [
+     "Died and rose again",
+     "Was never in Jerusalem",
+     "Died of old age",
+     "Was not truly crucified; it only appeared so"
+    ],
+    "es": [
+     "Murió y resucitó",
+     "Nunca estuvo en Jerusalén",
+     "Murió de vejez",
+     "No fue verdaderamente crucificado; solo lo pareció"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Islam commonly denies the crucifixion, teaching it only appeared so and that God took Jesus up.",
+    "es": "El islam comúnmente niega la crucifixión, enseñando que solo lo pareció y que Dios tomó a Jesús consigo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Muslims believe the Qur'an:",
+    "es": "Los musulmanes creen que el Corán:"
+   },
+   "options": {
+    "en": [
+     "Is the final word of God that supersedes the earlier (corrupted) Scriptures",
+     "Agrees fully with the Bible as it stands",
+     "Is one holy book among equals",
+     "Was written by Jesus"
+    ],
+    "es": [
+     "Es la palabra final de Dios que supera a las Escrituras anteriores (corrompidas)",
+     "Concuerda plenamente con la Biblia tal como está",
+     "Es un libro santo entre iguales",
+     "Fue escrito por Jesús"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Islam holds the Qur'an to be God's final word, superseding the Law and Gospel it regards as corrupted.",
+    "es": "El islam sostiene que el Corán es la palabra final de Dios, superando la Ley y el Evangelio que considera corrompidos."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Bahá'í Faith arose in the nineteenth century in Persia through:",
+    "es": "La fe bahá'í surgió en el siglo diecinueve en Persia por medio de:"
+   },
+   "options": {
+    "en": [
+     "Muhammad",
+     "Joseph Smith",
+     "Krishna",
+     "The Báb and then Bahá'u'lláh"
+    ],
+    "es": [
+     "Mahoma",
+     "José Smith",
+     "Krishna",
+     "El Báb y luego Bahá'u'lláh"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Bahá'u'lláh, following his forerunner the Báb, founded the Bahá'í Faith in nineteenth-century Persia.",
+    "es": "Bahá'u'lláh, siguiendo a su precursor el Báb, fundó la fe bahá'í en la Persia del siglo diecinueve."
+   }
+  },
+  {
+   "stem": {
+    "en": "The central Bahá'í idea of 'progressive revelation' teaches that:",
+    "es": "La idea central bahá'í de la 'revelación progresiva' enseña que:"
+   },
+   "options": {
+    "en": [
+     "The Bible is God's final word",
+     "There is no God",
+     "Only Jesus reveals God",
+     "God sends a succession of 'Manifestations,' each for his own age"
+    ],
+    "es": [
+     "La Biblia es la palabra final de Dios",
+     "No hay Dios",
+     "Solo Jesús revela a Dios",
+     "Dios envía una sucesión de 'Manifestaciones', cada una para su propia edad"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Progressive revelation holds that God sends a line of Manifestations, each suited to a particular age.",
+    "es": "La revelación progresiva sostiene que Dios envía una línea de Manifestaciones, cada una adecuada a una edad particular."
+   }
+  },
+  {
+   "stem": {
+    "en": "In the Bahá'í scheme, Jesus is:",
+    "es": "En el esquema bahá'í, Jesús es:"
+   },
+   "options": {
+    "en": [
+     "One Manifestation now superseded by Bahá'u'lláh",
+     "The only Savior",
+     "Never mentioned",
+     "A merely legendary figure"
+    ],
+    "es": [
+     "Una Manifestación ahora superada por Bahá'u'lláh",
+     "El único Salvador",
+     "Nunca mencionado",
+     "Una figura meramente legendaria"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Bahá'í honors Jesus as one Manifestation, now fulfilled and surpassed by Bahá'u'lláh.",
+    "es": "El bahaísmo honra a Jesús como una Manifestación, ahora cumplida y superada por Bahá'u'lláh."
+   }
+  },
+  {
+   "stem": {
+    "en": "Both faiths honor Jesus, yet both ultimately:",
+    "es": "Ambas fes honran a Jesús, pero ambas al final:"
+   },
+   "options": {
+    "en": [
+     "Worship Him as God",
+     "Leave Him behind, surpassed by a later voice",
+     "Reject Him entirely",
+     "Call Him the final prophet"
+    ],
+    "es": [
+     "Lo adoran como Dios",
+     "Lo dejan atrás, superado por una voz posterior",
+     "Lo rechazan por completo",
+     "Lo llaman el profeta final"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "In both, Jesus is honored and then surpassed by a later messenger — the shared move this unit tests.",
+    "es": "En ambas, Jesús es honrado y luego superado por un mensajero posterior — el movimiento compartido que esta unidad prueba."
+   }
+  },
+  {
+   "stem": {
+    "en": "The first root-test asks about the person of Christ; on this both Islam and Bahá'í:",
+    "es": "La primera prueba de la raíz pregunta acerca de la persona de Cristo; en esto tanto el islam como el bahaísmo:"
+   },
+   "options": {
+    "en": [
+     "Confess His full deity",
+     "Deny that He is the eternal God the Son",
+     "Agree with the Trinity",
+     "Say He never existed"
+    ],
+    "es": [
+     "Confiesan su plena deidad",
+     "Niegan que Él sea el eterno Dios el Hijo",
+     "Concuerdan con la Trinidad",
+     "Dicen que nunca existió"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Both deny the deity of Christ — Islam outright, Bahá'í by making Him one Manifestation among many.",
+    "es": "Ambas niegan la deidad de Cristo — el islam abiertamente, el bahaísmo al hacerlo una Manifestación entre muchas."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus said in John 14:6, 'I am the way, the truth, and the life. No one comes to the Father':",
+    "es": "Jesús dijo en Juan 14:6: 'Yo soy el camino, la verdad, y la vida; nadie viene al Padre':"
+   },
+   "options": {
+    "en": [
+     "through many prophets",
+     "by good works",
+     "except through Me",
+     "after Muhammad"
+    ],
+    "es": [
+     "por medio de muchos profetas",
+     "por buenas obras",
+     "sino por mí",
+     "después de Mahoma"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Christ is the only way to the Father — not one path among many.",
+    "es": "Cristo es el único camino al Padre — no un sendero entre muchos."
+   }
+  },
+  {
+   "stem": {
+    "en": "To the claim that 'God has no son,' 1 John 2:23 answers:",
+    "es": "A la afirmación de que 'Dios no tiene hijo', 1 Juan 2:23 responde:"
+   },
+   "options": {
+    "en": [
+     "That claim is correct",
+     "'Whoever denies the Son does not have the Father either'",
+     "The Son is an angel",
+     "Sons are unimportant"
+    ],
+    "es": [
+     "Esa afirmación es correcta",
+     "'Cualquiera que niega al Hijo, tampoco tiene al Padre'",
+     "El Hijo es un ángel",
+     "Los hijos no importan"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "To deny the Son is to lose the Father also — the two cannot be separated.",
+    "es": "Negar al Hijo es perder también al Padre — los dos no pueden separarse."
+   }
+  },
+  {
+   "stem": {
+    "en": "The denial of the cross strikes at the gospel because, per 1 Corinthians 15:3-4 and Hebrews 9:22:",
+    "es": "La negación de la cruz hiere el evangelio porque, según 1 Corintios 15:3-4 y Hebreos 9:22:"
+   },
+   "options": {
+    "en": [
+     "The cross was only symbolic",
+     "Christ's death and shed blood are essential — without them there is no remission",
+     "Jesus only fainted on the cross",
+     "The resurrection did not happen"
+    ],
+    "es": [
+     "La cruz fue solo simbólica",
+     "La muerte y la sangre derramada de Cristo son esenciales — sin ellas no hay remisión",
+     "Jesús solo se desmayó en la cruz",
+     "La resurrección no ocurrió"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Without Christ's death and shed blood there is no remission of sins; the cross is the heart of the gospel.",
+    "es": "Sin la muerte y la sangre derramada de Cristo no hay remisión de pecados; la cruz es el corazón del evangelio."
+   }
+  },
+  {
+   "stem": {
+    "en": "Hebrews 1:1-3 teaches that, whereas God once spoke by the prophets, in these last days He has spoken to us by:",
+    "es": "Hebreos 1:1-3 enseña que, mientras que Dios habló antes por los profetas, en estos postreros días nos ha hablado por:"
+   },
+   "options": {
+    "en": [
+     "another, greater prophet",
+     "an angel from heaven",
+     "His Son, who is the express image of His person",
+     "a newly given book"
+    ],
+    "es": [
+     "otro profeta mayor",
+     "un ángel del cielo",
+     "su Hijo, que es la imagen misma de su sustancia",
+     "un libro recién dado"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "God's final speech is not another prophet but His Son, the express image of His person.",
+    "es": "El habla final de Dios no es otro profeta sino su Hijo, la imagen misma de su sustancia."
+   }
+  },
+  {
+   "stem": {
+    "en": "The point of Hebrews 1 against the shared claim is that:",
+    "es": "El punto de Hebreos 1 contra la afirmación compartida es que:"
+   },
+   "options": {
+    "en": [
+     "more prophets are always coming",
+     "the Son is God's final word, for none is greater than God Himself",
+     "Jesus was only the first prophet",
+     "revelation never ends"
+    ],
+    "es": [
+     "siempre vienen más profetas",
+     "el Hijo es la palabra final de Dios, pues ninguno es mayor que Dios mismo",
+     "Jesús fue solo el primer profeta",
+     "la revelación nunca termina"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Because the Son is God Himself, no greater messenger can follow — He is the final word.",
+    "es": "Porque el Hijo es Dios mismo, ningún mensajero mayor puede seguir — Él es la palabra final."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jude 3 calls us to contend for 'the faith which was once for all delivered,' meaning the gospel:",
+    "es": "Judas 3 nos llama a contender por 'la fe que ha sido una vez dada', lo que significa que el evangelio:"
+   },
+   "options": {
+    "en": [
+     "changes with each age",
+     "is revised by new prophets",
+     "is fixed, not superseded by later voices",
+     "was lost long ago"
+    ],
+    "es": [
+     "cambia con cada edad",
+     "es revisado por nuevos profetas",
+     "es fijo, no superado por voces posteriores",
+     "se perdió hace mucho"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The faith was delivered once for all; later voices do not revise or supersede it.",
+    "es": "La fe fue dada una vez para siempre; las voces posteriores no la revisan ni la superan."
+   }
+  },
+  {
+   "stem": {
+    "en": "That Muhammad claimed to receive the Qur'an from an angel gives special force to which warning?",
+    "es": "Que Mahoma afirmara recibir el Corán de un ángel da fuerza especial a ¿cuál advertencia?"
+   },
+   "options": {
+    "en": [
+     "Galatians 1:8 — even an angel preaching another gospel is accursed",
+     "A blessing pronounced on angels",
+     "A command to fast in Ramadan",
+     "None at all"
+    ],
+    "es": [
+     "Gálatas 1:8 — aun un ángel que predique otro evangelio sea anatema",
+     "Una bendición pronunciada sobre los ángeles",
+     "Un mandato de ayunar en Ramadán",
+     "Ninguna"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Galatians 1:8 warns that even an angel preaching another gospel is accursed — pointed here.",
+    "es": "Gálatas 1:8 advierte que aun un ángel que predique otro evangelio sea anatema — muy al caso aquí."
+   }
+  },
+  {
+   "stem": {
+    "en": "Both faiths are 'another gospel' because each gives another Jesus, sets a later book above Scripture, and offers salvation by:",
+    "es": "Ambas fes son 'otro evangelio' porque cada una da otro Jesús, coloca un libro posterior por encima de la Escritura, y ofrece salvación por:"
+   },
+   "options": {
+    "en": [
+     "grace alone",
+     "faith alone in Christ",
+     "submission and works rather than free grace in the crucified and risen Christ",
+     "nothing at all"
+    ],
+    "es": [
+     "gracia sola",
+     "la fe sola en Cristo",
+     "sumisión y obras en lugar de la gracia gratuita en el Cristo crucificado y resucitado",
+     "nada en absoluto"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Another Jesus, an added authority, and salvation by works instead of grace — a different gospel.",
+    "es": "Otro Jesús, una autoridad añadida, y salvación por obras en lugar de gracia — otro evangelio."
+   }
+  },
+  {
+   "stem": {
+    "en": "Our redemptive aim toward Muslims and Bahá'ís is to show them that the Jesus they revere is:",
+    "es": "Nuestro fin redentor hacia los musulmanes y los bahá'ís es mostrarles que el Jesús que reverencian es:"
+   },
+   "options": {
+    "en": [
+     "less than they had thought",
+     "merely a prophet after all",
+     "the eternal Son, God's final and complete Word, the only way to the Father",
+     "unimportant"
+    ],
+    "es": [
+     "menos de lo que habían pensado",
+     "meramente un profeta después de todo",
+     "el eterno Hijo, la Palabra final y completa de Dios, el único camino al Padre",
+     "sin importancia"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "We show them the One they revere is far greater — the eternal Son and only way to the Father.",
+    "es": "Les mostramos que Aquel a quien reverencian es mucho mayor — el eterno Hijo y único camino al Padre."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "State the single claim that Islam and the Bahá'í Faith share, and explain why this unit tests it.",
+    "es": "Exponga la única afirmación que el islam y la fe bahá'í comparten, y explique por qué esta unidad la prueba."
+   },
+   "keywords": {
+    "en": [
+     "newer",
+     "prophet",
+     "supersede",
+     "muhammad",
+     "manifestation",
+     "christ",
+     "final",
+     "claim"
+    ],
+    "es": [
+     "nuevo",
+     "profeta",
+     "supera",
+     "mahoma",
+     "manifestaci",
+     "cristo",
+     "postrer",
+     "afirma"
+    ]
+   },
+   "model": {
+    "en": "Islam and the Bahá'í Faith share the claim that God keeps sending a newer messenger who supersedes those before him. In Islam, Muhammad is the last and greatest prophet, the Seal of the Prophets, whose revelation is final. In the Bahá'í Faith, a succession of Manifestations culminates for now in Bahá'u'lláh, the newest. In both, Jesus is honored and then surpassed by a later voice. This unit tests that claim because everything turns on one question: is Christ one prophet in a continuing series, or is He God's final and complete Word? If the Son is God's last word, then no newer prophet or manifestation can supersede Him.",
+    "es": "El islam y la fe bahá'í comparten la afirmación de que Dios sigue enviando un mensajero más nuevo que supera a los anteriores. En el islam, Mahoma es el último y más grande profeta, el Sello de los Profetas, cuya revelación es final. En la fe bahá'í, una sucesión de Manifestaciones culmina por ahora en Bahá'u'lláh, el más nuevo. En ambas, Jesús es honrado y luego superado por una voz posterior. Esta unidad prueba esa afirmación porque todo gira en torno a una pregunta: ¿es Cristo un profeta en una serie continua, o es la Palabra final y completa de Dios? Si el Hijo es la palabra postrera de Dios, entonces ningún profeta o manifestación más nuevo puede superarlo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Fairly summarize what Muslims teach about Jesus, the Qur'an, and how a person is saved.",
+    "es": "Resuma justamente lo que los musulmanes enseñan acerca de Jesús, el Corán, y cómo es salva una persona."
+   },
+   "keywords": {
+    "en": [
+     "jesus",
+     "prophet",
+     "son",
+     "crucified",
+     "quran",
+     "supersede",
+     "submission",
+     "works"
+    ],
+    "es": [
+     "profeta",
+     "hijo",
+     "cristo",
+     "pilares",
+     "supera",
+     "sumisi",
+     "obras",
+     "cruz"
+    ]
+   },
+   "model": {
+    "en": "Muslims honor Jesus as a great prophet, the Messiah, born of a virgin and a worker of miracles, but they deny that He is the Son of God or divine, and they deny that He was truly crucified, teaching that it only appeared so. They believe the Qur'an is the final, perfect word of God, given to Muhammad, which supersedes the earlier Scriptures they regard as corrupted. Salvation is by submission to God and by the works of faith, especially the Five Pillars, with a person's deeds weighed at the Day of Judgment and no certainty of the outcome. In short, they revere Jesus as a prophet while denying His deity, His cross, and salvation by grace.",
+    "es": "Los musulmanes honran a Jesús como un gran profeta, el Mesías, nacido de una virgen y obrador de milagros, pero niegan que sea el Hijo de Dios o divino, y niegan que fuera verdaderamente crucificado, enseñando que solo lo pareció. Creen que el Corán es la palabra final y perfecta de Dios, dada a Mahoma, que supera a las Escrituras anteriores que consideran corrompidas. La salvación es por sumisión a Dios y por las obras de la fe, especialmente los Cinco Pilares, con las obras de una persona pesadas en el Día del Juicio y sin certeza del resultado. En resumen, reverencian a Jesús como profeta mientras niegan su deidad, su cruz, y la salvación por gracia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Fairly summarize what Bahá'ís teach about progressive revelation, the Manifestations, and Jesus.",
+    "es": "Resuma justamente lo que los bahá'ís enseñan acerca de la revelación progresiva, las Manifestaciones, y Jesús."
+   },
+   "keywords": {
+    "en": [
+     "progressive",
+     "revelation",
+     "manifestation",
+     "christ",
+     "bahaullah",
+     "supersede",
+     "age",
+     "unity"
+    ],
+    "es": [
+     "progresiva",
+     "revelaci",
+     "manifestaci",
+     "cristo",
+     "supera",
+     "edad",
+     "unidad",
+     "religiones"
+    ]
+   },
+   "model": {
+    "en": "Bahá'ís teach progressive revelation: that God, unknowable in Himself, sends a succession of Manifestations, each bringing truth suited to his own age, so that the world's religions are at heart one unfolding faith. These Manifestations include Abraham, Moses, Krishna, Buddha, Zoroaster, Jesus, Muhammad, and finally Bahá'u'lláh, the one for today. Jesus, in this scheme, is one Manifestation among many, genuinely from God but for His time, now fulfilled and superseded by Bahá'u'lláh, whose writings are the newest scripture. They emphasize the unity of God, of religion, and of humanity, along with world peace and the harmony of science and religion. Here again Jesus is honored, and then set aside for a newer voice.",
+    "es": "Los bahá'ís enseñan la revelación progresiva: que Dios, incognoscible en sí mismo, envía una sucesión de Manifestaciones, cada una trayendo verdad adecuada a su propia edad, de modo que las religiones del mundo son en el fondo una sola fe que se despliega. Estas Manifestaciones incluyen a Abraham, Moisés, Krishna, Buda, Zoroastro, Jesús, Mahoma, y finalmente Bahá'u'lláh, el que es para hoy. Jesús, en este esquema, es una Manifestación entre muchas, genuinamente de Dios pero para su tiempo, ahora cumplida y superada por Bahá'u'lláh, cuyos escritos son la escritura más nueva. Enfatizan la unidad de Dios, de la religión, y de la humanidad, junto con la paz mundial y la armonía de la ciencia y la religión. Aquí de nuevo Jesús es honrado, y luego apartado por una voz más nueva."
+   }
+  },
+  {
+   "prompt": {
+    "en": "From Scripture, show that Jesus is the eternal God the Son, not merely a prophet or one manifestation among many.",
+    "es": "Desde la Escritura, muestre que Jesús es el eterno Dios el Hijo, no meramente un profeta ni una manifestación entre muchas."
+   },
+   "keywords": {
+    "en": [
+     "god",
+     "son",
+     "word",
+     "deity",
+     "fullness",
+     "way",
+     "eternal",
+     "christ"
+    ],
+    "es": [
+     "dios",
+     "hijo",
+     "verbo",
+     "deidad",
+     "plenitud",
+     "camino",
+     "eterno",
+     "cristo"
+    ]
+   },
+   "model": {
+    "en": "Scripture teaches that Jesus is the eternal God the Son, not merely a prophet. John says the Word was God, and that in Christ dwells all the fullness of the Godhead bodily, so He is not one manifestation among many but God Himself. He is eternal, for before Abraham was, He said, I AM. And He is not one way among many: He said, I am the way, the truth, and the life; no one comes to the Father except through Me. To make Jesus a mere prophet, or one Manifestation now superseded, is to deny what Scripture plainly says about His deity. The Son shares the very being of God, and therefore cannot be surpassed by any later messenger.",
+    "es": "La Escritura enseña que Jesús es el eterno Dios el Hijo, no meramente un profeta. Juan dice que el Verbo era Dios, y que en Cristo habita corporalmente toda la plenitud de la Deidad, así que no es una manifestación entre muchas sino Dios mismo. Es eterno, pues antes que Abraham fuese, Él dijo: yo soy. Y no es un camino entre muchos: dijo, yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí. Hacer a Jesús un mero profeta, o una Manifestación ahora superada, es negar lo que la Escritura dice claramente acerca de su deidad. El Hijo comparte el ser mismo de Dios, y por tanto no puede ser superado por ningún mensajero posterior."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why the denial of the cross (in Islam) strikes at the very heart of the gospel.",
+    "es": "Explique por qué la negación de la cruz (en el islam) hiere el corazón mismo del evangelio."
+   },
+   "keywords": {
+    "en": [
+     "cross",
+     "death",
+     "crucified",
+     "blood",
+     "remission",
+     "gospel",
+     "sin",
+     "risen"
+    ],
+    "es": [
+     "cruz",
+     "muerte",
+     "sangre",
+     "remisi",
+     "evangelio",
+     "pecado",
+     "resucit",
+     "salva"
+    ]
+   },
+   "model": {
+    "en": "The denial of the cross strikes at the very heart of the gospel because the death of Christ is not an accident to be explained away but the ground of our salvation. Paul says that Christ died for our sins according to the Scriptures and rose again the third day, and this is the gospel itself. Hebrews says that without the shedding of blood there is no remission of sin, so if Jesus did not die, there is no sacrifice and no forgiveness. Islam teaches that Jesus was not truly crucified but only appeared to be, and God took Him up. But a Christ who did not die for sinners is a Christ who cannot save them. Take away the cross and the risen Christ, and nothing remains by which sin can be remitted.",
+    "es": "La negación de la cruz hiere el corazón mismo del evangelio porque la muerte de Cristo no es un accidente que explicar sino el fundamento de nuestra salvación. Pablo dice que Cristo murió por nuestros pecados conforme a las Escrituras y resucitó al tercer día, y esto es el evangelio mismo. Hebreos dice que sin derramamiento de sangre no hay remisión del pecado, así que si Jesús no murió, no hay sacrificio ni perdón. El islam enseña que Jesús no fue verdaderamente crucificado sino que solo lo pareció, y Dios lo tomó consigo. Pero un Cristo que no murió por los pecadores es un Cristo que no puede salvarlos. Quite la cruz y el Cristo resucitado, y no queda nada por lo cual el pecado pueda ser remitido."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using Hebrews 1:1-3, explain why Christ is God's final word and not one prophet in a continuing series.",
+    "es": "Usando Hebreos 1:1-3, explique por qué Cristo es la palabra final de Dios y no un profeta en una serie continua."
+   },
+   "keywords": {
+    "en": [
+     "hebrews",
+     "prophet",
+     "son",
+     "final",
+     "god",
+     "image",
+     "last",
+     "spoken"
+    ],
+    "es": [
+     "hebreos",
+     "profeta",
+     "hijo",
+     "final",
+     "dios",
+     "imagen",
+     "postrer",
+     "hablado"
+    ]
+   },
+   "model": {
+    "en": "Hebrews teaches that in time past God spoke to the fathers by the prophets in many pieces and in various ways, but in these last days He has spoken to us by His Son, who is the brightness of His glory and the express image of His person. The prophets came first and partially; but the final word is not another prophet, it is the Son, who is God Himself. This is why Christ cannot be one messenger in a continuing series: after God has spoken by His own Son, there is no greater messenger to come, for none is greater than God. So the claim that a later prophet supersedes Jesus fails, because the Son is the last and highest word, being the very image of God.",
+    "es": "Hebreos enseña que en otro tiempo Dios habló a los padres por los profetas en muchas partes y de muchas maneras, pero en estos postreros días nos ha hablado por su Hijo, que es el resplandor de su gloria y la imagen misma de su sustancia. Los profetas vinieron primero y en parte; pero la palabra final no es otro profeta, es el Hijo, que es Dios mismo. Por eso Cristo no puede ser un mensajero en una serie continua: después que Dios ha hablado por su propio Hijo, no hay mensajero mayor por venir, pues ninguno es mayor que Dios. Así que la afirmación de que un profeta posterior supera a Jesús falla, porque el Hijo es la palabra postrera y más alta, siendo la imagen misma de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using Jude 3 and Galatians 1:8, explain why a later prophet who changes the gospel is under God's warning, and note the force of 'even an angel.'",
+    "es": "Usando Judas 3 y Gálatas 1:8, explique por qué un profeta posterior que cambia el evangelio está bajo la advertencia de Dios, y note la fuerza de 'aun un ángel'."
+   },
+   "keywords": {
+    "en": [
+     "jude",
+     "faith",
+     "delivered",
+     "gospel",
+     "angel",
+     "accursed",
+     "another",
+     "change"
+    ],
+    "es": [
+     "fe",
+     "dada",
+     "evangelio",
+     "anatema",
+     "otro",
+     "cambia",
+     "profeta",
+     "santos"
+    ]
+   },
+   "model": {
+    "en": "Jude commands us to contend earnestly for the faith which was once for all delivered to the saints. The word once for all means the gospel is fixed and complete, not revised by each new age or superseded by a later prophet. So when Islam or the Bahá'í Faith brings a newer messenger who changes the gospel of Christ, it falls under Paul's warning in Galatians: even if an angel from heaven preaches another gospel, let him be accursed. The force of even an angel is sharp here, because Muhammad claimed to receive the Qur'an from the angel Gabriel. Yet no angel, and no later prophet, however sincere, may set aside the once-delivered gospel. To change it is to fall under this solemn warning.",
+    "es": "Judas nos manda contender ardientemente por la fe que ha sido una vez dada a los santos. La palabra una vez significa que el evangelio es fijo y completo, no revisado con cada nueva edad ni superado por un profeta posterior. Así que cuando el islam o la fe bahá'í trae un mensajero más nuevo que cambia el evangelio de Cristo, cae bajo la advertencia de Pablo en Gálatas: si un ángel del cielo predica otro evangelio, sea anatema. La fuerza de aun un ángel es aguda aquí, porque Mahoma afirmó recibir el Corán del ángel Gabriel. Sin embargo, ningún ángel, y ningún profeta posterior, por sincero que sea, puede desechar el evangelio una vez dado. Cambiarlo es caer bajo esta advertencia solemne."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why, despite honoring Jesus, both Islam and the Bahá'í Faith teach 'another gospel.'",
+    "es": "Explique por qué, a pesar de honrar a Jesús, tanto el islam como la fe bahá'í enseñan 'otro evangelio'."
+   },
+   "keywords": {
+    "en": [
+     "another",
+     "gospel",
+     "christ",
+     "authority",
+     "scripture",
+     "works",
+     "grace",
+     "root"
+    ],
+    "es": [
+     "otro",
+     "evangelio",
+     "cristo",
+     "autoridad",
+     "escritura",
+     "obras",
+     "gracia",
+     "fundamento"
+    ]
+   },
+   "model": {
+    "en": "Despite honoring Jesus, both faiths teach another gospel because each changes the root at the points that matter most. Each gives us another Christ: a prophet or a manifestation rather than the eternal incarnate Son. Each sets a later authority above the Scriptures: the Qur'an, or the writings of Bahá'u'lláh. And each offers salvation by submission and works rather than the free grace of God in the crucified and risen Christ. The reverence of the Muslim and the gentleness of the Bahá'í are real, but neither can change the root. A message that surpasses the Son, denies or ignores His cross, and adds a newer prophet is, in Paul's words, a different gospel, which is not really another but a departure from the true one.",
+    "es": "A pesar de honrar a Jesús, ambas fes enseñan otro evangelio porque cada una cambia el fundamento en los puntos que más importan. Cada una nos da otro Cristo: un profeta o una manifestación en lugar del eterno Hijo encarnado. Cada una coloca una autoridad posterior por encima de las Escrituras: el Corán, o los escritos de Bahá'u'lláh. Y cada una ofrece salvación por sumisión y obras en lugar de la gracia gratuita de Dios en el Cristo crucificado y resucitado. La reverencia del musulmán y la mansedumbre del bahá'í son reales, pero ninguna puede cambiar el fundamento. Un mensaje que supera al Hijo, niega o ignora su cruz, y añade un profeta más nuevo es, en palabras de Pablo, otro evangelio, que no es realmente otro sino una desviación del verdadero."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the redemptive aim toward a Muslim or a Bahá'í, and how their existing honor for Jesus becomes a door.",
+    "es": "Describa el fin redentor hacia un musulmán o un bahá'í, y cómo su honor existente por Jesús se vuelve una puerta."
+   },
+   "keywords": {
+    "en": [
+     "honor",
+     "jesus",
+     "door",
+     "son",
+     "greater",
+     "love",
+     "christ",
+     "truth"
+    ],
+    "es": [
+     "honra",
+     "cristo",
+     "puerta",
+     "hijo",
+     "mayor",
+     "amor",
+     "verdad",
+     "respeto"
+    ]
+   },
+   "model": {
+    "en": "The redemptive aim is not to make a Muslim or a Bahá'í think less of Jesus, but far more. Because they already honor Jesus, that honor becomes a door: we can start where they already stand and lead them further. Our message is that the One they revere as a prophet is greater than they have been told. He is not a voice awaiting a successor but the eternal Son, God's final word; He did not merely appear to die but truly gave His life and rose again; and He is not one way among many but the only way to the Father. We come not to win an argument but to introduce a Person, the real Christ, in love and with respect. We treat each one as a neighbor, with patience, prayer, and an open Bible, longing for them to see the truth about the Lord they already admire.",
+    "es": "El fin redentor no es hacer que un musulmán o un bahá'í piense menos de Jesús, sino mucho más. Porque ya honran a Jesús, ese honor se vuelve una puerta: podemos comenzar donde ya están y llevarlos más allá. Nuestro mensaje es que Aquel a quien reverencian como profeta es mayor de lo que se les ha dicho. No es una voz que espera un sucesor sino el eterno Hijo, la palabra final de Dios; no solo pareció morir sino que verdaderamente dio su vida y resucitó; y no es un camino entre muchos sino el único camino al Padre. Venimos no a ganar una discusión sino a presentar a una Persona, el Cristo real, en amor y con respeto. Tratamos a cada uno como un prójimo, con paciencia, oración, y la Biblia abierta, anhelando que vean la verdad acerca del Señor que ya admiran."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize Unit 6: the shared claim, the two roots tested, the verdict, and the redemptive aim.",
+    "es": "Resuma la Unidad 6: la afirmación compartida, las dos raíces probadas, el veredicto, y el fin redentor."
+   },
+   "keywords": {
+    "en": [
+     "prophet",
+     "christ",
+     "final",
+     "cross",
+     "gospel",
+     "supersede",
+     "redemptive",
+     "son"
+    ],
+    "es": [
+     "profeta",
+     "cristo",
+     "final",
+     "cruz",
+     "evangelio",
+     "supera",
+     "redentor",
+     "hijo"
+    ]
+   },
+   "model": {
+    "en": "Unit 6 tests the claim that Islam and the Bahá'í Faith share: that God keeps sending a newer prophet who supersedes Jesus, whether Muhammad or Bahá'u'lláh. We test this at two roots. First, the person of Christ: both deny that He is the eternal Son, and Islam denies His cross, but Scripture shows His full deity and that His death and resurrection are the heart of the gospel. Second, the finality of the Son: Hebrews teaches that God's last word is not another prophet but His Son, and Jude that the faith was delivered once for all, so a later voice that changes the gospel is under Galatians' warning. The verdict is that both, for all their honor of Jesus, teach another gospel. Yet the aim is redemptive: because they already revere Jesus, we point them to the greater truth, that He is the eternal Son and the only way to the Father.",
+    "es": "La Unidad 6 prueba la afirmación que el islam y la fe bahá'í comparten: que Dios sigue enviando un profeta más nuevo que supera a Jesús, sea Mahoma o Bahá'u'lláh. Probamos esto en dos raíces. Primera, la persona de Cristo: ambas niegan que sea el eterno Hijo, y el islam niega su cruz, pero la Escritura muestra su plena deidad y que su muerte y resurrección son el corazón del evangelio. Segunda, la finalidad del Hijo: Hebreos enseña que la palabra postrera de Dios no es otro profeta sino su Hijo, y Judas que la fe fue dada una vez para siempre, así que una voz posterior que cambia el evangelio está bajo la advertencia de Gálatas. El veredicto es que ambas, a pesar de todo su honor por Jesús, enseñan otro evangelio. Sin embargo, el fin es redentor: porque ya reverencian a Jesús, los señalamos a la verdad mayor, que Él es el eterno Hijo y el único camino al Padre."
+   }
+  }
+ ]
+};

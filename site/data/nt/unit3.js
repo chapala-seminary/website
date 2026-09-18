@@ -1,123 +1,781 @@
-/* CTSNT - unit 3: per-unit configuration and content. */
-
-const UNIT = 3;
-
-const NEXT_URL = 'CTSNTUnit4.html';
-
-const PREV_URL = 'CTSNTUnit2.html';
-
-const mcQuestions = [
-    { textEn: "1. Who wrote the Gospel of Mark?", textEs: "1. ¿Quién escribió el Evangelio de Marcos?",
-      optionsEn: ["The Apostle Peter", "Matthew", "John Mark", "Luke the physician"],
-      optionsEs: ["El apóstol Pedro", "Mateo", "Juan Marcos", "Lucas el médico"],
-      explanationEn: "Mark was John Mark, the young man who fled Gethsemane and later wrote the second Gospel from Peter's recollections.", explanationEs: "Marcos era Juan Marcos, el joven que huyó de Getsemaní y luego escribió el segundo Evangelio a partir de los recuerdos de Pedro.", correct: 2 },
-    { textEn: "2. The young man who fled naked in Mark 14:51-52 is traditionally identified as:", textEs: "2. El joven que huyó desnudo en Marcos 14:51-52 se identifica tradicionalmente como:",
-      optionsEn: ["John Mark himself", "John the Baptist", "Lazarus", "Peter"],
-      optionsEs: ["Juan Marcos mismo", "Juan el Bautista", "Lázaro", "Pedro"],
-      explanationEn: "The naked young man of Mark 14:51–52 is traditionally John Mark himself, signing his Gospel with a glimpse of his own back.", explanationEs: "El joven desnudo de Marcos 14:51–52 es tradicionalmente Juan Marcos mismo, firmando su Evangelio con un vistazo de su propia espalda.", correct: 0 },
-    { textEn: "3. Where did John Mark desert Paul and Barnabas?", textEs: "3. ¿Dónde desertó Juan Marcos de Pablo y Bernabé?",
-      optionsEn: ["Antioch", "Cyprus", "Lystra", "Pamphylia"],
-      optionsEs: ["Antioquía", "Chipre", "Listra", "Panfilia"],
-      explanationEn: "John Mark deserted Paul and Barnabas at Pamphylia on the first missionary journey (Acts 13:13).", explanationEs: "Juan Marcos desertó de Pablo y Bernabé en Panfilia en el primer viaje misionero (Hechos 13:13).", correct: 3 },
-    { textEn: "4. In Paul's final letter (2 Timothy 4:11), Paul calls Mark:", textEs: "4. En la última carta de Pablo (2 Timoteo 4:11), Pablo llama a Marcos:",
-      optionsEn: ["A coward", "Useful for ministry", "His son in the faith", "His apostle"],
-      optionsEs: ["Un cobarde", "Útil para el ministerio", "Su hijo en la fe", "Su apóstol"],
-      explanationEn: "In his last letter Paul asks for Mark, calling him useful for ministry (2 Timothy 4:11) — the deserter restored.", explanationEs: "En su última carta Pablo pide a Marcos, llamándolo útil para el ministerio (2 Timoteo 4:11) — el desertor restaurado.", correct: 1 },
-    { textEn: "5. The early church identified Mark as:", textEs: "5. La iglesia primitiva identificó a Marcos como:",
-      optionsEn: ["Interpreter of Peter", "Brother of Peter", "Disciple of John", "Cousin of Paul"],
-      optionsEs: ["Intérprete de Pedro", "Hermano de Pedro", "Discípulo de Juan", "Primo de Pablo"],
-      explanationEn: "The early church identified Mark as the interpreter of Peter, recording accurately what Peter remembered of the Lord.", explanationEs: "La iglesia primitiva identificó a Marcos como el intérprete de Pedro, anotando con exactitud lo que Pedro recordaba del Señor.", correct: 0 },
-    { textEn: "6. The key verse of Mark's Gospel is found in:", textEs: "6. El versículo clave del Evangelio de Marcos se encuentra en:",
-      optionsEn: ["Mark 1:1", "Mark 16:15", "Mark 8:29", "Mark 10:45"],
-      optionsEs: ["Marcos 1:1", "Marcos 16:15", "Marcos 8:29", "Marcos 10:45"],
-      explanationEn: "Mark's key verse is 10:45 — the Son of Man came to serve and give His life a ransom for many.", explanationEs: "El versículo clave de Marcos es 10:45 — el Hijo del Hombre vino a servir y dar Su vida en rescate por muchos.", correct: 3 },
-    { textEn: "7. According to Mark 10:45, the Son of Man came to:", textEs: "7. Según Marcos 10:45, el Hijo del Hombre vino a:",
-      optionsEn: ["Restore the temple", "Conquer Rome", "Serve and give His life as a ransom", "Found the Church"],
-      optionsEs: ["Restaurar el templo", "Conquistar Roma", "Servir y dar Su vida en rescate", "Fundar la Iglesia"],
-      explanationEn: "Mark 10:45 says the Son of Man came not to be served but to serve and to give His life as a ransom.", explanationEs: "Marcos 10:45 dice que el Hijo del Hombre vino no para ser servido sino para servir y dar Su vida en rescate.", correct: 2 },
-    { textEn: "8. Mark's favorite Greek word, used 42 times, is:", textEs: "8. La palabra griega favorita de Marcos, usada 42 veces, es:",
-      optionsEn: ["Logos (word)", "Euthus (immediately)", "Agape (love)", "Pistis (faith)"],
-      optionsEs: ["Logos (palabra)", "Euthus (inmediatamente)", "Ágape (amor)", "Pistis (fe)"],
-      explanationEn: "Mark's favorite word is euthus, 'immediately,' used forty-two times to drive his breathless, fast-moving Gospel.", explanationEs: "La palabra favorita de Marcos es euthus, 'inmediatamente', usada cuarenta y dos veces para impulsar su Evangelio entrecortado y veloz.", correct: 1 },
-    { textEn: "9. Mark was most likely written for what audience?", textEs: "9. Marcos fue escrito muy probablemente para qué audiencia?",
-      optionsEn: ["Roman Gentiles", "Hebrew priests", "Greek philosophers", "Egyptian scholars"],
-      optionsEs: ["Gentiles romanos", "Sacerdotes hebreos", "Filósofos griegos", "Eruditos egipcios"],
-      explanationEn: "Mark was written for Roman Gentiles, who wanted action, miracle, and a cross rather than genealogies or philosophy.", explanationEs: "Marcos fue escrito para gentiles romanos, que querían acción, milagro y una cruz en vez de genealogías o filosofía.", correct: 0 },
-    { textEn: "10. Mark's Gospel divides into two halves at which event?", textEs: "10. El Evangelio de Marcos se divide en dos mitades en cuál evento?",
-      optionsEn: ["The baptism of Jesus", "The Last Supper", "The Transfiguration", "Peter's confession at Caesarea Philippi"],
-      optionsEs: ["El bautismo de Jesús", "La Última Cena", "La Transfiguración", "La confesión de Pedro en Cesarea de Filipo"],
-      explanationEn: "Mark divides in half at Peter's confession at Caesarea Philippi (8:29): first 'Who is He?', then 'Why did He come?'", explanationEs: "Marcos se divide por la mitad en la confesión de Pedro en Cesarea de Filipo (8:29): primero '¿Quién es Él?', luego '¿Por qué vino?'", correct: 3 },
-    { textEn: "11. The three threads running through Mark (per this unit) are:", textEs: "11. Los tres hilos que atraviesan Marcos (según esta unidad) son:",
-      optionsEn: ["Love, Joy, Peace", "Faith, Servanthood, Priority", "Word, Spirit, Power", "Law, Grace, Glory"],
-      optionsEs: ["Amor, Gozo, Paz", "Fe, Servicio, Prioridad", "Palabra, Espíritu, Poder", "Ley, Gracia, Gloria"],
-      explanationEn: "The three threads running through Mark are Faith, Servanthood, and Priority — the marks of the Servant and His disciples.", explanationEs: "Los tres hilos que atraviesan Marcos son Fe, Servicio y Prioridad — las marcas del Siervo y de Sus discípulos.", correct: 1 },
-    { textEn: "12. The Roman centurion at the cross confessed:", textEs: "12. El centurión romano en la cruz confesó:",
-      optionsEn: ["Blessed is He who comes", "Lord, have mercy", "Truly this Man was the Son of God", "It is finished"],
-      optionsEs: ["Bendito el que viene", "Señor, ten misericordia", "Verdaderamente este hombre era Hijo de Dios", "Consumado es"],
-      explanationEn: "At the cross the Roman centurion confessed 'Truly this Man was the Son of God,' the climax of Mark's Gospel.", explanationEs: "En la cruz el centurión romano confesó 'Verdaderamente este hombre era Hijo de Dios', el clímax del Evangelio de Marcos.", correct: 2 },
-    { textEn: "13. The rich young ruler in Mark 10 lacked:", textEs: "13. Al joven rico de Marcos 10 le faltaba:",
-      optionsEn: ["One thing", "Wealth", "Knowledge of the Law", "Family"],
-      optionsEs: ["Una cosa", "Riqueza", "Conocimiento de la Ley", "Familia"],
-      explanationEn: "The rich young ruler lacked one thing; the Lord looked on him and loved him even as he turned away (Mark 10).", explanationEs: "Al joven rico le faltaba una cosa; el Señor lo miró y lo amó aun cuando se apartó (Marcos 10).", correct: 0 },
-    { textEn: "14. If Matthew gives the Servant-King, Mark gives:", textEs: "14. Si Mateo da al Siervo-Rey, Marcos da:",
-      optionsEn: ["The Servant-Man", "Simply the Servant", "The Servant-God", "The Servant-Priest"],
-      optionsEs: ["Al Siervo-Hombre", "Sencillamente al Siervo", "Al Siervo-Dios", "Al Siervo-Sacerdote"],
-      explanationEn: "Where Matthew gives the Servant-King, Mark gives simply the Servant who works and dies.", explanationEs: "Donde Mateo da al Siervo-Rey, Marcos da sencillamente al Siervo que trabaja y muere.", correct: 1 },
-    { textEn: "15. Mark's cousin, who took him to Cyprus, was:", textEs: "15. El primo de Marcos, que lo llevó a Chipre, fue:",
-      optionsEn: ["Peter", "Silas", "Timothy", "Barnabas"],
-      optionsEs: ["Pedro", "Silas", "Timoteo", "Bernabé"],
-      explanationEn: "Mark's cousin Barnabas took him to Cyprus after the split with Paul (Acts 15:36–41).", explanationEs: "El primo de Marcos, Bernabé, lo llevó a Chipre tras la separación con Pablo (Hechos 15:36–41).", correct: 3 },
-    { textEn: "16. Mark was probably written from which city?", textEs: "16. Marcos fue probablemente escrito desde cuál ciudad?",
-      optionsEn: ["Antioch", "Jerusalem", "Rome", "Alexandria"],
-      optionsEs: ["Antioquía", "Jerusalén", "Roma", "Alejandría"],
-      explanationEn: "Mark was written from Rome in the early sixties, for the action-minded Roman world.", explanationEs: "Marcos fue escrito desde Roma a comienzos de los años sesenta, para el mundo romano de mente activa.", correct: 2 },
-    { textEn: "17. The widow in Mark 12 gave:", textEs: "17. La viuda en Marcos 12 dio:",
-      optionsEn: ["Five shekels", "Two mites", "A tenth of her income", "A jar of perfume"],
-      optionsEs: ["Cinco siclos", "Dos blancas", "El diezmo de sus ingresos", "Un vaso de perfume"],
-      explanationEn: "The widow in Mark 12 gave two mites — everything she had — because the Lord was her one priority.", explanationEs: "La viuda en Marcos 12 dio dos blancas — todo lo que tenía — porque el Señor era su única prioridad.", correct: 1 },
-    { textEn: "18. In Mark 8:34, following Jesus requires:", textEs: "18. En Marcos 8:34, seguir a Jesús requiere:",
-      optionsEn: ["Self-denial and taking up the cross", "Knowledge of Scripture", "Wealth to share", "Joining the disciples"],
-      optionsEs: ["Negarse a sí mismo y tomar la cruz", "Conocimiento de la Escritura", "Riqueza para compartir", "Unirse a los discípulos"],
-      explanationEn: "Mark 8:34 says following Jesus means self-denial and taking up the cross — the action of choice and priority.", explanationEs: "Marcos 8:34 dice que seguir a Jesús significa negarse a sí mismo y tomar la cruz — la acción de elección y prioridad.", correct: 0 },
-    { textEn: "19. The blind man who shouted at Jesus near Jericho was:", textEs: "19. El ciego que clamó a Jesús cerca de Jericó fue:",
-      optionsEn: ["Lazarus", "Zacchaeus", "Malchus", "Bartimaeus"],
-      optionsEs: ["Lázaro", "Zaqueo", "Malco", "Bartimeo"],
-      explanationEn: "Blind Bartimaeus shouted to Jesus near Jericho and would not be silenced — action-faith in Mark.", explanationEs: "El ciego Bartimeo clamó a Jesús cerca de Jericó y no se dejó callar — la fe-acción en Marcos.", correct: 3 },
-    { textEn: "20. The centurion's confession parallels and completes:", textEs: "20. La confesión del centurión es paralela y completa:",
-      optionsEn: ["The Sermon on the Mount", "The Lord's Prayer", "Peter's confession at Caesarea Philippi", "The Beatitudes"],
-      optionsEs: ["El Sermón del Monte", "El Padre Nuestro", "La confesión de Pedro en Cesarea de Filipo", "Las Bienaventuranzas"],
-      explanationEn: "The centurion's Gentile confession parallels and completes Peter's confession at Caesarea Philippi.", explanationEs: "La confesión gentil del centurión es paralela y completa la confesión de Pedro en Cesarea de Filipo.", correct: 2 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain Mark's portrait of Jesus as the Suffering Servant. Why is this the central image of his Gospel?", textEs: "21. Explique el retrato de Jesús como el Siervo Sufriente en Marcos. ¿Por qué es esta la imagen central de su Evangelio?",
-      kw_en: ["servant", "suffering", "isaiah", "ransom", "cross"], kw_es: ["siervo", "sufrimiento", "isaias", "rescate", "cruz"],
-      modelEn: "Mark presents Jesus as the Servant who works, suffers, and dies. The Suffering Servant of Isaiah stands behind the portrait, and the key verse says the Son of Man came to give His life a ransom for many. That servanthood runs straight to the cross, where the Servant lays down His life. Mark shows the Servant in action rather than in long genealogies.", modelEs: "Marcos presenta a Jesús como el Siervo que trabaja, sufre y muere. El Siervo sufriente de Isaías está detrás del retrato, y el versículo clave dice que el Hijo del Hombre vino a dar Su vida en rescate por muchos. Ese servicio va directo a la cruz, donde el Siervo entrega Su vida. Marcos muestra al Siervo en acción más que en largas genealogías." },
-    { textEn: "22. How does Mark's relationship to Peter shape the character of his Gospel?", textEs: "22. ¿Cómo da forma la relación de Marcos con Pedro al carácter de su Evangelio?",
-      kw_en: ["peter", "interpreter", "eyewitness", "memory", "rome"], kw_es: ["pedro", "interprete", "testigo ocular", "memoria", "roma"],
-      modelEn: "The early church called Mark the interpreter of Peter, writing in Rome from Peter's own eyewitness memory. That is why the Gospel sounds breathless and vivid, like a fisherman's storytelling. Reading Mark aloud you can almost hear Peter's voice recalling what he saw the Lord do.", modelEs: "La iglesia primitiva llamó a Marcos el intérprete de Pedro, escribiendo en Roma a partir de la memoria de testigo ocular del propio Pedro. Por eso el Evangelio suena entrecortado y vívido, como el relato de un pescador. Al leer a Marcos en voz alta casi se oye la voz de Pedro recordando lo que vio hacer al Señor." },
-    { textEn: "23. Discuss the significance of Mark's repeated use of 'immediately' (euthus). What does this tell us about Mark's Jesus?", textEs: "23. Discuta el significado del uso repetido de 'inmediatamente' (euthus) por Marcos. ¿Qué nos dice esto acerca del Jesús de Marcos?",
-      kw_en: ["immediately", "euthus", "action", "urgency", "servant"], kw_es: ["inmediatamente", "euthus", "accion", "urgencia", "siervo"],
-      modelEn: "Mark's repeated 'immediately' translates the Greek euthus, used forty-two times. The word gives the Gospel its urgency and constant action: the Servant does not stroll, He runs from one work to the next. It fits a Servant Gospel, because a servant moves at once when his master speaks.", modelEs: "El repetido 'inmediatamente' de Marcos traduce el griego euthus, usado cuarenta y dos veces. La palabra da al Evangelio su urgencia y acción constante: el Siervo no pasea, corre de una obra a la siguiente. Encaja en un Evangelio del Siervo, porque un siervo se mueve enseguida cuando su amo habla." },
-    { textEn: "24. Trace John Mark's restoration from desertion in Pamphylia (Acts 13:13) to 'useful for ministry' (2 Timothy 4:11).", textEs: "24. Trace la restauración de Juan Marcos desde la deserción en Panfilia (Hechos 13:13) hasta 'útil para el ministerio' (2 Timoteo 4:11).",
-      kw_en: ["pamphylia", "desert", "barnabas", "restoration", "useful", "paul"], kw_es: ["panfilia", "desierto", "bernabe", "restauracion", "util", "pablo"],
-      modelEn: "John Mark deserted Paul at Pamphylia, and Paul refused to take him again, so Barnabas took his cousin to Cyprus. Yet the story ends in restoration: years later Paul asks for Mark as useful for ministry. The deserter became profitable, proof that the Lord does not waste failures.", modelEs: "Juan Marcos desertó de Pablo en Panfilia, y Pablo se negó a llevarlo otra vez, así que Bernabé llevó a su primo a Chipre. Sin embargo la historia termina en restauración: años después Pablo pide a Marcos como útil para el ministerio. El desertor se volvió provechoso, prueba de que el Señor no desperdicia los fracasos." },
-    { textEn: "25. Compare Peter's confession (Mark 8:29) and the centurion's confession (Mark 15:39). What is the literary and theological significance of this pairing?", textEs: "25. Compare la confesión de Pedro (Marcos 8:29) y la confesión del centurión (Marcos 15:39). ¿Cuál es la importancia literaria y teológica de este emparejamiento?",
-      kw_en: ["peter", "centurion", "confession", "christ", "son of god", "gentile"], kw_es: ["pedro", "centurion", "confesion", "cristo", "hijo de dios", "gentil"],
-      modelEn: "Peter's confession at Caesarea Philippi ('You are the Christ') is the disciples' confession; the centurion's confession at the cross ('Truly this was the Son of God') is the Gentile confession. Together they bracket the Gospel, showing that both Jew and Gentile come to see who Jesus is.", modelEs: "La confesión de Pedro en Cesarea de Filipo ('Tú eres el Cristo') es la confesión de los discípulos; la confesión del centurión en la cruz ('Verdaderamente este hombre era Hijo de Dios') es la confesión gentil. Juntas enmarcan el Evangelio, mostrando que tanto el judío como el gentil llegan a ver quién es Jesús." },
-    { textEn: "26. Explain how Mark 10:45 functions as the key verse and theological spine of the Gospel.", textEs: "26. Explique cómo Marcos 10:45 funciona como versículo clave y columna vertebral teológica del Evangelio.",
-      kw_en: ["10:45", "serve", "ransom", "son of man", "key verse"], kw_es: ["10:45", "servir", "rescate", "hijo del hombre", "versiculo clave"],
-      modelEn: "Mark 10:45 is the key verse and theological center: the Son of Man came not to be served but to serve and to give His life a ransom for many. Before this verse Mark asks who Jesus is; after it, why He came. Every chapter can be read backward from this sentence.", modelEs: "Marcos 10:45 es el versículo clave y el centro teológico: el Hijo del Hombre vino no para ser servido sino para servir y dar Su vida en rescate por muchos. Antes de este versículo Marcos pregunta quién es Jesús; después, por qué vino. Cada capítulo puede leerse hacia atrás desde esta oración." },
-    { textEn: "27. Why is Mark called the 'Gospel for Romans'? What features of the book point to a Gentile, Roman audience?", textEs: "27. ¿Por qué se llama a Marcos el 'Evangelio para los romanos'? ¿Qué rasgos del libro apuntan a una audiencia gentil romana?",
-      kw_en: ["romans", "gentile", "action", "no genealogy", "latin", "centurion"], kw_es: ["romanos", "gentil", "accion", "sin genealogia", "latin", "centurion"],
-      modelEn: "Mark is called the Gospel for Romans because it suits a Gentile, action-minded audience. It gives no genealogy and little abstract teaching, favoring miracle, conflict, and a cross. It ends with a Roman centurion confessing Jesus as the Son of God, closing the loop on its Roman readers.", modelEs: "Marcos se llama el Evangelio para los romanos porque conviene a una audiencia gentil y de mente activa. No da genealogía ni mucha enseñanza abstracta, prefiriendo el milagro, el conflicto y una cruz. Termina con un centurión romano confesando a Jesús como el Hijo de Dios, cerrando el círculo sobre sus lectores romanos." },
-    { textEn: "28. Apply the three themes of Faith, Servanthood, and Priority to your own walk with Christ. Give a specific example for each.", textEs: "28. Aplique los tres temas de Fe, Servicio y Prioridad a su propio caminar con Cristo. Dé un ejemplo específico para cada uno.",
-      kw_en: ["faith", "servanthood", "priority", "application", "discipleship"], kw_es: ["fe", "servicio", "prioridad", "aplicacion", "discipulado"],
-      modelEn: "The three themes of Mark apply directly to discipleship. Faith is the action of trust that sets the sail and reaches for Christ. Servanthood is the action of love that takes up the basin. Priority is the action of choice that gives the Lord first place. Together they show that following the Servant means action, not sentiment.", modelEs: "Los tres temas de Marcos se aplican directamente al discipulado. La fe es la acción de confianza que iza la vela y se extiende hacia Cristo. El servicio es la acción de amor que toma la vasija. La prioridad es la acción de elección que da al Señor el primer lugar. Juntos muestran que seguir al Siervo significa acción, no sentimiento." },
-    { textEn: "29. What is the significance of Mark's abrupt ending (Mark 16:8) in the earliest manuscripts? How does the absence of post-resurrection scenes affect the reader?", textEs: "29. ¿Cuál es la importancia del final abrupto de Marcos (Marcos 16:8) en los manuscritos más antiguos? ¿Cómo afecta al lector la ausencia de escenas después de la resurrección?",
-      kw_en: ["ending", "16:8", "abrupt", "resurrection", "reader response"], kw_es: ["final", "16:8", "abrupto", "resurreccion", "respuesta del lector"],
-      modelEn: "Mark's abrupt ending at 16:8 leaves the women fleeing the empty tomb in fear, and the oldest and best manuscripts stop there; verses 16:9–20 are absent from them, which is why modern translations set them apart. The lack of long post-resurrection scenes throws the reader back on a response: the tomb is empty and the Servant goes ahead, so the abrupt ending hands the pen to the reader to decide what to do.", modelEs: "El final abrupto de Marcos en 16:8 deja a las mujeres huyendo de la tumba vacía con miedo, y los manuscritos más antiguos y mejores se detienen allí; los versículos 16:9–20 están ausentes de ellos, por lo cual las traducciones modernas los separan. La falta de largas escenas tras la resurrección lanza al lector a una respuesta: la tumba está vacía y el Siervo va delante, así que el final abrupto le entrega la pluma al lector para decidir qué hacer." },
-    { textEn: "30. Synthesize: Why is the Gospel of Mark especially well suited to the restless, action-minded heart of the modern reader?", textEs: "30. Sintetice: ¿Por qué es el Evangelio de Marcos especialmente apropiado para el corazón inquieto y activo del lector moderno?",
-      kw_en: ["action", "modern", "servant", "immediately", "discipleship", "priority"], kw_es: ["accion", "moderno", "siervo", "inmediatamente", "discipulado", "prioridad"],
-      modelEn: "Mark suits the modern reader because it is the Gospel of action: a Servant who moves immediately from work to work, with no wasted words. Its themes of faith, servanthood, and priority turn straight into discipleship, demanding not theory but a life that acts. The restless, busy modern world meets in Mark a Lord who serves and a call to follow Him at once.", modelEs: "Marcos conviene al lector moderno porque es el Evangelio de la acción: un Siervo que se mueve inmediatamente de obra en obra, sin palabras desperdiciadas. Sus temas de fe, servicio y prioridad se convierten directamente en discipulado, exigiendo no teoría sino una vida que actúa. El mundo moderno inquieto y ocupado encuentra en Marcos un Señor que sirve y un llamado a seguirlo enseguida." }
-];
+/* CTSNT — unit 3. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "nt",
+ "unit": 3,
+ "totalUnits": 12,
+ "filePrefix": "CTSNT",
+ "prevHref": "CTSNTUnit2.html",
+ "nextHref": "CTSNTUnit4.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Who wrote the Gospel of Mark?",
+    "es": "¿Quién escribió el Evangelio de Marcos?"
+   },
+   "options": {
+    "en": [
+     "The Apostle Peter",
+     "Matthew",
+     "John Mark",
+     "Luke the physician"
+    ],
+    "es": [
+     "El apóstol Pedro",
+     "Mateo",
+     "Juan Marcos",
+     "Lucas el médico"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Mark was John Mark, the young man who fled Gethsemane and later wrote the second Gospel from Peter's recollections.",
+    "es": "Marcos era Juan Marcos, el joven que huyó de Getsemaní y luego escribió el segundo Evangelio a partir de los recuerdos de Pedro."
+   }
+  },
+  {
+   "stem": {
+    "en": "The young man who fled naked in Mark 14:51-52 is traditionally identified as:",
+    "es": "El joven que huyó desnudo en Marcos 14:51-52 se identifica tradicionalmente como:"
+   },
+   "options": {
+    "en": [
+     "John Mark himself",
+     "John the Baptist",
+     "Lazarus",
+     "Peter"
+    ],
+    "es": [
+     "Juan Marcos mismo",
+     "Juan el Bautista",
+     "Lázaro",
+     "Pedro"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The naked young man of Mark 14:51–52 is traditionally John Mark himself, signing his Gospel with a glimpse of his own back.",
+    "es": "El joven desnudo de Marcos 14:51–52 es tradicionalmente Juan Marcos mismo, firmando su Evangelio con un vistazo de su propia espalda."
+   }
+  },
+  {
+   "stem": {
+    "en": "Where did John Mark desert Paul and Barnabas?",
+    "es": "¿Dónde desertó Juan Marcos de Pablo y Bernabé?"
+   },
+   "options": {
+    "en": [
+     "Antioch",
+     "Cyprus",
+     "Lystra",
+     "Pamphylia"
+    ],
+    "es": [
+     "Antioquía",
+     "Chipre",
+     "Listra",
+     "Panfilia"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "John Mark deserted Paul and Barnabas at Pamphylia on the first missionary journey (Acts 13:13).",
+    "es": "Juan Marcos desertó de Pablo y Bernabé en Panfilia en el primer viaje misionero (Hechos 13:13)."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Paul's final letter (2 Timothy 4:11), Paul calls Mark:",
+    "es": "En la última carta de Pablo (2 Timoteo 4:11), Pablo llama a Marcos:"
+   },
+   "options": {
+    "en": [
+     "A coward",
+     "Useful for ministry",
+     "His son in the faith",
+     "His apostle"
+    ],
+    "es": [
+     "Un cobarde",
+     "Útil para el ministerio",
+     "Su hijo en la fe",
+     "Su apóstol"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "In his last letter Paul asks for Mark, calling him useful for ministry (2 Timothy 4:11) — the deserter restored.",
+    "es": "En su última carta Pablo pide a Marcos, llamándolo útil para el ministerio (2 Timoteo 4:11) — el desertor restaurado."
+   }
+  },
+  {
+   "stem": {
+    "en": "The early church identified Mark as:",
+    "es": "La iglesia primitiva identificó a Marcos como:"
+   },
+   "options": {
+    "en": [
+     "Interpreter of Peter",
+     "Brother of Peter",
+     "Disciple of John",
+     "Cousin of Paul"
+    ],
+    "es": [
+     "Intérprete de Pedro",
+     "Hermano de Pedro",
+     "Discípulo de Juan",
+     "Primo de Pablo"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The early church identified Mark as the interpreter of Peter, recording accurately what Peter remembered of the Lord.",
+    "es": "La iglesia primitiva identificó a Marcos como el intérprete de Pedro, anotando con exactitud lo que Pedro recordaba del Señor."
+   }
+  },
+  {
+   "stem": {
+    "en": "The key verse of Mark's Gospel is found in:",
+    "es": "El versículo clave del Evangelio de Marcos se encuentra en:"
+   },
+   "options": {
+    "en": [
+     "Mark 1:1",
+     "Mark 16:15",
+     "Mark 8:29",
+     "Mark 10:45"
+    ],
+    "es": [
+     "Marcos 1:1",
+     "Marcos 16:15",
+     "Marcos 8:29",
+     "Marcos 10:45"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Mark's key verse is 10:45 — the Son of Man came to serve and give His life a ransom for many.",
+    "es": "El versículo clave de Marcos es 10:45 — el Hijo del Hombre vino a servir y dar Su vida en rescate por muchos."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Mark 10:45, the Son of Man came to:",
+    "es": "Según Marcos 10:45, el Hijo del Hombre vino a:"
+   },
+   "options": {
+    "en": [
+     "Restore the temple",
+     "Conquer Rome",
+     "Serve and give His life as a ransom",
+     "Found the Church"
+    ],
+    "es": [
+     "Restaurar el templo",
+     "Conquistar Roma",
+     "Servir y dar Su vida en rescate",
+     "Fundar la Iglesia"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Mark 10:45 says the Son of Man came not to be served but to serve and to give His life as a ransom.",
+    "es": "Marcos 10:45 dice que el Hijo del Hombre vino no para ser servido sino para servir y dar Su vida en rescate."
+   }
+  },
+  {
+   "stem": {
+    "en": "Mark's favorite Greek word, used 42 times, is:",
+    "es": "La palabra griega favorita de Marcos, usada 42 veces, es:"
+   },
+   "options": {
+    "en": [
+     "Logos (word)",
+     "Euthus (immediately)",
+     "Agape (love)",
+     "Pistis (faith)"
+    ],
+    "es": [
+     "Logos (palabra)",
+     "Euthus (inmediatamente)",
+     "Ágape (amor)",
+     "Pistis (fe)"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Mark's favorite word is euthus, 'immediately,' used forty-two times to drive his breathless, fast-moving Gospel.",
+    "es": "La palabra favorita de Marcos es euthus, 'inmediatamente', usada cuarenta y dos veces para impulsar su Evangelio entrecortado y veloz."
+   }
+  },
+  {
+   "stem": {
+    "en": "Mark was most likely written for what audience?",
+    "es": "Marcos fue escrito muy probablemente para qué audiencia?"
+   },
+   "options": {
+    "en": [
+     "Roman Gentiles",
+     "Hebrew priests",
+     "Greek philosophers",
+     "Egyptian scholars"
+    ],
+    "es": [
+     "Gentiles romanos",
+     "Sacerdotes hebreos",
+     "Filósofos griegos",
+     "Eruditos egipcios"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Mark was written for Roman Gentiles, who wanted action, miracle, and a cross rather than genealogies or philosophy.",
+    "es": "Marcos fue escrito para gentiles romanos, que querían acción, milagro y una cruz en vez de genealogías o filosofía."
+   }
+  },
+  {
+   "stem": {
+    "en": "Mark's Gospel divides into two halves at which event?",
+    "es": "El Evangelio de Marcos se divide en dos mitades en cuál evento?"
+   },
+   "options": {
+    "en": [
+     "The baptism of Jesus",
+     "The Last Supper",
+     "The Transfiguration",
+     "Peter's confession at Caesarea Philippi"
+    ],
+    "es": [
+     "El bautismo de Jesús",
+     "La Última Cena",
+     "La Transfiguración",
+     "La confesión de Pedro en Cesarea de Filipo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Mark divides in half at Peter's confession at Caesarea Philippi (8:29): first 'Who is He?', then 'Why did He come?'",
+    "es": "Marcos se divide por la mitad en la confesión de Pedro en Cesarea de Filipo (8:29): primero '¿Quién es Él?', luego '¿Por qué vino?'"
+   }
+  },
+  {
+   "stem": {
+    "en": "The three threads running through Mark (per this unit) are:",
+    "es": "Los tres hilos que atraviesan Marcos (según esta unidad) son:"
+   },
+   "options": {
+    "en": [
+     "Love, Joy, Peace",
+     "Faith, Servanthood, Priority",
+     "Word, Spirit, Power",
+     "Law, Grace, Glory"
+    ],
+    "es": [
+     "Amor, Gozo, Paz",
+     "Fe, Servicio, Prioridad",
+     "Palabra, Espíritu, Poder",
+     "Ley, Gracia, Gloria"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The three threads running through Mark are Faith, Servanthood, and Priority — the marks of the Servant and His disciples.",
+    "es": "Los tres hilos que atraviesan Marcos son Fe, Servicio y Prioridad — las marcas del Siervo y de Sus discípulos."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Roman centurion at the cross confessed:",
+    "es": "El centurión romano en la cruz confesó:"
+   },
+   "options": {
+    "en": [
+     "Blessed is He who comes",
+     "Lord, have mercy",
+     "Truly this Man was the Son of God",
+     "It is finished"
+    ],
+    "es": [
+     "Bendito el que viene",
+     "Señor, ten misericordia",
+     "Verdaderamente este hombre era Hijo de Dios",
+     "Consumado es"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "At the cross the Roman centurion confessed 'Truly this Man was the Son of God,' the climax of Mark's Gospel.",
+    "es": "En la cruz el centurión romano confesó 'Verdaderamente este hombre era Hijo de Dios', el clímax del Evangelio de Marcos."
+   }
+  },
+  {
+   "stem": {
+    "en": "The rich young ruler in Mark 10 lacked:",
+    "es": "Al joven rico de Marcos 10 le faltaba:"
+   },
+   "options": {
+    "en": [
+     "One thing",
+     "Wealth",
+     "Knowledge of the Law",
+     "Family"
+    ],
+    "es": [
+     "Una cosa",
+     "Riqueza",
+     "Conocimiento de la Ley",
+     "Familia"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The rich young ruler lacked one thing; the Lord looked on him and loved him even as he turned away (Mark 10).",
+    "es": "Al joven rico le faltaba una cosa; el Señor lo miró y lo amó aun cuando se apartó (Marcos 10)."
+   }
+  },
+  {
+   "stem": {
+    "en": "If Matthew gives the Servant-King, Mark gives:",
+    "es": "Si Mateo da al Siervo-Rey, Marcos da:"
+   },
+   "options": {
+    "en": [
+     "The Servant-Man",
+     "Simply the Servant",
+     "The Servant-God",
+     "The Servant-Priest"
+    ],
+    "es": [
+     "Al Siervo-Hombre",
+     "Sencillamente al Siervo",
+     "Al Siervo-Dios",
+     "Al Siervo-Sacerdote"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Where Matthew gives the Servant-King, Mark gives simply the Servant who works and dies.",
+    "es": "Donde Mateo da al Siervo-Rey, Marcos da sencillamente al Siervo que trabaja y muere."
+   }
+  },
+  {
+   "stem": {
+    "en": "Mark's cousin, who took him to Cyprus, was:",
+    "es": "El primo de Marcos, que lo llevó a Chipre, fue:"
+   },
+   "options": {
+    "en": [
+     "Peter",
+     "Silas",
+     "Timothy",
+     "Barnabas"
+    ],
+    "es": [
+     "Pedro",
+     "Silas",
+     "Timoteo",
+     "Bernabé"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Mark's cousin Barnabas took him to Cyprus after the split with Paul (Acts 15:36–41).",
+    "es": "El primo de Marcos, Bernabé, lo llevó a Chipre tras la separación con Pablo (Hechos 15:36–41)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Mark was probably written from which city?",
+    "es": "Marcos fue probablemente escrito desde cuál ciudad?"
+   },
+   "options": {
+    "en": [
+     "Antioch",
+     "Jerusalem",
+     "Rome",
+     "Alexandria"
+    ],
+    "es": [
+     "Antioquía",
+     "Jerusalén",
+     "Roma",
+     "Alejandría"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Mark was written from Rome in the early sixties, for the action-minded Roman world.",
+    "es": "Marcos fue escrito desde Roma a comienzos de los años sesenta, para el mundo romano de mente activa."
+   }
+  },
+  {
+   "stem": {
+    "en": "The widow in Mark 12 gave:",
+    "es": "La viuda en Marcos 12 dio:"
+   },
+   "options": {
+    "en": [
+     "Five shekels",
+     "Two mites",
+     "A tenth of her income",
+     "A jar of perfume"
+    ],
+    "es": [
+     "Cinco siclos",
+     "Dos blancas",
+     "El diezmo de sus ingresos",
+     "Un vaso de perfume"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The widow in Mark 12 gave two mites — everything she had — because the Lord was her one priority.",
+    "es": "La viuda en Marcos 12 dio dos blancas — todo lo que tenía — porque el Señor era su única prioridad."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Mark 8:34, following Jesus requires:",
+    "es": "En Marcos 8:34, seguir a Jesús requiere:"
+   },
+   "options": {
+    "en": [
+     "Self-denial and taking up the cross",
+     "Knowledge of Scripture",
+     "Wealth to share",
+     "Joining the disciples"
+    ],
+    "es": [
+     "Negarse a sí mismo y tomar la cruz",
+     "Conocimiento de la Escritura",
+     "Riqueza para compartir",
+     "Unirse a los discípulos"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Mark 8:34 says following Jesus means self-denial and taking up the cross — the action of choice and priority.",
+    "es": "Marcos 8:34 dice que seguir a Jesús significa negarse a sí mismo y tomar la cruz — la acción de elección y prioridad."
+   }
+  },
+  {
+   "stem": {
+    "en": "The blind man who shouted at Jesus near Jericho was:",
+    "es": "El ciego que clamó a Jesús cerca de Jericó fue:"
+   },
+   "options": {
+    "en": [
+     "Lazarus",
+     "Zacchaeus",
+     "Malchus",
+     "Bartimaeus"
+    ],
+    "es": [
+     "Lázaro",
+     "Zaqueo",
+     "Malco",
+     "Bartimeo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Blind Bartimaeus shouted to Jesus near Jericho and would not be silenced — action-faith in Mark.",
+    "es": "El ciego Bartimeo clamó a Jesús cerca de Jericó y no se dejó callar — la fe-acción en Marcos."
+   }
+  },
+  {
+   "stem": {
+    "en": "The centurion's confession parallels and completes:",
+    "es": "La confesión del centurión es paralela y completa:"
+   },
+   "options": {
+    "en": [
+     "The Sermon on the Mount",
+     "The Lord's Prayer",
+     "Peter's confession at Caesarea Philippi",
+     "The Beatitudes"
+    ],
+    "es": [
+     "El Sermón del Monte",
+     "El Padre Nuestro",
+     "La confesión de Pedro en Cesarea de Filipo",
+     "Las Bienaventuranzas"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The centurion's Gentile confession parallels and completes Peter's confession at Caesarea Philippi.",
+    "es": "La confesión gentil del centurión es paralela y completa la confesión de Pedro en Cesarea de Filipo."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain Mark's portrait of Jesus as the Suffering Servant. Why is this the central image of his Gospel?",
+    "es": "Explique el retrato de Jesús como el Siervo Sufriente en Marcos. ¿Por qué es esta la imagen central de su Evangelio?"
+   },
+   "keywords": {
+    "en": [
+     "servant",
+     "suffering",
+     "isaiah",
+     "ransom",
+     "cross"
+    ],
+    "es": [
+     "siervo",
+     "sufrimiento",
+     "isaias",
+     "rescate",
+     "cruz"
+    ]
+   },
+   "model": {
+    "en": "Mark presents Jesus as the Servant who works, suffers, and dies. The Suffering Servant of Isaiah stands behind the portrait, and the key verse says the Son of Man came to give His life a ransom for many. That servanthood runs straight to the cross, where the Servant lays down His life. Mark shows the Servant in action rather than in long genealogies.",
+    "es": "Marcos presenta a Jesús como el Siervo que trabaja, sufre y muere. El Siervo sufriente de Isaías está detrás del retrato, y el versículo clave dice que el Hijo del Hombre vino a dar Su vida en rescate por muchos. Ese servicio va directo a la cruz, donde el Siervo entrega Su vida. Marcos muestra al Siervo en acción más que en largas genealogías."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does Mark's relationship to Peter shape the character of his Gospel?",
+    "es": "¿Cómo da forma la relación de Marcos con Pedro al carácter de su Evangelio?"
+   },
+   "keywords": {
+    "en": [
+     "peter",
+     "interpreter",
+     "eyewitness",
+     "memory",
+     "rome"
+    ],
+    "es": [
+     "pedro",
+     "interprete",
+     "testigo ocular",
+     "memoria",
+     "roma"
+    ]
+   },
+   "model": {
+    "en": "The early church called Mark the interpreter of Peter, writing in Rome from Peter's own eyewitness memory. That is why the Gospel sounds breathless and vivid, like a fisherman's storytelling. Reading Mark aloud you can almost hear Peter's voice recalling what he saw the Lord do.",
+    "es": "La iglesia primitiva llamó a Marcos el intérprete de Pedro, escribiendo en Roma a partir de la memoria de testigo ocular del propio Pedro. Por eso el Evangelio suena entrecortado y vívido, como el relato de un pescador. Al leer a Marcos en voz alta casi se oye la voz de Pedro recordando lo que vio hacer al Señor."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Discuss the significance of Mark's repeated use of 'immediately' (euthus). What does this tell us about Mark's Jesus?",
+    "es": "Discuta el significado del uso repetido de 'inmediatamente' (euthus) por Marcos. ¿Qué nos dice esto acerca del Jesús de Marcos?"
+   },
+   "keywords": {
+    "en": [
+     "immediately",
+     "euthus",
+     "action",
+     "urgency",
+     "servant"
+    ],
+    "es": [
+     "inmediatamente",
+     "euthus",
+     "accion",
+     "urgencia",
+     "siervo"
+    ]
+   },
+   "model": {
+    "en": "Mark's repeated 'immediately' translates the Greek euthus, used forty-two times. The word gives the Gospel its urgency and constant action: the Servant does not stroll, He runs from one work to the next. It fits a Servant Gospel, because a servant moves at once when his master speaks.",
+    "es": "El repetido 'inmediatamente' de Marcos traduce el griego euthus, usado cuarenta y dos veces. La palabra da al Evangelio su urgencia y acción constante: el Siervo no pasea, corre de una obra a la siguiente. Encaja en un Evangelio del Siervo, porque un siervo se mueve enseguida cuando su amo habla."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Trace John Mark's restoration from desertion in Pamphylia (Acts 13:13) to 'useful for ministry' (2 Timothy 4:11).",
+    "es": "Trace la restauración de Juan Marcos desde la deserción en Panfilia (Hechos 13:13) hasta 'útil para el ministerio' (2 Timoteo 4:11)."
+   },
+   "keywords": {
+    "en": [
+     "pamphylia",
+     "desert",
+     "barnabas",
+     "restoration",
+     "useful",
+     "paul"
+    ],
+    "es": [
+     "panfilia",
+     "desierto",
+     "bernabe",
+     "restauracion",
+     "util",
+     "pablo"
+    ]
+   },
+   "model": {
+    "en": "John Mark deserted Paul at Pamphylia, and Paul refused to take him again, so Barnabas took his cousin to Cyprus. Yet the story ends in restoration: years later Paul asks for Mark as useful for ministry. The deserter became profitable, proof that the Lord does not waste failures.",
+    "es": "Juan Marcos desertó de Pablo en Panfilia, y Pablo se negó a llevarlo otra vez, así que Bernabé llevó a su primo a Chipre. Sin embargo la historia termina en restauración: años después Pablo pide a Marcos como útil para el ministerio. El desertor se volvió provechoso, prueba de que el Señor no desperdicia los fracasos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Compare Peter's confession (Mark 8:29) and the centurion's confession (Mark 15:39). What is the literary and theological significance of this pairing?",
+    "es": "Compare la confesión de Pedro (Marcos 8:29) y la confesión del centurión (Marcos 15:39). ¿Cuál es la importancia literaria y teológica de este emparejamiento?"
+   },
+   "keywords": {
+    "en": [
+     "peter",
+     "centurion",
+     "confession",
+     "christ",
+     "son of god",
+     "gentile"
+    ],
+    "es": [
+     "pedro",
+     "centurion",
+     "confesion",
+     "cristo",
+     "hijo de dios",
+     "gentil"
+    ]
+   },
+   "model": {
+    "en": "Peter's confession at Caesarea Philippi ('You are the Christ') is the disciples' confession; the centurion's confession at the cross ('Truly this was the Son of God') is the Gentile confession. Together they bracket the Gospel, showing that both Jew and Gentile come to see who Jesus is.",
+    "es": "La confesión de Pedro en Cesarea de Filipo ('Tú eres el Cristo') es la confesión de los discípulos; la confesión del centurión en la cruz ('Verdaderamente este hombre era Hijo de Dios') es la confesión gentil. Juntas enmarcan el Evangelio, mostrando que tanto el judío como el gentil llegan a ver quién es Jesús."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how Mark 10:45 functions as the key verse and theological spine of the Gospel.",
+    "es": "Explique cómo Marcos 10:45 funciona como versículo clave y columna vertebral teológica del Evangelio."
+   },
+   "keywords": {
+    "en": [
+     "10:45",
+     "serve",
+     "ransom",
+     "son of man",
+     "key verse"
+    ],
+    "es": [
+     "10:45",
+     "servir",
+     "rescate",
+     "hijo del hombre",
+     "versiculo clave"
+    ]
+   },
+   "model": {
+    "en": "Mark 10:45 is the key verse and theological center: the Son of Man came not to be served but to serve and to give His life a ransom for many. Before this verse Mark asks who Jesus is; after it, why He came. Every chapter can be read backward from this sentence.",
+    "es": "Marcos 10:45 es el versículo clave y el centro teológico: el Hijo del Hombre vino no para ser servido sino para servir y dar Su vida en rescate por muchos. Antes de este versículo Marcos pregunta quién es Jesús; después, por qué vino. Cada capítulo puede leerse hacia atrás desde esta oración."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is Mark called the 'Gospel for Romans'? What features of the book point to a Gentile, Roman audience?",
+    "es": "¿Por qué se llama a Marcos el 'Evangelio para los romanos'? ¿Qué rasgos del libro apuntan a una audiencia gentil romana?"
+   },
+   "keywords": {
+    "en": [
+     "romans",
+     "gentile",
+     "action",
+     "no genealogy",
+     "latin",
+     "centurion"
+    ],
+    "es": [
+     "romanos",
+     "gentil",
+     "accion",
+     "sin genealogia",
+     "latin",
+     "centurion"
+    ]
+   },
+   "model": {
+    "en": "Mark is called the Gospel for Romans because it suits a Gentile, action-minded audience. It gives no genealogy and little abstract teaching, favoring miracle, conflict, and a cross. It ends with a Roman centurion confessing Jesus as the Son of God, closing the loop on its Roman readers.",
+    "es": "Marcos se llama el Evangelio para los romanos porque conviene a una audiencia gentil y de mente activa. No da genealogía ni mucha enseñanza abstracta, prefiriendo el milagro, el conflicto y una cruz. Termina con un centurión romano confesando a Jesús como el Hijo de Dios, cerrando el círculo sobre sus lectores romanos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Apply the three themes of Faith, Servanthood, and Priority to your own walk with Christ. Give a specific example for each.",
+    "es": "Aplique los tres temas de Fe, Servicio y Prioridad a su propio caminar con Cristo. Dé un ejemplo específico para cada uno."
+   },
+   "keywords": {
+    "en": [
+     "faith",
+     "servanthood",
+     "priority",
+     "application",
+     "discipleship"
+    ],
+    "es": [
+     "fe",
+     "servicio",
+     "prioridad",
+     "aplicacion",
+     "discipulado"
+    ]
+   },
+   "model": {
+    "en": "The three themes of Mark apply directly to discipleship. Faith is the action of trust that sets the sail and reaches for Christ. Servanthood is the action of love that takes up the basin. Priority is the action of choice that gives the Lord first place. Together they show that following the Servant means action, not sentiment.",
+    "es": "Los tres temas de Marcos se aplican directamente al discipulado. La fe es la acción de confianza que iza la vela y se extiende hacia Cristo. El servicio es la acción de amor que toma la vasija. La prioridad es la acción de elección que da al Señor el primer lugar. Juntos muestran que seguir al Siervo significa acción, no sentimiento."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the significance of Mark's abrupt ending (Mark 16:8) in the earliest manuscripts? How does the absence of post-resurrection scenes affect the reader?",
+    "es": "¿Cuál es la importancia del final abrupto de Marcos (Marcos 16:8) en los manuscritos más antiguos? ¿Cómo afecta al lector la ausencia de escenas después de la resurrección?"
+   },
+   "keywords": {
+    "en": [
+     "ending",
+     "16:8",
+     "abrupt",
+     "resurrection",
+     "reader response"
+    ],
+    "es": [
+     "final",
+     "16:8",
+     "abrupto",
+     "resurreccion",
+     "respuesta del lector"
+    ]
+   },
+   "model": {
+    "en": "Mark's abrupt ending at 16:8 leaves the women fleeing the empty tomb in fear, and the oldest and best manuscripts stop there; verses 16:9–20 are absent from them, which is why modern translations set them apart. The lack of long post-resurrection scenes throws the reader back on a response: the tomb is empty and the Servant goes ahead, so the abrupt ending hands the pen to the reader to decide what to do.",
+    "es": "El final abrupto de Marcos en 16:8 deja a las mujeres huyendo de la tumba vacía con miedo, y los manuscritos más antiguos y mejores se detienen allí; los versículos 16:9–20 están ausentes de ellos, por lo cual las traducciones modernas los separan. La falta de largas escenas tras la resurrección lanza al lector a una respuesta: la tumba está vacía y el Siervo va delante, así que el final abrupto le entrega la pluma al lector para decidir qué hacer."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Synthesize: Why is the Gospel of Mark especially well suited to the restless, action-minded heart of the modern reader?",
+    "es": "Sintetice: ¿Por qué es el Evangelio de Marcos especialmente apropiado para el corazón inquieto y activo del lector moderno?"
+   },
+   "keywords": {
+    "en": [
+     "action",
+     "modern",
+     "servant",
+     "immediately",
+     "discipleship",
+     "priority"
+    ],
+    "es": [
+     "accion",
+     "moderno",
+     "siervo",
+     "inmediatamente",
+     "discipulado",
+     "prioridad"
+    ]
+   },
+   "model": {
+    "en": "Mark suits the modern reader because it is the Gospel of action: a Servant who moves immediately from work to work, with no wasted words. Its themes of faith, servanthood, and priority turn straight into discipleship, demanding not theory but a life that acts. The restless, busy modern world meets in Mark a Lord who serves and a call to follow Him at once.",
+    "es": "Marcos conviene al lector moderno porque es el Evangelio de la acción: un Siervo que se mueve inmediatamente de obra en obra, sin palabras desperdiciadas. Sus temas de fe, servicio y prioridad se convierten directamente en discipulado, exigiendo no teoría sino una vida que actúa. El mundo moderno inquieto y ocupado encuentra en Marcos un Señor que sirve y un llamado a seguirlo enseguida."
+   }
+  }
+ ]
+};

@@ -1,11 +1,859 @@
-/* CTSDP - unit 3: per-unit configuration and content. */
-
-const UNIT = 3;
-
-const NEXT_UNIT_URL = 'CTSDPUnit4.html';
-
-const unitTitlesEn = ["Unit 1 - What Is Doctrinal Preaching?", "Unit 2 - The Method: Text, Interrogative, Keyword", `Unit ${UNIT} - Preaching the Doctrine of Revelation`, `Unit ${UNIT + 1} - Preaching the Doctrine of God`, "Unit 5 - Preaching the Doctrine of Man", "Unit 6 - Preaching the Life and Work of Christ", "Unit 7 - Preaching the Holy Spirit", "Unit 8 - Preaching the Doctrine of Salvation", "Unit 9 - Preaching the Doctrine of the Church", "Unit 10 - Preaching the Doctrine of Last Things"];
-
-const mcQuestions = [{"textEn": "1. Why does this course preach the doctrine of Revelation first?", "textEs": "1. ¿Por qué este curso predica primero la doctrina de la Revelación?", "optionsEn": ["Because it is the shortest doctrine", "Because tradition demands it", "Because it is the easiest doctrine", "Because how we know God must be settled before who God is"], "optionsEs": ["Porque es la doctrina más corta", "Porque la tradición lo exige", "Porque es la doctrina más fácil", "Porque cómo conocemos a Dios debe resolverse antes de quién es Dios"], "explanationEn": "Revelation comes first because it establishes how God can be known at all, the ground of every later doctrine.", "explanationEs": "La revelación va primero porque establece cómo se puede conocer a Dios, el fundamento de toda doctrina posterior.", "correct": 3}, {"textEn": "2. The preacher’s pastoral aim in a sermon on revelation is to move hearers:", "textEs": "2. El objetivo pastoral del predicador en un sermón sobre la revelación es mover a los oyentes:", "optionsEn": ["From religion as human searching to trusting a God who has spoken", "To admire the preacher’s learning", "To memorize the canon", "To win theological debates"], "optionsEs": ["De la religión como búsqueda humana a confiar en un Dios que ha hablado", "A admirar el saber del predicador", "A memorizar el canon", "A ganar debates teológicos"], "explanationEn": "The aim is to move hearers from reaching up to God toward responding to the God who has already spoken.", "explanationEs": "El objetivo es mover a los oyentes de estirarse hacia Dios a responder al Dios que ya ha hablado.", "correct": 0}, {"textEn": "3. A topical sermon on revelation remains biblical when:", "textEs": "3. Un sermón tópico sobre la revelación sigue siendo bíblico cuando:", "optionsEn": ["It is long enough", "It avoids doctrine", "It quotes the Greek", "Every point rests on its own text"], "optionsEs": ["Es bastante largo", "Evita la doctrina", "Cita el griego", "Cada punto descansa en su propio texto"], "explanationEn": "Each point standing on its own text is what keeps a topical sermon biblical.", "explanationEs": "Que cada punto descanse en su propio texto es lo que mantiene bíblico al sermón tópico.", "correct": 3}, {"textEn": "4. The subject “the Word of God” with the keyword “forms” produces a sermon that is:", "textEs": "4. El tema “la Palabra de Dios” con la palabra clave “formas” produce un sermón que es:", "optionsEn": ["Topical and deductive, yet biblical", "Textual only", "Neither biblical", "Expository and inductive"], "optionsEs": ["Tópico y deductivo, pero bíblico", "Solo textual", "Nada bíblico", "Expositivo e inductivo"], "explanationEn": "The preacher arranges the forms (topical, deductive), yet each rests on a text, so it stays biblical.", "explanationEs": "El predicador ordena las formas (tópico, deductivo), pero cada una se apoya en un texto, así que sigue bíblico.", "correct": 0}, {"textEn": "5. The Living Word is:", "textEs": "5. La Palabra Viva es:", "optionsEn": ["Creation", "Baptism", "The Bible", "Jesus Christ"], "optionsEs": ["La creación", "El bautismo", "La Biblia", "Jesucristo"], "explanationEn": "The Living Word is Jesus Christ, the Word who became flesh (John 1:14).", "explanationEs": "La Palabra Viva es Jesucristo, el Verbo que se hizo carne (Juan 1:14).", "correct": 3}, {"textEn": "6. The Written Word is:", "textEs": "6. La Palabra Escrita es:", "optionsEn": ["The Lord’s Supper", "Preaching", "The Bible", "Jesus Christ"], "optionsEs": ["La Cena del Señor", "La predicación", "La Biblia", "Jesucristo"], "explanationEn": "The Written Word is the Bible (2 Timothy 3:16–17).", "explanationEs": "La Palabra Escrita es la Biblia (2 Timoteo 3:16–17).", "correct": 2}, {"textEn": "7. The Natural Word is:", "textEs": "7. La Palabra Natural es:", "optionsEn": ["Jesus Christ", "The Bible", "God’s revelation through creation", "The sacraments"], "optionsEs": ["Jesucristo", "La Biblia", "La revelación de Dios por la creación", "Los sacramentos"], "explanationEn": "The Natural Word is God’s revelation through creation (Psalm 19:1; Romans 1:19–20).", "explanationEs": "La Palabra Natural es la revelación de Dios por la creación (Salmo 19:1; Romanos 1:19–20).", "correct": 2}, {"textEn": "8. The Enacted Word refers to:", "textEs": "8. La Palabra Actuada se refiere a:", "optionsEn": ["Creation", "The Bible", "Preaching", "Baptism and the Lord’s Supper"], "optionsEs": ["La creación", "La Biblia", "La predicación", "El bautismo y la Cena del Señor"], "explanationEn": "The Enacted Word is baptism and the Lord’s Supper, where the truth is acted out (1 Corinthians 11:26).", "explanationEs": "La Palabra Actuada es el bautismo y la Cena del Señor, donde la verdad se representa (1 Corintios 11:26).", "correct": 3}, {"textEn": "9. The Preached or Prophetic Word is:", "textEs": "9. La Palabra Predicada o Profética es:", "optionsEn": ["The Lord’s Supper", "The proclamation of God’s truth", "Creation", "The incarnation"], "optionsEs": ["La Cena del Señor", "La proclamación de la verdad de Dios", "La creación", "La encarnación"], "explanationEn": "The Preached Word is the proclamation of God’s truth (Romans 10:14–17).", "explanationEs": "La Palabra Predicada es la proclamación de la verdad de Dios (Romanos 10:14–17).", "correct": 1}, {"textEn": "10. General revelation reveals:", "textEs": "10. La revelación general revela:", "optionsEn": ["The New Testament canon", "That God exists, is powerful, and man is accountable", "The church ordinances", "The full plan of salvation"], "optionsEs": ["El canon del Nuevo Testamento", "Que Dios existe, es poderoso y el hombre es responsable", "Las ordenanzas de la iglesia", "El plan completo de salvación"], "explanationEn": "General revelation shows God exists, is powerful, and man is accountable — but not the way of salvation.", "explanationEs": "La revelación general muestra que Dios existe, es poderoso y el hombre es responsable — pero no el camino de salvación.", "correct": 1}, {"textEn": "11. General revelation gives awareness but cannot:", "textEs": "11. La revelación general da conciencia pero no puede:", "optionsEn": ["Save", "Speak through nature", "Show God’s power", "Reveal that God exists"], "optionsEs": ["Salvar", "Hablar por la naturaleza", "Mostrar el poder de Dios", "Revelar que Dios existe"], "explanationEn": "General revelation cannot save; that is why God gave special revelation.", "explanationEs": "La revelación general no puede salvar; por eso Dios dio la revelación especial.", "correct": 0}, {"textEn": "12. Special revelation is found in:", "textEs": "12. La revelación especial se encuentra en:", "optionsEn": ["Philosophy", "Nature alone", "Israel’s history, Jesus Christ, and the Bible", "Human reason"], "optionsEs": ["La filosofía", "Solo la naturaleza", "La historia de Israel, Jesucristo y la Biblia", "La razón humana"], "explanationEn": "Special revelation is God’s direct, redemptive disclosure in Israel, Christ, and Scripture.", "explanationEs": "La revelación especial es la revelación directa y redentora de Dios en Israel, Cristo y la Escritura.", "correct": 2}, {"textEn": "13. The starting point of all theology is:", "textEs": "13. El punto de partida de toda teología es:", "optionsEn": ["Philosophical proof", "God’s decision to make Himself known", "Church tradition", "Man’s search for God"], "optionsEs": ["La prueba filosófica", "La decisión de Dios de darse a conocer", "La tradición de la iglesia", "La búsqueda del hombre por Dios"], "explanationEn": "Theology begins with God’s initiative to reveal Himself, not man’s search.", "explanationEs": "La teología comienza con la iniciativa de Dios de revelarse, no con la búsqueda del hombre.", "correct": 1}, {"textEn": "14. Why must God reveal Himself for us to know Him?", "textEs": "14. ¿Por qué debe Dios revelarse para que lo conozcamos?", "optionsEn": ["Because we are too busy", "Because the finite cannot reach the Infinite", "Because God is hiding", "Because reason is enough"], "optionsEs": ["Porque estamos muy ocupados", "Porque lo finito no puede alcanzar al Infinito", "Porque Dios se esconde", "Porque la razón basta"], "explanationEn": "The finite cannot reach the Infinite; unless God speaks, He cannot be known.", "explanationEs": "Lo finito no puede alcanzar al Infinito; si Dios no habla, no puede ser conocido.", "correct": 1}, {"textEn": "15. Which term does this course prefer for Scripture’s authority?", "textEs": "15. ¿Qué término prefiere este curso para la autoridad de la Escritura?", "optionsEn": ["Inerrancy", "Tradition", "Absolute Authority", "Infallibility"], "optionsEs": ["Inerrancia", "Tradición", "Autoridad Absoluta", "Infalibilidad"], "explanationEn": "The course prefers “Absolute Authority” — a positive affirmation of what Scripture is.", "explanationEs": "El curso prefiere “Autoridad Absoluta” — una afirmación positiva de lo que la Escritura es.", "correct": 2}, {"textEn": "16. Inspiration means:", "textEs": "16. La inspiración significa:", "optionsEn": ["Scripture was copied perfectly", "The church chose the canon", "God caused Scripture while working through human authors", "The Spirit helps believers understand"], "optionsEs": ["La Escritura se copió perfectamente", "La iglesia eligió el canon", "Dios causó la Escritura obrando por medio de autores humanos", "El Espíritu ayuda a los creyentes a entender"], "explanationEn": "Inspiration is God causing Scripture while working through human authors.", "explanationEs": "La inspiración es Dios causando la Escritura mientras obra por medio de autores humanos.", "correct": 2}, {"textEn": "17. Illumination means:", "textEs": "17. La iluminación significa:", "optionsEn": ["The canon was closed", "Manuscripts were copied", "God dictated the Word", "The Holy Spirit helps believers understand the Word"], "optionsEs": ["El canon se cerró", "Se copiaron los manuscritos", "Dios dictó la Palabra", "El Espíritu Santo ayuda a los creyentes a entender la Palabra"], "explanationEn": "Illumination is the Spirit’s ongoing work helping believers understand Scripture.", "explanationEs": "La iluminación es la obra continua del Espíritu ayudando a los creyentes a entender la Escritura.", "correct": 3}, {"textEn": "18. The hotel-room illustration teaches that:", "textEs": "18. La ilustración de la habitación del hotel enseña que:", "optionsEn": ["We should travel less", "God’s light reveals what was always there; the room did not change", "Cleanliness is next to godliness", "Hotels are unclean"], "optionsEs": ["Deberíamos viajar menos", "La luz de Dios revela lo que siempre estuvo allí; la habitación no cambió", "La limpieza es casi santidad", "Los hoteles son sucios"], "explanationEn": "Like sunlight in the room, God’s revelation shows what was always true; it does not create it.", "explanationEs": "Como la luz del sol en la habitación, la revelación de Dios muestra lo que siempre fue verdad; no lo crea.", "correct": 1}, {"textEn": "19. The danger to avoid when preaching revelation is:", "textEs": "19. El peligro a evitar al predicar la revelación es:", "optionsEn": ["Turning the sermon into a lecture on bibliology", "Using any illustration", "Mentioning Jesus", "Quoting Scripture"], "optionsEs": ["Convertir el sermón en una clase de bibliología", "Usar cualquier ilustración", "Mencionar a Jesús", "Citar la Escritura"], "explanationEn": "Avoid spending the sermon on canon and inspiration theories; aim at trust and obedience.", "explanationEs": "Evita gastar el sermón en el canon y las teorías de inspiración; apunta a la confianza y la obediencia.", "correct": 0}, {"textEn": "20. The doctrine’s closing chain runs: because God has spoken, He can be known; because known, trusted; because trusted, He must be:", "textEs": "20. La cadena final de la doctrina dice: porque Dios ha hablado, puede ser conocido; conocido, se confía; y por confiarse, debe ser:", "optionsEn": ["Obeyed", "Debated", "Admired", "Studied"], "optionsEs": ["Obedecido", "Debatido", "Admirado", "Estudiado"], "explanationEn": "The chain ends in obedience: spoken → known → trusted → obeyed.", "explanationEs": "La cadena termina en obediencia: hablado → conocido → confiado → obedecido.", "correct": 0}];
-
-const kwQuestions = [{"textEn": "21. Why does the preacher set the doctrine of revelation before the doctrine of God? What does it establish?", "textEs": "21. ¿Por qué coloca el predicador la doctrina de la revelación antes de la doctrina de Dios? ¿Qué establece?", "kw_en": ["revelation", "first", "know", "God", "spoken", "foundation", "before", "ground"], "kw_es": ["revelaci", "primero", "conoc", "Dios", "hablado", "fundament", "antes", "base"], "modelEn": "The preacher sets revelation first because it establishes how God can be known at all, which must be settled before anything is said about who God is. The starting point of theology is not man’s search but God’s decision to make Himself known; the finite cannot reach the Infinite, so unless God has spoken, He cannot be known. Revelation is therefore the foundation and ground of every later doctrine, the reason any sermon on God, Christ, or salvation is possible. Establish that God has spoken, and every other doctrine has somewhere to stand.", "modelEs": "El predicador coloca la revelación primero porque establece cómo se puede conocer a Dios, lo cual debe resolverse antes de decir algo sobre quién es Dios. El punto de partida de la teología no es la búsqueda del hombre sino la decisión de Dios de darse a conocer; lo finito no puede alcanzar al Infinito, así que si Dios no ha hablado, no puede ser conocido. La revelación es por tanto el fundamento y la base de toda doctrina posterior, la razón de que sea posible cualquier sermón sobre Dios, Cristo o la salvación. Establece que Dios ha hablado, y toda otra doctrina tiene dónde apoyarse."}, {"textEn": "22. State the preacher’s pastoral aim in a sermon on revelation. What move should the hearer make?", "textEs": "22. Exprese el objetivo pastoral del predicador en un sermón sobre la revelación. ¿Qué movimiento debe hacer el oyente?", "kw_en": ["aim", "searching", "respond", "spoken", "trust", "faith", "hearer", "known"], "kw_es": ["objetivo", "búsqueda", "responder", "hablado", "confiar", "fe", "oyente", "conoc"], "modelEn": "The pastoral aim is to move the hearer from religion as a human search to faith as a response to a God who has already spoken. The sermon must not leave people reaching up, guessing and hoping to find God on their own; it must turn them toward the God who has taken the initiative and made Himself known. The good news the hearer should grasp is not that we have found God but that God has come near and spoken, and the right response is to trust Him. So the sermon ends not in information but in faith.", "modelEs": "El objetivo pastoral es mover al oyente de la religión como búsqueda humana a la fe como respuesta a un Dios que ya ha hablado. El sermón no debe dejar a la gente estirándose, adivinando y esperando hallar a Dios por su cuenta; debe volverla hacia el Dios que ha tomado la iniciativa y se ha dado a conocer. La buena nueva que el oyente debe captar no es que hayamos hallado a Dios, sino que Dios se ha acercado y ha hablado, y la respuesta correcta es confiar en Él. Así que el sermón termina no en información sino en fe."}, {"textEn": "23. Lay out the homiletical move for preaching revelation: subject, interrogative, keyword, and how the points stay biblical.", "textEs": "23. Exponga el movimiento homilético para predicar la revelación: tema, interrogativo, palabra clave, y cómo los puntos siguen siendo bíblicos.", "kw_en": ["subject", "interrogative", "keyword", "forms", "point", "text", "biblical", "Word"], "kw_es": ["tema", "interrogativo", "clave", "formas", "punto", "texto", "bíblic", "Palabra"], "modelEn": "The subject is the Word of God. The interrogative asked of it is, in what forms does God speak His Word? The keyword that answers is forms, a plural noun from which the outline grows. The keyword yields five points, the Living, Preached, Natural, Written, and Enacted Word, and the points stay biblical because each one rests on its own text rather than on the preacher’s opinion. The preacher arranged the forms, which makes the sermon topical and deductive, yet the sermon is still the teaching of Scripture because every point is anchored to a passage.", "modelEs": "El tema es la Palabra de Dios. El interrogativo que se le hace es: ¿en qué formas habla Dios su Palabra? La palabra clave que responde es formas, un sustantivo plural del que crece el bosquejo. La palabra clave produce cinco puntos, la Palabra Viva, Predicada, Natural, Escrita y Actuada, y los puntos siguen siendo bíblicos porque cada uno descansa en su propio texto y no en la opinión del predicador. El predicador ordenó las formas, lo que hace el sermón tópico y deductivo, y sin embargo el sermón sigue siendo la enseñanza de la Escritura porque cada punto está anclado a un pasaje."}, {"textEn": "24. Name the five forms of the Word of God and the text under each.", "textEs": "24. Nombre las cinco formas de la Palabra de Dios y el texto bajo cada una.", "kw_en": ["living", "preached", "natural", "written", "enacted", "Jesus", "creation", "Bible"], "kw_es": ["viva", "predicada", "natural", "escrita", "actuada", "Jesús", "creaci", "Biblia"], "modelEn": "The Word of God comes in five forms, each on its own text. The Living Word is Jesus Christ, who became flesh, on John 1:14. The Preached or Prophetic Word is the proclamation of God’s truth, on Romans 10:14–17. The Natural Word is God’s revelation through creation, on Psalm 19:1 and Romans 1:19–20. The Written Word is the Bible, on 2 Timothy 3:16–17. And the Enacted Word is baptism and the Lord’s Supper, where the truth is acted out, on 1 Corinthians 11:26. Five forms, five texts, one subject.", "modelEs": "La Palabra de Dios viene en cinco formas, cada una sobre su propio texto. La Palabra Viva es Jesucristo, que se hizo carne, en Juan 1:14. La Palabra Predicada o Profética es la proclamación de la verdad de Dios, en Romanos 10:14–17. La Palabra Natural es la revelación de Dios por la creación, en Salmo 19:1 y Romanos 1:19–20. La Palabra Escrita es la Biblia, en 2 Timoteo 3:16–17. Y la Palabra Actuada es el bautismo y la Cena del Señor, donde la verdad se representa, en 1 Corintios 11:26. Cinco formas, cinco textos, un tema."}, {"textEn": "25. Develop the Living Word (John 1:14) as a sermon point using Explanation, Application, and Illustration.", "textEs": "25. Desarrolle la Palabra Viva (Juan 1:14) como punto de sermón usando Explicación, Aplicación e Ilustración.", "kw_en": ["explanation", "application", "illustration", "flesh", "Jesus", "Father", "look", "near"], "kw_es": ["explicaci", "aplicaci", "ilustraci", "carne", "Jesús", "Padre", "mirar", "cerca"], "modelEn": "The Explanation of the text is that a word expresses a mind, and the Word became flesh, so in Jesus God’s own self-expression took on flesh and dwelt among us; the highest form of God’s Word is a Person. The Application is that if you want to know what God is like, you look at Jesus, for he who has seen Him has seen the Father; the hearer who finds God distant is invited to look at the face of Christ, because God has come near and is not hiding. The Illustration is that a letter tells you much about someone, but it is not the same as the person walking through the door; the other forms are God’s letters, and the Living Word is God Himself arriving in the flesh.", "modelEs": "La Explicación del texto es que una palabra expresa una mente, y el Verbo se hizo carne, así que en Jesús la propia auto-expresión de Dios tomó carne y habitó entre nosotros; la forma más alta de la Palabra de Dios es una Persona. La Aplicación es que si quieres saber cómo es Dios, miras a Jesús, porque el que lo ha visto ha visto al Padre; al oyente que halla a Dios distante se le invita a mirar el rostro de Cristo, porque Dios se ha acercado y no se esconde. La Ilustración es que una carta dice mucho de alguien, pero no es lo mismo que la persona entrando por la puerta; las otras formas son las cartas de Dios, y la Palabra Viva es Dios mismo llegando en carne."}, {"textEn": "26. Explain the difference between general and special revelation. What can each do, and what can general revelation NOT do?", "textEs": "26. Explique la diferencia entre la revelación general y la especial. ¿Qué puede hacer cada una, y qué NO puede hacer la general?", "kw_en": ["general", "special", "nature", "conscience", "save", "Christ", "accountable", "creation"], "kw_es": ["general", "especial", "naturaleza", "conciencia", "salvar", "Cristo", "responsable", "creaci"], "modelEn": "General revelation is God’s disclosure through nature, history, and conscience, available to all people; it shows that God exists, that He is powerful, and that man is accountable to Him. What it cannot do is save; it gives awareness but not the way of forgiveness. Special revelation is God’s direct, redemptive self-disclosure in the history of Israel, in the person and work of Jesus Christ, and in the Bible. Because general revelation can make people accountable but cannot bring them to salvation, God gave special revelation, which alone makes Christ and the gospel known.", "modelEs": "La revelación general es la revelación de Dios por la naturaleza, la historia y la conciencia, disponible para todos; muestra que Dios existe, que es poderoso y que el hombre es responsable ante Él. Lo que no puede hacer es salvar; da conciencia pero no el camino del perdón. La revelación especial es la auto-revelación directa y redentora de Dios en la historia de Israel, en la persona y obra de Jesucristo y en la Biblia. Porque la revelación general puede hacer responsable a la gente pero no puede llevarla a la salvación, Dios dio la revelación especial, que es la única que da a conocer a Cristo y el evangelio."}, {"textEn": "27. Why does the course prefer “Absolute Authority” over terms like inerrancy and infallibility?", "textEs": "27. ¿Por qué prefiere el curso “Autoridad Absoluta” sobre términos como inerrancia e infalibilidad?", "kw_en": ["absolute", "authority", "positive", "affirm", "negative", "standard", "practice", "submit"], "kw_es": ["absoluta", "autoridad", "positiva", "afirm", "negativo", "norma", "práctica", "somet"], "modelEn": "Terms like inerrancy and infallibility have value, but they are framed as negatives, telling us what the Bible is not, not errant and not fallible. The course prefers Absolute Authority because it is a positive affirmation of what Scripture is and how we live under it. It moves the conversation from technical debates about the mechanics of the text to the practical reality of submitting to God’s Word. To say the Bible has absolute authority is to confess that it is the final, supreme standard for all faith and practice, so that we do not stand in judgment of the Word; the Word stands in judgment of us.", "modelEs": "Términos como inerrancia e infalibilidad tienen valor, pero se expresan como negativos, diciéndonos lo que la Biblia no es, no errante y no falible. El curso prefiere Autoridad Absoluta porque es una afirmación positiva de lo que la Escritura es y de cómo vivimos bajo ella. Mueve la conversación de los debates técnicos sobre los mecanismos del texto a la realidad práctica de someterse a la Palabra de Dios. Decir que la Biblia tiene autoridad absoluta es confesar que es la norma final y suprema para toda fe y práctica, de modo que no nos paramos en juicio sobre la Palabra; la Palabra se para en juicio sobre nosotros."}, {"textEn": "28. Distinguish inspiration, illumination, and transmission.", "textEs": "28. Distinga la inspiración, la iluminación y la transmisión.", "kw_en": ["inspiration", "illumination", "transmission", "Spirit", "understand", "authors", "preserve", "canon"], "kw_es": ["inspiraci", "iluminaci", "transmisi", "Espíritu", "entender", "autores", "preserv", "canon"], "modelEn": "These three describe how God gave, opens, and keeps His Word. Inspiration is God causing Scripture to be written while working through human authors, so that the text itself is God-breathed. Illumination is the ongoing work of the Holy Spirit enabling the believer to understand and apply what was written, since knowledge alone is insufficient without the Spirit opening our eyes. Transmission is God’s preservation of His Word through the centuries by canonization, manuscript copying, and translation, so that what reaches us is reliably what He gave. Inspiration produced the Word, illumination opens it to the reader, and transmission has preserved it.", "modelEs": "Estos tres describen cómo Dios dio, abre y guarda su Palabra. La inspiración es Dios causando que la Escritura fuera escrita mientras obraba por medio de autores humanos, de modo que el texto mismo es inspirado por Dios. La iluminación es la obra continua del Espíritu Santo que capacita al creyente para entender y aplicar lo que fue escrito, pues el conocimiento por sí solo es insuficiente sin el Espíritu abriendo nuestros ojos. La transmisión es la preservación de la Palabra de Dios a través de los siglos por la canonización, la copia de manuscritos y la traducción, de modo que lo que nos llega es de fiar lo que Él dio. La inspiración produjo la Palabra, la iluminación la abre al lector, y la transmisión la ha preservado."}, {"textEn": "29. Give two cautions for preaching revelation well, and explain why the sermon should reach toward response.", "textEs": "29. Dé dos advertencias para predicar bien la revelación, y explique por qué el sermón debe alcanzar la respuesta.", "kw_en": ["lecture", "bibliology", "response", "obedience", "trust", "arc", "invitation", "pictorial"], "kw_es": ["clase", "bibliolog", "respuesta", "obediencia", "confiar", "arco", "invitaci", "pictóric"], "modelEn": "One caution is not to preach a lecture on bibliology, spending the whole sermon on canon, manuscripts, and inspiration theories; those belong in the lesson, while the sermon aims at trust and obedience. A second caution is to preach pictorially, using illustrations like the hotel room so the truth lodges in memory. The sermon should reach toward response because the doctrine’s own logic forms an arc: because God has spoken, He can be known; because known, trusted; because trusted, obeyed. That chain carries the hearer naturally to the invitation, so revelation is preached not for information but for a response of faith and obedience.", "modelEs": "Una advertencia es no predicar una clase de bibliología, gastando todo el sermón en el canon, los manuscritos y las teorías de inspiración; eso pertenece a la lección, mientras que el sermón apunta a la confianza y la obediencia. Una segunda advertencia es predicar de forma pictórica, usando ilustraciones como la habitación del hotel para que la verdad se aloje en la memoria. El sermón debe alcanzar la respuesta porque la propia lógica de la doctrina forma un arco: porque Dios ha hablado, puede ser conocido; conocido, se confía; confiado, se obedece. Esa cadena lleva al oyente naturalmente a la invitación, así que la revelación se predica no para información sino para una respuesta de fe y obediencia."}, {"textEn": `30. Summarize how Unit ${UNIT} turns the doctrine of revelation into a sermon, from backbone to arc.`, "textEs": `30. Resuma cómo la Unidad ${UNIT} convierte la doctrina de la revelación en un sermón, del fundamento al arco.`, "kw_en": ["backbone", "subject", "keyword", "forms", "text", "point", "response", "method"], "kw_es": ["fundament", "tema", "clave", "formas", "texto", "punto", "respuesta", "método"], "modelEn": `Unit ${UNIT} takes the first doctrine and runs the whole method on it. It begins with a lean doctrinal backbone drawn from Systematic Theology: God must take the initiative, general revelation cannot save, and Scripture is the absolute authority. Then it makes the homiletical move: the subject is the Word of God, the interrogative asks in what forms God speaks, and the keyword forms yields five points, each anchored to its own text. One point, the Living Word, is developed by Explanation, Application, and Illustration to show how flesh is put on the skeleton. Finally the sermon bends toward response along the chain spoken, known, trusted, obeyed. Backbone, method, worked example, and arc to the invitation: that is the template every doctrine unit follows.`, "modelEs": `La Unidad ${UNIT} toma la primera doctrina y corre todo el método sobre ella. Comienza con un fundamento doctrinal breve sacado de la Teología Sistemática: Dios debe tomar la iniciativa, la revelación general no puede salvar, y la Escritura es la autoridad absoluta. Luego hace el movimiento homilético: el tema es la Palabra de Dios, el interrogativo pregunta en qué formas habla Dios, y la palabra clave formas produce cinco puntos, cada uno anclado a su propio texto. Un punto, la Palabra Viva, se desarrolla por Explicación, Aplicación e Ilustración para mostrar cómo se pone carne sobre el esqueleto. Finalmente el sermón se inclina hacia la respuesta por la cadena hablado, conocido, confiado, obedecido. Fundamento, método, ejemplo desarrollado y arco hacia la invitación: esa es la plantilla que sigue cada unidad de doctrina.`}];
+/* CTSDP — unit 3. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "dp",
+ "unit": 3,
+ "totalUnits": 10,
+ "filePrefix": "CTSDP",
+ "prevHref": "CTSDPUnit2.html",
+ "nextHref": "CTSDPUnit4.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - What Is Doctrinal Preaching?",
+   "Unit 2 - The Method: Text, Interrogative, Keyword",
+   "Unit 3 - Preaching the Doctrine of Revelation",
+   "Unit 4 - Preaching the Doctrine of God",
+   "Unit 5 - Preaching the Doctrine of Man",
+   "Unit 6 - Preaching the Life and Work of Christ",
+   "Unit 7 - Preaching the Holy Spirit",
+   "Unit 8 - Preaching the Doctrine of Salvation",
+   "Unit 9 - Preaching the Doctrine of the Church",
+   "Unit 10 - Preaching the Doctrine of Last Things"
+  ],
+  "es": [
+   "Unit 1 - What Is Doctrinal Preaching?",
+   "Unit 2 - The Method: Text, Interrogative, Keyword",
+   "Unit 3 - Preaching the Doctrine of Revelation",
+   "Unit 4 - Preaching the Doctrine of God",
+   "Unit 5 - Preaching the Doctrine of Man",
+   "Unit 6 - Preaching the Life and Work of Christ",
+   "Unit 7 - Preaching the Holy Spirit",
+   "Unit 8 - Preaching the Doctrine of Salvation",
+   "Unit 9 - Preaching the Doctrine of the Church",
+   "Unit 10 - Preaching the Doctrine of Last Things"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "Why does this course preach the doctrine of Revelation first?",
+    "es": "¿Por qué este curso predica primero la doctrina de la Revelación?"
+   },
+   "options": {
+    "en": [
+     "Because it is the shortest doctrine",
+     "Because tradition demands it",
+     "Because it is the easiest doctrine",
+     "Because how we know God must be settled before who God is"
+    ],
+    "es": [
+     "Porque es la doctrina más corta",
+     "Porque la tradición lo exige",
+     "Porque es la doctrina más fácil",
+     "Porque cómo conocemos a Dios debe resolverse antes de quién es Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Revelation comes first because it establishes how God can be known at all, the ground of every later doctrine.",
+    "es": "La revelación va primero porque establece cómo se puede conocer a Dios, el fundamento de toda doctrina posterior."
+   }
+  },
+  {
+   "stem": {
+    "en": "The preacher’s pastoral aim in a sermon on revelation is to move hearers:",
+    "es": "El objetivo pastoral del predicador en un sermón sobre la revelación es mover a los oyentes:"
+   },
+   "options": {
+    "en": [
+     "From religion as human searching to trusting a God who has spoken",
+     "To admire the preacher’s learning",
+     "To memorize the canon",
+     "To win theological debates"
+    ],
+    "es": [
+     "De la religión como búsqueda humana a confiar en un Dios que ha hablado",
+     "A admirar el saber del predicador",
+     "A memorizar el canon",
+     "A ganar debates teológicos"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The aim is to move hearers from reaching up to God toward responding to the God who has already spoken.",
+    "es": "El objetivo es mover a los oyentes de estirarse hacia Dios a responder al Dios que ya ha hablado."
+   }
+  },
+  {
+   "stem": {
+    "en": "A topical sermon on revelation remains biblical when:",
+    "es": "Un sermón tópico sobre la revelación sigue siendo bíblico cuando:"
+   },
+   "options": {
+    "en": [
+     "It is long enough",
+     "It avoids doctrine",
+     "It quotes the Greek",
+     "Every point rests on its own text"
+    ],
+    "es": [
+     "Es bastante largo",
+     "Evita la doctrina",
+     "Cita el griego",
+     "Cada punto descansa en su propio texto"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Each point standing on its own text is what keeps a topical sermon biblical.",
+    "es": "Que cada punto descanse en su propio texto es lo que mantiene bíblico al sermón tópico."
+   }
+  },
+  {
+   "stem": {
+    "en": "The subject “the Word of God” with the keyword “forms” produces a sermon that is:",
+    "es": "El tema “la Palabra de Dios” con la palabra clave “formas” produce un sermón que es:"
+   },
+   "options": {
+    "en": [
+     "Topical and deductive, yet biblical",
+     "Textual only",
+     "Neither biblical",
+     "Expository and inductive"
+    ],
+    "es": [
+     "Tópico y deductivo, pero bíblico",
+     "Solo textual",
+     "Nada bíblico",
+     "Expositivo e inductivo"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The preacher arranges the forms (topical, deductive), yet each rests on a text, so it stays biblical.",
+    "es": "El predicador ordena las formas (tópico, deductivo), pero cada una se apoya en un texto, así que sigue bíblico."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Living Word is:",
+    "es": "La Palabra Viva es:"
+   },
+   "options": {
+    "en": [
+     "Creation",
+     "Baptism",
+     "The Bible",
+     "Jesus Christ"
+    ],
+    "es": [
+     "La creación",
+     "El bautismo",
+     "La Biblia",
+     "Jesucristo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Living Word is Jesus Christ, the Word who became flesh (John 1:14).",
+    "es": "La Palabra Viva es Jesucristo, el Verbo que se hizo carne (Juan 1:14)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Written Word is:",
+    "es": "La Palabra Escrita es:"
+   },
+   "options": {
+    "en": [
+     "The Lord’s Supper",
+     "Preaching",
+     "The Bible",
+     "Jesus Christ"
+    ],
+    "es": [
+     "La Cena del Señor",
+     "La predicación",
+     "La Biblia",
+     "Jesucristo"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Written Word is the Bible (2 Timothy 3:16–17).",
+    "es": "La Palabra Escrita es la Biblia (2 Timoteo 3:16–17)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Natural Word is:",
+    "es": "La Palabra Natural es:"
+   },
+   "options": {
+    "en": [
+     "Jesus Christ",
+     "The Bible",
+     "God’s revelation through creation",
+     "The sacraments"
+    ],
+    "es": [
+     "Jesucristo",
+     "La Biblia",
+     "La revelación de Dios por la creación",
+     "Los sacramentos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Natural Word is God’s revelation through creation (Psalm 19:1; Romans 1:19–20).",
+    "es": "La Palabra Natural es la revelación de Dios por la creación (Salmo 19:1; Romanos 1:19–20)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Enacted Word refers to:",
+    "es": "La Palabra Actuada se refiere a:"
+   },
+   "options": {
+    "en": [
+     "Creation",
+     "The Bible",
+     "Preaching",
+     "Baptism and the Lord’s Supper"
+    ],
+    "es": [
+     "La creación",
+     "La Biblia",
+     "La predicación",
+     "El bautismo y la Cena del Señor"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Enacted Word is baptism and the Lord’s Supper, where the truth is acted out (1 Corinthians 11:26).",
+    "es": "La Palabra Actuada es el bautismo y la Cena del Señor, donde la verdad se representa (1 Corintios 11:26)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Preached or Prophetic Word is:",
+    "es": "La Palabra Predicada o Profética es:"
+   },
+   "options": {
+    "en": [
+     "The Lord’s Supper",
+     "The proclamation of God’s truth",
+     "Creation",
+     "The incarnation"
+    ],
+    "es": [
+     "La Cena del Señor",
+     "La proclamación de la verdad de Dios",
+     "La creación",
+     "La encarnación"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The Preached Word is the proclamation of God’s truth (Romans 10:14–17).",
+    "es": "La Palabra Predicada es la proclamación de la verdad de Dios (Romanos 10:14–17)."
+   }
+  },
+  {
+   "stem": {
+    "en": "General revelation reveals:",
+    "es": "La revelación general revela:"
+   },
+   "options": {
+    "en": [
+     "The New Testament canon",
+     "That God exists, is powerful, and man is accountable",
+     "The church ordinances",
+     "The full plan of salvation"
+    ],
+    "es": [
+     "El canon del Nuevo Testamento",
+     "Que Dios existe, es poderoso y el hombre es responsable",
+     "Las ordenanzas de la iglesia",
+     "El plan completo de salvación"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "General revelation shows God exists, is powerful, and man is accountable — but not the way of salvation.",
+    "es": "La revelación general muestra que Dios existe, es poderoso y el hombre es responsable — pero no el camino de salvación."
+   }
+  },
+  {
+   "stem": {
+    "en": "General revelation gives awareness but cannot:",
+    "es": "La revelación general da conciencia pero no puede:"
+   },
+   "options": {
+    "en": [
+     "Save",
+     "Speak through nature",
+     "Show God’s power",
+     "Reveal that God exists"
+    ],
+    "es": [
+     "Salvar",
+     "Hablar por la naturaleza",
+     "Mostrar el poder de Dios",
+     "Revelar que Dios existe"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "General revelation cannot save; that is why God gave special revelation.",
+    "es": "La revelación general no puede salvar; por eso Dios dio la revelación especial."
+   }
+  },
+  {
+   "stem": {
+    "en": "Special revelation is found in:",
+    "es": "La revelación especial se encuentra en:"
+   },
+   "options": {
+    "en": [
+     "Philosophy",
+     "Nature alone",
+     "Israel’s history, Jesus Christ, and the Bible",
+     "Human reason"
+    ],
+    "es": [
+     "La filosofía",
+     "Solo la naturaleza",
+     "La historia de Israel, Jesucristo y la Biblia",
+     "La razón humana"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Special revelation is God’s direct, redemptive disclosure in Israel, Christ, and Scripture.",
+    "es": "La revelación especial es la revelación directa y redentora de Dios en Israel, Cristo y la Escritura."
+   }
+  },
+  {
+   "stem": {
+    "en": "The starting point of all theology is:",
+    "es": "El punto de partida de toda teología es:"
+   },
+   "options": {
+    "en": [
+     "Philosophical proof",
+     "God’s decision to make Himself known",
+     "Church tradition",
+     "Man’s search for God"
+    ],
+    "es": [
+     "La prueba filosófica",
+     "La decisión de Dios de darse a conocer",
+     "La tradición de la iglesia",
+     "La búsqueda del hombre por Dios"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Theology begins with God’s initiative to reveal Himself, not man’s search.",
+    "es": "La teología comienza con la iniciativa de Dios de revelarse, no con la búsqueda del hombre."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why must God reveal Himself for us to know Him?",
+    "es": "¿Por qué debe Dios revelarse para que lo conozcamos?"
+   },
+   "options": {
+    "en": [
+     "Because we are too busy",
+     "Because the finite cannot reach the Infinite",
+     "Because God is hiding",
+     "Because reason is enough"
+    ],
+    "es": [
+     "Porque estamos muy ocupados",
+     "Porque lo finito no puede alcanzar al Infinito",
+     "Porque Dios se esconde",
+     "Porque la razón basta"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The finite cannot reach the Infinite; unless God speaks, He cannot be known.",
+    "es": "Lo finito no puede alcanzar al Infinito; si Dios no habla, no puede ser conocido."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which term does this course prefer for Scripture’s authority?",
+    "es": "¿Qué término prefiere este curso para la autoridad de la Escritura?"
+   },
+   "options": {
+    "en": [
+     "Inerrancy",
+     "Tradition",
+     "Absolute Authority",
+     "Infallibility"
+    ],
+    "es": [
+     "Inerrancia",
+     "Tradición",
+     "Autoridad Absoluta",
+     "Infalibilidad"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The course prefers “Absolute Authority” — a positive affirmation of what Scripture is.",
+    "es": "El curso prefiere “Autoridad Absoluta” — una afirmación positiva de lo que la Escritura es."
+   }
+  },
+  {
+   "stem": {
+    "en": "Inspiration means:",
+    "es": "La inspiración significa:"
+   },
+   "options": {
+    "en": [
+     "Scripture was copied perfectly",
+     "The church chose the canon",
+     "God caused Scripture while working through human authors",
+     "The Spirit helps believers understand"
+    ],
+    "es": [
+     "La Escritura se copió perfectamente",
+     "La iglesia eligió el canon",
+     "Dios causó la Escritura obrando por medio de autores humanos",
+     "El Espíritu ayuda a los creyentes a entender"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Inspiration is God causing Scripture while working through human authors.",
+    "es": "La inspiración es Dios causando la Escritura mientras obra por medio de autores humanos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Illumination means:",
+    "es": "La iluminación significa:"
+   },
+   "options": {
+    "en": [
+     "The canon was closed",
+     "Manuscripts were copied",
+     "God dictated the Word",
+     "The Holy Spirit helps believers understand the Word"
+    ],
+    "es": [
+     "El canon se cerró",
+     "Se copiaron los manuscritos",
+     "Dios dictó la Palabra",
+     "El Espíritu Santo ayuda a los creyentes a entender la Palabra"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Illumination is the Spirit’s ongoing work helping believers understand Scripture.",
+    "es": "La iluminación es la obra continua del Espíritu ayudando a los creyentes a entender la Escritura."
+   }
+  },
+  {
+   "stem": {
+    "en": "The hotel-room illustration teaches that:",
+    "es": "La ilustración de la habitación del hotel enseña que:"
+   },
+   "options": {
+    "en": [
+     "We should travel less",
+     "God’s light reveals what was always there; the room did not change",
+     "Cleanliness is next to godliness",
+     "Hotels are unclean"
+    ],
+    "es": [
+     "Deberíamos viajar menos",
+     "La luz de Dios revela lo que siempre estuvo allí; la habitación no cambió",
+     "La limpieza es casi santidad",
+     "Los hoteles son sucios"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Like sunlight in the room, God’s revelation shows what was always true; it does not create it.",
+    "es": "Como la luz del sol en la habitación, la revelación de Dios muestra lo que siempre fue verdad; no lo crea."
+   }
+  },
+  {
+   "stem": {
+    "en": "The danger to avoid when preaching revelation is:",
+    "es": "El peligro a evitar al predicar la revelación es:"
+   },
+   "options": {
+    "en": [
+     "Turning the sermon into a lecture on bibliology",
+     "Using any illustration",
+     "Mentioning Jesus",
+     "Quoting Scripture"
+    ],
+    "es": [
+     "Convertir el sermón en una clase de bibliología",
+     "Usar cualquier ilustración",
+     "Mencionar a Jesús",
+     "Citar la Escritura"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Avoid spending the sermon on canon and inspiration theories; aim at trust and obedience.",
+    "es": "Evita gastar el sermón en el canon y las teorías de inspiración; apunta a la confianza y la obediencia."
+   }
+  },
+  {
+   "stem": {
+    "en": "The doctrine’s closing chain runs: because God has spoken, He can be known; because known, trusted; because trusted, He must be:",
+    "es": "La cadena final de la doctrina dice: porque Dios ha hablado, puede ser conocido; conocido, se confía; y por confiarse, debe ser:"
+   },
+   "options": {
+    "en": [
+     "Obeyed",
+     "Debated",
+     "Admired",
+     "Studied"
+    ],
+    "es": [
+     "Obedecido",
+     "Debatido",
+     "Admirado",
+     "Estudiado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The chain ends in obedience: spoken → known → trusted → obeyed.",
+    "es": "La cadena termina en obediencia: hablado → conocido → confiado → obedecido."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Why does the preacher set the doctrine of revelation before the doctrine of God? What does it establish?",
+    "es": "¿Por qué coloca el predicador la doctrina de la revelación antes de la doctrina de Dios? ¿Qué establece?"
+   },
+   "keywords": {
+    "en": [
+     "revelation",
+     "first",
+     "know",
+     "God",
+     "spoken",
+     "foundation",
+     "before",
+     "ground"
+    ],
+    "es": [
+     "revelaci",
+     "primero",
+     "conoc",
+     "Dios",
+     "hablado",
+     "fundament",
+     "antes",
+     "base"
+    ]
+   },
+   "model": {
+    "en": "The preacher sets revelation first because it establishes how God can be known at all, which must be settled before anything is said about who God is. The starting point of theology is not man’s search but God’s decision to make Himself known; the finite cannot reach the Infinite, so unless God has spoken, He cannot be known. Revelation is therefore the foundation and ground of every later doctrine, the reason any sermon on God, Christ, or salvation is possible. Establish that God has spoken, and every other doctrine has somewhere to stand.",
+    "es": "El predicador coloca la revelación primero porque establece cómo se puede conocer a Dios, lo cual debe resolverse antes de decir algo sobre quién es Dios. El punto de partida de la teología no es la búsqueda del hombre sino la decisión de Dios de darse a conocer; lo finito no puede alcanzar al Infinito, así que si Dios no ha hablado, no puede ser conocido. La revelación es por tanto el fundamento y la base de toda doctrina posterior, la razón de que sea posible cualquier sermón sobre Dios, Cristo o la salvación. Establece que Dios ha hablado, y toda otra doctrina tiene dónde apoyarse."
+   }
+  },
+  {
+   "prompt": {
+    "en": "State the preacher’s pastoral aim in a sermon on revelation. What move should the hearer make?",
+    "es": "Exprese el objetivo pastoral del predicador en un sermón sobre la revelación. ¿Qué movimiento debe hacer el oyente?"
+   },
+   "keywords": {
+    "en": [
+     "aim",
+     "searching",
+     "respond",
+     "spoken",
+     "trust",
+     "faith",
+     "hearer",
+     "known"
+    ],
+    "es": [
+     "objetivo",
+     "búsqueda",
+     "responder",
+     "hablado",
+     "confiar",
+     "fe",
+     "oyente",
+     "conoc"
+    ]
+   },
+   "model": {
+    "en": "The pastoral aim is to move the hearer from religion as a human search to faith as a response to a God who has already spoken. The sermon must not leave people reaching up, guessing and hoping to find God on their own; it must turn them toward the God who has taken the initiative and made Himself known. The good news the hearer should grasp is not that we have found God but that God has come near and spoken, and the right response is to trust Him. So the sermon ends not in information but in faith.",
+    "es": "El objetivo pastoral es mover al oyente de la religión como búsqueda humana a la fe como respuesta a un Dios que ya ha hablado. El sermón no debe dejar a la gente estirándose, adivinando y esperando hallar a Dios por su cuenta; debe volverla hacia el Dios que ha tomado la iniciativa y se ha dado a conocer. La buena nueva que el oyente debe captar no es que hayamos hallado a Dios, sino que Dios se ha acercado y ha hablado, y la respuesta correcta es confiar en Él. Así que el sermón termina no en información sino en fe."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Lay out the homiletical move for preaching revelation: subject, interrogative, keyword, and how the points stay biblical.",
+    "es": "Exponga el movimiento homilético para predicar la revelación: tema, interrogativo, palabra clave, y cómo los puntos siguen siendo bíblicos."
+   },
+   "keywords": {
+    "en": [
+     "subject",
+     "interrogative",
+     "keyword",
+     "forms",
+     "point",
+     "text",
+     "biblical",
+     "Word"
+    ],
+    "es": [
+     "tema",
+     "interrogativo",
+     "clave",
+     "formas",
+     "punto",
+     "texto",
+     "bíblic",
+     "Palabra"
+    ]
+   },
+   "model": {
+    "en": "The subject is the Word of God. The interrogative asked of it is, in what forms does God speak His Word? The keyword that answers is forms, a plural noun from which the outline grows. The keyword yields five points, the Living, Preached, Natural, Written, and Enacted Word, and the points stay biblical because each one rests on its own text rather than on the preacher’s opinion. The preacher arranged the forms, which makes the sermon topical and deductive, yet the sermon is still the teaching of Scripture because every point is anchored to a passage.",
+    "es": "El tema es la Palabra de Dios. El interrogativo que se le hace es: ¿en qué formas habla Dios su Palabra? La palabra clave que responde es formas, un sustantivo plural del que crece el bosquejo. La palabra clave produce cinco puntos, la Palabra Viva, Predicada, Natural, Escrita y Actuada, y los puntos siguen siendo bíblicos porque cada uno descansa en su propio texto y no en la opinión del predicador. El predicador ordenó las formas, lo que hace el sermón tópico y deductivo, y sin embargo el sermón sigue siendo la enseñanza de la Escritura porque cada punto está anclado a un pasaje."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Name the five forms of the Word of God and the text under each.",
+    "es": "Nombre las cinco formas de la Palabra de Dios y el texto bajo cada una."
+   },
+   "keywords": {
+    "en": [
+     "living",
+     "preached",
+     "natural",
+     "written",
+     "enacted",
+     "Jesus",
+     "creation",
+     "Bible"
+    ],
+    "es": [
+     "viva",
+     "predicada",
+     "natural",
+     "escrita",
+     "actuada",
+     "Jesús",
+     "creaci",
+     "Biblia"
+    ]
+   },
+   "model": {
+    "en": "The Word of God comes in five forms, each on its own text. The Living Word is Jesus Christ, who became flesh, on John 1:14. The Preached or Prophetic Word is the proclamation of God’s truth, on Romans 10:14–17. The Natural Word is God’s revelation through creation, on Psalm 19:1 and Romans 1:19–20. The Written Word is the Bible, on 2 Timothy 3:16–17. And the Enacted Word is baptism and the Lord’s Supper, where the truth is acted out, on 1 Corinthians 11:26. Five forms, five texts, one subject.",
+    "es": "La Palabra de Dios viene en cinco formas, cada una sobre su propio texto. La Palabra Viva es Jesucristo, que se hizo carne, en Juan 1:14. La Palabra Predicada o Profética es la proclamación de la verdad de Dios, en Romanos 10:14–17. La Palabra Natural es la revelación de Dios por la creación, en Salmo 19:1 y Romanos 1:19–20. La Palabra Escrita es la Biblia, en 2 Timoteo 3:16–17. Y la Palabra Actuada es el bautismo y la Cena del Señor, donde la verdad se representa, en 1 Corintios 11:26. Cinco formas, cinco textos, un tema."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Develop the Living Word (John 1:14) as a sermon point using Explanation, Application, and Illustration.",
+    "es": "Desarrolle la Palabra Viva (Juan 1:14) como punto de sermón usando Explicación, Aplicación e Ilustración."
+   },
+   "keywords": {
+    "en": [
+     "explanation",
+     "application",
+     "illustration",
+     "flesh",
+     "Jesus",
+     "Father",
+     "look",
+     "near"
+    ],
+    "es": [
+     "explicaci",
+     "aplicaci",
+     "ilustraci",
+     "carne",
+     "Jesús",
+     "Padre",
+     "mirar",
+     "cerca"
+    ]
+   },
+   "model": {
+    "en": "The Explanation of the text is that a word expresses a mind, and the Word became flesh, so in Jesus God’s own self-expression took on flesh and dwelt among us; the highest form of God’s Word is a Person. The Application is that if you want to know what God is like, you look at Jesus, for he who has seen Him has seen the Father; the hearer who finds God distant is invited to look at the face of Christ, because God has come near and is not hiding. The Illustration is that a letter tells you much about someone, but it is not the same as the person walking through the door; the other forms are God’s letters, and the Living Word is God Himself arriving in the flesh.",
+    "es": "La Explicación del texto es que una palabra expresa una mente, y el Verbo se hizo carne, así que en Jesús la propia auto-expresión de Dios tomó carne y habitó entre nosotros; la forma más alta de la Palabra de Dios es una Persona. La Aplicación es que si quieres saber cómo es Dios, miras a Jesús, porque el que lo ha visto ha visto al Padre; al oyente que halla a Dios distante se le invita a mirar el rostro de Cristo, porque Dios se ha acercado y no se esconde. La Ilustración es que una carta dice mucho de alguien, pero no es lo mismo que la persona entrando por la puerta; las otras formas son las cartas de Dios, y la Palabra Viva es Dios mismo llegando en carne."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the difference between general and special revelation. What can each do, and what can general revelation NOT do?",
+    "es": "Explique la diferencia entre la revelación general y la especial. ¿Qué puede hacer cada una, y qué NO puede hacer la general?"
+   },
+   "keywords": {
+    "en": [
+     "general",
+     "special",
+     "nature",
+     "conscience",
+     "save",
+     "Christ",
+     "accountable",
+     "creation"
+    ],
+    "es": [
+     "general",
+     "especial",
+     "naturaleza",
+     "conciencia",
+     "salvar",
+     "Cristo",
+     "responsable",
+     "creaci"
+    ]
+   },
+   "model": {
+    "en": "General revelation is God’s disclosure through nature, history, and conscience, available to all people; it shows that God exists, that He is powerful, and that man is accountable to Him. What it cannot do is save; it gives awareness but not the way of forgiveness. Special revelation is God’s direct, redemptive self-disclosure in the history of Israel, in the person and work of Jesus Christ, and in the Bible. Because general revelation can make people accountable but cannot bring them to salvation, God gave special revelation, which alone makes Christ and the gospel known.",
+    "es": "La revelación general es la revelación de Dios por la naturaleza, la historia y la conciencia, disponible para todos; muestra que Dios existe, que es poderoso y que el hombre es responsable ante Él. Lo que no puede hacer es salvar; da conciencia pero no el camino del perdón. La revelación especial es la auto-revelación directa y redentora de Dios en la historia de Israel, en la persona y obra de Jesucristo y en la Biblia. Porque la revelación general puede hacer responsable a la gente pero no puede llevarla a la salvación, Dios dio la revelación especial, que es la única que da a conocer a Cristo y el evangelio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does the course prefer “Absolute Authority” over terms like inerrancy and infallibility?",
+    "es": "¿Por qué prefiere el curso “Autoridad Absoluta” sobre términos como inerrancia e infalibilidad?"
+   },
+   "keywords": {
+    "en": [
+     "absolute",
+     "authority",
+     "positive",
+     "affirm",
+     "negative",
+     "standard",
+     "practice",
+     "submit"
+    ],
+    "es": [
+     "absoluta",
+     "autoridad",
+     "positiva",
+     "afirm",
+     "negativo",
+     "norma",
+     "práctica",
+     "somet"
+    ]
+   },
+   "model": {
+    "en": "Terms like inerrancy and infallibility have value, but they are framed as negatives, telling us what the Bible is not, not errant and not fallible. The course prefers Absolute Authority because it is a positive affirmation of what Scripture is and how we live under it. It moves the conversation from technical debates about the mechanics of the text to the practical reality of submitting to God’s Word. To say the Bible has absolute authority is to confess that it is the final, supreme standard for all faith and practice, so that we do not stand in judgment of the Word; the Word stands in judgment of us.",
+    "es": "Términos como inerrancia e infalibilidad tienen valor, pero se expresan como negativos, diciéndonos lo que la Biblia no es, no errante y no falible. El curso prefiere Autoridad Absoluta porque es una afirmación positiva de lo que la Escritura es y de cómo vivimos bajo ella. Mueve la conversación de los debates técnicos sobre los mecanismos del texto a la realidad práctica de someterse a la Palabra de Dios. Decir que la Biblia tiene autoridad absoluta es confesar que es la norma final y suprema para toda fe y práctica, de modo que no nos paramos en juicio sobre la Palabra; la Palabra se para en juicio sobre nosotros."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Distinguish inspiration, illumination, and transmission.",
+    "es": "Distinga la inspiración, la iluminación y la transmisión."
+   },
+   "keywords": {
+    "en": [
+     "inspiration",
+     "illumination",
+     "transmission",
+     "Spirit",
+     "understand",
+     "authors",
+     "preserve",
+     "canon"
+    ],
+    "es": [
+     "inspiraci",
+     "iluminaci",
+     "transmisi",
+     "Espíritu",
+     "entender",
+     "autores",
+     "preserv",
+     "canon"
+    ]
+   },
+   "model": {
+    "en": "These three describe how God gave, opens, and keeps His Word. Inspiration is God causing Scripture to be written while working through human authors, so that the text itself is God-breathed. Illumination is the ongoing work of the Holy Spirit enabling the believer to understand and apply what was written, since knowledge alone is insufficient without the Spirit opening our eyes. Transmission is God’s preservation of His Word through the centuries by canonization, manuscript copying, and translation, so that what reaches us is reliably what He gave. Inspiration produced the Word, illumination opens it to the reader, and transmission has preserved it.",
+    "es": "Estos tres describen cómo Dios dio, abre y guarda su Palabra. La inspiración es Dios causando que la Escritura fuera escrita mientras obraba por medio de autores humanos, de modo que el texto mismo es inspirado por Dios. La iluminación es la obra continua del Espíritu Santo que capacita al creyente para entender y aplicar lo que fue escrito, pues el conocimiento por sí solo es insuficiente sin el Espíritu abriendo nuestros ojos. La transmisión es la preservación de la Palabra de Dios a través de los siglos por la canonización, la copia de manuscritos y la traducción, de modo que lo que nos llega es de fiar lo que Él dio. La inspiración produjo la Palabra, la iluminación la abre al lector, y la transmisión la ha preservado."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Give two cautions for preaching revelation well, and explain why the sermon should reach toward response.",
+    "es": "Dé dos advertencias para predicar bien la revelación, y explique por qué el sermón debe alcanzar la respuesta."
+   },
+   "keywords": {
+    "en": [
+     "lecture",
+     "bibliology",
+     "response",
+     "obedience",
+     "trust",
+     "arc",
+     "invitation",
+     "pictorial"
+    ],
+    "es": [
+     "clase",
+     "bibliolog",
+     "respuesta",
+     "obediencia",
+     "confiar",
+     "arco",
+     "invitaci",
+     "pictóric"
+    ]
+   },
+   "model": {
+    "en": "One caution is not to preach a lecture on bibliology, spending the whole sermon on canon, manuscripts, and inspiration theories; those belong in the lesson, while the sermon aims at trust and obedience. A second caution is to preach pictorially, using illustrations like the hotel room so the truth lodges in memory. The sermon should reach toward response because the doctrine’s own logic forms an arc: because God has spoken, He can be known; because known, trusted; because trusted, obeyed. That chain carries the hearer naturally to the invitation, so revelation is preached not for information but for a response of faith and obedience.",
+    "es": "Una advertencia es no predicar una clase de bibliología, gastando todo el sermón en el canon, los manuscritos y las teorías de inspiración; eso pertenece a la lección, mientras que el sermón apunta a la confianza y la obediencia. Una segunda advertencia es predicar de forma pictórica, usando ilustraciones como la habitación del hotel para que la verdad se aloje en la memoria. El sermón debe alcanzar la respuesta porque la propia lógica de la doctrina forma un arco: porque Dios ha hablado, puede ser conocido; conocido, se confía; confiado, se obedece. Esa cadena lleva al oyente naturalmente a la invitación, así que la revelación se predica no para información sino para una respuesta de fe y obediencia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize how Unit 3 turns the doctrine of revelation into a sermon, from backbone to arc.",
+    "es": "Resuma cómo la Unidad 3 convierte la doctrina de la revelación en un sermón, del fundamento al arco."
+   },
+   "keywords": {
+    "en": [
+     "backbone",
+     "subject",
+     "keyword",
+     "forms",
+     "text",
+     "point",
+     "response",
+     "method"
+    ],
+    "es": [
+     "fundament",
+     "tema",
+     "clave",
+     "formas",
+     "texto",
+     "punto",
+     "respuesta",
+     "método"
+    ]
+   },
+   "model": {
+    "en": "Unit 3 takes the first doctrine and runs the whole method on it. It begins with a lean doctrinal backbone drawn from Systematic Theology: God must take the initiative, general revelation cannot save, and Scripture is the absolute authority. Then it makes the homiletical move: the subject is the Word of God, the interrogative asks in what forms God speaks, and the keyword forms yields five points, each anchored to its own text. One point, the Living Word, is developed by Explanation, Application, and Illustration to show how flesh is put on the skeleton. Finally the sermon bends toward response along the chain spoken, known, trusted, obeyed. Backbone, method, worked example, and arc to the invitation: that is the template every doctrine unit follows.",
+    "es": "La Unidad 3 toma la primera doctrina y corre todo el método sobre ella. Comienza con un fundamento doctrinal breve sacado de la Teología Sistemática: Dios debe tomar la iniciativa, la revelación general no puede salvar, y la Escritura es la autoridad absoluta. Luego hace el movimiento homilético: el tema es la Palabra de Dios, el interrogativo pregunta en qué formas habla Dios, y la palabra clave formas produce cinco puntos, cada uno anclado a su propio texto. Un punto, la Palabra Viva, se desarrolla por Explicación, Aplicación e Ilustración para mostrar cómo se pone carne sobre el esqueleto. Finalmente el sermón se inclina hacia la respuesta por la cadena hablado, conocido, confiado, obedecido. Fundamento, método, ejemplo desarrollado y arco hacia la invitación: esa es la plantilla que sigue cada unidad de doctrina."
+   }
+  }
+ ]
+};

@@ -1,123 +1,803 @@
-/* CTSNT - unit 9: per-unit configuration and content. */
-
-const UNIT = 9;
-
-const NEXT_URL = 'CTSNTUnit10.html';
-
-const PREV_URL = 'CTSNTUnit8.html';
-
-const mcQuestions = [
-    { textEn: "1. Who founded the church at Thessalonica?", textEs: "1. ¿Quién fundó la iglesia en Tesalónica?",
-      optionsEn: ["Barnabas and Mark", "Peter and John", "Paul, Silas, and Timothy", "Apollos alone"],
-      optionsEs: ["Bernabé y Marcos", "Pedro y Juan", "Pablo, Silas y Timoteo", "Apolos solo"],
-      explanationEn: "Paul, Silas, and Timothy founded the Thessalonian church on Paul's second missionary journey (Acts 17).", explanationEs: "Pablo, Silas y Timoteo fundaron la iglesia tesalonicense en el segundo viaje misionero de Pablo (Hechos 17).", correct: 2 },
-    { textEn: "2. According to the unit, how long did Paul preach in the Thessalonian synagogue before opposition drove him out?", textEs: "2. Según la unidad, ¿cuánto tiempo predicó Pablo en la sinagoga de Tesalónica antes de que la oposición lo expulsara?",
-      optionsEn: ["Three years", "Only a few Sabbaths", "A single day", "Forty days"],
-      optionsEs: ["Tres años", "Solo unos pocos días de reposo", "Un solo día", "Cuarenta días"],
-      explanationEn: "Paul preached only a few Sabbaths in the synagogue before opposition drove him out, leaving a young church under pressure.", explanationEs: "Pablo predicó solo unos pocos días de reposo en la sinagoga antes de que la oposición lo expulsara, dejando una iglesia joven bajo presión.", correct: 1 },
-    { textEn: "3. In 'Salvation of the Whole Man,' the thief on the cross illustrates the salvation of the:", textEs: "3. En 'La Salvación del Hombre Completo', el ladrón en la cruz ilustra la salvación del:",
-      optionsEn: ["Whole man", "Body only", "Nation", "Soul only"],
-      optionsEs: ["Hombre completo", "Cuerpo solamente", "Nación", "Alma solamente"],
-      explanationEn: "The Thessalonians' complete salvation had three stages: they turned from idols, served the living God, and waited for His Son.", explanationEs: "La salvación completa de los tesalonicenses tuvo tres etapas: se convirtieron de los ídolos, sirvieron al Dios vivo y esperaron a Su Hijo.", correct: 3 },
-    { textEn: "4. The unit defines an idol as:", textEs: "4. La unidad define un ídolo como:",
-      optionsEn: ["Anything chosen above God", "A foreign religion", "A pagan temple", "Only a carved statue"],
-      optionsEs: ["Cualquier cosa escogida por encima de Dios", "Una religión extranjera", "Un templo pagano", "Solo una estatua tallada"],
-      explanationEn: "The unit defines an idol as anything chosen above God, whether beauty, money, or power.", explanationEs: "La unidad define un ídolo como cualquier cosa escogida por encima de Dios, sea belleza, dinero o poder.", correct: 0 },
-    { textEn: "5. The three stages of complete salvation in 1 Thessalonians 1 are: turned from idols, served the living God, and:", textEs: "5. Las tres etapas de la salvación completa en 1 Tesalonicenses 1 son: convertirse de los ídolos, servir al Dios vivo y:",
-      optionsEn: ["Wrote the epistles", "Built a temple", "Paid the tithe", "Waited for His Son from heaven"],
-      optionsEs: ["Escribir las epístolas", "Construir un templo", "Pagar el diezmo", "Esperar a su Hijo de los cielos"],
-      explanationEn: "The thief on the cross was saved in his soul but missed a whole life of service — salvation of the soul, not the whole man.", explanationEs: "El ladrón en la cruz fue salvo en su alma pero perdió toda una vida de servicio — salvación del alma, no del hombre completo.", correct: 3 },
-    { textEn: "6. Which is NOT named in the unit as a way to serve God?", textEs: "6. ¿Cuál NO se menciona en la unidad como una manera de servir a Dios?",
-      optionsEn: ["By the way we live", "By accumulating wealth for ourselves", "By giving our time", "By the right use of our money"],
-      optionsEs: ["Por la manera en que vivimos", "Acumulando riqueza para nosotros mismos", "Dándole nuestro tiempo", "Con el uso correcto de nuestro dinero"],
-      explanationEn: "Works do not save, but the truly saved serve the Lord, for by their fruits you shall know them (Matthew 7:20).", explanationEs: "Las obras no salvan, pero el verdaderamente salvo sirve al Señor, pues por sus frutos los conoceréis (Mateo 7:20).", correct: 1 },
-    { textEn: "7. The word 'cemetery,' the unit explains, originally means a:", textEs: "7. La palabra 'cementerio', explica la unidad, originalmente significa un:",
-      optionsEn: ["Place of mourning", "Field of the dead", "Resting or sleeping place", "City of tombs"],
-      optionsEs: ["Lugar de luto", "Campo de los muertos", "Lugar de descanso o para dormir", "Ciudad de tumbas"],
-      explanationEn: "Early Christians called the burial place a cemetery, meaning a resting or sleeping place, because death for the believer is sleep.", explanationEs: "Los primeros cristianos llamaron al lugar de sepultura un cementerio, que significa un lugar de descanso o sueño, porque la muerte para el creyente es sueño.", correct: 2 },
-    { textEn: "8. The unit says the pagan world faced death with:", textEs: "8. La unidad dice que el mundo pagano enfrentaba la muerte con:",
-      optionsEn: ["Despair", "Indifference to the body", "Confidence in reincarnation", "Joyful hope"],
-      optionsEs: ["Desesperación", "Indiferencia hacia el cuerpo", "Confianza en la reencarnación", "Esperanza gozosa"],
-      explanationEn: "Christians do not grieve as others grieve because loved ones in Christ are only asleep, awaiting the resurrection.", explanationEs: "Los cristianos no se afligen como los demás porque los seres queridos en Cristo solo duermen, esperando la resurrección.", correct: 0 },
-    { textEn: "9. Acts 1:11 is cited to show that Jesus will return:", textEs: "9. Se cita Hechos 1:11 para mostrar que Jesús volverá:",
-      optionsEn: ["After the world reforms", "Only spiritually", "In the same way He ascended", "At a date we can calculate"],
-      optionsEs: ["Después de que el mundo se reforme", "Solo espiritualmente", "De la misma manera en que ascendió", "En una fecha que podemos calcular"],
-      explanationEn: "The unit says the coming cannot be scheduled or read from signs, for it comes in the twinkling of an eye.", explanationEs: "La unidad dice que la venida no puede programarse ni leerse de las señales, porque viene en un abrir y cerrar de ojos.", correct: 2 },
-    { textEn: "10. The Eisenhower/dying-boy story illustrates that the Lord's coming will be:", textEs: "10. La historia de Eisenhower y el niño moribundo ilustra que la venida del Señor será:",
-      optionsEn: ["Sudden and unexpected", "Long delayed", "Announced years ahead", "Visible only to pastors"],
-      optionsEs: ["Repentina e inesperada", "Muy demorada", "Anunciada con años de anticipación", "Visible solo para los pastores"],
-      explanationEn: "Everyone who has set a date for the end has been wrong, including Christopher Columbus.", explanationEs: "Todo el que ha fijado una fecha para el fin se ha equivocado, incluyendo a Cristóbal Colón.", correct: 0 },
-    { textEn: "11. 'The dead in Christ will rise first' means believers receive:", textEs: "11. 'Los muertos en Cristo resucitarán primero' significa que los creyentes reciben:",
-      optionsEn: ["Their same earthly bodies reassembled", "New, glorified bodies like Christ's", "Only a spiritual existence", "No body at all"],
-      optionsEs: ["Sus mismos cuerpos terrenales rearmados", "Cuerpos nuevos y glorificados como el de Cristo", "Solo una existencia espiritual", "Ningún cuerpo en absoluto"],
-      explanationEn: "Acts 1:11 teaches that Christ will return the same way He ascended — personally, visibly, and actually, not merely spiritually.", explanationEs: "Hechos 1:11 enseña que Cristo volverá de la misma manera que ascendió — personal, visible y realmente, no solo espiritualmente.", correct: 1 },
-    { textEn: "12. In 1 Thessalonians 5:19, to 'quench' the Spirit means to:", textEs: "12. En 1 Tesalonicenses 5:19, 'apagar' el Espíritu significa:",
-      optionsEn: ["Multiply the fire", "Hide the fire", "Worship the fire", "Extinguish or put out the fire"],
-      optionsEs: ["Multiplicar el fuego", "Esconder el fuego", "Adorar el fuego", "Extinguir o apagar el fuego"],
-      explanationEn: "His coming will be in the air with the Lord's shout, the trumpet, and the voice of the archangel.", explanationEs: "Su venida será en el aire con la voz de mando del Señor, la trompeta y la voz del arcángel.", correct: 3 },
-    { textEn: "13. The unit lists the marks of a Spirit-filled church as happy, thankful, praying, and:", textEs: "13. La unidad enumera las marcas de una iglesia llena del Espíritu como gozosa, agradecida, que ora y:",
-      optionsEn: ["Large", "Wealthy", "Preaching", "Ancient"],
-      optionsEs: ["Grande", "Rica", "Que predica", "Antigua"],
-      explanationEn: "Paul says the Day of the Lord comes as a thief in the night — sudden and unexpected (1 Thessalonians 5:2).", explanationEs: "Pablo dice que el día del Señor viene como ladrón en la noche — repentino e inesperado (1 Tesalonicenses 5:2).", correct: 2 },
-    { textEn: "14. 'Jim Jones had fire, but it led to destruction' warns against:", textEs: "14. 'Jim Jones tenía fuego, pero condujo a la destrucción' advierte contra:",
-      optionsEn: ["Cold, dead churches", "Fanaticism / fire without light", "Tithing", "Prophecy of any kind"],
-      optionsEs: ["Iglesias frías y muertas", "El fanatismo / el fuego sin luz", "El diezmo", "La profecía de cualquier tipo"],
-      explanationEn: "At death the soul goes immediately to be with the Lord; it is the body, not the soul, that sleeps.", explanationEs: "Al morir el alma va de inmediato a estar con el Señor; es el cuerpo, no el alma, lo que duerme.", correct: 1 },
-    { textEn: "15. The main comfort of 2 Thessalonians 1 for the persecuted is that:", textEs: "15. El consuelo principal de 2 Tesalonicenses 1 para los perseguidos es que:",
-      optionsEn: ["Suffering is an illusion", "The storm is always stilled at once", "Persecution proves God is absent", "Christ is with us in the storm"],
-      optionsEs: ["El sufrimiento es una ilusión", "La tormenta siempre se calma de inmediato", "La persecución prueba que Dios está ausente", "Cristo está con nosotros en la tormenta"],
-      explanationEn: "At the return the dead in Christ rise first, receiving new glorified bodies like the resurrected body of Christ.", explanationEs: "En el regreso los muertos en Cristo resucitan primero, recibiendo nuevos cuerpos glorificados como el cuerpo resucitado de Cristo.", correct: 3 },
-    { textEn: "16. The book of Revelation is described in the unit as sharing what main message with 2 Thessalonians?", textEs: "16. El libro de Apocalipsis se describe en la unidad como compartiendo qué mensaje principal con 2 Tesalonicenses?",
-      optionsEn: ["Comfort for the persecuted", "Rules for worship", "Church organization", "Detailed end-time dates"],
-      optionsEs: ["Consuelo para los perseguidos", "Reglas para la adoración", "Organización de la iglesia", "Fechas detalladas del fin"],
-      explanationEn: "To quench the Spirit means to put out His fire; Paul commands 'Quench not the Spirit' (1 Thessalonians 5:19).", explanationEs: "Apagar el Espíritu significa apagar Su fuego; Pablo manda 'No apaguéis el Espíritu' (1 Tesalonicenses 5:19).", correct: 0 },
-    { textEn: "17. On the 'man of lawlessness,' the unit (citing 1 John) emphasizes that:", textEs: "17. Sobre el 'hombre de pecado', la unidad (citando a 1 Juan) enfatiza que:",
-      optionsEn: ["He is purely symbolic", "He is a known living person", "He has already been defeated", "There are many antichrists; don't fixate on one name"],
-      optionsEs: ["Es puramente simbólico", "Es una persona viva conocida", "Ya ha sido derrotado", "Hay muchos anticristos; no fijarse en un nombre"],
-      explanationEn: "A church quenches the Spirit by removing the fuel (treating the church as ours) or smothering the fire with willful sin.", explanationEs: "Una iglesia apaga el Espíritu quitando el combustible (tratando la iglesia como nuestra) o sofocando el fuego con pecado voluntario.", correct: 3 },
-    { textEn: "18. The Old Testament 'Day of the Lord' refers to God's decisive intervention in both:", textEs: "18. El 'Día del Señor' del Antiguo Testamento se refiere a la intervención decisiva de Dios en ambos:",
-      optionsEn: ["Law and sacrifice", "Judgment and salvation", "Israel and Egypt", "Temple and tabernacle"],
-      optionsEs: ["Ley y sacrificio", "Juicio y salvación", "Israel y Egipto", "Templo y tabernáculo"],
-      explanationEn: "Second Thessalonians 1 comforts a persecuted people: Christ is with them in the storm and the suffering will not last forever.", explanationEs: "Segunda de Tesalonicenses 1 consuela a un pueblo perseguido: Cristo está con ellos en la tormenta y el sufrimiento no durará para siempre.", correct: 1 },
-    { textEn: "19. Dietrich Bonhoeffer is used to illustrate that:", textEs: "19. Dietrich Bonhoeffer se usa para ilustrar que:",
-      optionsEn: ["One who spoke up against evil paid with his life", "Silence is always wise", "Most leaders spoke out against Hitler", "The church controlled the state"],
-      optionsEs: ["Quien alzó la voz contra el mal lo pagó con su vida", "El silencio siempre es sabio", "La mayoría de los líderes hablaron contra Hitler", "La iglesia controlaba al estado"],
-      explanationEn: "The unit urges restraint on the man of lawlessness: many antichrists exist, confident identifiers have been wrong, and our task is to stay faithful.", explanationEs: "La unidad insta a la cautela sobre el hombre de pecado: existen muchos anticristos, los que han identificado con confianza se han equivocado, y nuestra tarea es permanecer fieles.", correct: 0 },
-    { textEn: "20. The main correction of 2 Thessalonians 3 is that believers should be:", textEs: "20. La corrección principal de 2 Tesalonicenses 3 es que los creyentes deben estar:",
-      optionsEn: ["Scheduling the exact date", "Selling all and waiting", "Prepared and faithfully working, not idle", "Withdrawing from society"],
-      optionsEs: ["Programando la fecha exacta", "Vendiendo todo y esperando", "Preparados y trabajando fielmente, no ociosos", "Retirándose de la sociedad"],
-      explanationEn: "Second Thessalonians 3 corrects idleness: the believer who truly expects the Lord is found faithfully at work, not waiting idle.", explanationEs: "Segunda de Tesalonicenses 3 corrige la ociosidad: el creyente que verdaderamente espera al Señor es hallado fielmente en la obra, no esperando ocioso.", correct: 2 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain the difference between 'salvation of the soul' and 'salvation of the whole man.'", textEs: "21. Explique la diferencia entre la 'salvación del alma' y la 'salvación del hombre completo'.",
-      kw_en: ["soul", "life", "whole", "early", "serve", "thief"], kw_es: ["alma", "vida", "completo", "temprano", "servir", "ladron"],
-      modelEn: "Salvation of the soul rescues a person for eternity, as with the thief on the cross who was saved in his last moments. But salvation of the whole man saves the life as well as the soul, the years that can be poured out in service to Christ. The thief gained heaven yet forfeited a whole life of service, which is why we plead with people to come to Christ early and serve Him.", modelEs: "La salvación del alma rescata a una persona para la eternidad, como con el ladrón en la cruz que fue salvo en sus últimos momentos. Pero la salvación del hombre completo salva la vida tanto como el alma, los años que pueden derramarse en servicio a Cristo. El ladrón ganó el cielo pero perdió toda una vida de servicio, por lo cual rogamos a las personas que vengan a Cristo temprano y le sirvan." },
-    { textEn: "22. The unit says an idol is 'anything chosen above God.' Give an example and explain the principle.", textEs: "22. La unidad dice que un ídolo es 'cualquier cosa escogida por encima de Dios'. Dé un ejemplo y explique el principio.",
-      kw_en: ["above god", "money", "power", "pleasure", "turn", "first"], kw_es: ["por encima de dios", "dinero", "poder", "placer", "convertir", "primero"],
-      modelEn: "The unit defines an idol as anything chosen above God. It may be money and security, pleasure, or power, rather than a carved image. No one can be saved until he turns from that idol and chooses God in its place, for turning is the first point of salvation. Whatever holds the heart first, before God, is the idol that must be surrendered.", modelEs: "La unidad define un ídolo como cualquier cosa escogida por encima de Dios. Puede ser el dinero y la seguridad, el placer o el poder, en vez de una imagen tallada. Nadie puede ser salvo hasta que se convierta de ese ídolo y escoja a Dios en su lugar, pues convertirse es el primer punto de la salvación. Lo que retiene el corazón primero, antes que Dios, es el ídolo que debe entregarse." },
-    { textEn: "23. List several ways the unit says we can serve the living God.", textEs: "23. Enumere varias maneras en que la unidad dice que podemos servir al Dios vivo.",
-      kw_en: ["live", "time", "talents", "witness", "tell others", "money", "tithe"], kw_es: ["vivir", "tiempo", "talentos", "testificar", "hablar a otros", "dinero", "diezmo"],
-      modelEn: "The unit lists several ways to serve the living God. We serve by the way we live, a consecrated life whose influence cannot be measured; by giving Him our time rather than spending it all on the world; by using our talents for Him; by telling others the gospel, the greatest trust placed in our hands; and by the right use of our money, giving at least the tithe through the local church.", modelEs: "La unidad enumera varias maneras de servir al Dios vivo. Servimos por la manera en que vivimos, una vida consagrada cuya influencia no puede medirse; dándole nuestro tiempo en vez de gastarlo todo en el mundo; usando nuestros talentos para Él; hablándoles a otros el evangelio, la mayor confianza puesta en nuestras manos; y con el uso correcto de nuestro dinero, dando al menos el diezmo por medio de la iglesia local." },
-    { textEn: "24. Why does Paul say Christians do not grieve as others grieve? Use the meaning of 'cemetery.'", textEs: "24. ¿Por qué dice Pablo que los cristianos no se afligen como los demás? Use el significado de 'cementerio'.",
-      kw_en: ["sleep", "resting place", "hope", "asleep", "reunion", "return"], kw_es: ["dormir", "lugar de descanso", "esperanza", "dormidos", "reunion", "regreso"],
-      modelEn: "Christians do not grieve as others grieve because death for the believer is only sleep. The word cemetery means a resting place, a sleeping place, and a believer who has died is asleep there awaiting the Lord's return. Like a family that does not mourn a member away in a distant city, we hold the hope of reunion, for those asleep in Christ will rise when He comes.", modelEs: "Los cristianos no se afligen como los demás porque la muerte para el creyente es solo sueño. La palabra cementerio significa un lugar de descanso, un lugar para dormir, y un creyente que ha muerto está allí dormido esperando el regreso del Señor. Como una familia que no se lamenta por un miembro lejos en una ciudad distante, sostenemos la esperanza del reencuentro, pues los que duermen en Cristo resucitarán cuando Él venga." },
-    { textEn: "25. What does Acts 1:11 teach about the manner of Christ's return?", textEs: "25. ¿Qué enseña Hechos 1:11 sobre la manera del regreso de Cristo?",
-      kw_en: ["same way", "ascended", "personally", "visibly", "actually", "air"], kw_es: ["misma manera", "ascendio", "personalmente", "visiblemente", "realmente", "aire"],
-      modelEn: "Acts 1:11 teaches that Christ will return the same way He ascended into heaven: personally, visibly, and actually, not merely as a spiritual influence. His coming will be in the air, announced by the Lord's shout, a trumpet, and the voice of the archangel. The manner of His return is as real and bodily as His departure was.", modelEs: "Hechos 1:11 enseña que Cristo volverá de la misma manera que ascendió al cielo: personal, visible y realmente, no meramente como una influencia espiritual. Su venida será en el aire, anunciada por la voz de mando del Señor, una trompeta y la voz del arcángel. La manera de Su regreso es tan real y corporal como lo fue Su partida." },
-    { textEn: "26. Describe what happens to the body and the soul at death and at the resurrection, according to the unit.", textEs: "26. Describa lo que sucede con el cuerpo y el alma en la muerte y en la resurrección, según la unidad.",
-      kw_en: ["soul", "with the lord", "body sleeps", "rise first", "glorified body", "absent"], kw_es: ["alma", "con el señor", "cuerpo duerme", "resucitan primero", "cuerpo glorificado", "ausentes"],
-      modelEn: "At death the soul goes immediately to be with the Lord, for to be absent from the body is to be present with the Lord; it is the body that sleeps, not the soul. At the resurrection the dead in Christ rise first and receive a new glorified body like the risen body of Christ. God brings the waiting souls with Him, and they are reunited with transformed bodies.", modelEs: "Al morir el alma va de inmediato a estar con el Señor, pues estar ausentes del cuerpo es estar presentes al Señor; es el cuerpo el que duerme, no el alma. En la resurrección los muertos en Cristo resucitan primero y reciben un nuevo cuerpo glorificado como el cuerpo resucitado de Cristo. Dios trae consigo a las almas que esperan, y son reunidas con cuerpos transformados." },
-    { textEn: "27. What does it mean to 'quench the Spirit,' and how can a church do it?", textEs: "27. ¿Qué significa 'apagar el Espíritu' y cómo puede una iglesia hacerlo?",
-      kw_en: ["extinguish", "fire", "fuel", "willful sin", "enthusiasm", "dead church"], kw_es: ["extinguir", "fuego", "combustible", "pecado voluntario", "entusiasmo", "iglesia muerta"],
-      modelEn: "To quench the Spirit means to extinguish His fire, for the Spirit is pictured as a fire that can be put out. A church quenches Him in two ways: by removing the fuel, treating the church as its own rather than God's, or by throwing willful sin on the flame. A church that has lost its enthusiasm and joy becomes a dead church, where the fire has gone out.", modelEs: "Apagar el Espíritu significa extinguir Su fuego, pues el Espíritu se representa como un fuego que puede apagarse. Una iglesia lo apaga de dos maneras: quitando el combustible, tratando la iglesia como propia en vez de de Dios, o echando pecado voluntario sobre la llama. Una iglesia que ha perdido su entusiasmo y su gozo se vuelve una iglesia muerta, donde el fuego se ha apagado." },
-    { textEn: "28. State the main message of 2 Thessalonians 1 and the storm illustration that supports it.", textEs: "28. Exprese el mensaje principal de 2 Tesalonicenses 1 y la ilustración de la tormenta que lo respalda.",
-      kw_en: ["comfort", "persecution", "with us", "storm", "peace be still", "revelation", "patmos"], kw_es: ["consuelo", "persecucion", "con nosotros", "tormenta", "calla enmudece", "apocalipsis", "patmos"],
-      modelEn: "Second Thessalonians 1 comforts a church under persecution, the same comfort that runs through Revelation, where John was imprisoned on Patmos. The message is not that the suffering is small but that Christ is with His people in it. Like the storm on the lake when Jesus said Peace be still, the comfort is not always a calmed storm on demand but His presence within it; God has not lost control.", modelEs: "Segunda de Tesalonicenses 1 consuela a una iglesia bajo persecución, el mismo consuelo que recorre Apocalipsis, donde Juan estuvo preso en Patmos. El mensaje no es que el sufrimiento sea pequeño sino que Cristo está con Su pueblo en él. Como la tormenta en el lago cuando Jesús dijo Calla, enmudece, el consuelo no siempre es una tormenta calmada a petición sino Su presencia dentro de ella; Dios no ha perdido el control." },
-    { textEn: "29. How does the unit teach the 'man of lawlessness' and the Day of the Lord? Why caution against naming the Antichrist?", textEs: "29. ¿Cómo enseña la unidad el 'hombre de pecado' y el Día del Señor? ¿Por qué advertir contra nombrar al Anticristo?",
-      kw_en: ["many antichrists", "timeline", "god in control", "intervene", "judgment", "salvation", "wrong"], kw_es: ["muchos anticristos", "calendario", "dios en control", "intervenir", "juicio", "salvacion", "equivocado"],
-      modelEn: "On the man of lawlessness the unit teaches restraint. John says there are already many antichrists, and across the centuries confident identifiers have generally been proven wrong, like every date-setter. God remains in control of the timeline, and behind the chapter lies the Day of the Lord, God's decisive intervention bringing both judgment and salvation. Our task is not to pin a name on the lawlessness but to stay faithful, because God must intervene to set the world right.", modelEs: "Sobre el hombre de pecado la unidad enseña cautela. Juan dice que ya hay muchos anticristos, y a lo largo de los siglos los que identifican con confianza generalmente han resultado equivocados, como todo el que fija fechas. Dios permanece en control de la línea de tiempo, y tras el capítulo está el Día del Señor, la intervención decisiva de Dios que trae a la vez juicio y salvación. Nuestra tarea no es ponerle un nombre a la maldad sino permanecer fieles, porque Dios debe intervenir para enderezar el mundo." },
-    { textEn: "30. Why does 2 Thessalonians correct idleness, and how does the unit use Adam to show the dignity of work?", textEs: "30. ¿Por qué corrige 2 Tesalonicenses la ociosidad, y cómo usa la unidad a Adán para mostrar la dignidad del trabajo?",
-      kw_en: ["prepared", "not schedule", "work", "adam", "garden", "thorns", "noble", "six days"], kw_es: ["preparados", "no programar", "trabajo", "adan", "huerto", "espinos", "noble", "seis dias"],
-      modelEn: "Second Thessalonians 3 corrects idleness because some, expecting the Lord at any moment, had stopped working. We are called to be prepared, not to schedule the return, which even the Son left to the Father. And being prepared does not mean idleness: man was made for work. Before the Fall Adam tended the garden; after it he labored among thorns, yet work stayed noble, for God said six days you shall labor. The faithful believer is found at work.", modelEs: "Segunda de Tesalonicenses 3 corrige la ociosidad porque algunos, esperando al Señor en cualquier momento, habían dejado de trabajar. Somos llamados a estar preparados, no a programar el regreso, que aun el Hijo dejó al Padre. Y estar preparados no significa ociosidad: el hombre fue hecho para trabajar. Antes de la Caída Adán cuidaba el huerto; después trabajó entre espinos, pero el trabajo siguió siendo noble, pues Dios dijo seis días trabajarás. El creyente fiel es hallado en la obra." }
-];
+/* CTSNT — unit 9. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "nt",
+ "unit": 9,
+ "totalUnits": 12,
+ "filePrefix": "CTSNT",
+ "prevHref": "CTSNTUnit8.html",
+ "nextHref": "CTSNTUnit10.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Who founded the church at Thessalonica?",
+    "es": "¿Quién fundó la iglesia en Tesalónica?"
+   },
+   "options": {
+    "en": [
+     "Barnabas and Mark",
+     "Peter and John",
+     "Paul, Silas, and Timothy",
+     "Apollos alone"
+    ],
+    "es": [
+     "Bernabé y Marcos",
+     "Pedro y Juan",
+     "Pablo, Silas y Timoteo",
+     "Apolos solo"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Paul, Silas, and Timothy founded the Thessalonian church on Paul's second missionary journey (Acts 17).",
+    "es": "Pablo, Silas y Timoteo fundaron la iglesia tesalonicense en el segundo viaje misionero de Pablo (Hechos 17)."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the unit, how long did Paul preach in the Thessalonian synagogue before opposition drove him out?",
+    "es": "Según la unidad, ¿cuánto tiempo predicó Pablo en la sinagoga de Tesalónica antes de que la oposición lo expulsara?"
+   },
+   "options": {
+    "en": [
+     "Three years",
+     "Only a few Sabbaths",
+     "A single day",
+     "Forty days"
+    ],
+    "es": [
+     "Tres años",
+     "Solo unos pocos días de reposo",
+     "Un solo día",
+     "Cuarenta días"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Paul preached only a few Sabbaths in the synagogue before opposition drove him out, leaving a young church under pressure.",
+    "es": "Pablo predicó solo unos pocos días de reposo en la sinagoga antes de que la oposición lo expulsara, dejando una iglesia joven bajo presión."
+   }
+  },
+  {
+   "stem": {
+    "en": "In 'Salvation of the Whole Man,' the thief on the cross illustrates the salvation of the:",
+    "es": "En 'La Salvación del Hombre Completo', el ladrón en la cruz ilustra la salvación del:"
+   },
+   "options": {
+    "en": [
+     "Whole man",
+     "Body only",
+     "Nation",
+     "Soul only"
+    ],
+    "es": [
+     "Hombre completo",
+     "Cuerpo solamente",
+     "Nación",
+     "Alma solamente"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Thessalonians' complete salvation had three stages: they turned from idols, served the living God, and waited for His Son.",
+    "es": "La salvación completa de los tesalonicenses tuvo tres etapas: se convirtieron de los ídolos, sirvieron al Dios vivo y esperaron a Su Hijo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit defines an idol as:",
+    "es": "La unidad define un ídolo como:"
+   },
+   "options": {
+    "en": [
+     "Anything chosen above God",
+     "A foreign religion",
+     "A pagan temple",
+     "Only a carved statue"
+    ],
+    "es": [
+     "Cualquier cosa escogida por encima de Dios",
+     "Una religión extranjera",
+     "Un templo pagano",
+     "Solo una estatua tallada"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The unit defines an idol as anything chosen above God, whether beauty, money, or power.",
+    "es": "La unidad define un ídolo como cualquier cosa escogida por encima de Dios, sea belleza, dinero o poder."
+   }
+  },
+  {
+   "stem": {
+    "en": "The three stages of complete salvation in 1 Thessalonians 1 are: turned from idols, served the living God, and:",
+    "es": "Las tres etapas de la salvación completa en 1 Tesalonicenses 1 son: convertirse de los ídolos, servir al Dios vivo y:"
+   },
+   "options": {
+    "en": [
+     "Wrote the epistles",
+     "Built a temple",
+     "Paid the tithe",
+     "Waited for His Son from heaven"
+    ],
+    "es": [
+     "Escribir las epístolas",
+     "Construir un templo",
+     "Pagar el diezmo",
+     "Esperar a su Hijo de los cielos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The thief on the cross was saved in his soul but missed a whole life of service — salvation of the soul, not the whole man.",
+    "es": "El ladrón en la cruz fue salvo en su alma pero perdió toda una vida de servicio — salvación del alma, no del hombre completo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which is NOT named in the unit as a way to serve God?",
+    "es": "¿Cuál NO se menciona en la unidad como una manera de servir a Dios?"
+   },
+   "options": {
+    "en": [
+     "By the way we live",
+     "By accumulating wealth for ourselves",
+     "By giving our time",
+     "By the right use of our money"
+    ],
+    "es": [
+     "Por la manera en que vivimos",
+     "Acumulando riqueza para nosotros mismos",
+     "Dándole nuestro tiempo",
+     "Con el uso correcto de nuestro dinero"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Works do not save, but the truly saved serve the Lord, for by their fruits you shall know them (Matthew 7:20).",
+    "es": "Las obras no salvan, pero el verdaderamente salvo sirve al Señor, pues por sus frutos los conoceréis (Mateo 7:20)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The word 'cemetery,' the unit explains, originally means a:",
+    "es": "La palabra 'cementerio', explica la unidad, originalmente significa un:"
+   },
+   "options": {
+    "en": [
+     "Place of mourning",
+     "Field of the dead",
+     "Resting or sleeping place",
+     "City of tombs"
+    ],
+    "es": [
+     "Lugar de luto",
+     "Campo de los muertos",
+     "Lugar de descanso o para dormir",
+     "Ciudad de tumbas"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Early Christians called the burial place a cemetery, meaning a resting or sleeping place, because death for the believer is sleep.",
+    "es": "Los primeros cristianos llamaron al lugar de sepultura un cementerio, que significa un lugar de descanso o sueño, porque la muerte para el creyente es sueño."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit says the pagan world faced death with:",
+    "es": "La unidad dice que el mundo pagano enfrentaba la muerte con:"
+   },
+   "options": {
+    "en": [
+     "Despair",
+     "Indifference to the body",
+     "Confidence in reincarnation",
+     "Joyful hope"
+    ],
+    "es": [
+     "Desesperación",
+     "Indiferencia hacia el cuerpo",
+     "Confianza en la reencarnación",
+     "Esperanza gozosa"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Christians do not grieve as others grieve because loved ones in Christ are only asleep, awaiting the resurrection.",
+    "es": "Los cristianos no se afligen como los demás porque los seres queridos en Cristo solo duermen, esperando la resurrección."
+   }
+  },
+  {
+   "stem": {
+    "en": "Acts 1:11 is cited to show that Jesus will return:",
+    "es": "Se cita Hechos 1:11 para mostrar que Jesús volverá:"
+   },
+   "options": {
+    "en": [
+     "After the world reforms",
+     "Only spiritually",
+     "In the same way He ascended",
+     "At a date we can calculate"
+    ],
+    "es": [
+     "Después de que el mundo se reforme",
+     "Solo espiritualmente",
+     "De la misma manera en que ascendió",
+     "En una fecha que podemos calcular"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The unit says the coming cannot be scheduled or read from signs, for it comes in the twinkling of an eye.",
+    "es": "La unidad dice que la venida no puede programarse ni leerse de las señales, porque viene en un abrir y cerrar de ojos."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Eisenhower/dying-boy story illustrates that the Lord's coming will be:",
+    "es": "La historia de Eisenhower y el niño moribundo ilustra que la venida del Señor será:"
+   },
+   "options": {
+    "en": [
+     "Sudden and unexpected",
+     "Long delayed",
+     "Announced years ahead",
+     "Visible only to pastors"
+    ],
+    "es": [
+     "Repentina e inesperada",
+     "Muy demorada",
+     "Anunciada con años de anticipación",
+     "Visible solo para los pastores"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Everyone who has set a date for the end has been wrong, including Christopher Columbus.",
+    "es": "Todo el que ha fijado una fecha para el fin se ha equivocado, incluyendo a Cristóbal Colón."
+   }
+  },
+  {
+   "stem": {
+    "en": "'The dead in Christ will rise first' means believers receive:",
+    "es": "'Los muertos en Cristo resucitarán primero' significa que los creyentes reciben:"
+   },
+   "options": {
+    "en": [
+     "Their same earthly bodies reassembled",
+     "New, glorified bodies like Christ's",
+     "Only a spiritual existence",
+     "No body at all"
+    ],
+    "es": [
+     "Sus mismos cuerpos terrenales rearmados",
+     "Cuerpos nuevos y glorificados como el de Cristo",
+     "Solo una existencia espiritual",
+     "Ningún cuerpo en absoluto"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Acts 1:11 teaches that Christ will return the same way He ascended — personally, visibly, and actually, not merely spiritually.",
+    "es": "Hechos 1:11 enseña que Cristo volverá de la misma manera que ascendió — personal, visible y realmente, no solo espiritualmente."
+   }
+  },
+  {
+   "stem": {
+    "en": "In 1 Thessalonians 5:19, to 'quench' the Spirit means to:",
+    "es": "En 1 Tesalonicenses 5:19, 'apagar' el Espíritu significa:"
+   },
+   "options": {
+    "en": [
+     "Multiply the fire",
+     "Hide the fire",
+     "Worship the fire",
+     "Extinguish or put out the fire"
+    ],
+    "es": [
+     "Multiplicar el fuego",
+     "Esconder el fuego",
+     "Adorar el fuego",
+     "Extinguir o apagar el fuego"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "His coming will be in the air with the Lord's shout, the trumpet, and the voice of the archangel.",
+    "es": "Su venida será en el aire con la voz de mando del Señor, la trompeta y la voz del arcángel."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit lists the marks of a Spirit-filled church as happy, thankful, praying, and:",
+    "es": "La unidad enumera las marcas de una iglesia llena del Espíritu como gozosa, agradecida, que ora y:"
+   },
+   "options": {
+    "en": [
+     "Large",
+     "Wealthy",
+     "Preaching",
+     "Ancient"
+    ],
+    "es": [
+     "Grande",
+     "Rica",
+     "Que predica",
+     "Antigua"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Paul says the Day of the Lord comes as a thief in the night — sudden and unexpected (1 Thessalonians 5:2).",
+    "es": "Pablo dice que el día del Señor viene como ladrón en la noche — repentino e inesperado (1 Tesalonicenses 5:2)."
+   }
+  },
+  {
+   "stem": {
+    "en": "'Jim Jones had fire, but it led to destruction' warns against:",
+    "es": "'Jim Jones tenía fuego, pero condujo a la destrucción' advierte contra:"
+   },
+   "options": {
+    "en": [
+     "Cold, dead churches",
+     "Fanaticism / fire without light",
+     "Tithing",
+     "Prophecy of any kind"
+    ],
+    "es": [
+     "Iglesias frías y muertas",
+     "El fanatismo / el fuego sin luz",
+     "El diezmo",
+     "La profecía de cualquier tipo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "At death the soul goes immediately to be with the Lord; it is the body, not the soul, that sleeps.",
+    "es": "Al morir el alma va de inmediato a estar con el Señor; es el cuerpo, no el alma, lo que duerme."
+   }
+  },
+  {
+   "stem": {
+    "en": "The main comfort of 2 Thessalonians 1 for the persecuted is that:",
+    "es": "El consuelo principal de 2 Tesalonicenses 1 para los perseguidos es que:"
+   },
+   "options": {
+    "en": [
+     "Suffering is an illusion",
+     "The storm is always stilled at once",
+     "Persecution proves God is absent",
+     "Christ is with us in the storm"
+    ],
+    "es": [
+     "El sufrimiento es una ilusión",
+     "La tormenta siempre se calma de inmediato",
+     "La persecución prueba que Dios está ausente",
+     "Cristo está con nosotros en la tormenta"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "At the return the dead in Christ rise first, receiving new glorified bodies like the resurrected body of Christ.",
+    "es": "En el regreso los muertos en Cristo resucitan primero, recibiendo nuevos cuerpos glorificados como el cuerpo resucitado de Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The book of Revelation is described in the unit as sharing what main message with 2 Thessalonians?",
+    "es": "El libro de Apocalipsis se describe en la unidad como compartiendo qué mensaje principal con 2 Tesalonicenses?"
+   },
+   "options": {
+    "en": [
+     "Comfort for the persecuted",
+     "Rules for worship",
+     "Church organization",
+     "Detailed end-time dates"
+    ],
+    "es": [
+     "Consuelo para los perseguidos",
+     "Reglas para la adoración",
+     "Organización de la iglesia",
+     "Fechas detalladas del fin"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "To quench the Spirit means to put out His fire; Paul commands 'Quench not the Spirit' (1 Thessalonians 5:19).",
+    "es": "Apagar el Espíritu significa apagar Su fuego; Pablo manda 'No apaguéis el Espíritu' (1 Tesalonicenses 5:19)."
+   }
+  },
+  {
+   "stem": {
+    "en": "On the 'man of lawlessness,' the unit (citing 1 John) emphasizes that:",
+    "es": "Sobre el 'hombre de pecado', la unidad (citando a 1 Juan) enfatiza que:"
+   },
+   "options": {
+    "en": [
+     "He is purely symbolic",
+     "He is a known living person",
+     "He has already been defeated",
+     "There are many antichrists; don't fixate on one name"
+    ],
+    "es": [
+     "Es puramente simbólico",
+     "Es una persona viva conocida",
+     "Ya ha sido derrotado",
+     "Hay muchos anticristos; no fijarse en un nombre"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "A church quenches the Spirit by removing the fuel (treating the church as ours) or smothering the fire with willful sin.",
+    "es": "Una iglesia apaga el Espíritu quitando el combustible (tratando la iglesia como nuestra) o sofocando el fuego con pecado voluntario."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Old Testament 'Day of the Lord' refers to God's decisive intervention in both:",
+    "es": "El 'Día del Señor' del Antiguo Testamento se refiere a la intervención decisiva de Dios en ambos:"
+   },
+   "options": {
+    "en": [
+     "Law and sacrifice",
+     "Judgment and salvation",
+     "Israel and Egypt",
+     "Temple and tabernacle"
+    ],
+    "es": [
+     "Ley y sacrificio",
+     "Juicio y salvación",
+     "Israel y Egipto",
+     "Templo y tabernáculo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Second Thessalonians 1 comforts a persecuted people: Christ is with them in the storm and the suffering will not last forever.",
+    "es": "Segunda de Tesalonicenses 1 consuela a un pueblo perseguido: Cristo está con ellos en la tormenta y el sufrimiento no durará para siempre."
+   }
+  },
+  {
+   "stem": {
+    "en": "Dietrich Bonhoeffer is used to illustrate that:",
+    "es": "Dietrich Bonhoeffer se usa para ilustrar que:"
+   },
+   "options": {
+    "en": [
+     "One who spoke up against evil paid with his life",
+     "Silence is always wise",
+     "Most leaders spoke out against Hitler",
+     "The church controlled the state"
+    ],
+    "es": [
+     "Quien alzó la voz contra el mal lo pagó con su vida",
+     "El silencio siempre es sabio",
+     "La mayoría de los líderes hablaron contra Hitler",
+     "La iglesia controlaba al estado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The unit urges restraint on the man of lawlessness: many antichrists exist, confident identifiers have been wrong, and our task is to stay faithful.",
+    "es": "La unidad insta a la cautela sobre el hombre de pecado: existen muchos anticristos, los que han identificado con confianza se han equivocado, y nuestra tarea es permanecer fieles."
+   }
+  },
+  {
+   "stem": {
+    "en": "The main correction of 2 Thessalonians 3 is that believers should be:",
+    "es": "La corrección principal de 2 Tesalonicenses 3 es que los creyentes deben estar:"
+   },
+   "options": {
+    "en": [
+     "Scheduling the exact date",
+     "Selling all and waiting",
+     "Prepared and faithfully working, not idle",
+     "Withdrawing from society"
+    ],
+    "es": [
+     "Programando la fecha exacta",
+     "Vendiendo todo y esperando",
+     "Preparados y trabajando fielmente, no ociosos",
+     "Retirándose de la sociedad"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Second Thessalonians 3 corrects idleness: the believer who truly expects the Lord is found faithfully at work, not waiting idle.",
+    "es": "Segunda de Tesalonicenses 3 corrige la ociosidad: el creyente que verdaderamente espera al Señor es hallado fielmente en la obra, no esperando ocioso."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain the difference between 'salvation of the soul' and 'salvation of the whole man.'",
+    "es": "Explique la diferencia entre la 'salvación del alma' y la 'salvación del hombre completo'."
+   },
+   "keywords": {
+    "en": [
+     "soul",
+     "life",
+     "whole",
+     "early",
+     "serve",
+     "thief"
+    ],
+    "es": [
+     "alma",
+     "vida",
+     "completo",
+     "temprano",
+     "servir",
+     "ladron"
+    ]
+   },
+   "model": {
+    "en": "Salvation of the soul rescues a person for eternity, as with the thief on the cross who was saved in his last moments. But salvation of the whole man saves the life as well as the soul, the years that can be poured out in service to Christ. The thief gained heaven yet forfeited a whole life of service, which is why we plead with people to come to Christ early and serve Him.",
+    "es": "La salvación del alma rescata a una persona para la eternidad, como con el ladrón en la cruz que fue salvo en sus últimos momentos. Pero la salvación del hombre completo salva la vida tanto como el alma, los años que pueden derramarse en servicio a Cristo. El ladrón ganó el cielo pero perdió toda una vida de servicio, por lo cual rogamos a las personas que vengan a Cristo temprano y le sirvan."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The unit says an idol is 'anything chosen above God.' Give an example and explain the principle.",
+    "es": "La unidad dice que un ídolo es 'cualquier cosa escogida por encima de Dios'. Dé un ejemplo y explique el principio."
+   },
+   "keywords": {
+    "en": [
+     "above god",
+     "money",
+     "power",
+     "pleasure",
+     "turn",
+     "first"
+    ],
+    "es": [
+     "por encima de dios",
+     "dinero",
+     "poder",
+     "placer",
+     "convertir",
+     "primero"
+    ]
+   },
+   "model": {
+    "en": "The unit defines an idol as anything chosen above God. It may be money and security, pleasure, or power, rather than a carved image. No one can be saved until he turns from that idol and chooses God in its place, for turning is the first point of salvation. Whatever holds the heart first, before God, is the idol that must be surrendered.",
+    "es": "La unidad define un ídolo como cualquier cosa escogida por encima de Dios. Puede ser el dinero y la seguridad, el placer o el poder, en vez de una imagen tallada. Nadie puede ser salvo hasta que se convierta de ese ídolo y escoja a Dios en su lugar, pues convertirse es el primer punto de la salvación. Lo que retiene el corazón primero, antes que Dios, es el ídolo que debe entregarse."
+   }
+  },
+  {
+   "prompt": {
+    "en": "List several ways the unit says we can serve the living God.",
+    "es": "Enumere varias maneras en que la unidad dice que podemos servir al Dios vivo."
+   },
+   "keywords": {
+    "en": [
+     "live",
+     "time",
+     "talents",
+     "witness",
+     "tell others",
+     "money",
+     "tithe"
+    ],
+    "es": [
+     "vivir",
+     "tiempo",
+     "talentos",
+     "testificar",
+     "hablar a otros",
+     "dinero",
+     "diezmo"
+    ]
+   },
+   "model": {
+    "en": "The unit lists several ways to serve the living God. We serve by the way we live, a consecrated life whose influence cannot be measured; by giving Him our time rather than spending it all on the world; by using our talents for Him; by telling others the gospel, the greatest trust placed in our hands; and by the right use of our money, giving at least the tithe through the local church.",
+    "es": "La unidad enumera varias maneras de servir al Dios vivo. Servimos por la manera en que vivimos, una vida consagrada cuya influencia no puede medirse; dándole nuestro tiempo en vez de gastarlo todo en el mundo; usando nuestros talentos para Él; hablándoles a otros el evangelio, la mayor confianza puesta en nuestras manos; y con el uso correcto de nuestro dinero, dando al menos el diezmo por medio de la iglesia local."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does Paul say Christians do not grieve as others grieve? Use the meaning of 'cemetery.'",
+    "es": "¿Por qué dice Pablo que los cristianos no se afligen como los demás? Use el significado de 'cementerio'."
+   },
+   "keywords": {
+    "en": [
+     "sleep",
+     "resting place",
+     "hope",
+     "asleep",
+     "reunion",
+     "return"
+    ],
+    "es": [
+     "dormir",
+     "lugar de descanso",
+     "esperanza",
+     "dormidos",
+     "reunion",
+     "regreso"
+    ]
+   },
+   "model": {
+    "en": "Christians do not grieve as others grieve because death for the believer is only sleep. The word cemetery means a resting place, a sleeping place, and a believer who has died is asleep there awaiting the Lord's return. Like a family that does not mourn a member away in a distant city, we hold the hope of reunion, for those asleep in Christ will rise when He comes.",
+    "es": "Los cristianos no se afligen como los demás porque la muerte para el creyente es solo sueño. La palabra cementerio significa un lugar de descanso, un lugar para dormir, y un creyente que ha muerto está allí dormido esperando el regreso del Señor. Como una familia que no se lamenta por un miembro lejos en una ciudad distante, sostenemos la esperanza del reencuentro, pues los que duermen en Cristo resucitarán cuando Él venga."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does Acts 1:11 teach about the manner of Christ's return?",
+    "es": "¿Qué enseña Hechos 1:11 sobre la manera del regreso de Cristo?"
+   },
+   "keywords": {
+    "en": [
+     "same way",
+     "ascended",
+     "personally",
+     "visibly",
+     "actually",
+     "air"
+    ],
+    "es": [
+     "misma manera",
+     "ascendio",
+     "personalmente",
+     "visiblemente",
+     "realmente",
+     "aire"
+    ]
+   },
+   "model": {
+    "en": "Acts 1:11 teaches that Christ will return the same way He ascended into heaven: personally, visibly, and actually, not merely as a spiritual influence. His coming will be in the air, announced by the Lord's shout, a trumpet, and the voice of the archangel. The manner of His return is as real and bodily as His departure was.",
+    "es": "Hechos 1:11 enseña que Cristo volverá de la misma manera que ascendió al cielo: personal, visible y realmente, no meramente como una influencia espiritual. Su venida será en el aire, anunciada por la voz de mando del Señor, una trompeta y la voz del arcángel. La manera de Su regreso es tan real y corporal como lo fue Su partida."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe what happens to the body and the soul at death and at the resurrection, according to the unit.",
+    "es": "Describa lo que sucede con el cuerpo y el alma en la muerte y en la resurrección, según la unidad."
+   },
+   "keywords": {
+    "en": [
+     "soul",
+     "with the lord",
+     "body sleeps",
+     "rise first",
+     "glorified body",
+     "absent"
+    ],
+    "es": [
+     "alma",
+     "con el señor",
+     "cuerpo duerme",
+     "resucitan primero",
+     "cuerpo glorificado",
+     "ausentes"
+    ]
+   },
+   "model": {
+    "en": "At death the soul goes immediately to be with the Lord, for to be absent from the body is to be present with the Lord; it is the body that sleeps, not the soul. At the resurrection the dead in Christ rise first and receive a new glorified body like the risen body of Christ. God brings the waiting souls with Him, and they are reunited with transformed bodies.",
+    "es": "Al morir el alma va de inmediato a estar con el Señor, pues estar ausentes del cuerpo es estar presentes al Señor; es el cuerpo el que duerme, no el alma. En la resurrección los muertos en Cristo resucitan primero y reciben un nuevo cuerpo glorificado como el cuerpo resucitado de Cristo. Dios trae consigo a las almas que esperan, y son reunidas con cuerpos transformados."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does it mean to 'quench the Spirit,' and how can a church do it?",
+    "es": "¿Qué significa 'apagar el Espíritu' y cómo puede una iglesia hacerlo?"
+   },
+   "keywords": {
+    "en": [
+     "extinguish",
+     "fire",
+     "fuel",
+     "willful sin",
+     "enthusiasm",
+     "dead church"
+    ],
+    "es": [
+     "extinguir",
+     "fuego",
+     "combustible",
+     "pecado voluntario",
+     "entusiasmo",
+     "iglesia muerta"
+    ]
+   },
+   "model": {
+    "en": "To quench the Spirit means to extinguish His fire, for the Spirit is pictured as a fire that can be put out. A church quenches Him in two ways: by removing the fuel, treating the church as its own rather than God's, or by throwing willful sin on the flame. A church that has lost its enthusiasm and joy becomes a dead church, where the fire has gone out.",
+    "es": "Apagar el Espíritu significa extinguir Su fuego, pues el Espíritu se representa como un fuego que puede apagarse. Una iglesia lo apaga de dos maneras: quitando el combustible, tratando la iglesia como propia en vez de de Dios, o echando pecado voluntario sobre la llama. Una iglesia que ha perdido su entusiasmo y su gozo se vuelve una iglesia muerta, donde el fuego se ha apagado."
+   }
+  },
+  {
+   "prompt": {
+    "en": "State the main message of 2 Thessalonians 1 and the storm illustration that supports it.",
+    "es": "Exprese el mensaje principal de 2 Tesalonicenses 1 y la ilustración de la tormenta que lo respalda."
+   },
+   "keywords": {
+    "en": [
+     "comfort",
+     "persecution",
+     "with us",
+     "storm",
+     "peace be still",
+     "revelation",
+     "patmos"
+    ],
+    "es": [
+     "consuelo",
+     "persecucion",
+     "con nosotros",
+     "tormenta",
+     "calla enmudece",
+     "apocalipsis",
+     "patmos"
+    ]
+   },
+   "model": {
+    "en": "Second Thessalonians 1 comforts a church under persecution, the same comfort that runs through Revelation, where John was imprisoned on Patmos. The message is not that the suffering is small but that Christ is with His people in it. Like the storm on the lake when Jesus said Peace be still, the comfort is not always a calmed storm on demand but His presence within it; God has not lost control.",
+    "es": "Segunda de Tesalonicenses 1 consuela a una iglesia bajo persecución, el mismo consuelo que recorre Apocalipsis, donde Juan estuvo preso en Patmos. El mensaje no es que el sufrimiento sea pequeño sino que Cristo está con Su pueblo en él. Como la tormenta en el lago cuando Jesús dijo Calla, enmudece, el consuelo no siempre es una tormenta calmada a petición sino Su presencia dentro de ella; Dios no ha perdido el control."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the unit teach the 'man of lawlessness' and the Day of the Lord? Why caution against naming the Antichrist?",
+    "es": "¿Cómo enseña la unidad el 'hombre de pecado' y el Día del Señor? ¿Por qué advertir contra nombrar al Anticristo?"
+   },
+   "keywords": {
+    "en": [
+     "many antichrists",
+     "timeline",
+     "god in control",
+     "intervene",
+     "judgment",
+     "salvation",
+     "wrong"
+    ],
+    "es": [
+     "muchos anticristos",
+     "calendario",
+     "dios en control",
+     "intervenir",
+     "juicio",
+     "salvacion",
+     "equivocado"
+    ]
+   },
+   "model": {
+    "en": "On the man of lawlessness the unit teaches restraint. John says there are already many antichrists, and across the centuries confident identifiers have generally been proven wrong, like every date-setter. God remains in control of the timeline, and behind the chapter lies the Day of the Lord, God's decisive intervention bringing both judgment and salvation. Our task is not to pin a name on the lawlessness but to stay faithful, because God must intervene to set the world right.",
+    "es": "Sobre el hombre de pecado la unidad enseña cautela. Juan dice que ya hay muchos anticristos, y a lo largo de los siglos los que identifican con confianza generalmente han resultado equivocados, como todo el que fija fechas. Dios permanece en control de la línea de tiempo, y tras el capítulo está el Día del Señor, la intervención decisiva de Dios que trae a la vez juicio y salvación. Nuestra tarea no es ponerle un nombre a la maldad sino permanecer fieles, porque Dios debe intervenir para enderezar el mundo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does 2 Thessalonians correct idleness, and how does the unit use Adam to show the dignity of work?",
+    "es": "¿Por qué corrige 2 Tesalonicenses la ociosidad, y cómo usa la unidad a Adán para mostrar la dignidad del trabajo?"
+   },
+   "keywords": {
+    "en": [
+     "prepared",
+     "not schedule",
+     "work",
+     "adam",
+     "garden",
+     "thorns",
+     "noble",
+     "six days"
+    ],
+    "es": [
+     "preparados",
+     "no programar",
+     "trabajo",
+     "adan",
+     "huerto",
+     "espinos",
+     "noble",
+     "seis dias"
+    ]
+   },
+   "model": {
+    "en": "Second Thessalonians 3 corrects idleness because some, expecting the Lord at any moment, had stopped working. We are called to be prepared, not to schedule the return, which even the Son left to the Father. And being prepared does not mean idleness: man was made for work. Before the Fall Adam tended the garden; after it he labored among thorns, yet work stayed noble, for God said six days you shall labor. The faithful believer is found at work.",
+    "es": "Segunda de Tesalonicenses 3 corrige la ociosidad porque algunos, esperando al Señor en cualquier momento, habían dejado de trabajar. Somos llamados a estar preparados, no a programar el regreso, que aun el Hijo dejó al Padre. Y estar preparados no significa ociosidad: el hombre fue hecho para trabajar. Antes de la Caída Adán cuidaba el huerto; después trabajó entre espinos, pero el trabajo siguió siendo noble, pues Dios dijo seis días trabajarás. El creyente fiel es hallado en la obra."
+   }
+  }
+ ]
+};

@@ -1,655 +1,833 @@
-/* CTSPM - unit 12: per-unit configuration and content. */
-
-const UNIT = 12;
-
-let currentUnit = 12;
-
-const mcQuestions = [
+/* CTSPM — unit 12. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pm",
+ "unit": 12,
+ "totalUnits": 12,
+ "filePrefix": "CTSPM",
+ "prevHref": "CTSPMUnit11.html",
+ "nextHref": null,
+ "mc": [
   {
-    "textEn": "1. The anchor text for this capstone unit is:",
-    "textEs": "1. El texto ancla para esta unidad capstone es:",
-    "optionsEn": [
-      "Psalm 23",
-      "John 3:16",
-      "2 Timothy 4:7-8",
-      "Hebrews 11:1"
+   "stem": {
+    "en": "The anchor text for this capstone unit is:",
+    "es": "El texto ancla para esta unidad capstone es:"
+   },
+   "options": {
+    "en": [
+     "Psalm 23",
+     "John 3:16",
+     "2 Timothy 4:7-8",
+     "Hebrews 11:1"
     ],
-    "optionsEs": [
-      "Salmo 23",
-      "Juan 3:16",
-      "2 Timoteo 4:7-8",
-      "Hebreos 11:1"
-    ],
-    "c": 23,
-    "explEn": "The anchor text for this capstone unit is 2 Timothy 4:7-8.",
-    "explEs": "El texto base de esta unidad final es 2 Timoteo 4:7-8."
+    "es": [
+     "Salmo 23",
+     "Juan 3:16",
+     "2 Timoteo 4:7-8",
+     "Hebreos 11:1"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The anchor text for this capstone unit is 2 Timothy 4:7-8.",
+    "es": "El texto base de esta unidad final es 2 Timoteo 4:7-8."
+   }
   },
   {
-    "textEn": "2. Paul's three statements at the end of his life were:",
-    "textEs": "2. Las tres declaraciones de Pablo al final de su vida fueron:",
-    "optionsEn": [
-      "Fought the good fight, finished the race, kept the faith",
-      "Built, planned, rested",
-      "Preached, visited, prayed",
-      "Suffered, endured, triumphed"
+   "stem": {
+    "en": "Paul's three statements at the end of his life were:",
+    "es": "Las tres declaraciones de Pablo al final de su vida fueron:"
+   },
+   "options": {
+    "en": [
+     "Fought the good fight, finished the race, kept the faith",
+     "Built, planned, rested",
+     "Preached, visited, prayed",
+     "Suffered, endured, triumphed"
     ],
-    "optionsEs": [
-      "Peleé la buena batalla, acabé la carrera, guardé la fe",
-      "Edifiqué, planeé, descansé",
-      "Prediqué, visité, oré",
-      "Sufrí, perseveré, triunfé"
-    ],
-    "c": 28,
-    "explEn": "Paul's three statements were: fought the good fight, finished the race, kept the faith.",
-    "explEs": "Las tres declaraciones de Pablo fueron: peleé la buena batalla, acabé la carrera, guardé la fe."
+    "es": [
+     "Peleé la buena batalla, acabé la carrera, guardé la fe",
+     "Edifiqué, planeé, descansé",
+     "Prediqué, visité, oré",
+     "Sufrí, perseveré, triunfé"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Paul's three statements were: fought the good fight, finished the race, kept the faith.",
+    "es": "Las tres declaraciones de Pablo fueron: peleé la buena batalla, acabé la carrera, guardé la fe."
+   }
   },
   {
-    "textEn": "3. The Greek word analusis (departure) means:",
-    "textEs": "3. La palabra griega analusis (partida) significa:",
-    "optionsEn": [
-      "Final breath",
-      "The unmooring of a ship about to sail",
-      "Last meal",
-      "Burial preparation"
+   "stem": {
+    "en": "The Greek word analusis (departure) means:",
+    "es": "La palabra griega analusis (partida) significa:"
+   },
+   "options": {
+    "en": [
+     "Final breath",
+     "The unmooring of a ship about to sail",
+     "Last meal",
+     "Burial preparation"
     ],
-    "optionsEs": [
-      "Último aliento",
-      "El desamarrar de un barco a punto de zarpar",
-      "Última comida",
-      "Preparación del entierro"
-    ],
-    "c": 36,
-    "explEn": "The Greek analusis means the unmooring of a ship about to sail.",
-    "explEs": "El griego analusis significa el desamarrar de un barco a punto de zarpar."
+    "es": [
+     "Último aliento",
+     "El desamarrar de un barco a punto de zarpar",
+     "Última comida",
+     "Preparación del entierro"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The Greek analusis means the unmooring of a ship about to sail.",
+    "es": "El griego analusis significa el desamarrar de un barco a punto de zarpar."
+   }
   },
   {
-    "textEn": "4. Long pastoral ministry is sustained primarily by:",
-    "textEs": "4. El ministerio pastoral largo se sostiene principalmente por:",
-    "optionsEn": [
-      "Talent and charisma",
-      "Larger congregations",
-      "Conference fame",
-      "Endurance — daily faithfulness under load"
+   "stem": {
+    "en": "Long pastoral ministry is sustained primarily by:",
+    "es": "El ministerio pastoral largo se sostiene principalmente por:"
+   },
+   "options": {
+    "en": [
+     "Talent and charisma",
+     "Larger congregations",
+     "Conference fame",
+     "Endurance — daily faithfulness under load"
     ],
-    "optionsEs": [
-      "Talento y carisma",
-      "Congregaciones más grandes",
-      "Fama de conferencias",
-      "Perseverancia — fidelidad diaria bajo carga"
-    ],
-    "c": 45,
-    "explEn": "Long pastoral ministry is sustained primarily by endurance — daily faithfulness under load.",
-    "explEs": "El ministerio pastoral largo se sostiene principalmente por la resistencia — fidelidad diaria bajo carga."
+    "es": [
+     "Talento y carisma",
+     "Congregaciones más grandes",
+     "Fama de conferencias",
+     "Perseverancia — fidelidad diaria bajo carga"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Long pastoral ministry is sustained primarily by endurance — daily faithfulness under load.",
+    "es": "El ministerio pastoral largo se sostiene principalmente por la resistencia — fidelidad diaria bajo carga."
+   }
   },
   {
-    "textEn": "5. The crown of righteousness in 2 Timothy 4:8 is given to:",
-    "textEs": "5. La corona de justicia en 2 Timoteo 4:8 es dada a:",
-    "optionsEn": [
-      "All who have loved His appearing",
-      "Pastors only",
-      "The most successful by attendance",
-      "Those with seminary degrees"
+   "stem": {
+    "en": "The crown of righteousness in 2 Timothy 4:8 is given to:",
+    "es": "La corona de justicia en 2 Timoteo 4:8 es dada a:"
+   },
+   "options": {
+    "en": [
+     "All who have loved His appearing",
+     "Pastors only",
+     "The most successful by attendance",
+     "Those with seminary degrees"
     ],
-    "optionsEs": [
-      "Todos los que aman su venida",
-      "Solo a los pastores",
-      "Los más exitosos por asistencia",
-      "Aquellos con grados de seminario"
-    ],
-    "c": 49,
-    "explEn": "The crown of righteousness is given to all who have loved His appearing.",
-    "explEs": "La corona de justicia se da a todos los que aman Su venida."
+    "es": [
+     "Todos los que aman su venida",
+     "Solo a los pastores",
+     "Los más exitosos por asistencia",
+     "Aquellos con grados de seminario"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The crown of righteousness is given to all who have loved His appearing.",
+    "es": "La corona de justicia se da a todos los que aman Su venida."
+   }
   },
   {
-    "textEn": "6. When the seminary president asked the professor to teach 'people skills,' the professor argued that:",
-    "textEs": "6. Cuando el presidente del seminario le pidió al profesor enseñar 'habilidades con la gente,' el profesor argumentó que:",
-    "optionsEn": [
-      "A semester would be sufficient",
-      "Theology was more important",
-      "Only graduate students could learn them",
-      "People skills cannot be learned in a classroom — they are forged across a lifetime; the best he could do was teach how to handle difficult people"
+   "stem": {
+    "en": "When the seminary president asked the professor to teach 'people skills,' the professor argued that:",
+    "es": "Cuando el presidente del seminario le pidió al profesor enseñar 'habilidades con la gente,' el profesor argumentó que:"
+   },
+   "options": {
+    "en": [
+     "A semester would be sufficient",
+     "Theology was more important",
+     "Only graduate students could learn them",
+     "People skills cannot be learned in a classroom — they are forged across a lifetime; the best he could do was teach how to handle difficult people"
     ],
-    "optionsEs": [
-      "Un semestre sería suficiente",
-      "La teología era más importante",
-      "Solo los graduados podían aprenderlas",
-      "Las habilidades con la gente no se aprenden en un salón — se forjan a lo largo de toda una vida; lo mejor que podía hacer era enseñar cómo manejar a personas difíciles"
-    ],
-    "c": 59,
-    "explEn": "The professor argued people skills are forged across a lifetime, not learned in a classroom.",
-    "explEs": "El profesor argumentó que las habilidades con la gente se forjan a lo largo de la vida, no en un aula."
+    "es": [
+     "Un semestre sería suficiente",
+     "La teología era más importante",
+     "Solo los graduados podían aprenderlas",
+     "Las habilidades con la gente no se aprenden en un salón — se forjan a lo largo de toda una vida; lo mejor que podía hacer era enseñar cómo manejar a personas difíciles"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The professor argued people skills are forged across a lifetime, not learned in a classroom.",
+    "es": "El profesor argumentó que las habilidades con la gente se forjan a lo largo de la vida, no en un aula."
+   }
   },
   {
-    "textEn": "7. After many years of pastoral and seminary observation, the professor concluded that pastors are summarily dismissed from churches because of:",
-    "textEs": "7. Después de muchos años de observación pastoral y de seminario, el profesor concluyó que los pastores son despedidos sumariamente de las iglesias debido a:",
-    "optionsEn": [
-      "Theological error",
-      "Inability to handle conflict — never theology",
-      "Lack of education",
-      "Financial mismanagement"
+   "stem": {
+    "en": "After many years of pastoral and seminary observation, the professor concluded that pastors are summarily dismissed from churches because of:",
+    "es": "Después de muchos años de observación pastoral y de seminario, el profesor concluyó que los pastores son despedidos sumariamente de las iglesias debido a:"
+   },
+   "options": {
+    "en": [
+     "Theological error",
+     "Inability to handle conflict — never theology",
+     "Lack of education",
+     "Financial mismanagement"
     ],
-    "optionsEs": [
-      "Error teológico",
-      "Inhabilidad para manejar el conflicto — nunca por teología",
-      "Falta de educación",
-      "Mala administración financiera"
-    ],
-    "c": 64,
-    "explEn": "The professor concluded pastors are dismissed for inability to handle conflict, never theology.",
-    "explEs": "El profesor concluyó que los pastores son despedidos por incapacidad de manejar el conflicto, nunca por teología."
+    "es": [
+     "Error teológico",
+     "Inhabilidad para manejar el conflicto — nunca por teología",
+     "Falta de educación",
+     "Mala administración financiera"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The professor concluded pastors are dismissed for inability to handle conflict, never theology.",
+    "es": "El profesor concluyó que los pastores son despedidos por incapacidad de manejar el conflicto, nunca por teología."
+   }
   },
   {
-    "textEn": "8. Succession is best understood as:",
-    "textEs": "8. La sucesión se entiende mejor como:",
-    "optionsEn": [
-      "Holding on as long as possible",
-      "Waiting until the last moment",
-      "Handing off what you have been given to faithful men, beginning years before retirement",
-      "Picking the youngest available successor"
+   "stem": {
+    "en": "Succession is best understood as:",
+    "es": "La sucesión se entiende mejor como:"
+   },
+   "options": {
+    "en": [
+     "Holding on as long as possible",
+     "Waiting until the last moment",
+     "Handing off what you have been given to faithful men, beginning years before retirement",
+     "Picking the youngest available successor"
     ],
-    "optionsEs": [
-      "Aferrarse el mayor tiempo posible",
-      "Esperar hasta el último momento",
-      "Entregar lo que se le ha dado a hombres fieles, comenzando años antes de la jubilación",
-      "Escoger al sucesor más joven disponible"
-    ],
-    "c": 72,
-    "explEn": "Succession is handing off what you've been given to faithful men, beginning years before retirement.",
-    "explEs": "La sucesión es entregar lo recibido a hombres fieles, comenzando años antes de la jubilación."
+    "es": [
+     "Aferrarse el mayor tiempo posible",
+     "Esperar hasta el último momento",
+     "Entregar lo que se le ha dado a hombres fieles, comenzando años antes de la jubilación",
+     "Escoger al sucesor más joven disponible"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Succession is handing off what you've been given to faithful men, beginning years before retirement.",
+    "es": "La sucesión es entregar lo recibido a hombres fieles, comenzando años antes de la jubilación."
+   }
   },
   {
-    "textEn": "9. The pastor's real legacy is:",
-    "textEs": "9. El verdadero legado del pastor es:",
-    "optionsEn": [
-      "His buildings",
-      "His sermon archive",
-      "Average Sunday attendance at retirement",
-      "The people he led to Christ, mentored, married, and discipled — disciples that reach into eternity"
+   "stem": {
+    "en": "The pastor's real legacy is:",
+    "es": "El verdadero legado del pastor es:"
+   },
+   "options": {
+    "en": [
+     "His buildings",
+     "His sermon archive",
+     "Average Sunday attendance at retirement",
+     "The people he led to Christ, mentored, married, and discipled — disciples that reach into eternity"
     ],
-    "optionsEs": [
-      "Sus edificios",
-      "Su archivo de sermones",
-      "La asistencia promedio del domingo a la jubilación",
-      "La gente que llevó a Cristo, mentoreó, casó, y discipuló — discípulos que alcanzan la eternidad"
-    ],
-    "c": 80,
-    "explEn": "The pastor's real legacy is the people he led to Christ, mentored, married, and discipled.",
-    "explEs": "El verdadero legado del pastor es la gente que llevó a Cristo, mentoreó, casó y discipuló."
+    "es": [
+     "Sus edificios",
+     "Su archivo de sermones",
+     "La asistencia promedio del domingo a la jubilación",
+     "La gente que llevó a Cristo, mentoreó, casó, y discipuló — discípulos que alcanzan la eternidad"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The pastor's real legacy is the people he led to Christ, mentored, married, and discipled.",
+    "es": "El verdadero legado del pastor es la gente que llevó a Cristo, mentoreó, casó y discipuló."
+   }
   },
   {
-    "textEn": "10. The professor's career arc moved through:",
-    "textEs": "10. El arco de carrera del profesor se movió a través de:",
-    "optionsEn": [
-      "Pastor → Louisiana prison chaplaincy & Deputy Warden (Rayburn) → seminary teaching → Chapala Theological Seminary in Mexico",
-      "Only church pastoring",
-      "Only seminary teaching",
-      "Only chaplaincy"
+   "stem": {
+    "en": "The professor's career arc moved through:",
+    "es": "El arco de carrera del profesor se movió a través de:"
+   },
+   "options": {
+    "en": [
+     "Pastor → Louisiana prison chaplaincy & Deputy Warden (Rayburn) → seminary teaching → Chapala Theological Seminary in Mexico",
+     "Only church pastoring",
+     "Only seminary teaching",
+     "Only chaplaincy"
     ],
-    "optionsEs": [
-      "Pastor → capellanía/Subdirector (Deputy Warden) en correcciones de Luisiana (Rayburn) → enseñanza de seminario → Seminario Teológico de Chapala en México",
-      "Solo pastoreo de iglesia",
-      "Solo enseñanza de seminario",
-      "Solo capellanía"
-    ],
-    "c": 84,
-    "explEn": "The professor's arc moved from pastor to prison chaplaincy to seminary to Chapala Theological Seminary.",
-    "explEs": "La trayectoria del profesor fue de pastor a capellanía carcelaria a seminario a Chapala Theological Seminary."
+    "es": [
+     "Pastor → capellanía/Subdirector (Deputy Warden) en correcciones de Luisiana (Rayburn) → enseñanza de seminario → Seminario Teológico de Chapala en México",
+     "Solo pastoreo de iglesia",
+     "Solo enseñanza de seminario",
+     "Solo capellanía"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The professor's arc moved from pastor to prison chaplaincy to seminary to Chapala Theological Seminary.",
+    "es": "La trayectoria del profesor fue de pastor a capellanía carcelaria a seminario a Chapala Theological Seminary."
+   }
   },
   {
-    "textEn": "11. The professor describes this very course as an act of:",
-    "textEs": "11. El profesor describe este mismo curso como un acto de:",
-    "optionsEn": [
-      "Personal legacy building",
-      "Required academic work",
-      "2 Timothy 2:2 — committing what he has learned to faithful men who will teach others also",
-      "Denominational requirement"
+   "stem": {
+    "en": "The professor describes this very course as an act of:",
+    "es": "El profesor describe este mismo curso como un acto de:"
+   },
+   "options": {
+    "en": [
+     "Personal legacy building",
+     "Required academic work",
+     "2 Timothy 2:2 — committing what he has learned to faithful men who will teach others also",
+     "Denominational requirement"
     ],
-    "optionsEs": [
-      "Edificación de legado personal",
-      "Trabajo académico requerido",
-      "2 Timoteo 2:2 — entregando lo que ha aprendido a hombres fieles que enseñarán a otros",
-      "Requisito denominacional"
-    ],
-    "c": 93,
-    "explEn": "The professor describes this course as an act of 2 Timothy 2:2 — committing truth to faithful men.",
-    "explEs": "El profesor describe este curso como un acto de 2 Timoteo 2:2 — encargar la verdad a hombres fieles."
+    "es": [
+     "Edificación de legado personal",
+     "Trabajo académico requerido",
+     "2 Timoteo 2:2 — entregando lo que ha aprendido a hombres fieles que enseñarán a otros",
+     "Requisito denominacional"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The professor describes this course as an act of 2 Timothy 2:2 — committing truth to faithful men.",
+    "es": "El profesor describe este curso como un acto de 2 Timoteo 2:2 — encargar la verdad a hombres fieles."
+   }
   },
   {
-    "textEn": "12. Most pastors who fall do so because of:",
-    "textEs": "12. La mayoría de los pastores que caen lo hacen debido a:",
-    "optionsEn": [
-      "One sudden catastrophic sin",
-      "A thousand small compromises accumulated over years",
-      "Persecution from outside",
-      "Lack of education"
+   "stem": {
+    "en": "Most pastors who fall do so because of:",
+    "es": "La mayoría de los pastores que caen lo hacen debido a:"
+   },
+   "options": {
+    "en": [
+     "One sudden catastrophic sin",
+     "A thousand small compromises accumulated over years",
+     "Persecution from outside",
+     "Lack of education"
     ],
-    "optionsEs": [
-      "Un solo pecado catastrófico repentino",
-      "Mil pequeños compromisos acumulados a través de los años",
-      "Persecución de afuera",
-      "Falta de educación"
-    ],
-    "c": 99,
-    "explEn": "Most pastors who fall do so because of a thousand small compromises accumulated over years.",
-    "explEs": "La mayoría de los pastores que caen lo hacen por mil pequeños compromisos acumulados con los años."
+    "es": [
+     "Un solo pecado catastrófico repentino",
+     "Mil pequeños compromisos acumulados a través de los años",
+     "Persecución de afuera",
+     "Falta de educación"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Most pastors who fall do so because of a thousand small compromises accumulated over years.",
+    "es": "La mayoría de los pastores que caen lo hacen por mil pequeños compromisos acumulados con los años."
+   }
   },
   {
-    "textEn": "13. The professor's central charge to future pastors regarding character and skill is:",
-    "textEs": "13. La advertencia central del profesor a los pastores futuros respecto al carácter y la habilidad es:",
-    "optionsEn": [
-      "Your theology will not save your ministry — your character and your people skills will",
-      "Your eloquence will save your ministry",
-      "Your administrative skills are most important",
-      "Your seminary credentials will protect you"
+   "stem": {
+    "en": "The professor's central charge to future pastors regarding character and skill is:",
+    "es": "La advertencia central del profesor a los pastores futuros respecto al carácter y la habilidad es:"
+   },
+   "options": {
+    "en": [
+     "Your theology will not save your ministry — your character and your people skills will",
+     "Your eloquence will save your ministry",
+     "Your administrative skills are most important",
+     "Your seminary credentials will protect you"
     ],
-    "optionsEs": [
-      "Su teología no salvará su ministerio — su carácter y sus habilidades con la gente lo harán",
-      "Su elocuencia salvará su ministerio",
-      "Sus habilidades administrativas son lo más importante",
-      "Sus credenciales de seminario lo protegerán"
-    ],
-    "c": 105,
-    "explEn": "The central charge: your theology will not save your ministry — your character and people skills will.",
-    "explEs": "El cargo central: tu teología no salvará tu ministerio — tu carácter y tus habilidades con la gente lo harán."
+    "es": [
+     "Su teología no salvará su ministerio — su carácter y sus habilidades con la gente lo harán",
+     "Su elocuencia salvará su ministerio",
+     "Sus habilidades administrativas son lo más importante",
+     "Sus credenciales de seminario lo protegerán"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The central charge: your theology will not save your ministry — your character and people skills will.",
+    "es": "El cargo central: tu teología no salvará tu ministerio — tu carácter y tus habilidades con la gente lo harán."
+   }
   },
   {
-    "textEn": "14. The Greek word agōn (in 'I have fought the good fight') is the word for:",
-    "textEs": "14. La palabra griega agōn ('he peleado la buena batalla') es la palabra para:",
-    "optionsEn": [
-      "A military invasion",
-      "A theological argument",
-      "A church business meeting",
-      "An athletic contest — wrestling, struggling against an opponent"
+   "stem": {
+    "en": "The Greek word agōn (in 'I have fought the good fight') is the word for:",
+    "es": "La palabra griega agōn ('he peleado la buena batalla') es la palabra para:"
+   },
+   "options": {
+    "en": [
+     "A military invasion",
+     "A theological argument",
+     "A church business meeting",
+     "An athletic contest — wrestling, struggling against an opponent"
     ],
-    "optionsEs": [
-      "Una invasión militar",
-      "Un argumento teológico",
-      "Una reunión de negocios",
-      "Una contienda atlética — luchar contra un oponente"
-    ],
-    "c": 115,
-    "explEn": "The Greek agōn ('fought the good fight') is the word for an athletic contest or struggle.",
-    "explEs": "El griego agōn ('peleé la buena batalla') es la palabra para un certamen atlético o lucha."
+    "es": [
+     "Una invasión militar",
+     "Un argumento teológico",
+     "Una reunión de negocios",
+     "Una contienda atlética — luchar contra un oponente"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Greek agōn ('fought the good fight') is the word for an athletic contest or struggle.",
+    "es": "El griego agōn ('peleé la buena batalla') es la palabra para un certamen atlético o lucha."
+   }
   },
   {
-    "textEn": "15. The Greek word dromos (in 'I have finished the race') means:",
-    "textEs": "15. La palabra griega dromos ('he acabado la carrera') significa:",
-    "optionsEn": [
-      "Victory celebration",
-      "A course laid out, a track to be run from start to finish",
-      "A judgment seat",
-      "A burial procession"
+   "stem": {
+    "en": "The Greek word dromos (in 'I have finished the race') means:",
+    "es": "La palabra griega dromos ('he acabado la carrera') significa:"
+   },
+   "options": {
+    "en": [
+     "Victory celebration",
+     "A course laid out, a track to be run from start to finish",
+     "A judgment seat",
+     "A burial procession"
     ],
-    "optionsEs": [
-      "Celebración de victoria",
-      "Un curso trazado, una pista por correr de principio a fin",
-      "Un asiento de juicio",
-      "Una procesión funeraria"
-    ],
-    "c": 120,
-    "explEn": "The Greek dromos ('finished the race') means a course laid out, a track to be run.",
-    "explEs": "El griego dromos ('acabé la carrera') significa un curso trazado, una pista que correr."
+    "es": [
+     "Celebración de victoria",
+     "Un curso trazado, una pista por correr de principio a fin",
+     "Un asiento de juicio",
+     "Una procesión funeraria"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The Greek dromos ('finished the race') means a course laid out, a track to be run.",
+    "es": "El griego dromos ('acabé la carrera') significa un curso trazado, una pista que correr."
+   }
   },
   {
-    "textEn": "16. The retiring pastor's posture toward his successor should be:",
-    "textEs": "16. La postura del pastor que se jubila hacia su sucesor debe ser:",
-    "optionsEn": [
-      "Constant correction",
-      "Public undermining",
-      "Quiet support and prayer; available when called upon, silent when not",
-      "Running a parallel ministry"
+   "stem": {
+    "en": "The retiring pastor's posture toward his successor should be:",
+    "es": "La postura del pastor que se jubila hacia su sucesor debe ser:"
+   },
+   "options": {
+    "en": [
+     "Constant correction",
+     "Public undermining",
+     "Quiet support and prayer; available when called upon, silent when not",
+     "Running a parallel ministry"
     ],
-    "optionsEs": [
-      "Corrección constante",
-      "Socavación pública",
-      "Apoyo silencioso y oración; disponible cuando es llamado, en silencio cuando no",
-      "Dirigir un ministerio paralelo"
-    ],
-    "c": 128,
-    "explEn": "The retiring pastor's posture should be quiet support and prayer — available when called, silent when not.",
-    "explEs": "La postura del pastor que se jubila debe ser apoyo silencioso y oración — disponible cuando se le llame, callado cuando no."
+    "es": [
+     "Corrección constante",
+     "Socavación pública",
+     "Apoyo silencioso y oración; disponible cuando es llamado, en silencio cuando no",
+     "Dirigir un ministerio paralelo"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The retiring pastor's posture should be quiet support and prayer — available when called, silent when not.",
+    "es": "La postura del pastor que se jubila debe ser apoyo silencioso y oración — disponible cuando se le llame, callado cuando no."
+   }
   },
   {
-    "textEn": "17. Endurance is built through:",
-    "textEs": "17. La perseverancia se construye a través de:",
-    "optionsEn": [
-      "Sudden bursts of effort",
-      "Annual conferences",
-      "Periodic retreats only",
-      "One day at a time — sermon prep this week, prayer this morning, honesty in marriage today"
+   "stem": {
+    "en": "Endurance is built through:",
+    "es": "La perseverancia se construye a través de:"
+   },
+   "options": {
+    "en": [
+     "Sudden bursts of effort",
+     "Annual conferences",
+     "Periodic retreats only",
+     "One day at a time — sermon prep this week, prayer this morning, honesty in marriage today"
     ],
-    "optionsEs": [
-      "Estallidos repentinos de esfuerzo",
-      "Conferencias anuales",
-      "Solo retiros periódicos",
-      "Un día a la vez — preparación de sermón esta semana, oración esta mañana, honestidad en el matrimonio hoy"
-    ],
-    "c": 136,
-    "explEn": "Endurance is built one day at a time — prayer this morning, honesty in marriage today.",
-    "explEs": "La resistencia se construye un día a la vez — oración esta mañana, honestidad en el matrimonio hoy."
+    "es": [
+     "Estallidos repentinos de esfuerzo",
+     "Conferencias anuales",
+     "Solo retiros periódicos",
+     "Un día a la vez — preparación de sermón esta semana, oración esta mañana, honestidad en el matrimonio hoy"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Endurance is built one day at a time — prayer this morning, honesty in marriage today.",
+    "es": "La resistencia se construye un día a la vez — oración esta mañana, honestidad en el matrimonio hoy."
+   }
   },
   {
-    "textEn": "18. The crown of righteousness is reserved for those who:",
-    "textEs": "18. La corona de justicia está reservada para aquellos que:",
-    "optionsEn": [
-      "Finished the race and have loved His appearing",
-      "Started the race well",
-      "Preached the most sermons",
-      "Built the largest churches"
+   "stem": {
+    "en": "The crown of righteousness is reserved for those who:",
+    "es": "La corona de justicia está reservada para aquellos que:"
+   },
+   "options": {
+    "en": [
+     "Finished the race and have loved His appearing",
+     "Started the race well",
+     "Preached the most sermons",
+     "Built the largest churches"
     ],
-    "optionsEs": [
-      "Acabaron la carrera y han amado su venida",
-      "Comenzaron bien la carrera",
-      "Predicaron más sermones",
-      "Construyeron las iglesias más grandes"
-    ],
-    "c": 140,
-    "explEn": "The crown of righteousness is reserved for those who finished the race and loved His appearing.",
-    "explEs": "La corona de justicia se reserva para los que acabaron la carrera y amaron Su venida."
+    "es": [
+     "Acabaron la carrera y han amado su venida",
+     "Comenzaron bien la carrera",
+     "Predicaron más sermones",
+     "Construyeron las iglesias más grandes"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The crown of righteousness is reserved for those who finished the race and loved His appearing.",
+    "es": "La corona de justicia se reserva para los que acabaron la carrera y amaron Su venida."
+   }
   },
   {
-    "textEn": "19. The capstone Scripture for the entire Pastoral Ministries course is:",
-    "textEs": "19. La Escritura capstone para todo el curso de Ministerios Pastorales es:",
-    "optionsEn": [
-      "John 3:16",
-      "Romans 8:28",
-      "1 Peter 5:2-4 — Shepherd the flock of God... and when the Chief Shepherd appears, you will receive the crown of glory",
-      "Genesis 1:1"
+   "stem": {
+    "en": "The capstone Scripture for the entire Pastoral Ministries course is:",
+    "es": "La Escritura capstone para todo el curso de Ministerios Pastorales es:"
+   },
+   "options": {
+    "en": [
+     "John 3:16",
+     "Romans 8:28",
+     "1 Peter 5:2-4 — Shepherd the flock of God... and when the Chief Shepherd appears, you will receive the crown of glory",
+     "Genesis 1:1"
     ],
-    "optionsEs": [
-      "Juan 3:16",
-      "Romanos 8:28",
-      "1 Pedro 5:2-4 — Apacentad la grey de Dios... y cuando aparezca el Príncipe de los pastores, recibiréis la corona incorruptible de gloria",
-      "Génesis 1:1"
-    ],
-    "c": 149,
-    "explEn": "The capstone Scripture for the whole course is 1 Peter 5:2-4.",
-    "explEs": "La Escritura culminante de todo el curso es 1 Pedro 5:2-4."
+    "es": [
+     "Juan 3:16",
+     "Romanos 8:28",
+     "1 Pedro 5:2-4 — Apacentad la grey de Dios... y cuando aparezca el Príncipe de los pastores, recibiréis la corona incorruptible de gloria",
+     "Génesis 1:1"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The capstone Scripture for the whole course is 1 Peter 5:2-4.",
+    "es": "La Escritura culminante de todo el curso es 1 Pedro 5:2-4."
+   }
   },
   {
-    "textEn": "20. The closing word every pastor who finishes well will hear is:",
-    "textEs": "20. La palabra de cierre que cada pastor que termina bien oirá es:",
-    "optionsEn": [
-      "You earned it",
-      "Well done, good and faithful servant... Enter into the joy of your lord (Matthew 25:21)",
-      "Your records are impressive",
-      "Your buildings will stand"
+   "stem": {
+    "en": "The closing word every pastor who finishes well will hear is:",
+    "es": "La palabra de cierre que cada pastor que termina bien oirá es:"
+   },
+   "options": {
+    "en": [
+     "You earned it",
+     "Well done, good and faithful servant... Enter into the joy of your lord (Matthew 25:21)",
+     "Your records are impressive",
+     "Your buildings will stand"
     ],
-    "optionsEs": [
-      "Te lo ganaste",
-      "Bien, buen siervo y fiel... entra en el gozo de tu Señor (Mateo 25:21)",
-      "Tus registros son impresionantes",
-      "Tus edificios permanecerán"
-    ],
-    "c": 155,
-    "explEn": "The closing word every faithful pastor will hear is 'Well done, good and faithful servant' (Matthew 25:21).",
-    "explEs": "La palabra final que oirá todo pastor fiel es 'Bien, buen siervo y fiel' (Mateo 25:21)."
+    "es": [
+     "Te lo ganaste",
+     "Bien, buen siervo y fiel... entra en el gozo de tu Señor (Mateo 25:21)",
+     "Tus registros son impresionantes",
+     "Tus edificios permanecerán"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The closing word every faithful pastor will hear is 'Well done, good and faithful servant' (Matthew 25:21).",
+    "es": "La palabra final que oirá todo pastor fiel es 'Bien, buen siervo y fiel' (Mateo 25:21)."
+   }
   }
-];
-
-const kwQuestions = [
+ ],
+ "sa": [
   {
-    "textEn": "21. Defend the claim that 'few pastors finish well.' Apply Paul's three statements (fought, finished, kept) as a diagnostic for pastoral life.",
-    "textEs": "21. Defienda la afirmación de que 'pocos pastores terminan bien.' Aplique las tres declaraciones de Pablo como diagnóstico para la vida pastoral.",
-    "kw_en": [
-      "finish",
-      "fought",
-      "kept",
-      "faith",
-      "paul",
-      "diagnostic",
-      "few",
-      "race"
+   "prompt": {
+    "en": "Defend the claim that 'few pastors finish well.' Apply Paul's three statements (fought, finished, kept) as a diagnostic for pastoral life.",
+    "es": "Defienda la afirmación de que 'pocos pastores terminan bien.' Aplique las tres declaraciones de Pablo como diagnóstico para la vida pastoral."
+   },
+   "keywords": {
+    "en": [
+     "finish",
+     "fought",
+     "kept",
+     "faith",
+     "paul",
+     "diagnostic",
+     "few",
+     "race"
     ],
-    "kw_es": [
-      "terminar",
-      "peleado",
-      "guardado",
-      "fe",
-      "pablo",
-      "diagnóstico",
-      "pocos",
-      "carrera"
-    ],
-    "modelEn": "Few pastors finish well, and Paul's three statements at the end of his life serve as a diagnostic for pastoral life: 'I have fought the good fight, I have finished the race, I have kept the faith' (2 Timothy 4:7). Each phrase tests a man. Have you fought — engaged the real battle, not dodged it? Have you finished — stayed to the end rather than quitting or being disqualified along the way? Have you kept the faith — guarded both your doctrine and your devotion through every season? The sobering truth observed across many ministries is that many who start strong do not finish well; they fall to scandal, burn out, grow bitter, or simply drift into a hollow professionalism. Finishing well is not automatic and not common; it is the fruit of decades of faithfulness. Paul's words are not a victory lap to admire but a standard against which a pastor measures his own trajectory while there is still time to correct it.",
-    "modelEs": "Pocos pastores terminan bien, y las tres declaraciones de Pablo al final de su vida sirven como diagnóstico para la vida pastoral: 'He peleado la buena batalla, he acabado la carrera, he guardado la fe' (2 Timoteo 4:7). Cada frase prueba a un hombre. ¿Has peleado — entrado en la batalla real, sin esquivarla? ¿Has terminado — permanecido hasta el final en vez de renunciar o ser descalificado en el camino? ¿Has guardado la fe — protegido tanto tu doctrina como tu devoción a través de cada estación? La verdad solemne observada a lo largo de muchos ministerios es que muchos que comienzan fuerte no terminan bien; caen en el escándalo, se queman, se amargan, o simplemente se deslizan hacia un profesionalismo vacío. Terminar bien no es automático ni común; es el fruto de décadas de fidelidad. Las palabras de Pablo no son una vuelta de la victoria para admirar sino un estándar contra el cual un pastor mide su propia trayectoria mientras aún hay tiempo de corregirla."
+    "es": [
+     "terminar",
+     "peleado",
+     "guardado",
+     "fe",
+     "pablo",
+     "diagnóstico",
+     "pocos",
+     "carrera"
+    ]
+   },
+   "model": {
+    "en": "Few pastors finish well, and Paul's three statements at the end of his life serve as a diagnostic for pastoral life: 'I have fought the good fight, I have finished the race, I have kept the faith' (2 Timothy 4:7). Each phrase tests a man. Have you fought — engaged the real battle, not dodged it? Have you finished — stayed to the end rather than quitting or being disqualified along the way? Have you kept the faith — guarded both your doctrine and your devotion through every season? The sobering truth observed across many ministries is that many who start strong do not finish well; they fall to scandal, burn out, grow bitter, or simply drift into a hollow professionalism. Finishing well is not automatic and not common; it is the fruit of decades of faithfulness. Paul's words are not a victory lap to admire but a standard against which a pastor measures his own trajectory while there is still time to correct it.",
+    "es": "Pocos pastores terminan bien, y las tres declaraciones de Pablo al final de su vida sirven como diagnóstico para la vida pastoral: 'He peleado la buena batalla, he acabado la carrera, he guardado la fe' (2 Timoteo 4:7). Cada frase prueba a un hombre. ¿Has peleado — entrado en la batalla real, sin esquivarla? ¿Has terminado — permanecido hasta el final en vez de renunciar o ser descalificado en el camino? ¿Has guardado la fe — protegido tanto tu doctrina como tu devoción a través de cada estación? La verdad solemne observada a lo largo de muchos ministerios es que muchos que comienzan fuerte no terminan bien; caen en el escándalo, se queman, se amargan, o simplemente se deslizan hacia un profesionalismo vacío. Terminar bien no es automático ni común; es el fruto de décadas de fidelidad. Las palabras de Pablo no son una vuelta de la victoria para admirar sino un estándar contra el cual un pastor mide su propia trayectoria mientras aún hay tiempo de corregirla."
+   }
   },
   {
-    "textEn": "22. Explain analusis (the unmooring of a ship) and 'poured out' as Paul's vision of his death. Why is finishing poured out the right ambition?",
-    "textEs": "22. Explique analusis y 'derramado' como la visión de Pablo de su muerte. ¿Por qué es 'derramado' la ambición correcta?",
-    "kw_en": [
-      "analusis",
-      "ship",
-      "unmoor",
-      "poured",
-      "death",
-      "depart",
-      "sail",
-      "ambition"
+   "prompt": {
+    "en": "Explain analusis (the unmooring of a ship) and 'poured out' as Paul's vision of his death. Why is finishing poured out the right ambition?",
+    "es": "Explique analusis y 'derramado' como la visión de Pablo de su muerte. ¿Por qué es 'derramado' la ambición correcta?"
+   },
+   "keywords": {
+    "en": [
+     "analusis",
+     "ship",
+     "unmoor",
+     "poured",
+     "death",
+     "depart",
+     "sail",
+     "ambition"
     ],
-    "kw_es": [
-      "analusis",
-      "barco",
-      "desamarrar",
-      "derramado",
-      "muerte",
-      "partir",
-      "zarpar",
-      "ambición"
-    ],
-    "modelEn": "Paul's word for his death, analusis, pictures the unmooring of a ship about to sail — the ropes loosed, the vessel slipping its harbor for the open sea and its true destination. Alongside it he says he is being 'poured out' like a drink offering, his life given completely as an offering to God. Together these images show Paul's vision of his death not as a tragic end but as a departure toward home and a final act of worship. Finishing poured out is the right ambition because it means a man held nothing back, spending his life fully rather than hoarding it, so that at the end there is nothing left to give because it has all been given. The faithful pastor does not aim to retire with reserves carefully preserved; he aims to arrive at the harbor empty, poured out in the service of Christ, ready for the ship to be unmoored for the voyage home. To be poured out is to have spent everything for the One worth everything.",
-    "modelEs": "La palabra de Pablo para su muerte, analusis, retrata el desamarrar de un barco a punto de zarpar — las cuerdas sueltas, la nave dejando su puerto hacia el mar abierto y su verdadero destino. Junto a ella dice que está siendo 'derramado' como una libación, su vida dada completamente como ofrenda a Dios. Juntas estas imágenes muestran la visión de Pablo de su muerte no como un final trágico sino como una partida hacia el hogar y un acto final de adoración. Terminar derramado es la ambición correcta porque significa que un hombre no retuvo nada, gastando su vida plenamente en vez de atesorarla, de modo que al final no queda nada por dar porque todo ha sido dado. El pastor fiel no aspira a jubilarse con reservas cuidadosamente preservadas; aspira a llegar al puerto vacío, derramado en el servicio de Cristo, listo para que el barco sea desamarrado para el viaje a casa. Ser derramado es haber gastado todo por Aquel que vale todo."
+    "es": [
+     "analusis",
+     "barco",
+     "desamarrar",
+     "derramado",
+     "muerte",
+     "partir",
+     "zarpar",
+     "ambición"
+    ]
+   },
+   "model": {
+    "en": "Paul's word for his death, analusis, pictures the unmooring of a ship about to sail — the ropes loosed, the vessel slipping its harbor for the open sea and its true destination. Alongside it he says he is being 'poured out' like a drink offering, his life given completely as an offering to God. Together these images show Paul's vision of his death not as a tragic end but as a departure toward home and a final act of worship. Finishing poured out is the right ambition because it means a man held nothing back, spending his life fully rather than hoarding it, so that at the end there is nothing left to give because it has all been given. The faithful pastor does not aim to retire with reserves carefully preserved; he aims to arrive at the harbor empty, poured out in the service of Christ, ready for the ship to be unmoored for the voyage home. To be poured out is to have spent everything for the One worth everything.",
+    "es": "La palabra de Pablo para su muerte, analusis, retrata el desamarrar de un barco a punto de zarpar — las cuerdas sueltas, la nave dejando su puerto hacia el mar abierto y su verdadero destino. Junto a ella dice que está siendo 'derramado' como una libación, su vida dada completamente como ofrenda a Dios. Juntas estas imágenes muestran la visión de Pablo de su muerte no como un final trágico sino como una partida hacia el hogar y un acto final de adoración. Terminar derramado es la ambición correcta porque significa que un hombre no retuvo nada, gastando su vida plenamente en vez de atesorarla, de modo que al final no queda nada por dar porque todo ha sido dado. El pastor fiel no aspira a jubilarse con reservas cuidadosamente preservadas; aspira a llegar al puerto vacío, derramado en el servicio de Cristo, listo para que el barco sea desamarrado para el viaje a casa. Ser derramado es haber gastado todo por Aquel que vale todo."
+   }
   },
   {
-    "textEn": "23. Discuss endurance (hupomonē) as the central virtue of long pastoral ministry. Why do most fallen pastors fall from a thousand small compromises rather than one big sin?",
-    "textEs": "23. Discuta la perseverancia (hupomonē) como la virtud central del ministerio pastoral largo. ¿Por qué los pastores caídos caen de mil pequeños compromisos?",
-    "kw_en": [
-      "endurance",
-      "hupomone",
-      "compromise",
-      "small",
-      "daily",
-      "faithful",
-      "load",
-      "fall"
+   "prompt": {
+    "en": "Discuss endurance (hupomonē) as the central virtue of long pastoral ministry. Why do most fallen pastors fall from a thousand small compromises rather than one big sin?",
+    "es": "Discuta la perseverancia (hupomonē) como la virtud central del ministerio pastoral largo. ¿Por qué los pastores caídos caen de mil pequeños compromisos?"
+   },
+   "keywords": {
+    "en": [
+     "endurance",
+     "hupomone",
+     "compromise",
+     "small",
+     "daily",
+     "faithful",
+     "load",
+     "fall"
     ],
-    "kw_es": [
-      "resistencia",
-      "hupomone",
-      "compromiso",
-      "pequeño",
-      "diario",
-      "fiel",
-      "carga",
-      "caer"
-    ],
-    "modelEn": "Endurance — the Greek hupomonē, the capacity to remain under a load without giving way — is the central virtue of long pastoral ministry. It is not dramatic; it is daily faithfulness under weight, year after year, when no one is watching and nothing is exciting. Most fallen pastors do not fall from one great dramatic sin but from a thousand small compromises accumulated over years — a little dishonesty here, a guarded prayer life there, a slow coarsening of the conscience, a steady neglect of the disciplines until the foundation quietly rots. The collapse looks sudden, but it was built by a long erosion. This is why endurance matters more than brilliance: the ministry is not won in a sprint of inspiration but in the long obedience of remaining faithful through decades of ordinary Tuesdays. The pastor who endures guards against the small compromises precisely because he knows they, not the spectacular temptations, are what bring most good men down.",
-    "modelEs": "La resistencia — el griego hupomonē, la capacidad de permanecer bajo una carga sin ceder — es la virtud central del ministerio pastoral largo. No es dramática; es fidelidad diaria bajo peso, año tras año, cuando nadie observa y nada es emocionante. La mayoría de los pastores caídos no caen de un gran pecado dramático sino de mil pequeños compromisos acumulados a lo largo de los años — una pequeña deshonestidad aquí, una vida de oración descuidada allá, un lento endurecimiento de la conciencia, un constante descuido de las disciplinas hasta que el fundamento se pudre en silencio. El colapso parece repentino, pero fue construido por una larga erosión. Por eso la resistencia importa más que la brillantez: el ministerio no se gana en un esprint de inspiración sino en la larga obediencia de permanecer fiel a través de décadas de martes ordinarios. El pastor que resiste se guarda de los pequeños compromisos precisamente porque sabe que ellos, no las tentaciones espectaculares, son los que derriban a la mayoría de los hombres buenos."
+    "es": [
+     "resistencia",
+     "hupomone",
+     "compromiso",
+     "pequeño",
+     "diario",
+     "fiel",
+     "carga",
+     "caer"
+    ]
+   },
+   "model": {
+    "en": "Endurance — the Greek hupomonē, the capacity to remain under a load without giving way — is the central virtue of long pastoral ministry. It is not dramatic; it is daily faithfulness under weight, year after year, when no one is watching and nothing is exciting. Most fallen pastors do not fall from one great dramatic sin but from a thousand small compromises accumulated over years — a little dishonesty here, a guarded prayer life there, a slow coarsening of the conscience, a steady neglect of the disciplines until the foundation quietly rots. The collapse looks sudden, but it was built by a long erosion. This is why endurance matters more than brilliance: the ministry is not won in a sprint of inspiration but in the long obedience of remaining faithful through decades of ordinary Tuesdays. The pastor who endures guards against the small compromises precisely because he knows they, not the spectacular temptations, are what bring most good men down.",
+    "es": "La resistencia — el griego hupomonē, la capacidad de permanecer bajo una carga sin ceder — es la virtud central del ministerio pastoral largo. No es dramática; es fidelidad diaria bajo peso, año tras año, cuando nadie observa y nada es emocionante. La mayoría de los pastores caídos no caen de un gran pecado dramático sino de mil pequeños compromisos acumulados a lo largo de los años — una pequeña deshonestidad aquí, una vida de oración descuidada allá, un lento endurecimiento de la conciencia, un constante descuido de las disciplinas hasta que el fundamento se pudre en silencio. El colapso parece repentino, pero fue construido por una larga erosión. Por eso la resistencia importa más que la brillantez: el ministerio no se gana en un esprint de inspiración sino en la larga obediencia de permanecer fiel a través de décadas de martes ordinarios. El pastor que resiste se guarda de los pequeños compromisos precisamente porque sabe que ellos, no las tentaciones espectaculares, son los que derriban a la mayoría de los hombres buenos."
+   }
   },
   {
-    "textEn": "24. Apply the people skills principle. Why does the professor say 'your theology will not save your ministry — your character and your people skills will'?",
-    "textEs": "24. Aplique el principio de habilidades con la gente. ¿Por qué dice el profesor que 'su teología no salvará su ministerio — su carácter y sus habilidades con la gente lo harán'?",
-    "kw_en": [
-      "people",
-      "character",
-      "theology",
-      "skill",
-      "relationship",
-      "save",
-      "ministry",
-      "handle"
+   "prompt": {
+    "en": "Apply the people skills principle. Why does the professor say 'your theology will not save your ministry — your character and your people skills will'?",
+    "es": "Aplique el principio de habilidades con la gente. ¿Por qué dice el profesor que 'su teología no salvará su ministerio — su carácter y sus habilidades con la gente lo harán'?"
+   },
+   "keywords": {
+    "en": [
+     "people",
+     "character",
+     "theology",
+     "skill",
+     "relationship",
+     "save",
+     "ministry",
+     "handle"
     ],
-    "kw_es": [
-      "gente",
-      "carácter",
-      "teología",
-      "habilidad",
-      "relación",
-      "salvar",
-      "ministerio",
-      "manejar"
-    ],
-    "modelEn": "The professor says 'your theology will not save your ministry — your character and your people skills will,' and the principle is hard-won. A pastor may have impeccable doctrine, a fine education, and powerful sermons, yet wreck his ministry because he cannot relate to people, cannot handle conflict, cannot love the difficult, cannot listen, cannot lead human beings with patience and grace. People skills are the practical outworking of love — the ability to be with people, bear with them, win their trust, and walk with them through their messiness. Theology tells a pastor what is true, but people skills determine whether he can actually shepherd living souls who are stubborn, wounded, and slow. This is not a call to neglect theology, which remains the foundation; it is a warning that sound doctrine alone, paired with a man who cannot get along with people, will not sustain a ministry. The flock is made of people, and a shepherd who cannot handle people cannot keep the flock.",
-    "modelEs": "El profesor dice 'tu teología no salvará tu ministerio — tu carácter y tus habilidades con la gente lo harán,' y el principio es ganado con esfuerzo. Un pastor puede tener doctrina impecable, una fina educación y sermones poderosos, y sin embargo arruinar su ministerio porque no puede relacionarse con la gente, no puede manejar el conflicto, no puede amar al difícil, no puede escuchar, no puede dirigir a seres humanos con paciencia y gracia. Las habilidades con la gente son la expresión práctica del amor — la capacidad de estar con la gente, soportarla, ganar su confianza, y caminar con ella a través de su desorden. La teología le dice al pastor qué es verdad, pero las habilidades con la gente determinan si realmente puede pastorear almas vivientes que son tercas, heridas y lentas. Esto no es un llamado a descuidar la teología, que sigue siendo el fundamento; es una advertencia de que la sana doctrina sola, junto a un hombre que no puede llevarse bien con la gente, no sostendrá un ministerio. El rebaño está hecho de gente, y un pastor que no puede manejar a la gente no puede guardar el rebaño."
+    "es": [
+     "gente",
+     "carácter",
+     "teología",
+     "habilidad",
+     "relación",
+     "salvar",
+     "ministerio",
+     "manejar"
+    ]
+   },
+   "model": {
+    "en": "The professor says 'your theology will not save your ministry — your character and your people skills will,' and the principle is hard-won. A pastor may have impeccable doctrine, a fine education, and powerful sermons, yet wreck his ministry because he cannot relate to people, cannot handle conflict, cannot love the difficult, cannot listen, cannot lead human beings with patience and grace. People skills are the practical outworking of love — the ability to be with people, bear with them, win their trust, and walk with them through their messiness. Theology tells a pastor what is true, but people skills determine whether he can actually shepherd living souls who are stubborn, wounded, and slow. This is not a call to neglect theology, which remains the foundation; it is a warning that sound doctrine alone, paired with a man who cannot get along with people, will not sustain a ministry. The flock is made of people, and a shepherd who cannot handle people cannot keep the flock.",
+    "es": "El profesor dice 'tu teología no salvará tu ministerio — tu carácter y tus habilidades con la gente lo harán,' y el principio es ganado con esfuerzo. Un pastor puede tener doctrina impecable, una fina educación y sermones poderosos, y sin embargo arruinar su ministerio porque no puede relacionarse con la gente, no puede manejar el conflicto, no puede amar al difícil, no puede escuchar, no puede dirigir a seres humanos con paciencia y gracia. Las habilidades con la gente son la expresión práctica del amor — la capacidad de estar con la gente, soportarla, ganar su confianza, y caminar con ella a través de su desorden. La teología le dice al pastor qué es verdad, pero las habilidades con la gente determinan si realmente puede pastorear almas vivientes que son tercas, heridas y lentas. Esto no es un llamado a descuidar la teología, que sigue siendo el fundamento; es una advertencia de que la sana doctrina sola, junto a un hombre que no puede llevarse bien con la gente, no sostendrá un ministerio. El rebaño está hecho de gente, y un pastor que no puede manejar a la gente no puede guardar el rebaño."
+   }
   },
   {
-    "textEn": "25. Discuss the professor's observation that pastors are summarily dismissed from churches for conflict-handling failures, never theology. What are the implications for ministry training and self-examination?",
-    "textEs": "25. Discuta la observación del profesor de que los pastores son despedidos por fallas en manejar conflictos, nunca por teología. ¿Cuáles son las implicaciones para el entrenamiento ministerial?",
-    "kw_en": [
-      "conflict",
-      "dismiss",
-      "theology",
-      "fire",
-      "handle",
-      "skill",
-      "examination",
-      "train"
+   "prompt": {
+    "en": "Discuss the professor's observation that pastors are summarily dismissed from churches for conflict-handling failures, never theology. What are the implications for ministry training and self-examination?",
+    "es": "Discuta la observación del profesor de que los pastores son despedidos por fallas en manejar conflictos, nunca por teología. ¿Cuáles son las implicaciones para el entrenamiento ministerial?"
+   },
+   "keywords": {
+    "en": [
+     "conflict",
+     "dismiss",
+     "theology",
+     "fire",
+     "handle",
+     "skill",
+     "examination",
+     "train"
     ],
-    "kw_es": [
-      "conflicto",
-      "despedir",
-      "teología",
-      "despido",
-      "manejar",
-      "habilidad",
-      "examen",
-      "entrenar"
-    ],
-    "modelEn": "After many years of pastoral and seminary observation, the professor concluded that pastors are summarily dismissed from churches because of an inability to handle conflict — never because of theology. Churches almost never fire a pastor for his doctrine; they fire him because he mishandled a dispute, alienated key people, reacted defensively, or let a conflict spiral until the congregation split. The implication for ministry training is striking: seminaries pour enormous effort into theology and exegesis, which matter greatly, but often give almost no training in conflict resolution and people skills, which are what actually end ministries. For self-examination, the pastor must ask honestly whether he handles conflict biblically and maturely, or whether he avoids it, escalates it, or takes it personally. A man should give as much attention to learning how to navigate difficult people and disputes as he gives to his sermon preparation, because his ministry is far more likely to end over a conflict than over a doctrine.",
-    "modelEs": "Después de muchos años de observación pastoral y de seminario, el profesor concluyó que los pastores son despedidos sumariamente de las iglesias por una incapacidad de manejar el conflicto — nunca por la teología. Las iglesias casi nunca despiden a un pastor por su doctrina; lo despiden porque manejó mal una disputa, alienó a personas clave, reaccionó defensivamente, o dejó que un conflicto se descontrolara hasta que la congregación se dividió. La implicación para el entrenamiento ministerial es sorprendente: los seminarios vierten enorme esfuerzo en la teología y la exégesis, que importan grandemente, pero a menudo dan casi ningún entrenamiento en la resolución de conflictos y las habilidades con la gente, que son lo que realmente termina los ministerios. Para el autoexamen, el pastor debe preguntarse honestamente si maneja el conflicto bíblica y maduramente, o si lo evita, lo escala, o lo toma personalmente. Un hombre debe dar tanta atención a aprender a navegar gente difícil y disputas como da a la preparación de su sermón, porque su ministerio tiene mucha más probabilidad de terminar por un conflicto que por una doctrina."
+    "es": [
+     "conflicto",
+     "despedir",
+     "teología",
+     "despido",
+     "manejar",
+     "habilidad",
+     "examen",
+     "entrenar"
+    ]
+   },
+   "model": {
+    "en": "After many years of pastoral and seminary observation, the professor concluded that pastors are summarily dismissed from churches because of an inability to handle conflict — never because of theology. Churches almost never fire a pastor for his doctrine; they fire him because he mishandled a dispute, alienated key people, reacted defensively, or let a conflict spiral until the congregation split. The implication for ministry training is striking: seminaries pour enormous effort into theology and exegesis, which matter greatly, but often give almost no training in conflict resolution and people skills, which are what actually end ministries. For self-examination, the pastor must ask honestly whether he handles conflict biblically and maturely, or whether he avoids it, escalates it, or takes it personally. A man should give as much attention to learning how to navigate difficult people and disputes as he gives to his sermon preparation, because his ministry is far more likely to end over a conflict than over a doctrine.",
+    "es": "Después de muchos años de observación pastoral y de seminario, el profesor concluyó que los pastores son despedidos sumariamente de las iglesias por una incapacidad de manejar el conflicto — nunca por la teología. Las iglesias casi nunca despiden a un pastor por su doctrina; lo despiden porque manejó mal una disputa, alienó a personas clave, reaccionó defensivamente, o dejó que un conflicto se descontrolara hasta que la congregación se dividió. La implicación para el entrenamiento ministerial es sorprendente: los seminarios vierten enorme esfuerzo en la teología y la exégesis, que importan grandemente, pero a menudo dan casi ningún entrenamiento en la resolución de conflictos y las habilidades con la gente, que son lo que realmente termina los ministerios. Para el autoexamen, el pastor debe preguntarse honestamente si maneja el conflicto bíblica y maduramente, o si lo evita, lo escala, o lo toma personalmente. Un hombre debe dar tanta atención a aprender a navegar gente difícil y disputas como da a la preparación de su sermón, porque su ministerio tiene mucha más probabilidad de terminar por un conflicto que por una doctrina."
+   }
   },
   {
-    "textEn": "26. Defend the principle that retirement done well begins decades before the actual retirement. What disciplines must the pastor have built so that he steps down without collapse?",
-    "textEs": "26. Defienda el principio de que la jubilación bien hecha comienza décadas antes. ¿Qué disciplinas debe haber edificado el pastor?",
-    "kw_en": [
-      "retirement",
-      "succession",
-      "decade",
-      "prepare",
-      "discipline",
-      "step",
-      "collapse",
-      "identity"
+   "prompt": {
+    "en": "Defend the principle that retirement done well begins decades before the actual retirement. What disciplines must the pastor have built so that he steps down without collapse?",
+    "es": "Defienda el principio de que la jubilación bien hecha comienza décadas antes. ¿Qué disciplinas debe haber edificado el pastor?"
+   },
+   "keywords": {
+    "en": [
+     "retirement",
+     "succession",
+     "decade",
+     "prepare",
+     "discipline",
+     "step",
+     "collapse",
+     "identity"
     ],
-    "kw_es": [
-      "jubilación",
-      "sucesión",
-      "década",
-      "preparar",
-      "disciplina",
-      "dejar",
-      "colapso",
-      "identidad"
-    ],
-    "modelEn": "Retirement done well begins decades before the actual retirement, not in the final year. The disciplines that allow a pastor to step down without collapse must be built across the whole of his ministry. He must build his identity in Christ rather than in the office, so that when the office is gone he has not lost himself — the man whose entire identity is 'pastor' has nothing left when he is no longer pastor. He must practice succession all along, handing off ministry to faithful men year after year as 2 Timothy 2:2 commands, so that the church does not depend on him alone. He must cultivate friendships, interests, and a marriage that exist apart from his role, so there is a life to step into. The pastor who builds none of this arrives at retirement and falls apart, because he poured everything into a position that has now ended. The faithful finish requires preparing for the handoff from the very beginning, living all along as a steward who will one day give the trust to another.",
-    "modelEs": "La jubilación hecha bien comienza décadas antes de la jubilación real, no en el último año. Las disciplinas que permiten a un pastor dejar el cargo sin colapsar deben construirse a lo largo de todo su ministerio. Debe construir su identidad en Cristo en vez de en el oficio, para que cuando el oficio se vaya no se haya perdido a sí mismo — el hombre cuya identidad entera es 'pastor' no tiene nada que le quede cuando ya no es pastor. Debe practicar la sucesión todo el tiempo, entregando el ministerio a hombres fieles año tras año como manda 2 Timoteo 2:2, para que la iglesia no dependa solo de él. Debe cultivar amistades, intereses y un matrimonio que existan aparte de su papel, para que haya una vida hacia la cual entrar. El pastor que no construye nada de esto llega a la jubilación y se desmorona, porque vertió todo en una posición que ahora ha terminado. El final fiel requiere prepararse para la entrega desde el mismo principio, viviendo todo el tiempo como un mayordomo que un día dará la confianza a otro."
+    "es": [
+     "jubilación",
+     "sucesión",
+     "década",
+     "preparar",
+     "disciplina",
+     "dejar",
+     "colapso",
+     "identidad"
+    ]
+   },
+   "model": {
+    "en": "Retirement done well begins decades before the actual retirement, not in the final year. The disciplines that allow a pastor to step down without collapse must be built across the whole of his ministry. He must build his identity in Christ rather than in the office, so that when the office is gone he has not lost himself — the man whose entire identity is 'pastor' has nothing left when he is no longer pastor. He must practice succession all along, handing off ministry to faithful men year after year as 2 Timothy 2:2 commands, so that the church does not depend on him alone. He must cultivate friendships, interests, and a marriage that exist apart from his role, so there is a life to step into. The pastor who builds none of this arrives at retirement and falls apart, because he poured everything into a position that has now ended. The faithful finish requires preparing for the handoff from the very beginning, living all along as a steward who will one day give the trust to another.",
+    "es": "La jubilación hecha bien comienza décadas antes de la jubilación real, no en el último año. Las disciplinas que permiten a un pastor dejar el cargo sin colapsar deben construirse a lo largo de todo su ministerio. Debe construir su identidad en Cristo en vez de en el oficio, para que cuando el oficio se vaya no se haya perdido a sí mismo — el hombre cuya identidad entera es 'pastor' no tiene nada que le quede cuando ya no es pastor. Debe practicar la sucesión todo el tiempo, entregando el ministerio a hombres fieles año tras año como manda 2 Timoteo 2:2, para que la iglesia no dependa solo de él. Debe cultivar amistades, intereses y un matrimonio que existan aparte de su papel, para que haya una vida hacia la cual entrar. El pastor que no construye nada de esto llega a la jubilación y se desmorona, porque vertió todo en una posición que ahora ha terminado. El final fiel requiere prepararse para la entrega desde el mismo principio, viviendo todo el tiempo como un mayordomo que un día dará la confianza a otro."
+   }
   },
   {
-    "textEn": "27. Explain the deepest meaning of 2 Timothy 2:2. Why does this principle outlast every individual pastor's ministry, and how is this course itself an example?",
-    "textEs": "27. Explique el significado más profundo de 2 Timoteo 2:2. ¿Por qué este principio sobrevive al ministerio de cada pastor individual?",
-    "kw_en": [
-      "timothy",
-      "generation",
-      "outlast",
-      "course",
-      "transmit",
-      "faithful",
-      "multiply",
-      "example"
+   "prompt": {
+    "en": "Explain the deepest meaning of 2 Timothy 2:2. Why does this principle outlast every individual pastor's ministry, and how is this course itself an example?",
+    "es": "Explique el significado más profundo de 2 Timoteo 2:2. ¿Por qué este principio sobrevive al ministerio de cada pastor individual?"
+   },
+   "keywords": {
+    "en": [
+     "timothy",
+     "generation",
+     "outlast",
+     "course",
+     "transmit",
+     "faithful",
+     "multiply",
+     "example"
     ],
-    "kw_es": [
-      "timoteo",
-      "generación",
-      "sobrevivir",
-      "curso",
-      "transmitir",
-      "fiel",
-      "multiplic",
-      "ejemplo"
-    ],
-    "modelEn": "The deepest meaning of 2 Timothy 2:2 — 'the things you have heard from me, commit to faithful men who will teach others also' — is that this principle outlasts every individual pastor's ministry. No pastor lives forever, no ministry continues in one man's hands, but the truth committed to faithful men passes from generation to generation in an unbroken chain, so that the work continues long after any single shepherd is gone. This is how the faith has survived two thousand years: not through institutions or buildings, but through faithful people entrusting the gospel to the next faithful people. This very course is an example — the professor is committing what he has learned across a lifetime to faithful students who will teach others also, fulfilling the verse in the very act of teaching it. The principle is self-perpetuating by design. A pastor's individual ministry ends, but if he has invested in faithful men, his ministry continues through every disciple who carries it forward, which is the only way a finite man leaves an infinite legacy.",
-    "modelEs": "El significado más profundo de 2 Timoteo 2:2 — 'lo que has oído de mí, esto encarga a hombres fieles que enseñarán también a otros' — es que este principio sobrevive al ministerio de cada pastor individual. Ningún pastor vive para siempre, ningún ministerio continúa en las manos de un solo hombre, pero la verdad encargada a hombres fieles pasa de generación en generación en una cadena ininterrumpida, de modo que la obra continúa mucho después de que cualquier pastor se haya ido. Así ha sobrevivido la fe dos mil años: no a través de instituciones o edificios, sino a través de personas fieles que encargan el evangelio a las siguientes personas fieles. Este mismo curso es un ejemplo — el profesor está encargando lo que ha aprendido a lo largo de una vida a estudiantes fieles que enseñarán también a otros, cumpliendo el versículo en el acto mismo de enseñarlo. El principio se perpetúa a sí mismo por diseño. El ministerio individual de un pastor termina, pero si ha invertido en hombres fieles, su ministerio continúa a través de cada discípulo que lo lleva adelante, que es la única manera en que un hombre finito deja un legado infinito."
+    "es": [
+     "timoteo",
+     "generación",
+     "sobrevivir",
+     "curso",
+     "transmitir",
+     "fiel",
+     "multiplic",
+     "ejemplo"
+    ]
+   },
+   "model": {
+    "en": "The deepest meaning of 2 Timothy 2:2 — 'the things you have heard from me, commit to faithful men who will teach others also' — is that this principle outlasts every individual pastor's ministry. No pastor lives forever, no ministry continues in one man's hands, but the truth committed to faithful men passes from generation to generation in an unbroken chain, so that the work continues long after any single shepherd is gone. This is how the faith has survived two thousand years: not through institutions or buildings, but through faithful people entrusting the gospel to the next faithful people. This very course is an example — the professor is committing what he has learned across a lifetime to faithful students who will teach others also, fulfilling the verse in the very act of teaching it. The principle is self-perpetuating by design. A pastor's individual ministry ends, but if he has invested in faithful men, his ministry continues through every disciple who carries it forward, which is the only way a finite man leaves an infinite legacy.",
+    "es": "El significado más profundo de 2 Timoteo 2:2 — 'lo que has oído de mí, esto encarga a hombres fieles que enseñarán también a otros' — es que este principio sobrevive al ministerio de cada pastor individual. Ningún pastor vive para siempre, ningún ministerio continúa en las manos de un solo hombre, pero la verdad encargada a hombres fieles pasa de generación en generación en una cadena ininterrumpida, de modo que la obra continúa mucho después de que cualquier pastor se haya ido. Así ha sobrevivido la fe dos mil años: no a través de instituciones o edificios, sino a través de personas fieles que encargan el evangelio a las siguientes personas fieles. Este mismo curso es un ejemplo — el profesor está encargando lo que ha aprendido a lo largo de una vida a estudiantes fieles que enseñarán también a otros, cumpliendo el versículo en el acto mismo de enseñarlo. El principio se perpetúa a sí mismo por diseño. El ministerio individual de un pastor termina, pero si ha invertido en hombres fieles, su ministerio continúa a través de cada discípulo que lo lleva adelante, que es la única manera en que un hombre finito deja un legado infinito."
+   }
   },
   {
-    "textEn": "28. Discuss the pastor's true legacy. Why are people, not buildings, the only legacy that endures into eternity?",
-    "textEs": "28. Discuta el verdadero legado del pastor. ¿Por qué las personas, no los edificios, son el único legado que perdura?",
-    "kw_en": [
-      "legacy",
-      "people",
-      "building",
-      "eternal",
-      "disciple",
-      "soul",
-      "endure",
-      "remember"
+   "prompt": {
+    "en": "Discuss the pastor's true legacy. Why are people, not buildings, the only legacy that endures into eternity?",
+    "es": "Discuta el verdadero legado del pastor. ¿Por qué las personas, no los edificios, son el único legado que perdura?"
+   },
+   "keywords": {
+    "en": [
+     "legacy",
+     "people",
+     "building",
+     "eternal",
+     "disciple",
+     "soul",
+     "endure",
+     "remember"
     ],
-    "kw_es": [
-      "legado",
-      "gente",
-      "edificio",
-      "eterno",
-      "discípulo",
-      "alma",
-      "perdura",
-      "recordar"
-    ],
-    "modelEn": "A pastor's true legacy is people, not buildings, because people are the only legacy that endures into eternity. Buildings crumble, programs are forgotten, budgets are spent, sermons fade from memory — but the souls a pastor led to Christ, the disciples he mentored, the couples he married, the believers he equipped continue forever, and they carry his influence into generations and into eternity itself. A man may build an impressive church campus and be forgotten in fifty years; another may quietly disciple a handful of men whose faith reaches into eternity. At the end of his life no pastor wishes he had built a bigger building; he gives thanks for the people God let him touch. This reorders the pastor's priorities all the way through: he measures his ministry not by the visible monuments he leaves behind but by the people he has poured himself into. The faithful pastor invests in what lasts forever — souls — and lets the temporary things be merely tools, never the goal.",
-    "modelEs": "El verdadero legado de un pastor es la gente, no los edificios, porque la gente es el único legado que perdura en la eternidad. Los edificios se derrumban, los programas se olvidan, los presupuestos se gastan, los sermones se borran de la memoria — pero las almas que un pastor llevó a Cristo, los discípulos que mentoreó, las parejas que casó, los creyentes que equipó continúan para siempre, y llevan su influencia a las generaciones y a la eternidad misma. Un hombre puede construir un campus eclesial impresionante y ser olvidado en cincuenta años; otro puede discipular silenciosamente a un puñado de hombres cuya fe alcanza la eternidad. Al final de su vida ningún pastor desea haber construido un edificio más grande; da gracias por la gente que Dios le permitió tocar. Esto reordena las prioridades del pastor todo el tiempo: mide su ministerio no por los monumentos visibles que deja atrás sino por la gente en quien se ha vertido. El pastor fiel invierte en lo que dura para siempre — las almas — y deja que las cosas temporales sean meramente herramientas, nunca la meta."
+    "es": [
+     "legado",
+     "gente",
+     "edificio",
+     "eterno",
+     "discípulo",
+     "alma",
+     "perdura",
+     "recordar"
+    ]
+   },
+   "model": {
+    "en": "A pastor's true legacy is people, not buildings, because people are the only legacy that endures into eternity. Buildings crumble, programs are forgotten, budgets are spent, sermons fade from memory — but the souls a pastor led to Christ, the disciples he mentored, the couples he married, the believers he equipped continue forever, and they carry his influence into generations and into eternity itself. A man may build an impressive church campus and be forgotten in fifty years; another may quietly disciple a handful of men whose faith reaches into eternity. At the end of his life no pastor wishes he had built a bigger building; he gives thanks for the people God let him touch. This reorders the pastor's priorities all the way through: he measures his ministry not by the visible monuments he leaves behind but by the people he has poured himself into. The faithful pastor invests in what lasts forever — souls — and lets the temporary things be merely tools, never the goal.",
+    "es": "El verdadero legado de un pastor es la gente, no los edificios, porque la gente es el único legado que perdura en la eternidad. Los edificios se derrumban, los programas se olvidan, los presupuestos se gastan, los sermones se borran de la memoria — pero las almas que un pastor llevó a Cristo, los discípulos que mentoreó, las parejas que casó, los creyentes que equipó continúan para siempre, y llevan su influencia a las generaciones y a la eternidad misma. Un hombre puede construir un campus eclesial impresionante y ser olvidado en cincuenta años; otro puede discipular silenciosamente a un puñado de hombres cuya fe alcanza la eternidad. Al final de su vida ningún pastor desea haber construido un edificio más grande; da gracias por la gente que Dios le permitió tocar. Esto reordena las prioridades del pastor todo el tiempo: mide su ministerio no por los monumentos visibles que deja atrás sino por la gente en quien se ha vertido. El pastor fiel invierte en lo que dura para siempre — las almas — y deja que las cosas temporales sean meramente herramientas, nunca la meta."
+   }
   },
   {
-    "textEn": "29. Synthesize the eleven prior units into a single 'long view' for a future pastor. What disciplines from each unit must be cultivated for a forty-year ministry?",
-    "textEs": "29. Sintetice las once unidades previas en una sola 'visión a largo plazo' para un pastor futuro. ¿Qué disciplinas de cada unidad deben ser cultivadas?",
-    "kw_en": [
-      "long",
-      "view",
-      "discipline",
-      "character",
-      "endure",
-      "shepherd",
-      "decade",
-      "faithful"
+   "prompt": {
+    "en": "Synthesize the eleven prior units into a single 'long view' for a future pastor. What disciplines from each unit must be cultivated for a forty-year ministry?",
+    "es": "Sintetice las once unidades previas en una sola 'visión a largo plazo' para un pastor futuro. ¿Qué disciplinas de cada unidad deben ser cultivadas?"
+   },
+   "keywords": {
+    "en": [
+     "long",
+     "view",
+     "discipline",
+     "character",
+     "endure",
+     "shepherd",
+     "decade",
+     "faithful"
     ],
-    "kw_es": [
-      "largo",
-      "visión",
-      "disciplina",
-      "carácter",
-      "resistir",
-      "pastor",
-      "década",
-      "fiel"
-    ],
-    "modelEn": "The long view for a future pastor gathers the disciplines of all eleven prior units into a single trajectory toward a faithful forty-year ministry. From the biblical foundation he remembers he is an undershepherd serving the Chief Shepherd, the flock not his own. From calling and character he guards both pillars, kept by hidden disciplines. From preaching and worship he feeds the flock the Word and leads them into God's presence. From life-cycle ministry and visitation he stays present in the defining moments and shows up year after year. From discipleship he multiplies himself into faithful men. From counseling he becomes a healing instrument within clear boundaries. From leadership he shepherds rather than lords and decides together. From evangelism he keeps the soul-winner spirit alive. From family and self-care he guards his marriage, body, and soul. Every one of these disciplines must be cultivated and sustained across decades, because a faithful finish is not one heroic act but the sum of ten thousand ordinary days lived in obedience. The long view sees the whole race and runs it accordingly.",
-    "modelEs": "La visión larga para un futuro pastor reúne las disciplinas de las once unidades anteriores en una sola trayectoria hacia un ministerio fiel de cuarenta años. Del fundamento bíblico recuerda que es un subpastor sirviendo al Príncipe de los pastores, el rebaño no es suyo. Del llamado y el carácter guarda ambos pilares, sostenido por disciplinas ocultas. De la predicación y la adoración alimenta al rebaño con la Palabra y los lleva a la presencia de Dios. Del ministerio del ciclo de vida y la visitación permanece presente en los momentos definitorios y se presenta año tras año. Del discipulado se multiplica en hombres fieles. De la consejería se vuelve un instrumento de sanidad dentro de límites claros. Del liderazgo pastorea en vez de enseñorearse y decide en conjunto. Del evangelismo mantiene vivo el espíritu del ganador de almas. De la familia y el autocuidado guarda su matrimonio, su cuerpo y su alma. Cada una de estas disciplinas debe ser cultivada y sostenida a lo largo de décadas, porque un final fiel no es un acto heroico sino la suma de diez mil días ordinarios vividos en obediencia. La visión larga ve toda la carrera y la corre en consecuencia."
+    "es": [
+     "largo",
+     "visión",
+     "disciplina",
+     "carácter",
+     "resistir",
+     "pastor",
+     "década",
+     "fiel"
+    ]
+   },
+   "model": {
+    "en": "The long view for a future pastor gathers the disciplines of all eleven prior units into a single trajectory toward a faithful forty-year ministry. From the biblical foundation he remembers he is an undershepherd serving the Chief Shepherd, the flock not his own. From calling and character he guards both pillars, kept by hidden disciplines. From preaching and worship he feeds the flock the Word and leads them into God's presence. From life-cycle ministry and visitation he stays present in the defining moments and shows up year after year. From discipleship he multiplies himself into faithful men. From counseling he becomes a healing instrument within clear boundaries. From leadership he shepherds rather than lords and decides together. From evangelism he keeps the soul-winner spirit alive. From family and self-care he guards his marriage, body, and soul. Every one of these disciplines must be cultivated and sustained across decades, because a faithful finish is not one heroic act but the sum of ten thousand ordinary days lived in obedience. The long view sees the whole race and runs it accordingly.",
+    "es": "La visión larga para un futuro pastor reúne las disciplinas de las once unidades anteriores en una sola trayectoria hacia un ministerio fiel de cuarenta años. Del fundamento bíblico recuerda que es un subpastor sirviendo al Príncipe de los pastores, el rebaño no es suyo. Del llamado y el carácter guarda ambos pilares, sostenido por disciplinas ocultas. De la predicación y la adoración alimenta al rebaño con la Palabra y los lleva a la presencia de Dios. Del ministerio del ciclo de vida y la visitación permanece presente en los momentos definitorios y se presenta año tras año. Del discipulado se multiplica en hombres fieles. De la consejería se vuelve un instrumento de sanidad dentro de límites claros. Del liderazgo pastorea en vez de enseñorearse y decide en conjunto. Del evangelismo mantiene vivo el espíritu del ganador de almas. De la familia y el autocuidado guarda su matrimonio, su cuerpo y su alma. Cada una de estas disciplinas debe ser cultivada y sostenida a lo largo de décadas, porque un final fiel no es un acto heroico sino la suma de diez mil días ordinarios vividos en obediencia. La visión larga ve toda la carrera y la corre en consecuencia."
+   }
   },
   {
-    "textEn": "30. Capstone synthesis: Compose a personal commitment to finishing well, written as a letter to your future self twenty years into ministry. Address character, people skills, identity, and habits.",
-    "textEs": "30. Síntesis capstone: Componga un compromiso personal a terminar bien, como carta a su yo futuro veinte años en el ministerio.",
-    "kw_en": [
-      "finish",
-      "faithful",
-      "character",
-      "people",
-      "christ",
-      "endure",
-      "commit",
-      "ministry"
+   "prompt": {
+    "en": "Capstone synthesis: Compose a personal commitment to finishing well, written as a letter to your future self twenty years into ministry. Address character, people skills, identity, and habits.",
+    "es": "Síntesis capstone: Componga un compromiso personal a terminar bien, como carta a su yo futuro veinte años en el ministerio."
+   },
+   "keywords": {
+    "en": [
+     "finish",
+     "faithful",
+     "character",
+     "people",
+     "christ",
+     "endure",
+     "commit",
+     "ministry"
     ],
-    "kw_es": [
-      "terminar",
-      "fiel",
-      "carácter",
-      "gente",
-      "cristo",
-      "resistir",
-      "comprometer",
-      "ministerio"
-    ],
-    "modelEn": "This capstone asks you to write a personal commitment as a letter to your future self, twenty years into ministry, and there is no single right answer — it is your own vow before God. A faithful letter would address character: a commitment to guard integrity in the small compromises that bring men down, to live the same behind closed doors as in the pulpit. It would address people skills: a commitment to love difficult people, handle conflict biblically, and remember that relationships, not just doctrine, sustain a ministry. It would address identity: a commitment to find yourself in Christ and not in the office, so the role can one day end without destroying you. And it would address habits: the daily disciplines of Word, prayer, Sabbath, marriage, body, and friendships that build endurance one ordinary day at a time. The aim of the whole letter is to finish well — to one day say with Paul, 'I have fought the good fight, I have finished the race, I have kept the faith,' and to hear the Master say, 'Well done, good and faithful servant.'",
-    "modelEs": "Este trabajo final le pide escribir un compromiso personal como una carta a su yo futuro, veinte años dentro del ministerio, y no hay una sola respuesta correcta — es su propio voto delante de Dios. Una carta fiel abordaría el carácter: un compromiso de guardar la integridad en los pequeños compromisos que derriban a los hombres, de vivir igual tras puertas cerradas que en el púlpito. Abordaría las habilidades con la gente: un compromiso de amar a la gente difícil, manejar el conflicto bíblicamente, y recordar que las relaciones, no solo la doctrina, sostienen un ministerio. Abordaría la identidad: un compromiso de encontrarse en Cristo y no en el oficio, para que el papel pueda un día terminar sin destruirlo. Y abordaría los hábitos: las disciplinas diarias de la Palabra, la oración, el descanso, el matrimonio, el cuerpo y las amistades que construyen resistencia un día ordinario a la vez. El objetivo de toda la carta es terminar bien — decir un día con Pablo: 'He peleado la buena batalla, he acabado la carrera, he guardado la fe,' y oír al Maestro decir: 'Bien, buen siervo y fiel.'"
+    "es": [
+     "terminar",
+     "fiel",
+     "carácter",
+     "gente",
+     "cristo",
+     "resistir",
+     "comprometer",
+     "ministerio"
+    ]
+   },
+   "model": {
+    "en": "This capstone asks you to write a personal commitment as a letter to your future self, twenty years into ministry, and there is no single right answer — it is your own vow before God. A faithful letter would address character: a commitment to guard integrity in the small compromises that bring men down, to live the same behind closed doors as in the pulpit. It would address people skills: a commitment to love difficult people, handle conflict biblically, and remember that relationships, not just doctrine, sustain a ministry. It would address identity: a commitment to find yourself in Christ and not in the office, so the role can one day end without destroying you. And it would address habits: the daily disciplines of Word, prayer, Sabbath, marriage, body, and friendships that build endurance one ordinary day at a time. The aim of the whole letter is to finish well — to one day say with Paul, 'I have fought the good fight, I have finished the race, I have kept the faith,' and to hear the Master say, 'Well done, good and faithful servant.'",
+    "es": "Este trabajo final le pide escribir un compromiso personal como una carta a su yo futuro, veinte años dentro del ministerio, y no hay una sola respuesta correcta — es su propio voto delante de Dios. Una carta fiel abordaría el carácter: un compromiso de guardar la integridad en los pequeños compromisos que derriban a los hombres, de vivir igual tras puertas cerradas que en el púlpito. Abordaría las habilidades con la gente: un compromiso de amar a la gente difícil, manejar el conflicto bíblicamente, y recordar que las relaciones, no solo la doctrina, sostienen un ministerio. Abordaría la identidad: un compromiso de encontrarse en Cristo y no en el oficio, para que el papel pueda un día terminar sin destruirlo. Y abordaría los hábitos: las disciplinas diarias de la Palabra, la oración, el descanso, el matrimonio, el cuerpo y las amistades que construyen resistencia un día ordinario a la vez. El objetivo de toda la carta es terminar bien — decir un día con Pablo: 'He peleado la buena batalla, he acabado la carrera, he guardado la fe,' y oír al Maestro decir: 'Bien, buen siervo y fiel.'"
+   }
   }
-];
-
-const PREV_HREF = 'CTSPMUnit11.html';
-
-const NEXT_HREF = null;
+ ]
+};

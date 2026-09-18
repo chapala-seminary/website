@@ -1,146 +1,783 @@
-/* CTSCG - unit 1: per-unit configuration and content. */
-
-const UNIT = 1;
-
-const NEXT_UNIT_URL = 'CTSCGUnit2.html';
-
-const unitTitlesEn = [
-    `Unit ${UNIT} — Introduction`,
-    `Unit ${UNIT + 1} — Biblical Background`,
-    "Unit 3 — Terms and History",
-    "Unit 4 — Principles",
-    "Unit 5 — Change and the Generations",
-    "Unit 6 — Diagnosing Your Church",
-    "Unit 7 — Pastoral Leadership",
-    "Unit 8 — Worship",
-    "Unit 9 — Digital and Online Ministry",
-    "Unit 10 — Sunday School and Small Groups",
-    "Unit 11 — Discipleship",
-    "Unit 12 — Retention"
-];
-
-const mcQuestions = [
-    { textEn: "1. In 1950 the Southern Baptist Convention recorded an annual increase of about:", textEs: "1. En 1950 la Convención Bautista del Sur registró un aumento anual de cerca de:",
-      optionsEn: ["4.7%", "2.7%", "7.4%", "10%"],
-      optionsEs: ["4.7%", "2.7%", "7.4%", "10%"], correct: 0 },
-    { textEn: "2. The growth model Southern Baptists used in the 1950s is best described as:", textEs: "2. El modelo de crecimiento que usaron los bautistas del sur en los años 1950 se describe mejor como:",
-      optionsEn: ["the cell model", "the franchise (industrial) model", "the seeker model", "the missional model"],
-      optionsEs: ["el modelo de celulas", "el modelo de franquicia (industrial)", "el modelo sensible al buscador", "el modelo misional"], correct: 1 },
-    { textEn: "3. By definition, a growing church shows a membership increase of:", textEs: "3. Por definición, una iglesia en crecimiento muestra un aumento de membresía de:",
-      optionsEn: ["5% over 3 years", "2% per year", "25% over ten years", "more than 10% over five years"],
-      optionsEs: ["5% en 3 años", "2% por año", "25% en diez años", "más del 10% en cinco años"], correct: 3 },
-    { textEn: "4. A plateaued church is one that shows:", textEs: "4. Una iglesia en meseta es una que muestra:",
-      optionsEn: ["more than 10% growth", "more than 10% decline", "neither a 10% increase nor a 10% decrease over five years", "rapid collapse"],
-      optionsEs: ["más del 10% de crecimiento", "más del 10% de declive", "ni un aumento ni una disminución del 10% en cinco años", "colapso rápido"], correct: 2 },
-    { textEn: "5. Among the 1990 figures, the share of Southern Baptist churches that were plateaued was about:", textEs: "5. Según las cifras de 1990, la proporción de iglesias bautistas del sur en meseta era cerca de:",
-      optionsEn: ["30%", "52%", "18%", "80%"],
-      optionsEs: ["30%", "52%", "18%", "80%"], correct: 1 },
-    { textEn: "6. What kept the denomination from outright decline, according to the original lecture?", textEs: "6. ¿Qué evitó el declive total de la denominación, según la lección original?",
-      optionsEn: ["ethnic growth", "television ministry", "telemarketing", "church mergers"],
-      optionsEs: ["el crecimiento étnico", "el ministerio televisivo", "el telemercadeo", "las fusiones de iglesias"], correct: 0 },
-    { textEn: "7. The 'Great Dechurching' refers to roughly how many American adults who once attended and no longer do?", textEs: "7. El 'Gran Abandono' se refiere aproximadamente a cuántos adultos estadounidenses que antes asistían y ya no:",
-      optionsEn: ["about 4 million", "about 14 million", "about 40 million", "about 100 million"],
-      optionsEs: ["unos 4 millones", "unos 14 millones", "unos 40 millones", "unos 100 millones"], correct: 2 },
-    { textEn: "8. The dechurching most sharply accelerated beginning in:", textEs: "8. El abandono de la iglesia se aceleró más marcadamente a partir de:",
-      optionsEn: ["the 1950s", "the 2010s", "the year 2020", "the mid-1990s"],
-      optionsEs: ["los años 1950", "los años 2010", "el año 2020", "mediados de los años 1990"], correct: 3 },
-    { textEn: "9. Most of the dechurched left primarily because of:", textEs: "9. La mayoría de los que abandonaron la iglesia se fueron principalmente por:",
-      optionsEn: ["a loss of faith", "ordinary life reasons such as moving", "doctrinal disputes", "persecution"],
-      optionsEs: ["una perdida de fe", "razones ordinarias como una mudanza", "disputas doctrinales", "persecución"], correct: 1 },
-    { textEn: "10. Roughly what fraction of dechurched evangelicals say they would consider returning?", textEs: "10. ¿Aproximadamente qué fracción de evangélicos que abandonaron dice que consideraría regresar?",
-      optionsEn: ["about half", "about one tenth", "nearly all", "almost none"],
-      optionsEs: ["cerca de la mitad", "cerca de una decima parte", "casi todos", "casi ninguno"], correct: 0 },
-    { textEn: "11. About what share of the world's Christians now live in the Global South?", textEs: "11. ¿Cerca de qué proporción de los cristianos del mundo vive ahora en el Sur Global?",
-      optionsEn: ["one tenth", "one half", "two thirds", "one quarter"],
-      optionsEs: ["una decima parte", "la mitad", "dos tercios", "una cuarta parte"], correct: 2 },
-    { textEn: "12. The engine of the church's growth in the world today is largely:", textEs: "12. El motor del crecimiento de la iglesia en el mundo hoy es en gran parte:",
-      optionsEn: ["Baptist", "mainline Protestant", "Roman Catholic", "Pentecostal and charismatic"],
-      optionsEs: ["bautista", "protestante histórico", "católico romano", "pentecostal y carismático"], correct: 3 },
-    { textEn: "13. This unit describes Pentecost primarily as a miracle of:", textEs: "13. Esta unidad describe Pentecostés principalmente como un milagro de:",
-      optionsEn: ["healing", "speaking", "hearing", "prophecy"],
-      optionsEs: ["sanidad", "hablar", "oír", "profecía"], correct: 2 },
-    { textEn: "14. Pentecost is portrayed as the reversal of:", textEs: "14. Pentecostés se presenta como la reversión de:",
-      optionsEn: ["the Exodus", "the Fall", "the Flood", "the Tower of Babel"],
-      optionsEs: ["el Exodo", "la Caída", "el Diluvio", "la Torre de Babel"], correct: 3 },
-    { textEn: "15. According to J. Edwin Orr, every great awakening followed which sequence?", textEs: "15. Según J. Edwin Orr, ¿qué secuencia siguió cada gran avivamiento?",
-      optionsEn: ["prayer, then an outpouring of the Spirit, then repentance and faith", "organization, then advertising, then crowds", "preaching, then giving, then growth", "revival, then prayer, then decline"],
-      optionsEs: ["oración, luego un derramamiento del Espíritu, luego arrepentimiento y fe", "organización, luego publicidad, luego multitudes", "predicación, luego ofrenda, luego crecimiento", "avivamiento, luego oración, luego declive"], correct: 0 },
-    { textEn: "16. In the 1907 Korean revival, the outpouring came during:", textEs: "16. En el avivamiento coreano de 1907, el derramamiento vino durante:",
-      optionsEn: ["a building campaign", "a men's prayer meeting where all prayed aloud at once", "a denominational vote", "a televised crusade"],
-      optionsEs: ["una campana de construcción", "una reunión de oración de hombres donde todos oraron en voz alta a la vez", "una votación denominacional", "una cruzada televisada"], correct: 1 },
-    { textEn: "17. About how many Koreans came to Christ in that revival year?", textEs: "17. ¿Aproximadamente cuántos coreanos vinieron a Cristo en ese año de avivamiento?",
-      optionsEn: ["about 800,000", "about 8,000", "nearly 80,000", "about 8 million"],
-      optionsEs: ["unos 800,000", "unos 8,000", "casi 80,000", "unos 8 millones"], correct: 2 },
-    { textEn: "18. In the Welsh revival, Evan Roberts often said simply:", textEs: "18. En el avivamiento de Gales, Evan Roberts a menudo decía simplemente:",
-      optionsEn: ["'Repent now'", "'Give generously'", "'Come forward'", "'Let us pray'"],
-      optionsEs: ["'Arrepientanse ahora'", "'Den generosamente'", "'Pasen al frente'", "'Oremos'"], correct: 3 },
-    { textEn: "19. Besides 'try harder' or 'try differently,' the unit's third answer to the church-growth question is to:", textEs: "19. Además de 'esforzarse más' o 'intentar de otra manera,' la tercera respuesta de la unidad a la pregunta del crecimiento es:",
-      optionsEn: ["spend more money", "pray for a fresh outpouring of the Spirit", "hire consultants", "merge with another church"],
-      optionsEs: ["gastar más dinero", "orar por un nuevo derramamiento del Espíritu", "contratar consultores", "fusionarse con otra iglesia"], correct: 1 },
-    { textEn: "20. The newest figures show U.S. in-person attendance has:", textEs: "20. Las cifras más recientes muestran que la asistencia presencial en EE.UU. ha:",
-      optionsEn: ["ticked up for the first time in decades", "stayed exactly flat", "become impossible to measure", "collapsed entirely"],
-      optionsEs: ["subido por primera vez en décadas", "quedado totalmente plana", "vuelto imposible de medir", "colapsado por completo"], correct: 0 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Describe the franchise (industrial) model of church growth. What did it mean in practice, and what was its built-in weakness?",
-      textEs: "21. Describa el modelo de franquicia (industrial) del crecimiento de la iglesia. ¿Qué significaba en la práctica y cuál era su debilidad inherente?",
-      kw_en: ["franchis", "standard", "same", "mcdonald", "experiment", "model", "local", "uniform"],
-      kw_es: ["franquici", "estandar", "igual", "mcdonald", "experiment", "modelo", "local", "uniform"],
-      modelEn: "The franchise or industrial model meant every Southern Baptist church looked basically the same, standardized everywhere like a McDonald's, where the local congregation was not free to experiment. The strength was consistency; the weakness was that a uniform model cannot adapt when the world changes.",
-      modelEs: "El modelo de franquicia o industrial significaba que cada iglesia bautista del sur se veía básicamente igual, estandarizada en todas partes como un McDonald's, donde la congregación local no era libre de experimentar. La fuerza era la consistencia; la debilidad, que un modelo uniforme no puede adaptarse cuando el mundo cambia." },
-    { textEn: "22. Define a growing, a plateaued, and a declining church by the numerical standard given in this unit.",
-      textEs: "22. Defina una iglesia en crecimiento, en meseta y en declive según el estándar numérico dado en esta unidad.",
-      kw_en: ["plateau", "declin", "percent", "increas", "decreas", "member", "five", "grow"],
-      kw_es: ["meset", "decliv", "ciento", "aument", "dismin", "membres", "cinco", "crecim"],
-      modelEn: "A growing church increases more than ten percent over five years; a declining church decreases more than ten percent over the same five-year span; a plateaued church does neither, its membership essentially flat.",
-      modelEs: "Una iglesia en crecimiento aumenta más del diez por ciento en cinco años; una iglesia en declive disminuye más del diez por ciento en el mismo lapso; una iglesia en meseta no hace ninguna de las dos, su membresía esencialmente plana." },
-    { textEn: "23. What is the Great Dechurching, roughly how large is it, and why is its main cause a hopeful sign?",
-      textEs: "23. ¿Qué es el Gran Abandono de la iglesia, qué tan grande es aproximadamente, y por qué su causa principal es una señal esperanzadora?",
-      kw_en: ["dechurch", "million", "attend", "depart", "drift", "return", "never", "faith"],
-      kw_es: ["millon", "abandon", "iglesi", "asist", "decliv", "regres", "nunca", "alej"],
-      modelEn: "The Great Dechurching describes about forty million adults who once attended and have departed; most did not leave over doctrine but simply drifted, and about half would return, never having truly lost their faith.",
-      modelEs: "El Gran Abandono de la iglesia describe los cerca de cuarenta millones que antes asistían y ya no; la mayoría no se fue por doctrina sino que se alejó, y cerca de la mitad regresarían, sin haber perdido de veras su fe." },
-    { textEn: "24. State the pattern J. Edwin Orr found in every great awakening, in order, and explain why it rebukes a purely method-driven view of growth.",
-      textEs: "24. Exponga el patrón que J. Edwin Orr halló en cada gran avivamiento, en orden, y explique por qué reprende una visión del crecimiento puramente basada en métodos.",
-      kw_en: ["pray", "outpour", "spirit", "repent", "believ", "unite", "revival", "awaken"],
-      kw_es: ["oraci", "derram", "espirit", "arrepent", "avivam", "despert", "unid", "creer"],
-      modelEn: "Orr found every awakening follows one road: united prayer, then an outpouring of the Spirit, then people repent and believe. The pattern never changes, only the setting.",
-      modelEs: "Orr halló que todo avivamiento sigue un mismo camino: oración unida, luego un derramamiento del Espíritu, y entonces la gente se arrepiente y cree. El patrón nunca cambia, solo el escenario; el que despierta es el Espíritu." },
-    { textEn: "25. Explain why Pentecost is called a miracle of hearing rather than of speaking, and how it reverses Babel.",
-      textEs: "25. Explique por qué Pentecostés se llama un milagro de oír y no de hablar, y cómo revierte a Babel.",
-      kw_en: ["hear", "languag", "understand", "nation", "interpret", "speak", "tongue", "babel"],
-      kw_es: ["oir", "lengua", "entend", "nacion", "interpret", "hablar", "babel", "comprend"],
-      modelEn: "At Pentecost each person from every nation heard the gospel in his own language and understood without an interpreter, so it was a miracle of hearing more than of speaking, a reversal of Babel where tongues were once confused.",
-      modelEs: "En Pentecostés cada persona de toda nación oyó el evangelio en su propia lengua y comprendió sin intérprete, así que fue un milagro de oír más que de hablar, una reversión de Babel donde las lenguas antes fueron confundidas." },
-    { textEn: "26. Recount the 1907 Korean revival. What did it begin with, what happened, and what was the result?",
-      textEs: "26. Relate el avivamiento coreano de 1907. ¿Con qué comenzó, qué sucedió y cuál fue el resultado?",
-      kw_en: ["korea", "pray", "spirit", "repent", "thousand", "revival", "outpour", "missionar"],
-      kw_es: ["corea", "oraci", "espirit", "arrepent", "mil", "avivam", "derram", "misioner"],
-      modelEn: "In Korea in 1907 the missionaries redoubled their prayer; as the men prayed aloud the Spirit was poured out, people repented in agony, and nearly eighty thousand were saved that year, a revival still felt today.",
-      modelEs: "En Corea en 1907 los misioneros redoblaron su oración; mientras los hombres oraban en voz alta el Espíritu fue derramado, la gente se arrepintió con agonía, y casi ochenta mil fueron salvos ese año, un avivamiento aún vivo." },
-    { textEn: "27. Explain the statement that 'a plateaued denomination is simply a reflection of plateaued churches.'",
-      textEs: "27. Explique la afirmación de que 'una denominación en meseta es simplemente un reflejo de iglesias en meseta.'",
-      kw_en: ["denomin", "plateau", "church", "reflect", "local", "member", "sum", "declin"],
-      kw_es: ["denomin", "meset", "iglesi", "reflej", "local", "membres", "suma", "decliv"],
-      modelEn: "A denomination is only the sum of its churches, so a plateaued denomination simply reflects many local plateaued churches; the decline of the whole is the decline of its members added up.",
-      modelEs: "Una denominación es solo la suma de sus iglesias, así que una denominación en meseta simplemente refleja muchas iglesias locales en meseta; el declive del todo es el declive de sus miembros sumados." },
-    { textEn: "28. Where is the church growing most in the world today, and what is the engine of that growth?",
-      textEs: "28. ¿Dónde crece más la iglesia en el mundo hoy, y cuál es el motor de ese crecimiento?",
-      kw_en: ["global", "south", "pentecost", "charismat", "africa", "renewal", "spirit", "grow"],
-      kw_es: ["global", "pentecost", "carismat", "africa", "renov", "espirit", "crecim", "movimi"],
-      modelEn: "The church is growing most in the Global South, in Africa, Latin America, and Asia, and the engine of that growth is Pentecostal and charismatic renewal, the work of the Spirit, not the old Western Baptist model.",
-      modelEs: "La iglesia crece más en el Sur Global, en África, América Latina y Asia, y el motor de ese crecimiento es la renovación pentecostal y carismática, la obra del Espíritu, un movimiento, no el viejo modelo bautista occidental." },
-    { textEn: "29. Beyond 'try harder' and 'try differently,' what third answer does this unit give to the church-growth question, and why?",
-      textEs: "29. Más allá de 'esforzarse más' y 'intentar de otra manera,' ¿qué tercera respuesta da esta unidad a la pregunta del crecimiento, y por qué?",
-      kw_en: ["prayer", "spirit", "outpour", "harvest", "revival", "third", "knee", "ask"],
-      kw_es: ["oraci", "espirit", "derram", "mies", "avivam", "tercer", "rodill", "pedir"],
-      modelEn: "Beyond trying harder or trying differently, the third answer is prayer, to fall on our knees and ask the Lord of the harvest to pour out His Spirit again, for revival is His work and not our technique.",
-      modelEs: "Más allá de esforzarse más o de otra manera, la tercera respuesta es la oración, caer de rodillas y pedir al Señor de la mies que derrame de nuevo Su Espíritu, pues el avivamiento es Su obra y no nuestra técnica." },
-    { textEn: "30. Synthesis: Why did most of the dechurched leave, and how do their reasons point to the way they might be reached again?",
-      textEs: "30. Síntesis: ¿Por qué se fue la mayoría de los que abandonaron la iglesia, y cómo señalan sus razones la manera de volver a alcanzarlos?",
-      kw_en: ["ordinary", "drift", "faith", "return", "invit", "friend", "reach", "move"],
-      kw_es: ["ordinari", "alej", "regres", "invit", "amig", "buscar", "mudan", "mitad"],
-      modelEn: "Most did not lose their faith; they drifted for ordinary reasons like moving, and no one reached for them, which is hopeful, because about half would return if a friend offered an honest invitation home.",
-      modelEs: "La mayoría no perdió su fe; se alejaron por razones ordinarias como una mudanza, y nadie los buscó, lo cual es esperanzador, porque cerca de la mitad regresarían si un amigo ofreciera una invitación sincera; volvería la mitad." }
-];
+/* CTSCG — unit 1. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "cg",
+ "unit": 1,
+ "totalUnits": 12,
+ "filePrefix": "CTSCG",
+ "prevHref": null,
+ "nextHref": "CTSCGUnit2.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 — Introduction",
+   "Unit 2 — Biblical Background",
+   "Unit 3 — Terms and History",
+   "Unit 4 — Principles",
+   "Unit 5 — Change and the Generations",
+   "Unit 6 — Diagnosing Your Church",
+   "Unit 7 — Pastoral Leadership",
+   "Unit 8 — Worship",
+   "Unit 9 — Digital and Online Ministry",
+   "Unit 10 — Sunday School and Small Groups",
+   "Unit 11 — Discipleship",
+   "Unit 12 — Retention"
+  ],
+  "es": [
+   "Unit 1 — Introduction",
+   "Unit 2 — Biblical Background",
+   "Unit 3 — Terms and History",
+   "Unit 4 — Principles",
+   "Unit 5 — Change and the Generations",
+   "Unit 6 — Diagnosing Your Church",
+   "Unit 7 — Pastoral Leadership",
+   "Unit 8 — Worship",
+   "Unit 9 — Digital and Online Ministry",
+   "Unit 10 — Sunday School and Small Groups",
+   "Unit 11 — Discipleship",
+   "Unit 12 — Retention"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "In 1950 the Southern Baptist Convention recorded an annual increase of about:",
+    "es": "En 1950 la Convención Bautista del Sur registró un aumento anual de cerca de:"
+   },
+   "options": {
+    "en": [
+     "4.7%",
+     "2.7%",
+     "7.4%",
+     "10%"
+    ],
+    "es": [
+     "4.7%",
+     "2.7%",
+     "7.4%",
+     "10%"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The growth model Southern Baptists used in the 1950s is best described as:",
+    "es": "El modelo de crecimiento que usaron los bautistas del sur en los años 1950 se describe mejor como:"
+   },
+   "options": {
+    "en": [
+     "the cell model",
+     "the franchise (industrial) model",
+     "the seeker model",
+     "the missional model"
+    ],
+    "es": [
+     "el modelo de celulas",
+     "el modelo de franquicia (industrial)",
+     "el modelo sensible al buscador",
+     "el modelo misional"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "By definition, a growing church shows a membership increase of:",
+    "es": "Por definición, una iglesia en crecimiento muestra un aumento de membresía de:"
+   },
+   "options": {
+    "en": [
+     "5% over 3 years",
+     "2% per year",
+     "25% over ten years",
+     "more than 10% over five years"
+    ],
+    "es": [
+     "5% en 3 años",
+     "2% por año",
+     "25% en diez años",
+     "más del 10% en cinco años"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "A plateaued church is one that shows:",
+    "es": "Una iglesia en meseta es una que muestra:"
+   },
+   "options": {
+    "en": [
+     "more than 10% growth",
+     "more than 10% decline",
+     "neither a 10% increase nor a 10% decrease over five years",
+     "rapid collapse"
+    ],
+    "es": [
+     "más del 10% de crecimiento",
+     "más del 10% de declive",
+     "ni un aumento ni una disminución del 10% en cinco años",
+     "colapso rápido"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Among the 1990 figures, the share of Southern Baptist churches that were plateaued was about:",
+    "es": "Según las cifras de 1990, la proporción de iglesias bautistas del sur en meseta era cerca de:"
+   },
+   "options": {
+    "en": [
+     "30%",
+     "52%",
+     "18%",
+     "80%"
+    ],
+    "es": [
+     "30%",
+     "52%",
+     "18%",
+     "80%"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "What kept the denomination from outright decline, according to the original lecture?",
+    "es": "¿Qué evitó el declive total de la denominación, según la lección original?"
+   },
+   "options": {
+    "en": [
+     "ethnic growth",
+     "television ministry",
+     "telemarketing",
+     "church mergers"
+    ],
+    "es": [
+     "el crecimiento étnico",
+     "el ministerio televisivo",
+     "el telemercadeo",
+     "las fusiones de iglesias"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The 'Great Dechurching' refers to roughly how many American adults who once attended and no longer do?",
+    "es": "El 'Gran Abandono' se refiere aproximadamente a cuántos adultos estadounidenses que antes asistían y ya no:"
+   },
+   "options": {
+    "en": [
+     "about 4 million",
+     "about 14 million",
+     "about 40 million",
+     "about 100 million"
+    ],
+    "es": [
+     "unos 4 millones",
+     "unos 14 millones",
+     "unos 40 millones",
+     "unos 100 millones"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The dechurching most sharply accelerated beginning in:",
+    "es": "El abandono de la iglesia se aceleró más marcadamente a partir de:"
+   },
+   "options": {
+    "en": [
+     "the 1950s",
+     "the 2010s",
+     "the year 2020",
+     "the mid-1990s"
+    ],
+    "es": [
+     "los años 1950",
+     "los años 2010",
+     "el año 2020",
+     "mediados de los años 1990"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Most of the dechurched left primarily because of:",
+    "es": "La mayoría de los que abandonaron la iglesia se fueron principalmente por:"
+   },
+   "options": {
+    "en": [
+     "a loss of faith",
+     "ordinary life reasons such as moving",
+     "doctrinal disputes",
+     "persecution"
+    ],
+    "es": [
+     "una perdida de fe",
+     "razones ordinarias como una mudanza",
+     "disputas doctrinales",
+     "persecución"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Roughly what fraction of dechurched evangelicals say they would consider returning?",
+    "es": "¿Aproximadamente qué fracción de evangélicos que abandonaron dice que consideraría regresar?"
+   },
+   "options": {
+    "en": [
+     "about half",
+     "about one tenth",
+     "nearly all",
+     "almost none"
+    ],
+    "es": [
+     "cerca de la mitad",
+     "cerca de una decima parte",
+     "casi todos",
+     "casi ninguno"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "About what share of the world's Christians now live in the Global South?",
+    "es": "¿Cerca de qué proporción de los cristianos del mundo vive ahora en el Sur Global?"
+   },
+   "options": {
+    "en": [
+     "one tenth",
+     "one half",
+     "two thirds",
+     "one quarter"
+    ],
+    "es": [
+     "una decima parte",
+     "la mitad",
+     "dos tercios",
+     "una cuarta parte"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The engine of the church's growth in the world today is largely:",
+    "es": "El motor del crecimiento de la iglesia en el mundo hoy es en gran parte:"
+   },
+   "options": {
+    "en": [
+     "Baptist",
+     "mainline Protestant",
+     "Roman Catholic",
+     "Pentecostal and charismatic"
+    ],
+    "es": [
+     "bautista",
+     "protestante histórico",
+     "católico romano",
+     "pentecostal y carismático"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "This unit describes Pentecost primarily as a miracle of:",
+    "es": "Esta unidad describe Pentecostés principalmente como un milagro de:"
+   },
+   "options": {
+    "en": [
+     "healing",
+     "speaking",
+     "hearing",
+     "prophecy"
+    ],
+    "es": [
+     "sanidad",
+     "hablar",
+     "oír",
+     "profecía"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Pentecost is portrayed as the reversal of:",
+    "es": "Pentecostés se presenta como la reversión de:"
+   },
+   "options": {
+    "en": [
+     "the Exodus",
+     "the Fall",
+     "the Flood",
+     "the Tower of Babel"
+    ],
+    "es": [
+     "el Exodo",
+     "la Caída",
+     "el Diluvio",
+     "la Torre de Babel"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "According to J. Edwin Orr, every great awakening followed which sequence?",
+    "es": "Según J. Edwin Orr, ¿qué secuencia siguió cada gran avivamiento?"
+   },
+   "options": {
+    "en": [
+     "prayer, then an outpouring of the Spirit, then repentance and faith",
+     "organization, then advertising, then crowds",
+     "preaching, then giving, then growth",
+     "revival, then prayer, then decline"
+    ],
+    "es": [
+     "oración, luego un derramamiento del Espíritu, luego arrepentimiento y fe",
+     "organización, luego publicidad, luego multitudes",
+     "predicación, luego ofrenda, luego crecimiento",
+     "avivamiento, luego oración, luego declive"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In the 1907 Korean revival, the outpouring came during:",
+    "es": "En el avivamiento coreano de 1907, el derramamiento vino durante:"
+   },
+   "options": {
+    "en": [
+     "a building campaign",
+     "a men's prayer meeting where all prayed aloud at once",
+     "a denominational vote",
+     "a televised crusade"
+    ],
+    "es": [
+     "una campana de construcción",
+     "una reunión de oración de hombres donde todos oraron en voz alta a la vez",
+     "una votación denominacional",
+     "una cruzada televisada"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "About how many Koreans came to Christ in that revival year?",
+    "es": "¿Aproximadamente cuántos coreanos vinieron a Cristo en ese año de avivamiento?"
+   },
+   "options": {
+    "en": [
+     "about 800,000",
+     "about 8,000",
+     "nearly 80,000",
+     "about 8 million"
+    ],
+    "es": [
+     "unos 800,000",
+     "unos 8,000",
+     "casi 80,000",
+     "unos 8 millones"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "In the Welsh revival, Evan Roberts often said simply:",
+    "es": "En el avivamiento de Gales, Evan Roberts a menudo decía simplemente:"
+   },
+   "options": {
+    "en": [
+     "'Repent now'",
+     "'Give generously'",
+     "'Come forward'",
+     "'Let us pray'"
+    ],
+    "es": [
+     "'Arrepientanse ahora'",
+     "'Den generosamente'",
+     "'Pasen al frente'",
+     "'Oremos'"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Besides 'try harder' or 'try differently,' the unit's third answer to the church-growth question is to:",
+    "es": "Además de 'esforzarse más' o 'intentar de otra manera,' la tercera respuesta de la unidad a la pregunta del crecimiento es:"
+   },
+   "options": {
+    "en": [
+     "spend more money",
+     "pray for a fresh outpouring of the Spirit",
+     "hire consultants",
+     "merge with another church"
+    ],
+    "es": [
+     "gastar más dinero",
+     "orar por un nuevo derramamiento del Espíritu",
+     "contratar consultores",
+     "fusionarse con otra iglesia"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The newest figures show U.S. in-person attendance has:",
+    "es": "Las cifras más recientes muestran que la asistencia presencial en EE.UU. ha:"
+   },
+   "options": {
+    "en": [
+     "ticked up for the first time in decades",
+     "stayed exactly flat",
+     "become impossible to measure",
+     "collapsed entirely"
+    ],
+    "es": [
+     "subido por primera vez en décadas",
+     "quedado totalmente plana",
+     "vuelto imposible de medir",
+     "colapsado por completo"
+    ]
+   },
+   "answer": 0
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Describe the franchise (industrial) model of church growth. What did it mean in practice, and what was its built-in weakness?",
+    "es": "Describa el modelo de franquicia (industrial) del crecimiento de la iglesia. ¿Qué significaba en la práctica y cuál era su debilidad inherente?"
+   },
+   "keywords": {
+    "en": [
+     "franchis",
+     "standard",
+     "same",
+     "mcdonald",
+     "experiment",
+     "model",
+     "local",
+     "uniform"
+    ],
+    "es": [
+     "franquici",
+     "estandar",
+     "igual",
+     "mcdonald",
+     "experiment",
+     "modelo",
+     "local",
+     "uniform"
+    ]
+   },
+   "model": {
+    "en": "The franchise or industrial model meant every Southern Baptist church looked basically the same, standardized everywhere like a McDonald's, where the local congregation was not free to experiment. The strength was consistency; the weakness was that a uniform model cannot adapt when the world changes.",
+    "es": "El modelo de franquicia o industrial significaba que cada iglesia bautista del sur se veía básicamente igual, estandarizada en todas partes como un McDonald's, donde la congregación local no era libre de experimentar. La fuerza era la consistencia; la debilidad, que un modelo uniforme no puede adaptarse cuando el mundo cambia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Define a growing, a plateaued, and a declining church by the numerical standard given in this unit.",
+    "es": "Defina una iglesia en crecimiento, en meseta y en declive según el estándar numérico dado en esta unidad."
+   },
+   "keywords": {
+    "en": [
+     "plateau",
+     "declin",
+     "percent",
+     "increas",
+     "decreas",
+     "member",
+     "five",
+     "grow"
+    ],
+    "es": [
+     "meset",
+     "decliv",
+     "ciento",
+     "aument",
+     "dismin",
+     "membres",
+     "cinco",
+     "crecim"
+    ]
+   },
+   "model": {
+    "en": "A growing church increases more than ten percent over five years; a declining church decreases more than ten percent over the same five-year span; a plateaued church does neither, its membership essentially flat.",
+    "es": "Una iglesia en crecimiento aumenta más del diez por ciento en cinco años; una iglesia en declive disminuye más del diez por ciento en el mismo lapso; una iglesia en meseta no hace ninguna de las dos, su membresía esencialmente plana."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the Great Dechurching, roughly how large is it, and why is its main cause a hopeful sign?",
+    "es": "¿Qué es el Gran Abandono de la iglesia, qué tan grande es aproximadamente, y por qué su causa principal es una señal esperanzadora?"
+   },
+   "keywords": {
+    "en": [
+     "dechurch",
+     "million",
+     "attend",
+     "depart",
+     "drift",
+     "return",
+     "never",
+     "faith"
+    ],
+    "es": [
+     "millon",
+     "abandon",
+     "iglesi",
+     "asist",
+     "decliv",
+     "regres",
+     "nunca",
+     "alej"
+    ]
+   },
+   "model": {
+    "en": "The Great Dechurching describes about forty million adults who once attended and have departed; most did not leave over doctrine but simply drifted, and about half would return, never having truly lost their faith.",
+    "es": "El Gran Abandono de la iglesia describe los cerca de cuarenta millones que antes asistían y ya no; la mayoría no se fue por doctrina sino que se alejó, y cerca de la mitad regresarían, sin haber perdido de veras su fe."
+   }
+  },
+  {
+   "prompt": {
+    "en": "State the pattern J. Edwin Orr found in every great awakening, in order, and explain why it rebukes a purely method-driven view of growth.",
+    "es": "Exponga el patrón que J. Edwin Orr halló en cada gran avivamiento, en orden, y explique por qué reprende una visión del crecimiento puramente basada en métodos."
+   },
+   "keywords": {
+    "en": [
+     "pray",
+     "outpour",
+     "spirit",
+     "repent",
+     "believ",
+     "unite",
+     "revival",
+     "awaken"
+    ],
+    "es": [
+     "oraci",
+     "derram",
+     "espirit",
+     "arrepent",
+     "avivam",
+     "despert",
+     "unid",
+     "creer"
+    ]
+   },
+   "model": {
+    "en": "Orr found every awakening follows one road: united prayer, then an outpouring of the Spirit, then people repent and believe. The pattern never changes, only the setting.",
+    "es": "Orr halló que todo avivamiento sigue un mismo camino: oración unida, luego un derramamiento del Espíritu, y entonces la gente se arrepiente y cree. El patrón nunca cambia, solo el escenario; el que despierta es el Espíritu."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why Pentecost is called a miracle of hearing rather than of speaking, and how it reverses Babel.",
+    "es": "Explique por qué Pentecostés se llama un milagro de oír y no de hablar, y cómo revierte a Babel."
+   },
+   "keywords": {
+    "en": [
+     "hear",
+     "languag",
+     "understand",
+     "nation",
+     "interpret",
+     "speak",
+     "tongue",
+     "babel"
+    ],
+    "es": [
+     "oir",
+     "lengua",
+     "entend",
+     "nacion",
+     "interpret",
+     "hablar",
+     "babel",
+     "comprend"
+    ]
+   },
+   "model": {
+    "en": "At Pentecost each person from every nation heard the gospel in his own language and understood without an interpreter, so it was a miracle of hearing more than of speaking, a reversal of Babel where tongues were once confused.",
+    "es": "En Pentecostés cada persona de toda nación oyó el evangelio en su propia lengua y comprendió sin intérprete, así que fue un milagro de oír más que de hablar, una reversión de Babel donde las lenguas antes fueron confundidas."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Recount the 1907 Korean revival. What did it begin with, what happened, and what was the result?",
+    "es": "Relate el avivamiento coreano de 1907. ¿Con qué comenzó, qué sucedió y cuál fue el resultado?"
+   },
+   "keywords": {
+    "en": [
+     "korea",
+     "pray",
+     "spirit",
+     "repent",
+     "thousand",
+     "revival",
+     "outpour",
+     "missionar"
+    ],
+    "es": [
+     "corea",
+     "oraci",
+     "espirit",
+     "arrepent",
+     "mil",
+     "avivam",
+     "derram",
+     "misioner"
+    ]
+   },
+   "model": {
+    "en": "In Korea in 1907 the missionaries redoubled their prayer; as the men prayed aloud the Spirit was poured out, people repented in agony, and nearly eighty thousand were saved that year, a revival still felt today.",
+    "es": "En Corea en 1907 los misioneros redoblaron su oración; mientras los hombres oraban en voz alta el Espíritu fue derramado, la gente se arrepintió con agonía, y casi ochenta mil fueron salvos ese año, un avivamiento aún vivo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the statement that 'a plateaued denomination is simply a reflection of plateaued churches.'",
+    "es": "Explique la afirmación de que 'una denominación en meseta es simplemente un reflejo de iglesias en meseta.'"
+   },
+   "keywords": {
+    "en": [
+     "denomin",
+     "plateau",
+     "church",
+     "reflect",
+     "local",
+     "member",
+     "sum",
+     "declin"
+    ],
+    "es": [
+     "denomin",
+     "meset",
+     "iglesi",
+     "reflej",
+     "local",
+     "membres",
+     "suma",
+     "decliv"
+    ]
+   },
+   "model": {
+    "en": "A denomination is only the sum of its churches, so a plateaued denomination simply reflects many local plateaued churches; the decline of the whole is the decline of its members added up.",
+    "es": "Una denominación es solo la suma de sus iglesias, así que una denominación en meseta simplemente refleja muchas iglesias locales en meseta; el declive del todo es el declive de sus miembros sumados."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Where is the church growing most in the world today, and what is the engine of that growth?",
+    "es": "¿Dónde crece más la iglesia en el mundo hoy, y cuál es el motor de ese crecimiento?"
+   },
+   "keywords": {
+    "en": [
+     "global",
+     "south",
+     "pentecost",
+     "charismat",
+     "africa",
+     "renewal",
+     "spirit",
+     "grow"
+    ],
+    "es": [
+     "global",
+     "pentecost",
+     "carismat",
+     "africa",
+     "renov",
+     "espirit",
+     "crecim",
+     "movimi"
+    ]
+   },
+   "model": {
+    "en": "The church is growing most in the Global South, in Africa, Latin America, and Asia, and the engine of that growth is Pentecostal and charismatic renewal, the work of the Spirit, not the old Western Baptist model.",
+    "es": "La iglesia crece más en el Sur Global, en África, América Latina y Asia, y el motor de ese crecimiento es la renovación pentecostal y carismática, la obra del Espíritu, un movimiento, no el viejo modelo bautista occidental."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Beyond 'try harder' and 'try differently,' what third answer does this unit give to the church-growth question, and why?",
+    "es": "Más allá de 'esforzarse más' y 'intentar de otra manera,' ¿qué tercera respuesta da esta unidad a la pregunta del crecimiento, y por qué?"
+   },
+   "keywords": {
+    "en": [
+     "prayer",
+     "spirit",
+     "outpour",
+     "harvest",
+     "revival",
+     "third",
+     "knee",
+     "ask"
+    ],
+    "es": [
+     "oraci",
+     "espirit",
+     "derram",
+     "mies",
+     "avivam",
+     "tercer",
+     "rodill",
+     "pedir"
+    ]
+   },
+   "model": {
+    "en": "Beyond trying harder or trying differently, the third answer is prayer, to fall on our knees and ask the Lord of the harvest to pour out His Spirit again, for revival is His work and not our technique.",
+    "es": "Más allá de esforzarse más o de otra manera, la tercera respuesta es la oración, caer de rodillas y pedir al Señor de la mies que derrame de nuevo Su Espíritu, pues el avivamiento es Su obra y no nuestra técnica."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Synthesis: Why did most of the dechurched leave, and how do their reasons point to the way they might be reached again?",
+    "es": "Síntesis: ¿Por qué se fue la mayoría de los que abandonaron la iglesia, y cómo señalan sus razones la manera de volver a alcanzarlos?"
+   },
+   "keywords": {
+    "en": [
+     "ordinary",
+     "drift",
+     "faith",
+     "return",
+     "invit",
+     "friend",
+     "reach",
+     "move"
+    ],
+    "es": [
+     "ordinari",
+     "alej",
+     "regres",
+     "invit",
+     "amig",
+     "buscar",
+     "mudan",
+     "mitad"
+    ]
+   },
+   "model": {
+    "en": "Most did not lose their faith; they drifted for ordinary reasons like moving, and no one reached for them, which is hopeful, because about half would return if a friend offered an honest invitation home.",
+    "es": "La mayoría no perdió su fe; se alejaron por razones ordinarias como una mudanza, y nadie los buscó, lo cual es esperanzador, porque cerca de la mitad regresarían si un amigo ofreciera una invitación sincera; volvería la mitad."
+   }
+  }
+ ]
+};

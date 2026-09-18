@@ -1,146 +1,783 @@
-/* CTSCG - unit 9: per-unit configuration and content. */
-
-const UNIT = 9;
-
-const NEXT_UNIT_URL = 'CTSCGUnit10.html';
-
-const unitTitlesEn = [
-    "Unit 1 — Introduction",
-    "Unit 2 — Biblical Background",
-    "Unit 3 — Terms and History",
-    "Unit 4 — Principles",
-    "Unit 5 — Change and the Generations",
-    "Unit 6 — Diagnosing Your Church",
-    "Unit 7 — Pastoral Leadership",
-    "Unit 8 — Worship",
-    `Unit ${UNIT} — Digital and Online Ministry`,
-    `Unit ${UNIT + 1} — Sunday School and Small Groups`,
-    "Unit 11 — Discipleship",
-    "Unit 12 — Retention"
-];
-
-const mcQuestions = [
-    { textEn: "1. The older chapter that this unit replaces was built on the method of:", textEs: "1. El capítulo antiguo que esta unidad reemplaza se construyó sobre el método de:",
-      optionsEn: ["billboards", "television", "radio", "telemarketing and phone campaigns"],
-      optionsEs: ["las vallas publicitarias", "la televisión", "la radio", "el telemercadeo y las campanas telefónicas"], correct: 3 },
-    { textEn: "2. The old telemarketing campaign worked like a:", textEs: "2. La vieja campana de telemercadeo funcionaba como un:",
-      optionsEn: ["pyramid", "circle", "funnel that sifts thousands down to a core", "ladder"],
-      optionsEs: ["pirámide", "círculo", "embudo que tamiza miles hasta un núcleo", "escalera"], correct: 2 },
-    { textEn: "3. In the phone-campaign arithmetic, thousands of calls produced:", textEs: "3. En la aritmética de la campana telefónica, miles de llamadas producían:",
-      optionsEn: ["thousands of members", "a much smaller core group after several siftings", "no results at all", "instant growth"],
-      optionsEs: ["miles de miembros", "un núcleo mucho más pequeño tras varios tamizados", "ningún resultado", "crecimiento instantaneo"], correct: 1 },
-    { textEn: "4. What has died is the channel; what endures, this unit says, is the:", textEs: "4. Lo que ha muerto es el canal; lo que perdura, dice esta unidad, es la:",
-      optionsEn: ["funnel logic", "choir", "denominations", "building"],
-      optionsEs: ["lógica del embudo", "coro", "denominaciones", "edificio"], correct: 0 },
-    { textEn: "5. Today the church's true front door is most often:", textEs: "5. Hoy la verdadera puerta de entrada de la iglesia es más a menudo:",
-      optionsEn: ["the billboard", "the telephone", "the newspaper", "digital: website, livestream, social media, search"],
-      optionsEs: ["la valla", "el teléfono", "el periodico", "digital: sitio web, transmisión en vivo, redes sociales, búsqueda"], correct: 3 },
-    { textEn: "6. Before ever walking in, many people now:", textEs: "6. Antes de siquiera entrar, muchas personas ahora:",
-      optionsEn: ["give money first", "join the choir", "attend anonymously online for weeks or months", "become members"],
-      optionsEs: ["dan dinero primero", "se unen al coro", "asisten anónimamente en línea por semanas o meses", "se hacen miembros"], correct: 2 },
-    { textEn: "7. The year that made nearly every church a broadcaster was:", textEs: "7. El año que hizo de casi toda iglesia una emisora fue:",
-      optionsEn: ["1995", "2020", "2007", "1980"],
-      optionsEs: ["1995", "2020", "2007", "1980"], correct: 1 },
-    { textEn: "8. The 'orbit' of a church refers to:", textEs: "8. La 'órbita' de una iglesia se refiere a:",
-      optionsEn: ["those who watch and belong through a screen", "its budget", "its committees", "its parking lot"],
-      optionsEs: ["los que observan y pertenecen por una pantalla", "su presupuesto", "sus comites", "su estacionamiento"], correct: 0 },
-    { textEn: "9. A sobering warning of this unit is that the internet both gathers and:", textEs: "9. Una advertencia seria de esta unidad es que el internet a la vez reúne y:",
-      optionsEn: ["simplifies", "saves", "sanctifies", "scatters"],
-      optionsEs: ["simplifica", "salva", "santifica", "dispersa"], correct: 3 },
-    { textEn: "10. The internet is named as an engine of:", textEs: "10. El internet se nombra como un motor de:",
-      optionsEn: ["much of the dechurching", "revival", "church planting", "biological growth"],
-      optionsEs: ["gran parte del abandono de la iglesia", "el avivamiento", "la plantación de iglesias", "el crecimiento biológico"], correct: 0 },
-    { textEn: "11. The screen, this unit says, is the church's:", textEs: "11. La pantalla, dice esta unidad, es de la iglesia:",
-      optionsEn: ["living room", "sanctuary", "front porch, not the place to live", "altar"],
-      optionsEs: ["la sala", "el santuario", "el porche de entrada, no el lugar para vivir", "el altar"], correct: 2 },
-    { textEn: "12. Digital ministry succeeds when it is used to:", textEs: "12. El ministerio digital tiene éxito cuando se usa para:",
-      optionsEn: ["keep people on the screen forever", "bring people in toward the gathered body", "entertain endlessly", "replace the gathered church"],
-      optionsEs: ["mantener a la gente en la pantalla para siempre", "traer a la gente hacia el cuerpo reunido", "entretener sin fin", "reemplazar a la iglesia reunida"], correct: 1 },
-    { textEn: "13. A person watching online for months is best understood as:", textEs: "13. A una persona que observa en línea por meses se le entiende mejor como:",
-      optionsEn: ["a guest on the porch to be welcomed in", "a full member already", "an intruder", "a donor"],
-      optionsEs: ["un invitado en el porche que debe ser invitado a entrar", "ya un miembro pleno", "un intruso", "un donante"], correct: 0 },
-    { textEn: "14. The funnel logic endures because evangelism still:", textEs: "14. La lógica del embudo perdura porque el evangelismo todavía:",
-      optionsEn: ["requires no contact", "sifts many contacts down toward a few disciples", "happens instantly", "needs no follow-up"],
-      optionsEs: ["no requiere contacto", "tamiza muchos contactos hacia unos pocos discípulos", "ocurre al instante", "no necesita seguimiento"], correct: 1 },
-    { textEn: "15. Mass mailings and cold phone campaigns are now largely:", textEs: "15. Los envíos masivos y las campanas telefónicas frías son ahora en gran parte:",
-      optionsEn: ["the best method", "growing fast", "dead", "required"],
-      optionsEs: ["el mejor método", "de rápido crecimiento", "muertos", "requeridos"], correct: 2 },
-    { textEn: "16. A church that gathers a large online orbit but never moves them toward the body has produced:", textEs: "16. Una iglesia que reúne una gran órbita en línea pero nunca la mueve hacia el cuerpo ha producido:",
-      optionsEn: ["disciples", "members", "leaders", "spectators"],
-      optionsEs: ["discípulos", "miembros", "líderes", "espectadores"], correct: 3 },
-    { textEn: "17. The danger of digital church is mistaking the front porch for the:", textEs: "17. El peligro de la iglesia digital es confundir el porche de entrada con la:",
-      optionsEn: ["living room", "driveway", "mailbox", "street"],
-      optionsEs: ["sala", "entrada de autos", "buzon", "calle"], correct: 0 },
-    { textEn: "18. Online presence is most fruitful as:", textEs: "18. La presencia en línea es más fructífera como:",
-      optionsEn: ["a final destination", "an on-ramp into the gathered church", "a substitute for fellowship", "an entertainment channel"],
-      optionsEs: ["un destino final", "una rampa de entrada a la iglesia reunida", "un sustituto del compañerismo", "un canal de entretenimiento"], correct: 1 },
-    { textEn: "19. The same tool that can gather a watching world can also:", textEs: "19. La misma herramienta que puede reunir a un mundo que observa también puede:",
-      optionsEn: ["guarantee growth", "replace the Spirit", "end all dechurching", "isolate people into permanent spectatorship"],
-      optionsEs: ["garantizar el crecimiento", "reemplazar al Espíritu", "acabar con todo abandono", "aislar a la gente en una espectaduria permanente"], correct: 3 },
-    { textEn: "20. The abiding aim behind both the old funnel and the new screen is to:", textEs: "20. El objetivo permanente tras el viejo embudo y la nueva pantalla es:",
-      optionsEn: ["collect contacts", "fill a database", "make and gather disciples", "raise money"],
-      optionsEs: ["coleccionar contactos", "llenar una base de datos", "hacer y reunir discípulos", "recaudar dinero"], correct: 2 }
-];
-
-const kwQuestions = [
-    { textEn: "Describe the old telemarketing 'funnel' and its arithmetic. How did the campaign actually work?",
-      textEs: "Describa el viejo 'embudo' del telemercadeo y su aritmética. Cómo funcionaba realmente la campana?",
-      kw_en: ["telemarket", "funnel", "call", "thousand", "sift", "prospect", "core", "contact"],
-      kw_es: ["telemerc", "embudo", "llamad", "miles", "tamiz", "prospect", "nucleo", "contact"],
-      modelEn: "The old method was a telemarketing funnel: a church would place thousands of phone calls, sift out the few hundred who were interested, invite them, and after several siftings gather a much smaller core group that became the launch of a congregation. The arithmetic was brutal; many thousands of contacts yielded a modest core, but it worked because evangelism is a sifting of the many to find the few.",
-      modelEs: "El viejo método era un embudo de telemercadeo: una iglesia hacía miles de llamadas, tamizaba a los pocos cientos interesados, los invitaba, y tras varios tamizados reunía un núcleo mucho más pequeño que se volvía el lanzamiento de una congregación. La aritmética era dura; muchos miles de contactos rendían un núcleo modesto, pero funcionaba porque el evangelismo es un tamizado de los muchos para hallar los pocos." },
-    { textEn: "Explain the principle that 'the channel died but the logic endures.' What carries over from telemarketing to today?",
-      textEs: "Explique el principio de que 'el canal murió pero la lógica perdura.' Qué se traslada del telemercadeo a hoy?",
-      kw_en: ["channel", "funnel", "logic", "endure", "contact", "disciple", "sift", "method"],
-      kw_es: ["canal", "embudo", "logic", "perdur", "contact", "discipul", "tamiz", "metod"],
-      modelEn: "The telephone channel is dead, mass cold-calling no longer works, but the funnel logic endures: reaching people still means casting wide, then patiently sifting many contacts down toward the few who become disciples. The lesson carries straight into digital ministry; only the channel changed from the phone to the screen, while the patient, narrowing work of evangelism stayed the same.",
-      modelEs: "El canal telefónico está muerto, las llamadas frías masivas ya no funcionan, pero la lógica del embudo perdura: alcanzar a la gente todavía significa lanzar ampliamente, y luego tamizar con paciencia muchos contactos hacia los pocos que se vuelven discípulos. La lección pasa directo al ministerio digital; solo cambió el canal del teléfono a la pantalla, mientras la obra paciente y estrechante del evangelismo siguió igual." },
-    { textEn: "Describe the church's new digital front door. What channels now serve as the first point of contact?",
-      textEs: "Describa la nueva puerta de entrada digital de la iglesia. Qué canales sirven ahora como primer punto de contacto?",
-      kw_en: ["digital", "website", "stream", "social", "search", "front", "door", "online"],
-      kw_es: ["digital", "web", "transmis", "social", "busqued", "front", "puerta", "linea"],
-      modelEn: "The front door is now digital: the website, the livestream, social media, search results, and the podcast are where most outsiders first meet a church. People form their first impression on a screen long before they ever stand in a foyer, so the digital presence is no longer optional decoration but the actual entrance through which a watching world arrives.",
-      modelEs: "La puerta de entrada ahora es digital: el sitio web, la transmisión en vivo, las redes sociales, los resultados de búsqueda y el podcast son donde la mayoría de los de afuera conoce primero una iglesia. La gente se forma su primera impresión en una pantalla mucho antes de pararse en un vestíbulo, así que la presencia digital ya no es adorno opcional sino la entrada real por la que llega un mundo que observa." },
-    { textEn: "Why do people now 'attend anonymously' before they ever walk in, and how should a church treat such a watcher?",
-      textEs: "Por qué la gente ahora 'asiste anónimamente' antes de entrar, y cómo debe una iglesia tratar a tal observador?",
-      kw_en: ["anonym", "online", "watch", "week", "month", "screen", "welcom", "porch"],
-      kw_es: ["anonim", "linea", "observ", "seman", "mes", "pantalla", "recib", "porche"],
-      modelEn: "Many people now watch a church online anonymously for weeks or months, testing it from a safe distance before risking a visit. Such a watcher is a guest standing on the front porch; the church should treat the online service as a real welcome, warm and clear, and give gentle on-ramps that invite the watcher to step from the screen into the gathered body.",
-      modelEs: "Muchas personas ahora observan una iglesia en línea anónimamente por semanas o meses, probándola desde una distancia segura antes de arriesgar una visita. Tal observador es un invitado parado en el porche de entrada; la iglesia debe tratar el servicio en línea como una bienvenida real, cálida y clara, y dar rampas suaves que inviten al observador a pasar de la pantalla al cuerpo reunido." },
-    { textEn: "Explain the 'orbit' and why the events of 2020 forced every church to learn to count it.",
-      textEs: "Explique la 'órbita' y por qué los eventos de 2020 obligaron a toda iglesia a aprender a contarla.",
-      kw_en: ["orbit", "broadcast", "screen", "room", "watch", "belong", "count", "larger"],
-      kw_es: ["orbit", "difus", "pantalla", "salon", "observ", "pertenec", "cont", "mayor"],
-      modelEn: "In 2020 the doors shut and nearly every church became a broadcaster overnight, discovering that its true reach was an orbit far larger than the room: people who watched, served, and belonged through a screen. The lesson stayed after the doors reopened; a church must now count the orbit as well as the pews, for many who belong never sit in the building.",
-      modelEs: "En 2020 las puertas se cerraron y casi toda iglesia se volvió una emisora de la noche a la mañana, descubriendo que su verdadero alcance era una órbita mucho más grande que el salón: gente que observaba, servía y pertenecía por una pantalla. La lección permaneció tras reabrir las puertas; una iglesia debe contar ahora la órbita además de las bancas, pues muchos que pertenecen nunca se sientan en el edificio." },
-    { textEn: "State the sober warning that the internet 'both gathers and scatters.' How is it an engine of dechurching?",
-      textEs: "Exponga la advertencia seria de que el internet 'a la vez reúne y dispersa.' Cómo es un motor del abandono de la iglesia?",
-      kw_en: ["internet", "gather", "scatter", "dechurch", "engine", "isolat", "screen", "both"],
-      kw_es: ["internet", "reun", "dispers", "desiglesi", "motor", "aisl", "pantalla", "ambas"],
-      modelEn: "The same internet that can gather a watching world can also scatter it, and it has been an engine of much dechurching. It lets people replace the gathered body with a screen, drift from any congregation while feeling religiously fed, and isolate into a private, consuming faith. The tool both gathers and scatters; used carelessly it disperses the very flock it could have drawn in.",
-      modelEs: "El mismo internet que puede reunir a un mundo que observa también puede dispersarlo, y ha sido un motor de gran parte del abandono de la iglesia. Permite a la gente reemplazar el cuerpo reunido con una pantalla, alejarse de toda congregación sintiéndose alimentada religiosamente, y aislarse en una fe privada y consumidora. La herramienta a la vez reúne y dispersa; usada sin cuidado dispersa el mismo rebaño que pudo haber atraído." },
-    { textEn: "Explain the image of the screen as 'front porch, not living room.' How should digital ministry be used?",
-      textEs: "Explique la imagen de la pantalla como 'porche de entrada, no la sala.' Cómo debe usarse el ministerio digital?",
-      kw_en: ["screen", "porch", "living", "room", "bring", "stay", "gather", "body"],
-      kw_es: ["pantalla", "porche", "sala", "sala", "traer", "qued", "reun", "cuerp"],
-      modelEn: "The screen is meant to be a front porch, a welcoming threshold, not the living room where a person settles in to stay. Digital ministry should be used to bring people in toward the gathered body, never to be the place they live out their whole faith. A church that lets the orbit stay forever on the porch has made spectators, not disciples.",
-      modelEs: "La pantalla debe ser un porche de entrada, un umbral acogedor, no la sala donde una persona se acomoda para quedarse. El ministerio digital debe usarse para traer a la gente hacia el cuerpo reunido, nunca para ser el lugar donde viven toda su fe. Una iglesia que deja a la órbita quedarse para siempre en el porche ha hecho espectadores, no discípulos." },
-    { textEn: "Why are online spectators 'not the church,' and what does this mean for measuring digital success?",
-      textEs: "Por qué los espectadores en línea 'no son la iglesia,' y qué significa esto para medir el éxito digital?",
-      kw_en: ["spectator", "body", "gather", "disciple", "watch", "consume", "belong", "member"],
-      kw_es: ["espectador", "cuerp", "reun", "discipul", "observ", "consum", "pertenec", "miembr"],
-      modelEn: "A crowd that only watches is an audience, not the church; the church is a gathered body of disciples who belong, serve, and share life. So digital success is not measured by view counts but by how many watchers are moved from consuming a screen into belonging to the body. A million views that make no disciples is a number, not a church.",
-      modelEs: "Una multitud que solo observa es un público, no la iglesia; la iglesia es un cuerpo reunido de discípulos que pertenecen, sirven y comparten la vida. Así que el éxito digital no se mide por el conteo de vistas sino por cuántos observadores son movidos de consumir una pantalla a pertenecer al cuerpo. Un millón de vistas que no hace discípulos es un número, no una iglesia." },
-    { textEn: "Defend the claim that the old funnel and the new screen obey the same evangelistic logic.",
-      textEs: "Defienda la afirmación de que el viejo embudo y la nueva pantalla obedecen la misma lógica evangelística.",
-      kw_en: ["funnel", "screen", "sift", "contact", "disciple", "evangel", "narrow", "gather"],
-      kw_es: ["embudo", "pantalla", "tamiz", "contact", "discipul", "evangel", "estrech", "reun"],
-      modelEn: "Both the telemarketing funnel and the digital screen cast a wide net and then narrow it: many are reached, fewer respond, fewer still are gathered and discipled. The screen reaches more people than the phone ever could, but the logic is identical, sift the many to find and form the few. Evangelism in any age is wide contact narrowing toward committed disciples.",
-      modelEs: "Tanto el embudo del telemercadeo como la pantalla digital lanzan una red amplia y luego la estrechan: muchos son alcanzados, menos responden, aún menos son reunidos y discipulados. La pantalla alcanza a más gente de la que el teléfono jamás pudo, pero la lógica es idéntica, tamizar a los muchos para hallar y formar a los pocos. El evangelismo en cualquier era es contacto amplio que se estrecha hacia discípulos comprometidos." },
-    { textEn: "Synthesis: How should a church use its digital front door faithfully, holding together its reach and its dangers?",
-      textEs: "Síntesis: Cómo debe una iglesia usar fielmente su puerta de entrada digital, sosteniendo juntos su alcance y sus peligros?",
-      kw_en: ["digital", "gather", "bring", "disciple", "screen", "orbit", "body", "porch"],
-      kw_es: ["digital", "reun", "traer", "discipul", "pantalla", "orbit", "cuerp", "porche"],
-      modelEn: "A church should use the digital front door to reach its wide orbit and welcome watchers warmly, while always building on-ramps that bring them off the screen and into the gathered body. It must resist letting the porch become the home, remembering that the internet both gathers and scatters. Used as an entrance and not a destination, the screen serves the one aim: making and gathering disciples.",
-      modelEs: "Una iglesia debe usar la puerta de entrada digital para alcanzar su amplia órbita y recibir cálidamente a los observadores, mientras siempre construye rampas que los traigan fuera de la pantalla al cuerpo reunido. Debe resistir dejar que el porche se vuelva el hogar, recordando que el internet a la vez reúne y dispersa. Usada como entrada y no como destino, la pantalla sirve al único objetivo: hacer y reunir discípulos." }
-];
+/* CTSCG — unit 9. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "cg",
+ "unit": 9,
+ "totalUnits": 12,
+ "filePrefix": "CTSCG",
+ "prevHref": "CTSCGUnit8.html",
+ "nextHref": "CTSCGUnit10.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 — Introduction",
+   "Unit 2 — Biblical Background",
+   "Unit 3 — Terms and History",
+   "Unit 4 — Principles",
+   "Unit 5 — Change and the Generations",
+   "Unit 6 — Diagnosing Your Church",
+   "Unit 7 — Pastoral Leadership",
+   "Unit 8 — Worship",
+   "Unit 9 — Digital and Online Ministry",
+   "Unit 10 — Sunday School and Small Groups",
+   "Unit 11 — Discipleship",
+   "Unit 12 — Retention"
+  ],
+  "es": [
+   "Unit 1 — Introduction",
+   "Unit 2 — Biblical Background",
+   "Unit 3 — Terms and History",
+   "Unit 4 — Principles",
+   "Unit 5 — Change and the Generations",
+   "Unit 6 — Diagnosing Your Church",
+   "Unit 7 — Pastoral Leadership",
+   "Unit 8 — Worship",
+   "Unit 9 — Digital and Online Ministry",
+   "Unit 10 — Sunday School and Small Groups",
+   "Unit 11 — Discipleship",
+   "Unit 12 — Retention"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "The older chapter that this unit replaces was built on the method of:",
+    "es": "El capítulo antiguo que esta unidad reemplaza se construyó sobre el método de:"
+   },
+   "options": {
+    "en": [
+     "billboards",
+     "television",
+     "radio",
+     "telemarketing and phone campaigns"
+    ],
+    "es": [
+     "las vallas publicitarias",
+     "la televisión",
+     "la radio",
+     "el telemercadeo y las campanas telefónicas"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The old telemarketing campaign worked like a:",
+    "es": "La vieja campana de telemercadeo funcionaba como un:"
+   },
+   "options": {
+    "en": [
+     "pyramid",
+     "circle",
+     "funnel that sifts thousands down to a core",
+     "ladder"
+    ],
+    "es": [
+     "pirámide",
+     "círculo",
+     "embudo que tamiza miles hasta un núcleo",
+     "escalera"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "In the phone-campaign arithmetic, thousands of calls produced:",
+    "es": "En la aritmética de la campana telefónica, miles de llamadas producían:"
+   },
+   "options": {
+    "en": [
+     "thousands of members",
+     "a much smaller core group after several siftings",
+     "no results at all",
+     "instant growth"
+    ],
+    "es": [
+     "miles de miembros",
+     "un núcleo mucho más pequeño tras varios tamizados",
+     "ningún resultado",
+     "crecimiento instantaneo"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "What has died is the channel; what endures, this unit says, is the:",
+    "es": "Lo que ha muerto es el canal; lo que perdura, dice esta unidad, es la:"
+   },
+   "options": {
+    "en": [
+     "funnel logic",
+     "choir",
+     "denominations",
+     "building"
+    ],
+    "es": [
+     "lógica del embudo",
+     "coro",
+     "denominaciones",
+     "edificio"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Today the church's true front door is most often:",
+    "es": "Hoy la verdadera puerta de entrada de la iglesia es más a menudo:"
+   },
+   "options": {
+    "en": [
+     "the billboard",
+     "the telephone",
+     "the newspaper",
+     "digital: website, livestream, social media, search"
+    ],
+    "es": [
+     "la valla",
+     "el teléfono",
+     "el periodico",
+     "digital: sitio web, transmisión en vivo, redes sociales, búsqueda"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Before ever walking in, many people now:",
+    "es": "Antes de siquiera entrar, muchas personas ahora:"
+   },
+   "options": {
+    "en": [
+     "give money first",
+     "join the choir",
+     "attend anonymously online for weeks or months",
+     "become members"
+    ],
+    "es": [
+     "dan dinero primero",
+     "se unen al coro",
+     "asisten anónimamente en línea por semanas o meses",
+     "se hacen miembros"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The year that made nearly every church a broadcaster was:",
+    "es": "El año que hizo de casi toda iglesia una emisora fue:"
+   },
+   "options": {
+    "en": [
+     "1995",
+     "2020",
+     "2007",
+     "1980"
+    ],
+    "es": [
+     "1995",
+     "2020",
+     "2007",
+     "1980"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The 'orbit' of a church refers to:",
+    "es": "La 'órbita' de una iglesia se refiere a:"
+   },
+   "options": {
+    "en": [
+     "those who watch and belong through a screen",
+     "its budget",
+     "its committees",
+     "its parking lot"
+    ],
+    "es": [
+     "los que observan y pertenecen por una pantalla",
+     "su presupuesto",
+     "sus comites",
+     "su estacionamiento"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "A sobering warning of this unit is that the internet both gathers and:",
+    "es": "Una advertencia seria de esta unidad es que el internet a la vez reúne y:"
+   },
+   "options": {
+    "en": [
+     "simplifies",
+     "saves",
+     "sanctifies",
+     "scatters"
+    ],
+    "es": [
+     "simplifica",
+     "salva",
+     "santifica",
+     "dispersa"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The internet is named as an engine of:",
+    "es": "El internet se nombra como un motor de:"
+   },
+   "options": {
+    "en": [
+     "much of the dechurching",
+     "revival",
+     "church planting",
+     "biological growth"
+    ],
+    "es": [
+     "gran parte del abandono de la iglesia",
+     "el avivamiento",
+     "la plantación de iglesias",
+     "el crecimiento biológico"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The screen, this unit says, is the church's:",
+    "es": "La pantalla, dice esta unidad, es de la iglesia:"
+   },
+   "options": {
+    "en": [
+     "living room",
+     "sanctuary",
+     "front porch, not the place to live",
+     "altar"
+    ],
+    "es": [
+     "la sala",
+     "el santuario",
+     "el porche de entrada, no el lugar para vivir",
+     "el altar"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Digital ministry succeeds when it is used to:",
+    "es": "El ministerio digital tiene éxito cuando se usa para:"
+   },
+   "options": {
+    "en": [
+     "keep people on the screen forever",
+     "bring people in toward the gathered body",
+     "entertain endlessly",
+     "replace the gathered church"
+    ],
+    "es": [
+     "mantener a la gente en la pantalla para siempre",
+     "traer a la gente hacia el cuerpo reunido",
+     "entretener sin fin",
+     "reemplazar a la iglesia reunida"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "A person watching online for months is best understood as:",
+    "es": "A una persona que observa en línea por meses se le entiende mejor como:"
+   },
+   "options": {
+    "en": [
+     "a guest on the porch to be welcomed in",
+     "a full member already",
+     "an intruder",
+     "a donor"
+    ],
+    "es": [
+     "un invitado en el porche que debe ser invitado a entrar",
+     "ya un miembro pleno",
+     "un intruso",
+     "un donante"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The funnel logic endures because evangelism still:",
+    "es": "La lógica del embudo perdura porque el evangelismo todavía:"
+   },
+   "options": {
+    "en": [
+     "requires no contact",
+     "sifts many contacts down toward a few disciples",
+     "happens instantly",
+     "needs no follow-up"
+    ],
+    "es": [
+     "no requiere contacto",
+     "tamiza muchos contactos hacia unos pocos discípulos",
+     "ocurre al instante",
+     "no necesita seguimiento"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Mass mailings and cold phone campaigns are now largely:",
+    "es": "Los envíos masivos y las campanas telefónicas frías son ahora en gran parte:"
+   },
+   "options": {
+    "en": [
+     "the best method",
+     "growing fast",
+     "dead",
+     "required"
+    ],
+    "es": [
+     "el mejor método",
+     "de rápido crecimiento",
+     "muertos",
+     "requeridos"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "A church that gathers a large online orbit but never moves them toward the body has produced:",
+    "es": "Una iglesia que reúne una gran órbita en línea pero nunca la mueve hacia el cuerpo ha producido:"
+   },
+   "options": {
+    "en": [
+     "disciples",
+     "members",
+     "leaders",
+     "spectators"
+    ],
+    "es": [
+     "discípulos",
+     "miembros",
+     "líderes",
+     "espectadores"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The danger of digital church is mistaking the front porch for the:",
+    "es": "El peligro de la iglesia digital es confundir el porche de entrada con la:"
+   },
+   "options": {
+    "en": [
+     "living room",
+     "driveway",
+     "mailbox",
+     "street"
+    ],
+    "es": [
+     "sala",
+     "entrada de autos",
+     "buzon",
+     "calle"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Online presence is most fruitful as:",
+    "es": "La presencia en línea es más fructífera como:"
+   },
+   "options": {
+    "en": [
+     "a final destination",
+     "an on-ramp into the gathered church",
+     "a substitute for fellowship",
+     "an entertainment channel"
+    ],
+    "es": [
+     "un destino final",
+     "una rampa de entrada a la iglesia reunida",
+     "un sustituto del compañerismo",
+     "un canal de entretenimiento"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The same tool that can gather a watching world can also:",
+    "es": "La misma herramienta que puede reunir a un mundo que observa también puede:"
+   },
+   "options": {
+    "en": [
+     "guarantee growth",
+     "replace the Spirit",
+     "end all dechurching",
+     "isolate people into permanent spectatorship"
+    ],
+    "es": [
+     "garantizar el crecimiento",
+     "reemplazar al Espíritu",
+     "acabar con todo abandono",
+     "aislar a la gente en una espectaduria permanente"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The abiding aim behind both the old funnel and the new screen is to:",
+    "es": "El objetivo permanente tras el viejo embudo y la nueva pantalla es:"
+   },
+   "options": {
+    "en": [
+     "collect contacts",
+     "fill a database",
+     "make and gather disciples",
+     "raise money"
+    ],
+    "es": [
+     "coleccionar contactos",
+     "llenar una base de datos",
+     "hacer y reunir discípulos",
+     "recaudar dinero"
+    ]
+   },
+   "answer": 2
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Describe the old telemarketing 'funnel' and its arithmetic. How did the campaign actually work?",
+    "es": "Describa el viejo 'embudo' del telemercadeo y su aritmética. Cómo funcionaba realmente la campana?"
+   },
+   "keywords": {
+    "en": [
+     "telemarket",
+     "funnel",
+     "call",
+     "thousand",
+     "sift",
+     "prospect",
+     "core",
+     "contact"
+    ],
+    "es": [
+     "telemerc",
+     "embudo",
+     "llamad",
+     "miles",
+     "tamiz",
+     "prospect",
+     "nucleo",
+     "contact"
+    ]
+   },
+   "model": {
+    "en": "The old method was a telemarketing funnel: a church would place thousands of phone calls, sift out the few hundred who were interested, invite them, and after several siftings gather a much smaller core group that became the launch of a congregation. The arithmetic was brutal; many thousands of contacts yielded a modest core, but it worked because evangelism is a sifting of the many to find the few.",
+    "es": "El viejo método era un embudo de telemercadeo: una iglesia hacía miles de llamadas, tamizaba a los pocos cientos interesados, los invitaba, y tras varios tamizados reunía un núcleo mucho más pequeño que se volvía el lanzamiento de una congregación. La aritmética era dura; muchos miles de contactos rendían un núcleo modesto, pero funcionaba porque el evangelismo es un tamizado de los muchos para hallar los pocos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the principle that 'the channel died but the logic endures.' What carries over from telemarketing to today?",
+    "es": "Explique el principio de que 'el canal murió pero la lógica perdura.' Qué se traslada del telemercadeo a hoy?"
+   },
+   "keywords": {
+    "en": [
+     "channel",
+     "funnel",
+     "logic",
+     "endure",
+     "contact",
+     "disciple",
+     "sift",
+     "method"
+    ],
+    "es": [
+     "canal",
+     "embudo",
+     "logic",
+     "perdur",
+     "contact",
+     "discipul",
+     "tamiz",
+     "metod"
+    ]
+   },
+   "model": {
+    "en": "The telephone channel is dead, mass cold-calling no longer works, but the funnel logic endures: reaching people still means casting wide, then patiently sifting many contacts down toward the few who become disciples. The lesson carries straight into digital ministry; only the channel changed from the phone to the screen, while the patient, narrowing work of evangelism stayed the same.",
+    "es": "El canal telefónico está muerto, las llamadas frías masivas ya no funcionan, pero la lógica del embudo perdura: alcanzar a la gente todavía significa lanzar ampliamente, y luego tamizar con paciencia muchos contactos hacia los pocos que se vuelven discípulos. La lección pasa directo al ministerio digital; solo cambió el canal del teléfono a la pantalla, mientras la obra paciente y estrechante del evangelismo siguió igual."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the church's new digital front door. What channels now serve as the first point of contact?",
+    "es": "Describa la nueva puerta de entrada digital de la iglesia. Qué canales sirven ahora como primer punto de contacto?"
+   },
+   "keywords": {
+    "en": [
+     "digital",
+     "website",
+     "stream",
+     "social",
+     "search",
+     "front",
+     "door",
+     "online"
+    ],
+    "es": [
+     "digital",
+     "web",
+     "transmis",
+     "social",
+     "busqued",
+     "front",
+     "puerta",
+     "linea"
+    ]
+   },
+   "model": {
+    "en": "The front door is now digital: the website, the livestream, social media, search results, and the podcast are where most outsiders first meet a church. People form their first impression on a screen long before they ever stand in a foyer, so the digital presence is no longer optional decoration but the actual entrance through which a watching world arrives.",
+    "es": "La puerta de entrada ahora es digital: el sitio web, la transmisión en vivo, las redes sociales, los resultados de búsqueda y el podcast son donde la mayoría de los de afuera conoce primero una iglesia. La gente se forma su primera impresión en una pantalla mucho antes de pararse en un vestíbulo, así que la presencia digital ya no es adorno opcional sino la entrada real por la que llega un mundo que observa."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why do people now 'attend anonymously' before they ever walk in, and how should a church treat such a watcher?",
+    "es": "Por qué la gente ahora 'asiste anónimamente' antes de entrar, y cómo debe una iglesia tratar a tal observador?"
+   },
+   "keywords": {
+    "en": [
+     "anonym",
+     "online",
+     "watch",
+     "week",
+     "month",
+     "screen",
+     "welcom",
+     "porch"
+    ],
+    "es": [
+     "anonim",
+     "linea",
+     "observ",
+     "seman",
+     "mes",
+     "pantalla",
+     "recib",
+     "porche"
+    ]
+   },
+   "model": {
+    "en": "Many people now watch a church online anonymously for weeks or months, testing it from a safe distance before risking a visit. Such a watcher is a guest standing on the front porch; the church should treat the online service as a real welcome, warm and clear, and give gentle on-ramps that invite the watcher to step from the screen into the gathered body.",
+    "es": "Muchas personas ahora observan una iglesia en línea anónimamente por semanas o meses, probándola desde una distancia segura antes de arriesgar una visita. Tal observador es un invitado parado en el porche de entrada; la iglesia debe tratar el servicio en línea como una bienvenida real, cálida y clara, y dar rampas suaves que inviten al observador a pasar de la pantalla al cuerpo reunido."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the 'orbit' and why the events of 2020 forced every church to learn to count it.",
+    "es": "Explique la 'órbita' y por qué los eventos de 2020 obligaron a toda iglesia a aprender a contarla."
+   },
+   "keywords": {
+    "en": [
+     "orbit",
+     "broadcast",
+     "screen",
+     "room",
+     "watch",
+     "belong",
+     "count",
+     "larger"
+    ],
+    "es": [
+     "orbit",
+     "difus",
+     "pantalla",
+     "salon",
+     "observ",
+     "pertenec",
+     "cont",
+     "mayor"
+    ]
+   },
+   "model": {
+    "en": "In 2020 the doors shut and nearly every church became a broadcaster overnight, discovering that its true reach was an orbit far larger than the room: people who watched, served, and belonged through a screen. The lesson stayed after the doors reopened; a church must now count the orbit as well as the pews, for many who belong never sit in the building.",
+    "es": "En 2020 las puertas se cerraron y casi toda iglesia se volvió una emisora de la noche a la mañana, descubriendo que su verdadero alcance era una órbita mucho más grande que el salón: gente que observaba, servía y pertenecía por una pantalla. La lección permaneció tras reabrir las puertas; una iglesia debe contar ahora la órbita además de las bancas, pues muchos que pertenecen nunca se sientan en el edificio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "State the sober warning that the internet 'both gathers and scatters.' How is it an engine of dechurching?",
+    "es": "Exponga la advertencia seria de que el internet 'a la vez reúne y dispersa.' Cómo es un motor del abandono de la iglesia?"
+   },
+   "keywords": {
+    "en": [
+     "internet",
+     "gather",
+     "scatter",
+     "dechurch",
+     "engine",
+     "isolat",
+     "screen",
+     "both"
+    ],
+    "es": [
+     "internet",
+     "reun",
+     "dispers",
+     "desiglesi",
+     "motor",
+     "aisl",
+     "pantalla",
+     "ambas"
+    ]
+   },
+   "model": {
+    "en": "The same internet that can gather a watching world can also scatter it, and it has been an engine of much dechurching. It lets people replace the gathered body with a screen, drift from any congregation while feeling religiously fed, and isolate into a private, consuming faith. The tool both gathers and scatters; used carelessly it disperses the very flock it could have drawn in.",
+    "es": "El mismo internet que puede reunir a un mundo que observa también puede dispersarlo, y ha sido un motor de gran parte del abandono de la iglesia. Permite a la gente reemplazar el cuerpo reunido con una pantalla, alejarse de toda congregación sintiéndose alimentada religiosamente, y aislarse en una fe privada y consumidora. La herramienta a la vez reúne y dispersa; usada sin cuidado dispersa el mismo rebaño que pudo haber atraído."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the image of the screen as 'front porch, not living room.' How should digital ministry be used?",
+    "es": "Explique la imagen de la pantalla como 'porche de entrada, no la sala.' Cómo debe usarse el ministerio digital?"
+   },
+   "keywords": {
+    "en": [
+     "screen",
+     "porch",
+     "living",
+     "room",
+     "bring",
+     "stay",
+     "gather",
+     "body"
+    ],
+    "es": [
+     "pantalla",
+     "porche",
+     "sala",
+     "sala",
+     "traer",
+     "qued",
+     "reun",
+     "cuerp"
+    ]
+   },
+   "model": {
+    "en": "The screen is meant to be a front porch, a welcoming threshold, not the living room where a person settles in to stay. Digital ministry should be used to bring people in toward the gathered body, never to be the place they live out their whole faith. A church that lets the orbit stay forever on the porch has made spectators, not disciples.",
+    "es": "La pantalla debe ser un porche de entrada, un umbral acogedor, no la sala donde una persona se acomoda para quedarse. El ministerio digital debe usarse para traer a la gente hacia el cuerpo reunido, nunca para ser el lugar donde viven toda su fe. Una iglesia que deja a la órbita quedarse para siempre en el porche ha hecho espectadores, no discípulos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why are online spectators 'not the church,' and what does this mean for measuring digital success?",
+    "es": "Por qué los espectadores en línea 'no son la iglesia,' y qué significa esto para medir el éxito digital?"
+   },
+   "keywords": {
+    "en": [
+     "spectator",
+     "body",
+     "gather",
+     "disciple",
+     "watch",
+     "consume",
+     "belong",
+     "member"
+    ],
+    "es": [
+     "espectador",
+     "cuerp",
+     "reun",
+     "discipul",
+     "observ",
+     "consum",
+     "pertenec",
+     "miembr"
+    ]
+   },
+   "model": {
+    "en": "A crowd that only watches is an audience, not the church; the church is a gathered body of disciples who belong, serve, and share life. So digital success is not measured by view counts but by how many watchers are moved from consuming a screen into belonging to the body. A million views that make no disciples is a number, not a church.",
+    "es": "Una multitud que solo observa es un público, no la iglesia; la iglesia es un cuerpo reunido de discípulos que pertenecen, sirven y comparten la vida. Así que el éxito digital no se mide por el conteo de vistas sino por cuántos observadores son movidos de consumir una pantalla a pertenecer al cuerpo. Un millón de vistas que no hace discípulos es un número, no una iglesia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Defend the claim that the old funnel and the new screen obey the same evangelistic logic.",
+    "es": "Defienda la afirmación de que el viejo embudo y la nueva pantalla obedecen la misma lógica evangelística."
+   },
+   "keywords": {
+    "en": [
+     "funnel",
+     "screen",
+     "sift",
+     "contact",
+     "disciple",
+     "evangel",
+     "narrow",
+     "gather"
+    ],
+    "es": [
+     "embudo",
+     "pantalla",
+     "tamiz",
+     "contact",
+     "discipul",
+     "evangel",
+     "estrech",
+     "reun"
+    ]
+   },
+   "model": {
+    "en": "Both the telemarketing funnel and the digital screen cast a wide net and then narrow it: many are reached, fewer respond, fewer still are gathered and discipled. The screen reaches more people than the phone ever could, but the logic is identical, sift the many to find and form the few. Evangelism in any age is wide contact narrowing toward committed disciples.",
+    "es": "Tanto el embudo del telemercadeo como la pantalla digital lanzan una red amplia y luego la estrechan: muchos son alcanzados, menos responden, aún menos son reunidos y discipulados. La pantalla alcanza a más gente de la que el teléfono jamás pudo, pero la lógica es idéntica, tamizar a los muchos para hallar y formar a los pocos. El evangelismo en cualquier era es contacto amplio que se estrecha hacia discípulos comprometidos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Synthesis: How should a church use its digital front door faithfully, holding together its reach and its dangers?",
+    "es": "Síntesis: Cómo debe una iglesia usar fielmente su puerta de entrada digital, sosteniendo juntos su alcance y sus peligros?"
+   },
+   "keywords": {
+    "en": [
+     "digital",
+     "gather",
+     "bring",
+     "disciple",
+     "screen",
+     "orbit",
+     "body",
+     "porch"
+    ],
+    "es": [
+     "digital",
+     "reun",
+     "traer",
+     "discipul",
+     "pantalla",
+     "orbit",
+     "cuerp",
+     "porche"
+    ]
+   },
+   "model": {
+    "en": "A church should use the digital front door to reach its wide orbit and welcome watchers warmly, while always building on-ramps that bring them off the screen and into the gathered body. It must resist letting the porch become the home, remembering that the internet both gathers and scatters. Used as an entrance and not a destination, the screen serves the one aim: making and gathering disciples.",
+    "es": "Una iglesia debe usar la puerta de entrada digital para alcanzar su amplia órbita y recibir cálidamente a los observadores, mientras siempre construye rampas que los traigan fuera de la pantalla al cuerpo reunido. Debe resistir dejar que el porche se vuelva el hogar, recordando que el internet a la vez reúne y dispersa. Usada como entrada y no como destino, la pantalla sirve al único objetivo: hacer y reunir discípulos."
+   }
+  }
+ ]
+};

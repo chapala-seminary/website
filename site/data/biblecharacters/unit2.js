@@ -1,11 +1,863 @@
-/* CTSBibleCharacters - unit 2: per-unit configuration and content. */
-
-const UNIT = 2;
-
-const NEXT_UNIT_URL = 'CTSBibleCharactersUnit3.html';
-
-const unitTitlesEn = ["Unit 1 - Enoch — The Man Who Walked with God", `Unit ${UNIT} - Job — Faith That Holds When Everything Is Stripped Away`, `Unit ${UNIT + 1} - Abraham — Father of the Faithful, Friend of God`, "Unit 4 - Rebekah — The Bride Who Said “I Will Go”", "Unit 5 - Joseph — From the Pit to the Palace, the Man Who Forgave", "Unit 6 - Moses — The Man Who Asked to See God’s Glory", "Unit 7 - Gideon — When God Wins With Few", "Unit 8 - Ruth — When Life Looks Hopeless, There Is Always Hope and God", "Unit 9 - Hannah — The Praying Mother Who Gave Her Son to God", "Unit 10 - Samuel — The Boy Who Heard God, the Prophet Who Anointed Kings", "Unit 11 - David — A Man After God's Own Heart", "Unit 12 - Elijah — The Prophet of Fire and the Still Small Voice"];
-
-const mcQuestions = [{"textEn":"1. Who was Job?","textEs":"1. ¿Quién era Job?","optionsEn":["A wicked king", "A blameless, upright man who feared God, with a fine family and great wealth", "A poor beggar with no faith", "A Roman official"],"optionsEs":["Un rey malvado", "Un hombre perfecto y recto que temía a Dios, con una buena familia y gran riqueza", "Un mendigo pobre sin fe", "Un oficial romano"],"explanationEn":"Job 1:1 calls him blameless and upright, one who feared God and shunned evil.","explanationEs":"Job 1:1 lo llama perfecto y recto, temeroso de Dios y apartado del mal.","correct":1},{"textEn":"2. What was Satan's accusation against Job?","textEs":"2. ¿Cuál fue la acusación de Satanás contra Job?","optionsEn":["That Job had committed murder", "That Job worshiped idols", "That Job was secretly an atheist", "That Job served God only for the blessings — strip them and he would curse God"],"optionsEs":["Que Job había cometido un asesinato", "Que Job adoraba ídolos", "Que Job era en secreto un ateo", "Que Job servía a Dios solo por las bendiciones — quítaselas y maldeciría a Dios"],"explanationEn":"Satan claimed Job's faith was bought by prosperity, not real.","explanationEs":"Satanás afirmó que la fe de Job era comprada por la prosperidad, no real.","correct":3},{"textEn":"3. How did God respond to Satan's challenge?","textEs":"3. ¿Cómo respondió Dios al desafío de Satanás?","optionsEn":["He struck Job Himself", "He ignored Satan", "He permitted the testing — His permissive will — for Satan could do nothing without God's leave", "He destroyed Satan at once"],"optionsEs":["Hirió a Job Él mismo", "Ignoró a Satanás", "Permitió la prueba — su voluntad permisiva — porque Satanás no podía hacer nada sin el permiso de Dios", "Destruyó a Satanás de inmediato"],"explanationEn":"This is the permissive will of God: He allows what He does not author.","explanationEs":"Esta es la voluntad permisiva de Dios: permite lo que no es su autor.","correct":2},{"textEn":"4. What was the second wave of calamity that fell on Job?","textEs":"4. ¿Cuál fue la segunda ola de calamidad que cayó sobre Job?","optionsEn":["His ten children were all killed in one day in a storm", "He lost his memory", "He was exiled", "His house burned"],"optionsEs":["Sus diez hijos fueron muertos en un solo día en una tormenta", "Perdió la memoria", "Fue desterrado", "Su casa se quemó"],"explanationEn":"A great wind struck the house and killed all ten of his children at once.","explanationEs":"Un gran viento azotó la casa y mató a sus diez hijos a la vez.","correct":0},{"textEn":"5. What was the third wave that struck Job?","textEs":"5. ¿Cuál fue la tercera ola que golpeó a Job?","optionsEn":["Blindness", "His health — boils from head to foot", "Deafness", "Paralysis"],"optionsEs":["Ceguera", "Su salud — llagas de pies a cabeza", "Sordera", "Parálisis"],"explanationEn":"He was covered with painful boils from the sole of his foot to his crown.","explanationEs":"Fue cubierto de dolorosas llagas desde la planta del pie hasta la coronilla.","correct":1},{"textEn":"6. What did Job's wife say to him?","textEs":"6. ¿Qué le dijo la esposa de Job?","optionsEn":["\"Be strong and trust\"", "\"Call the elders\"", "\"Flee to another land\"", "\"Curse God and die\""],"optionsEs":["«Sé fuerte y confía»", "«Llama a los ancianos»", "«Huye a otra tierra»", "«Maldice a Dios, y muérete»"],"explanationEn":"Even his closest companion urged him to give up on God.","explanationEs":"Hasta su compañera más cercana lo instó a rendirse con Dios.","correct":3},{"textEn":"7. What was the error of Job's three friends?","textEs":"7. ¿Cuál fue el error de los tres amigos de Job?","optionsEn":["They insisted Job must have hidden sin, or God would not let him suffer", "They said Job was a great saint", "They told him to curse God", "They abandoned him without a word"],"optionsEs":["Insistieron en que Job debía tener un pecado oculto, o Dios no lo dejaría sufrir", "Dijeron que Job era un gran santo", "Le dijeron que maldijera a Dios", "Lo abandonaron sin una palabra"],"explanationEn":"They wrongly assumed all suffering must be punishment for sin.","explanationEs":"Supusieron erróneamente que todo sufrimiento debe ser castigo por el pecado.","correct":0},{"textEn":"8. What was Job's great answer in the midst of his suffering (Job 13:15)?","textEs":"8. ¿Cuál fue la gran respuesta de Job en medio de su sufrimiento (Job 13:15)?","optionsEn":["\"I will end my life\"", "\"God has forsaken me\"", "\"Though He slay me, yet will I trust Him\"", "\"I have sinned greatly\""],"optionsEs":["«Acabaré con mi vida»", "«Dios me ha abandonado»", "«Aunque él me matare, en él esperaré»", "«He pecado gravemente»"],"explanationEn":"His faith rested on the Lord Himself, not on his circumstances.","explanationEs":"Su fe descansaba en el Señor mismo, no en sus circunstancias.","correct":2},{"textEn":"9. What did Job say in Job 1:21?","textEs":"9. ¿Qué dijo Job en Job 1:21?","optionsEn":["\"The LORD gave, and the LORD has taken away; blessed be the name of the LORD\"", "\"Why have You forsaken me?\"", "\"My faith is gone\"", "\"I curse the heavens\""],"optionsEs":["«Jehová dio, y Jehová quitó; sea el nombre de Jehová bendito»", "«¿Por qué me has abandonado?»", "«Mi fe se ha ido»", "«Maldigo los cielos»"],"explanationEn":"At the first blow he worshiped rather than cursed.","explanationEs":"Al primer golpe adoró en lugar de maldecir.","correct":0},{"textEn":"10. The first great question of the book is...?","textEs":"10. La primera gran pregunta del libro es...?","optionsEn":["Why does the earth exist?", "How old is the universe?", "Who wrote the book of Job?", "Why do good men suffer?"],"optionsEs":["¿Por qué existe la tierra?", "¿Qué edad tiene el universo?", "¿Quién escribió el libro de Job?", "¿Por qué sufren los hombres buenos?"],"explanationEn":"The book answers two great questions; this is the first.","explanationEs":"El libro responde a dos grandes preguntas; esta es la primera.","correct":3},{"textEn":"11. What does the book teach about the source of trouble?","textEs":"11. ¿Qué enseña el libro sobre el origen del sufrimiento?","optionsEn":["All trouble comes directly from God", "Trouble does not always come from God — Satan could do nothing without God's permission", "Trouble is an illusion", "God is powerless to stop trouble"],"optionsEs":["Todo sufrimiento viene directamente de Dios", "El sufrimiento no siempre viene de Dios — Satanás no podía hacer nada sin el permiso de Dios", "El sufrimiento es una ilusión", "Dios no tiene poder para detener el sufrimiento"],"explanationEn":"God allowed, but did not author, Job's calamities (His permissive will).","explanationEs":"Dios permitió, pero no fue autor, de las calamidades de Job (su voluntad permisiva).","correct":1},{"textEn":"12. When God DOES discipline His people, why does He do it?","textEs":"12. Cuando Dios SÍ disciplina a su pueblo, ¿por qué lo hace?","optionsEn":["Because He is cruel", "Because He is indifferent", "Because He loves us — as a father disciplines his own children, not the neighbor's", "Because He has lost control"],"optionsEs":["Porque es cruel", "Porque es indiferente", "Porque nos ama — como un padre disciplina a sus propios hijos, no a los del vecino", "Porque ha perdido el control"],"explanationEn":"God corrects His own because they are His.","explanationEs":"Dios corrige a los suyos porque son suyos.","correct":2},{"textEn":"13. What did Jesus teach about the man born blind (John 9:3)?","textEs":"13. ¿Qué enseñó Jesús acerca del hombre ciego de nacimiento (Juan 9:3)?","optionsEn":["The man's parents had sinned", "\"Neither this man nor his parents sinned\" — some suffering comes from neither God nor sin", "The man himself had sinned", "Blindness is always a punishment"],"optionsEs":["Los padres del hombre habían pecado", "«No es que pecó éste, ni sus padres» — algún sufrimiento no viene ni de Dios ni del pecado", "El hombre mismo había pecado", "La ceguera siempre es un castigo"],"explanationEn":"Not every trouble is the result of sin, contrary to the friends' claim.","explanationEs":"No todo sufrimiento es resultado del pecado, contrario a lo que decían los amigos.","correct":1},{"textEn":"14. Who was behind Job's calamities?","textEs":"14. ¿Quién estaba detrás de las calamidades de Job?","optionsEn":["His friends", "His own foolishness", "Satan, the prince of this world", "A rival tribe"],"optionsEs":["Sus amigos", "Su propia necedad", "Satanás, el príncipe de este mundo", "Una tribu rival"],"explanationEn":"It was Satan, not God, who stood behind Job's suffering.","explanationEs":"Fue Satanás, no Dios, quien estuvo detrás del sufrimiento de Job.","correct":2},{"textEn":"15. What good did God bring out of Job's suffering?","textEs":"15. ¿Qué bien sacó Dios del sufrimiento de Job?","optionsEn":["Job's pride was broken, he learned patience and the providence of God, and God restored more than he had lost", "Nothing at all", "Job lost his faith", "Job became wealthy by his own scheming"],"optionsEs":["El orgullo de Job fue quebrantado, aprendió paciencia y la providencia de Dios, y Dios restauró más de lo que había perdido", "Nada en absoluto", "Job perdió su fe", "Job se hizo rico por sus propias tramas"],"explanationEn":"What Satan meant for evil, God turned to good (Romans 8:28).","explanationEs":"Lo que Satanás quiso para mal, Dios lo tornó en bien (Romanos 8:28).","correct":0},{"textEn":"16. What counsel does Job 22:21 give, illustrated by the storm-battered mountain still standing in sunshine?","textEs":"16. ¿Qué consejo da Job 22:21, ilustrado por la montaña azotada por la tormenta que sigue en pie bajo el sol?","optionsEn":["\"Run from your troubles\"", "\"Demand answers from God\"", "\"Trust in your own strength\"", "\"Acquaint now yourself with Him, and be at peace\" — God is greater than the storm"],"optionsEs":["«Huye de tus problemas»", "«Exige respuestas a Dios»", "«Confía en tu propia fuerza»", "«Vuélvete ahora hacia él, y tendrás paz» — Dios es mayor que la tormenta"],"explanationEn":"Peace comes from acquainting ourselves with the God who is in control.","explanationEs":"La paz viene de acercarnos al Dios que tiene el control.","correct":3},{"textEn":"17. The second great question of the book is...?","textEs":"17. La segunda gran pregunta del libro es...?","optionsEn":["Why is the sky blue?", "Why do the wicked prosper?", "Why do we sleep?", "Why do nations rise and fall?"],"optionsEs":["¿Por qué el cielo es azul?", "¿Por qué prosperan los malos?", "¿Por qué dormimos?", "¿Por qué se levantan y caen las naciones?"],"explanationEn":"Job himself raised this question in chapter 21.","explanationEs":"El propio Job planteó esta pregunta en el capítulo 21.","correct":1},{"textEn":"18. Why do the wicked sometimes prosper (point B)?","textEs":"18. ¿Por qué a veces prosperan los malos (punto B)?","optionsEn":["To show the patience and mercy of God, giving space for grace — as with Saul who became Paul", "Because God does not see them", "Because God approves of their sin", "Because evil always wins"],"optionsEs":["Para mostrar la paciencia y la misericordia de Dios, dando lugar para la gracia — como Saulo que llegó a ser Pablo", "Porque Dios no los ve", "Porque Dios aprueba su pecado", "Porque el mal siempre gana"],"explanationEn":"God's delay in judgment is the open door of His mercy.","explanationEs":"La demora de Dios en el juicio es la puerta abierta de su misericordia.","correct":0},{"textEn":"19. What truth answers the prosperity of the wicked (point C)?","textEs":"19. ¿Qué verdad responde a la prosperidad de los malos (punto C)?","optionsEn":["The wicked are never judged", "The wicked will always escape", "This life is all there is", "One day God will make all things right — \"God does not always settle His accounts in October\"; there is a judgment to come"],"optionsEs":["Los malos nunca son juzgados", "Los malos siempre escaparán", "Esta vida es todo lo que hay", "Un día Dios enderezará todas las cosas — «Dios no siempre salda sus cuentas en octubre»; hay un juicio por venir"],"explanationEn":"Not every wrong is righted now; every account is settled at the last.","explanationEs":"No todo agravio se endereza ahora; cada cuenta se salda al final.","correct":3},{"textEn":"20. What is the central theme of the book of Job?","textEs":"20. ¿Cuál es el tema central del libro de Job?","optionsEn":["God is absent when we suffer", "Suffering always means hidden sin", "God's permissive will is not His absence; He refines the faithful, bears with the wicked for grace, and will settle every account — \"Though He slay me, yet will I trust Him\"", "The wicked are happier than the righteous"],"optionsEs":["Dios está ausente cuando sufrimos", "El sufrimiento siempre significa pecado oculto", "La voluntad permisiva de Dios no es su ausencia; refina a los fieles, soporta a los malos por gracia, y enderezará cada cuenta — «Aunque él me matare, en él esperaré»", "Los malos son más felices que los justos"],"explanationEn":"In the dark, God is still present, sovereign, and just.","explanationEs":"En la oscuridad, Dios sigue presente, soberano y justo.","correct":2}];
-
-const kwQuestions = [{"textEn":"21. Describe Job's character and the four waves of calamity.","textEs":"21. Describe el carácter de Job y las cuatro olas de calamidad.","kw_en":["blameless","upright","wealth","goods","children","health","wife","friends"],"kw_es":["perfecto","recto","riqueza","bienes","hijos","salud","esposa","amigos"],"modelEn":"Job was a blameless and upright man who feared God, blessed with a fine family and great wealth. Four waves of calamity fell on him in turn: first his material goods were swept away into poverty; second all ten of his children were killed in a single day in a storm; third his health was taken with painful boils from head to foot; and fourth even his companions turned, his wife and his three friends. Yet he held his faith through it all.","modelEs":"Job era un hombre perfecto y recto que temía a Dios, bendecido con una buena familia y gran riqueza. Cuatro olas de calamidad cayeron sobre él por turno: primero sus bienes materiales fueron arrasados a la pobreza; segundo sus diez hijos fueron muertos en un solo día en una tormenta; tercero le fue quitada la salud con dolorosas llagas de pies a cabeza; y cuarto hasta sus compañeros se volvieron, su esposa y sus tres amigos. Pero guardó su fe a través de todo ello."},{"textEn":"22. What was Satan's accusation, and how did God respond?","textEs":"22. ¿Cuál fue la acusación de Satanás, y cómo respondió Dios?","kw_en":["accuse","blessings","curse","permit","permissive","satan","leave","test"],"kw_es":["acus","bendiciones","maldecir","permit","permisiva","satanas","permiso","prueba"],"modelEn":"Satan came before God to accuse Job, sneering that Job served God only for the blessings — strip them away and he would curse God. God permitted the testing, for this was His permissive will: Satan could do nothing without God's leave. God allowed what He did not author, to prove that Job's faith was real and not merely bought by prosperity. The test would show that Job loved God for Himself.","modelEs":"Satanás vino delante de Dios para acusar a Job, burlándose de que Job servía a Dios solo por las bendiciones — quítaselas y maldeciría a Dios. Dios permitió la prueba, porque esta era su voluntad permisiva: Satanás no podía hacer nada sin el permiso de Dios. Dios permitió lo que no era su autor, para probar que la fe de Job era real y no comprada por la prosperidad. La prueba mostraría que Job amaba a Dios por Él mismo."},{"textEn":"23. What was Job's great answer, and what did he say in Job 1:21?","textEs":"23. ¿Cuál fue la gran respuesta de Job, y qué dijo en Job 1:21?","kw_en":["slay","trust","gave","taken","blessed","lord","faith","name"],"kw_es":["matare","esper","dio","quito","bendito","jehova","fe","nombre"],"modelEn":"In the midst of his loss, Job gave the answer that has steadied suffering saints ever since: \"Though He slay me, yet will I trust Him.\" Even at the first blow he worshiped, saying, \"The LORD gave, and the LORD has taken away; blessed be the name of the LORD.\" He did not pretend the pain away, but he refused to let go of God. His faith rested not on his circumstances but on the Lord Himself.","modelEs":"En medio de su pérdida, Job dio la respuesta que ha sostenido a los santos que sufren desde entonces: \"Aunque él me matare, en él esperaré\". Aun en el primer golpe adoró, diciendo: \"Jehová dio, y Jehová quitó; sea el nombre de Jehová bendito\". No fingió que el dolor no existía, pero se negó a soltar a Dios. Su fe descansaba no en sus circunstancias sino en el Señor mismo."},{"textEn":"24. Does all trouble come from God? Explain.","textEs":"24. ¿Todo sufrimiento viene de Dios? Explica.","kw_en":["not","god","permissive","satan","permission","discipline","love","author"],"kw_es":["no","dios","permisiva","satanas","permiso","disciplina","ama","autor"],"modelEn":"Trouble does not always come from God. God did not strike Job's family, his health, or his friends; this was His permissive will, allowing what He did not author, for Satan could do nothing without God's permission. The skeptic's dilemma fails because God is not the only agent of power in the world. And when God does discipline His people, it is because He loves them, as a father corrects his own children and not the neighbor's.","modelEs":"El sufrimiento no siempre viene de Dios. Dios no hirió a la familia de Job, ni su salud, ni a sus amigos; esta era su voluntad permisiva, permitiendo lo que no era su autor, porque Satanás no podía hacer nada sin el permiso de Dios. El dilema del escéptico falla porque Dios no es el único agente de poder en el mundo. Y cuando Dios sí disciplina a su pueblo, es porque lo ama, como un padre corrige a sus propios hijos y no a los del vecino."},{"textEn":"25. What did Jesus teach (John 9:3) about suffering and sin?","textEs":"25. ¿Qué enseñó Jesús (Juan 9:3) acerca del sufrimiento y el pecado?","kw_en":["blind","neither","sinned","parents","suffering","sin","john","works"],"kw_es":["ciego","ni","peco","padres","sufrimiento","pecado","juan","obras"],"modelEn":"Not every trouble is the result of sin, which was the great error of Job's friends, who insisted he must be hiding secret wickedness. But when the disciples asked whose sin had caused a man to be born blind, Jesus answered, \"Neither this man nor his parents sinned, but that the works of God should be revealed in him.\" Some suffering comes from neither God nor personal sin. To accuse a sufferer of hidden sin, as Job's friends did, is both cruel and false.","modelEs":"No todo sufrimiento es resultado del pecado, que fue el gran error de los amigos de Job, que insistían en que debía ocultar alguna maldad secreta. Pero cuando los discípulos preguntaron de quién había sido el pecado que causó que un hombre naciera ciego, Jesús respondió: \"No es que pecó éste, ni sus padres; sino para que las obras de Dios se manifiesten en él\". Algún sufrimiento no viene ni de Dios ni del pecado personal. Acusar a un doliente de pecado oculto, como hicieron los amigos de Job, es cruel y falso."},{"textEn":"26. What good did God bring out of Job's suffering?","textEs":"26. ¿Qué bien sacó Dios del sufrimiento de Job?","kw_en":["pride","broken","patience","providence","control","restore","repent","good"],"kw_es":["orgullo","quebrant","paciencia","providencia","control","restaur","arrepent","bien"],"modelEn":"Through all that Satan meant for evil, God brought good. Job's pride was broken: he had justified himself rather than God, but at last he saw the Lord and repented in dust and ashes. He learned patience, for he kept his faith but lost his patience, and the hardest thing is to wait on God. And he learned the providence of God, that even when the world fell in, God was still in control. In the end God restored to Job more than he had ever lost.","modelEs":"A través de todo lo que Satanás quiso para mal, Dios trajo bien. El orgullo de Job fue quebrantado: se había justificado a sí mismo en lugar de a Dios, pero al fin vio al Señor y se arrepintió en polvo y ceniza. Aprendió paciencia, porque guardó su fe pero perdió su paciencia, y lo más difícil es esperar en Dios. Y aprendió la providencia de Dios, que aun cuando el mundo se desplomó, Dios seguía en control. Al final Dios restauró a Job más de lo que jamás había perdido."},{"textEn":"27. Are things always as they appear when the wicked prosper?","textEs":"27. ¿Son las cosas siempre como parecen cuando prosperan los malos?","kw_en":["appear","wicked","wages","sin","rockefeller","prosper","judge","surface"],"kw_es":["parecen","malos","salarios","pecado","rockefeller","prosper","juzg","superficie"],"modelEn":"Things are not always as they appear. We judge by wealth, power, and fame and assume the wicked are happy, but we do not see the wages of sin quietly being paid. Some who seemed to have everything ended in despair at the very top. John D. Rockefeller became the richest man on earth, then at fifty-three was so sick he was given a year to live; when he began giving his fortune away, he lived to ninety-eight. The wages of sin and the rewards of grace are not always visible on the surface.","modelEs":"Las cosas no siempre son como parecen. Juzgamos por la riqueza, el poder y la fama y suponemos que los malos son felices, pero no vemos cómo se pagan calladamente los salarios del pecado. Algunos que parecían tenerlo todo acabaron en la desesperación en la cima misma. John D. Rockefeller llegó a ser el hombre más rico de la tierra, luego a los cincuenta y tres estaba tan enfermo que le dieron un año de vida; cuando comenzó a regalar su fortuna, vivió hasta los noventa y ocho. Los salarios del pecado y las recompensas de la gracia no siempre se ven en la superficie."},{"textEn":"28. Why does God let the wicked live (point B)?","textEs":"28. ¿Por qué deja Dios vivir a los malos (punto B)?","kw_en":["patience","mercy","grace","space","saul","paul","repent","time"],"kw_es":["paciencia","misericordia","gracia","lugar","saulo","pablo","arrepent","tiempo"],"modelEn":"The wicked live to show the patience and mercy of God, who delays judgment to leave room for grace. It is as if an angel poised over a great sin asks, \"Shall I strike now?\" and God answers, \"No, not now.\" Saul the persecutor became Paul the apostle, a monument of saving grace, and Jerry McAuley, a despised convict, was saved and opened a mission where hundreds found Christ. God's delay in judgment is the open door of His mercy, giving sinners time to repent.","modelEs":"Los malos viven para mostrar la paciencia y la misericordia de Dios, que demora el juicio para dejar lugar a la gracia. Es como si un ángel suspendido sobre un gran pecado preguntara: \"¿Hiero ahora?\", y Dios respondiera: \"No, ahora no\". Saulo el perseguidor llegó a ser Pablo el apóstol, un monumento de la gracia salvadora, y Jerry McAuley, un convicto despreciado, fue salvo y abrió una misión donde cientos hallaron a Cristo. La demora de Dios en el juicio es la puerta abierta de su misericordia, dando tiempo a los pecadores para arrepentirse."},{"textEn":"29. When are all wrongs finally set right (point C)?","textEs":"29. ¿Cuándo se enderezan al fin todos los agravios (punto C)?","kw_en":["right","judgment","october","account","settle","wrong","finney","day"],"kw_es":["enderez","juicio","octubre","cuenta","saldar","agravio","finney","dia"],"modelEn":"The wicked live because one day God will make all things right; not every wrong is righted now. A man boasted that he plowed on Sundays and got a better crop, but a wise believer replied, \"God does not always settle His accounts in October.\" The swindler may have a grand funeral while a godly widow lies in a pauper's grave, yet a day of adjustment is coming. When Charles Finney traced his ambitions out to \"the judgment,\" he could not shake it, and ran to the woods and came out with a Savior. Every account will be settled at the last.","modelEs":"Los malos viven porque un día Dios enderezará todas las cosas; no todo agravio se endereza ahora. Un hombre se jactaba de que araba los domingos y obtenía mejor cosecha, pero un creyente sabio respondió: \"Dios no siempre salda sus cuentas en octubre\". El estafador puede tener un gran funeral mientras una viuda piadosa yace en una tumba de pobre, y sin embargo viene un día de ajuste. Cuando Charles Finney llevó sus ambiciones hasta \"el juicio\", no pudo sacudirlo, y corrió al bosque y salió con un Salvador. Cada cuenta será saldada al final."},{"textEn":"30. State the theme of Job — the believer's rest in the dark.","textEs":"30. Expresa el tema de Job — el reposo del creyente en la oscuridad.","kw_en":["permissive","absence","refine","faithful","wicked","account","trust","rock"],"kw_es":["permisiva","ausencia","refin","fieles","malos","cuenta","confi","roca"],"modelEn":"The theme of Job is that God's permissive will is not God's absence. In the dark, when the storm strips away everything we leaned on, God is still there, refining the faith of His own, bearing patiently with the wicked to leave room for grace, and storing up a day when He will set every account right. We are given not an explanation but the Lord Himself, who is greater than the mountain and master of the storm. So the believer can rest on the Solid Rock and say, \"Though He slay me, yet will I trust Him.\"","modelEs":"El tema de Job es que la voluntad permisiva de Dios no es la ausencia de Dios. En la oscuridad, cuando la tormenta arranca todo aquello en que nos apoyábamos, Dios sigue allí, refinando la fe de los suyos, soportando con paciencia a los malos para dejar lugar a la gracia, y guardando un día en que enderezará cada cuenta. Se nos da no una explicación sino al Señor mismo, que es mayor que la montaña y dueño de la tormenta. Así el creyente puede descansar sobre la Roca sólida y decir: \"Aunque él me matare, en él esperaré\"."}];
+/* CTSBibleCharacters — unit 2. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "biblecharacters",
+ "unit": 2,
+ "totalUnits": 12,
+ "filePrefix": "CTSBibleCharacters",
+ "prevHref": "CTSBibleCharactersUnit1.html",
+ "nextHref": "CTSBibleCharactersUnit3.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - Enoch — The Man Who Walked with God",
+   "Unit 2 - Job — Faith That Holds When Everything Is Stripped Away",
+   "Unit 3 - Abraham — Father of the Faithful, Friend of God",
+   "Unit 4 - Rebekah — The Bride Who Said “I Will Go”",
+   "Unit 5 - Joseph — From the Pit to the Palace, the Man Who Forgave",
+   "Unit 6 - Moses — The Man Who Asked to See God’s Glory",
+   "Unit 7 - Gideon — When God Wins With Few",
+   "Unit 8 - Ruth — When Life Looks Hopeless, There Is Always Hope and God",
+   "Unit 9 - Hannah — The Praying Mother Who Gave Her Son to God",
+   "Unit 10 - Samuel — The Boy Who Heard God, the Prophet Who Anointed Kings",
+   "Unit 11 - David — A Man After God's Own Heart",
+   "Unit 12 - Elijah — The Prophet of Fire and the Still Small Voice"
+  ],
+  "es": [
+   "Unit 1 - Enoch — The Man Who Walked with God",
+   "Unit 2 - Job — Faith That Holds When Everything Is Stripped Away",
+   "Unit 3 - Abraham — Father of the Faithful, Friend of God",
+   "Unit 4 - Rebekah — The Bride Who Said “I Will Go”",
+   "Unit 5 - Joseph — From the Pit to the Palace, the Man Who Forgave",
+   "Unit 6 - Moses — The Man Who Asked to See God’s Glory",
+   "Unit 7 - Gideon — When God Wins With Few",
+   "Unit 8 - Ruth — When Life Looks Hopeless, There Is Always Hope and God",
+   "Unit 9 - Hannah — The Praying Mother Who Gave Her Son to God",
+   "Unit 10 - Samuel — The Boy Who Heard God, the Prophet Who Anointed Kings",
+   "Unit 11 - David — A Man After God's Own Heart",
+   "Unit 12 - Elijah — The Prophet of Fire and the Still Small Voice"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "Who was Job?",
+    "es": "¿Quién era Job?"
+   },
+   "options": {
+    "en": [
+     "A wicked king",
+     "A blameless, upright man who feared God, with a fine family and great wealth",
+     "A poor beggar with no faith",
+     "A Roman official"
+    ],
+    "es": [
+     "Un rey malvado",
+     "Un hombre perfecto y recto que temía a Dios, con una buena familia y gran riqueza",
+     "Un mendigo pobre sin fe",
+     "Un oficial romano"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Job 1:1 calls him blameless and upright, one who feared God and shunned evil.",
+    "es": "Job 1:1 lo llama perfecto y recto, temeroso de Dios y apartado del mal."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was Satan's accusation against Job?",
+    "es": "¿Cuál fue la acusación de Satanás contra Job?"
+   },
+   "options": {
+    "en": [
+     "That Job had committed murder",
+     "That Job worshiped idols",
+     "That Job was secretly an atheist",
+     "That Job served God only for the blessings — strip them and he would curse God"
+    ],
+    "es": [
+     "Que Job había cometido un asesinato",
+     "Que Job adoraba ídolos",
+     "Que Job era en secreto un ateo",
+     "Que Job servía a Dios solo por las bendiciones — quítaselas y maldeciría a Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Satan claimed Job's faith was bought by prosperity, not real.",
+    "es": "Satanás afirmó que la fe de Job era comprada por la prosperidad, no real."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did God respond to Satan's challenge?",
+    "es": "¿Cómo respondió Dios al desafío de Satanás?"
+   },
+   "options": {
+    "en": [
+     "He struck Job Himself",
+     "He ignored Satan",
+     "He permitted the testing — His permissive will — for Satan could do nothing without God's leave",
+     "He destroyed Satan at once"
+    ],
+    "es": [
+     "Hirió a Job Él mismo",
+     "Ignoró a Satanás",
+     "Permitió la prueba — su voluntad permisiva — porque Satanás no podía hacer nada sin el permiso de Dios",
+     "Destruyó a Satanás de inmediato"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "This is the permissive will of God: He allows what He does not author.",
+    "es": "Esta es la voluntad permisiva de Dios: permite lo que no es su autor."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the second wave of calamity that fell on Job?",
+    "es": "¿Cuál fue la segunda ola de calamidad que cayó sobre Job?"
+   },
+   "options": {
+    "en": [
+     "His ten children were all killed in one day in a storm",
+     "He lost his memory",
+     "He was exiled",
+     "His house burned"
+    ],
+    "es": [
+     "Sus diez hijos fueron muertos en un solo día en una tormenta",
+     "Perdió la memoria",
+     "Fue desterrado",
+     "Su casa se quemó"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "A great wind struck the house and killed all ten of his children at once.",
+    "es": "Un gran viento azotó la casa y mató a sus diez hijos a la vez."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the third wave that struck Job?",
+    "es": "¿Cuál fue la tercera ola que golpeó a Job?"
+   },
+   "options": {
+    "en": [
+     "Blindness",
+     "His health — boils from head to foot",
+     "Deafness",
+     "Paralysis"
+    ],
+    "es": [
+     "Ceguera",
+     "Su salud — llagas de pies a cabeza",
+     "Sordera",
+     "Parálisis"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "He was covered with painful boils from the sole of his foot to his crown.",
+    "es": "Fue cubierto de dolorosas llagas desde la planta del pie hasta la coronilla."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Job's wife say to him?",
+    "es": "¿Qué le dijo la esposa de Job?"
+   },
+   "options": {
+    "en": [
+     "\"Be strong and trust\"",
+     "\"Call the elders\"",
+     "\"Flee to another land\"",
+     "\"Curse God and die\""
+    ],
+    "es": [
+     "«Sé fuerte y confía»",
+     "«Llama a los ancianos»",
+     "«Huye a otra tierra»",
+     "«Maldice a Dios, y muérete»"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Even his closest companion urged him to give up on God.",
+    "es": "Hasta su compañera más cercana lo instó a rendirse con Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the error of Job's three friends?",
+    "es": "¿Cuál fue el error de los tres amigos de Job?"
+   },
+   "options": {
+    "en": [
+     "They insisted Job must have hidden sin, or God would not let him suffer",
+     "They said Job was a great saint",
+     "They told him to curse God",
+     "They abandoned him without a word"
+    ],
+    "es": [
+     "Insistieron en que Job debía tener un pecado oculto, o Dios no lo dejaría sufrir",
+     "Dijeron que Job era un gran santo",
+     "Le dijeron que maldijera a Dios",
+     "Lo abandonaron sin una palabra"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "They wrongly assumed all suffering must be punishment for sin.",
+    "es": "Supusieron erróneamente que todo sufrimiento debe ser castigo por el pecado."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was Job's great answer in the midst of his suffering (Job 13:15)?",
+    "es": "¿Cuál fue la gran respuesta de Job en medio de su sufrimiento (Job 13:15)?"
+   },
+   "options": {
+    "en": [
+     "\"I will end my life\"",
+     "\"God has forsaken me\"",
+     "\"Though He slay me, yet will I trust Him\"",
+     "\"I have sinned greatly\""
+    ],
+    "es": [
+     "«Acabaré con mi vida»",
+     "«Dios me ha abandonado»",
+     "«Aunque él me matare, en él esperaré»",
+     "«He pecado gravemente»"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "His faith rested on the Lord Himself, not on his circumstances.",
+    "es": "Su fe descansaba en el Señor mismo, no en sus circunstancias."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Job say in Job 1:21?",
+    "es": "¿Qué dijo Job en Job 1:21?"
+   },
+   "options": {
+    "en": [
+     "\"The LORD gave, and the LORD has taken away; blessed be the name of the LORD\"",
+     "\"Why have You forsaken me?\"",
+     "\"My faith is gone\"",
+     "\"I curse the heavens\""
+    ],
+    "es": [
+     "«Jehová dio, y Jehová quitó; sea el nombre de Jehová bendito»",
+     "«¿Por qué me has abandonado?»",
+     "«Mi fe se ha ido»",
+     "«Maldigo los cielos»"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "At the first blow he worshiped rather than cursed.",
+    "es": "Al primer golpe adoró en lugar de maldecir."
+   }
+  },
+  {
+   "stem": {
+    "en": "The first great question of the book is...?",
+    "es": "La primera gran pregunta del libro es...?"
+   },
+   "options": {
+    "en": [
+     "Why does the earth exist?",
+     "How old is the universe?",
+     "Who wrote the book of Job?",
+     "Why do good men suffer?"
+    ],
+    "es": [
+     "¿Por qué existe la tierra?",
+     "¿Qué edad tiene el universo?",
+     "¿Quién escribió el libro de Job?",
+     "¿Por qué sufren los hombres buenos?"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The book answers two great questions; this is the first.",
+    "es": "El libro responde a dos grandes preguntas; esta es la primera."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does the book teach about the source of trouble?",
+    "es": "¿Qué enseña el libro sobre el origen del sufrimiento?"
+   },
+   "options": {
+    "en": [
+     "All trouble comes directly from God",
+     "Trouble does not always come from God — Satan could do nothing without God's permission",
+     "Trouble is an illusion",
+     "God is powerless to stop trouble"
+    ],
+    "es": [
+     "Todo sufrimiento viene directamente de Dios",
+     "El sufrimiento no siempre viene de Dios — Satanás no podía hacer nada sin el permiso de Dios",
+     "El sufrimiento es una ilusión",
+     "Dios no tiene poder para detener el sufrimiento"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "God allowed, but did not author, Job's calamities (His permissive will).",
+    "es": "Dios permitió, pero no fue autor, de las calamidades de Job (su voluntad permisiva)."
+   }
+  },
+  {
+   "stem": {
+    "en": "When God DOES discipline His people, why does He do it?",
+    "es": "Cuando Dios SÍ disciplina a su pueblo, ¿por qué lo hace?"
+   },
+   "options": {
+    "en": [
+     "Because He is cruel",
+     "Because He is indifferent",
+     "Because He loves us — as a father disciplines his own children, not the neighbor's",
+     "Because He has lost control"
+    ],
+    "es": [
+     "Porque es cruel",
+     "Porque es indiferente",
+     "Porque nos ama — como un padre disciplina a sus propios hijos, no a los del vecino",
+     "Porque ha perdido el control"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "God corrects His own because they are His.",
+    "es": "Dios corrige a los suyos porque son suyos."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Jesus teach about the man born blind (John 9:3)?",
+    "es": "¿Qué enseñó Jesús acerca del hombre ciego de nacimiento (Juan 9:3)?"
+   },
+   "options": {
+    "en": [
+     "The man's parents had sinned",
+     "\"Neither this man nor his parents sinned\" — some suffering comes from neither God nor sin",
+     "The man himself had sinned",
+     "Blindness is always a punishment"
+    ],
+    "es": [
+     "Los padres del hombre habían pecado",
+     "«No es que pecó éste, ni sus padres» — algún sufrimiento no viene ni de Dios ni del pecado",
+     "El hombre mismo había pecado",
+     "La ceguera siempre es un castigo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Not every trouble is the result of sin, contrary to the friends' claim.",
+    "es": "No todo sufrimiento es resultado del pecado, contrario a lo que decían los amigos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who was behind Job's calamities?",
+    "es": "¿Quién estaba detrás de las calamidades de Job?"
+   },
+   "options": {
+    "en": [
+     "His friends",
+     "His own foolishness",
+     "Satan, the prince of this world",
+     "A rival tribe"
+    ],
+    "es": [
+     "Sus amigos",
+     "Su propia necedad",
+     "Satanás, el príncipe de este mundo",
+     "Una tribu rival"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "It was Satan, not God, who stood behind Job's suffering.",
+    "es": "Fue Satanás, no Dios, quien estuvo detrás del sufrimiento de Job."
+   }
+  },
+  {
+   "stem": {
+    "en": "What good did God bring out of Job's suffering?",
+    "es": "¿Qué bien sacó Dios del sufrimiento de Job?"
+   },
+   "options": {
+    "en": [
+     "Job's pride was broken, he learned patience and the providence of God, and God restored more than he had lost",
+     "Nothing at all",
+     "Job lost his faith",
+     "Job became wealthy by his own scheming"
+    ],
+    "es": [
+     "El orgullo de Job fue quebrantado, aprendió paciencia y la providencia de Dios, y Dios restauró más de lo que había perdido",
+     "Nada en absoluto",
+     "Job perdió su fe",
+     "Job se hizo rico por sus propias tramas"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "What Satan meant for evil, God turned to good (Romans 8:28).",
+    "es": "Lo que Satanás quiso para mal, Dios lo tornó en bien (Romanos 8:28)."
+   }
+  },
+  {
+   "stem": {
+    "en": "What counsel does Job 22:21 give, illustrated by the storm-battered mountain still standing in sunshine?",
+    "es": "¿Qué consejo da Job 22:21, ilustrado por la montaña azotada por la tormenta que sigue en pie bajo el sol?"
+   },
+   "options": {
+    "en": [
+     "\"Run from your troubles\"",
+     "\"Demand answers from God\"",
+     "\"Trust in your own strength\"",
+     "\"Acquaint now yourself with Him, and be at peace\" — God is greater than the storm"
+    ],
+    "es": [
+     "«Huye de tus problemas»",
+     "«Exige respuestas a Dios»",
+     "«Confía en tu propia fuerza»",
+     "«Vuélvete ahora hacia él, y tendrás paz» — Dios es mayor que la tormenta"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Peace comes from acquainting ourselves with the God who is in control.",
+    "es": "La paz viene de acercarnos al Dios que tiene el control."
+   }
+  },
+  {
+   "stem": {
+    "en": "The second great question of the book is...?",
+    "es": "La segunda gran pregunta del libro es...?"
+   },
+   "options": {
+    "en": [
+     "Why is the sky blue?",
+     "Why do the wicked prosper?",
+     "Why do we sleep?",
+     "Why do nations rise and fall?"
+    ],
+    "es": [
+     "¿Por qué el cielo es azul?",
+     "¿Por qué prosperan los malos?",
+     "¿Por qué dormimos?",
+     "¿Por qué se levantan y caen las naciones?"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Job himself raised this question in chapter 21.",
+    "es": "El propio Job planteó esta pregunta en el capítulo 21."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why do the wicked sometimes prosper (point B)?",
+    "es": "¿Por qué a veces prosperan los malos (punto B)?"
+   },
+   "options": {
+    "en": [
+     "To show the patience and mercy of God, giving space for grace — as with Saul who became Paul",
+     "Because God does not see them",
+     "Because God approves of their sin",
+     "Because evil always wins"
+    ],
+    "es": [
+     "Para mostrar la paciencia y la misericordia de Dios, dando lugar para la gracia — como Saulo que llegó a ser Pablo",
+     "Porque Dios no los ve",
+     "Porque Dios aprueba su pecado",
+     "Porque el mal siempre gana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "God's delay in judgment is the open door of His mercy.",
+    "es": "La demora de Dios en el juicio es la puerta abierta de su misericordia."
+   }
+  },
+  {
+   "stem": {
+    "en": "What truth answers the prosperity of the wicked (point C)?",
+    "es": "¿Qué verdad responde a la prosperidad de los malos (punto C)?"
+   },
+   "options": {
+    "en": [
+     "The wicked are never judged",
+     "The wicked will always escape",
+     "This life is all there is",
+     "One day God will make all things right — \"God does not always settle His accounts in October\"; there is a judgment to come"
+    ],
+    "es": [
+     "Los malos nunca son juzgados",
+     "Los malos siempre escaparán",
+     "Esta vida es todo lo que hay",
+     "Un día Dios enderezará todas las cosas — «Dios no siempre salda sus cuentas en octubre»; hay un juicio por venir"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Not every wrong is righted now; every account is settled at the last.",
+    "es": "No todo agravio se endereza ahora; cada cuenta se salda al final."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the central theme of the book of Job?",
+    "es": "¿Cuál es el tema central del libro de Job?"
+   },
+   "options": {
+    "en": [
+     "God is absent when we suffer",
+     "Suffering always means hidden sin",
+     "God's permissive will is not His absence; He refines the faithful, bears with the wicked for grace, and will settle every account — \"Though He slay me, yet will I trust Him\"",
+     "The wicked are happier than the righteous"
+    ],
+    "es": [
+     "Dios está ausente cuando sufrimos",
+     "El sufrimiento siempre significa pecado oculto",
+     "La voluntad permisiva de Dios no es su ausencia; refina a los fieles, soporta a los malos por gracia, y enderezará cada cuenta — «Aunque él me matare, en él esperaré»",
+     "Los malos son más felices que los justos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "In the dark, God is still present, sovereign, and just.",
+    "es": "En la oscuridad, Dios sigue presente, soberano y justo."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Describe Job's character and the four waves of calamity.",
+    "es": "Describe el carácter de Job y las cuatro olas de calamidad."
+   },
+   "keywords": {
+    "en": [
+     "blameless",
+     "upright",
+     "wealth",
+     "goods",
+     "children",
+     "health",
+     "wife",
+     "friends"
+    ],
+    "es": [
+     "perfecto",
+     "recto",
+     "riqueza",
+     "bienes",
+     "hijos",
+     "salud",
+     "esposa",
+     "amigos"
+    ]
+   },
+   "model": {
+    "en": "Job was a blameless and upright man who feared God, blessed with a fine family and great wealth. Four waves of calamity fell on him in turn: first his material goods were swept away into poverty; second all ten of his children were killed in a single day in a storm; third his health was taken with painful boils from head to foot; and fourth even his companions turned, his wife and his three friends. Yet he held his faith through it all.",
+    "es": "Job era un hombre perfecto y recto que temía a Dios, bendecido con una buena familia y gran riqueza. Cuatro olas de calamidad cayeron sobre él por turno: primero sus bienes materiales fueron arrasados a la pobreza; segundo sus diez hijos fueron muertos en un solo día en una tormenta; tercero le fue quitada la salud con dolorosas llagas de pies a cabeza; y cuarto hasta sus compañeros se volvieron, su esposa y sus tres amigos. Pero guardó su fe a través de todo ello."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What was Satan's accusation, and how did God respond?",
+    "es": "¿Cuál fue la acusación de Satanás, y cómo respondió Dios?"
+   },
+   "keywords": {
+    "en": [
+     "accuse",
+     "blessings",
+     "curse",
+     "permit",
+     "permissive",
+     "satan",
+     "leave",
+     "test"
+    ],
+    "es": [
+     "acus",
+     "bendiciones",
+     "maldecir",
+     "permit",
+     "permisiva",
+     "satanas",
+     "permiso",
+     "prueba"
+    ]
+   },
+   "model": {
+    "en": "Satan came before God to accuse Job, sneering that Job served God only for the blessings — strip them away and he would curse God. God permitted the testing, for this was His permissive will: Satan could do nothing without God's leave. God allowed what He did not author, to prove that Job's faith was real and not merely bought by prosperity. The test would show that Job loved God for Himself.",
+    "es": "Satanás vino delante de Dios para acusar a Job, burlándose de que Job servía a Dios solo por las bendiciones — quítaselas y maldeciría a Dios. Dios permitió la prueba, porque esta era su voluntad permisiva: Satanás no podía hacer nada sin el permiso de Dios. Dios permitió lo que no era su autor, para probar que la fe de Job era real y no comprada por la prosperidad. La prueba mostraría que Job amaba a Dios por Él mismo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What was Job's great answer, and what did he say in Job 1:21?",
+    "es": "¿Cuál fue la gran respuesta de Job, y qué dijo en Job 1:21?"
+   },
+   "keywords": {
+    "en": [
+     "slay",
+     "trust",
+     "gave",
+     "taken",
+     "blessed",
+     "lord",
+     "faith",
+     "name"
+    ],
+    "es": [
+     "matare",
+     "esper",
+     "dio",
+     "quito",
+     "bendito",
+     "jehova",
+     "fe",
+     "nombre"
+    ]
+   },
+   "model": {
+    "en": "In the midst of his loss, Job gave the answer that has steadied suffering saints ever since: \"Though He slay me, yet will I trust Him.\" Even at the first blow he worshiped, saying, \"The LORD gave, and the LORD has taken away; blessed be the name of the LORD.\" He did not pretend the pain away, but he refused to let go of God. His faith rested not on his circumstances but on the Lord Himself.",
+    "es": "En medio de su pérdida, Job dio la respuesta que ha sostenido a los santos que sufren desde entonces: \"Aunque él me matare, en él esperaré\". Aun en el primer golpe adoró, diciendo: \"Jehová dio, y Jehová quitó; sea el nombre de Jehová bendito\". No fingió que el dolor no existía, pero se negó a soltar a Dios. Su fe descansaba no en sus circunstancias sino en el Señor mismo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Does all trouble come from God? Explain.",
+    "es": "¿Todo sufrimiento viene de Dios? Explica."
+   },
+   "keywords": {
+    "en": [
+     "not",
+     "god",
+     "permissive",
+     "satan",
+     "permission",
+     "discipline",
+     "love",
+     "author"
+    ],
+    "es": [
+     "no",
+     "dios",
+     "permisiva",
+     "satanas",
+     "permiso",
+     "disciplina",
+     "ama",
+     "autor"
+    ]
+   },
+   "model": {
+    "en": "Trouble does not always come from God. God did not strike Job's family, his health, or his friends; this was His permissive will, allowing what He did not author, for Satan could do nothing without God's permission. The skeptic's dilemma fails because God is not the only agent of power in the world. And when God does discipline His people, it is because He loves them, as a father corrects his own children and not the neighbor's.",
+    "es": "El sufrimiento no siempre viene de Dios. Dios no hirió a la familia de Job, ni su salud, ni a sus amigos; esta era su voluntad permisiva, permitiendo lo que no era su autor, porque Satanás no podía hacer nada sin el permiso de Dios. El dilema del escéptico falla porque Dios no es el único agente de poder en el mundo. Y cuando Dios sí disciplina a su pueblo, es porque lo ama, como un padre corrige a sus propios hijos y no a los del vecino."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What did Jesus teach (John 9:3) about suffering and sin?",
+    "es": "¿Qué enseñó Jesús (Juan 9:3) acerca del sufrimiento y el pecado?"
+   },
+   "keywords": {
+    "en": [
+     "blind",
+     "neither",
+     "sinned",
+     "parents",
+     "suffering",
+     "sin",
+     "john",
+     "works"
+    ],
+    "es": [
+     "ciego",
+     "ni",
+     "peco",
+     "padres",
+     "sufrimiento",
+     "pecado",
+     "juan",
+     "obras"
+    ]
+   },
+   "model": {
+    "en": "Not every trouble is the result of sin, which was the great error of Job's friends, who insisted he must be hiding secret wickedness. But when the disciples asked whose sin had caused a man to be born blind, Jesus answered, \"Neither this man nor his parents sinned, but that the works of God should be revealed in him.\" Some suffering comes from neither God nor personal sin. To accuse a sufferer of hidden sin, as Job's friends did, is both cruel and false.",
+    "es": "No todo sufrimiento es resultado del pecado, que fue el gran error de los amigos de Job, que insistían en que debía ocultar alguna maldad secreta. Pero cuando los discípulos preguntaron de quién había sido el pecado que causó que un hombre naciera ciego, Jesús respondió: \"No es que pecó éste, ni sus padres; sino para que las obras de Dios se manifiesten en él\". Algún sufrimiento no viene ni de Dios ni del pecado personal. Acusar a un doliente de pecado oculto, como hicieron los amigos de Job, es cruel y falso."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What good did God bring out of Job's suffering?",
+    "es": "¿Qué bien sacó Dios del sufrimiento de Job?"
+   },
+   "keywords": {
+    "en": [
+     "pride",
+     "broken",
+     "patience",
+     "providence",
+     "control",
+     "restore",
+     "repent",
+     "good"
+    ],
+    "es": [
+     "orgullo",
+     "quebrant",
+     "paciencia",
+     "providencia",
+     "control",
+     "restaur",
+     "arrepent",
+     "bien"
+    ]
+   },
+   "model": {
+    "en": "Through all that Satan meant for evil, God brought good. Job's pride was broken: he had justified himself rather than God, but at last he saw the Lord and repented in dust and ashes. He learned patience, for he kept his faith but lost his patience, and the hardest thing is to wait on God. And he learned the providence of God, that even when the world fell in, God was still in control. In the end God restored to Job more than he had ever lost.",
+    "es": "A través de todo lo que Satanás quiso para mal, Dios trajo bien. El orgullo de Job fue quebrantado: se había justificado a sí mismo en lugar de a Dios, pero al fin vio al Señor y se arrepintió en polvo y ceniza. Aprendió paciencia, porque guardó su fe pero perdió su paciencia, y lo más difícil es esperar en Dios. Y aprendió la providencia de Dios, que aun cuando el mundo se desplomó, Dios seguía en control. Al final Dios restauró a Job más de lo que jamás había perdido."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Are things always as they appear when the wicked prosper?",
+    "es": "¿Son las cosas siempre como parecen cuando prosperan los malos?"
+   },
+   "keywords": {
+    "en": [
+     "appear",
+     "wicked",
+     "wages",
+     "sin",
+     "rockefeller",
+     "prosper",
+     "judge",
+     "surface"
+    ],
+    "es": [
+     "parecen",
+     "malos",
+     "salarios",
+     "pecado",
+     "rockefeller",
+     "prosper",
+     "juzg",
+     "superficie"
+    ]
+   },
+   "model": {
+    "en": "Things are not always as they appear. We judge by wealth, power, and fame and assume the wicked are happy, but we do not see the wages of sin quietly being paid. Some who seemed to have everything ended in despair at the very top. John D. Rockefeller became the richest man on earth, then at fifty-three was so sick he was given a year to live; when he began giving his fortune away, he lived to ninety-eight. The wages of sin and the rewards of grace are not always visible on the surface.",
+    "es": "Las cosas no siempre son como parecen. Juzgamos por la riqueza, el poder y la fama y suponemos que los malos son felices, pero no vemos cómo se pagan calladamente los salarios del pecado. Algunos que parecían tenerlo todo acabaron en la desesperación en la cima misma. John D. Rockefeller llegó a ser el hombre más rico de la tierra, luego a los cincuenta y tres estaba tan enfermo que le dieron un año de vida; cuando comenzó a regalar su fortuna, vivió hasta los noventa y ocho. Los salarios del pecado y las recompensas de la gracia no siempre se ven en la superficie."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does God let the wicked live (point B)?",
+    "es": "¿Por qué deja Dios vivir a los malos (punto B)?"
+   },
+   "keywords": {
+    "en": [
+     "patience",
+     "mercy",
+     "grace",
+     "space",
+     "saul",
+     "paul",
+     "repent",
+     "time"
+    ],
+    "es": [
+     "paciencia",
+     "misericordia",
+     "gracia",
+     "lugar",
+     "saulo",
+     "pablo",
+     "arrepent",
+     "tiempo"
+    ]
+   },
+   "model": {
+    "en": "The wicked live to show the patience and mercy of God, who delays judgment to leave room for grace. It is as if an angel poised over a great sin asks, \"Shall I strike now?\" and God answers, \"No, not now.\" Saul the persecutor became Paul the apostle, a monument of saving grace, and Jerry McAuley, a despised convict, was saved and opened a mission where hundreds found Christ. God's delay in judgment is the open door of His mercy, giving sinners time to repent.",
+    "es": "Los malos viven para mostrar la paciencia y la misericordia de Dios, que demora el juicio para dejar lugar a la gracia. Es como si un ángel suspendido sobre un gran pecado preguntara: \"¿Hiero ahora?\", y Dios respondiera: \"No, ahora no\". Saulo el perseguidor llegó a ser Pablo el apóstol, un monumento de la gracia salvadora, y Jerry McAuley, un convicto despreciado, fue salvo y abrió una misión donde cientos hallaron a Cristo. La demora de Dios en el juicio es la puerta abierta de su misericordia, dando tiempo a los pecadores para arrepentirse."
+   }
+  },
+  {
+   "prompt": {
+    "en": "When are all wrongs finally set right (point C)?",
+    "es": "¿Cuándo se enderezan al fin todos los agravios (punto C)?"
+   },
+   "keywords": {
+    "en": [
+     "right",
+     "judgment",
+     "october",
+     "account",
+     "settle",
+     "wrong",
+     "finney",
+     "day"
+    ],
+    "es": [
+     "enderez",
+     "juicio",
+     "octubre",
+     "cuenta",
+     "saldar",
+     "agravio",
+     "finney",
+     "dia"
+    ]
+   },
+   "model": {
+    "en": "The wicked live because one day God will make all things right; not every wrong is righted now. A man boasted that he plowed on Sundays and got a better crop, but a wise believer replied, \"God does not always settle His accounts in October.\" The swindler may have a grand funeral while a godly widow lies in a pauper's grave, yet a day of adjustment is coming. When Charles Finney traced his ambitions out to \"the judgment,\" he could not shake it, and ran to the woods and came out with a Savior. Every account will be settled at the last.",
+    "es": "Los malos viven porque un día Dios enderezará todas las cosas; no todo agravio se endereza ahora. Un hombre se jactaba de que araba los domingos y obtenía mejor cosecha, pero un creyente sabio respondió: \"Dios no siempre salda sus cuentas en octubre\". El estafador puede tener un gran funeral mientras una viuda piadosa yace en una tumba de pobre, y sin embargo viene un día de ajuste. Cuando Charles Finney llevó sus ambiciones hasta \"el juicio\", no pudo sacudirlo, y corrió al bosque y salió con un Salvador. Cada cuenta será saldada al final."
+   }
+  },
+  {
+   "prompt": {
+    "en": "State the theme of Job — the believer's rest in the dark.",
+    "es": "Expresa el tema de Job — el reposo del creyente en la oscuridad."
+   },
+   "keywords": {
+    "en": [
+     "permissive",
+     "absence",
+     "refine",
+     "faithful",
+     "wicked",
+     "account",
+     "trust",
+     "rock"
+    ],
+    "es": [
+     "permisiva",
+     "ausencia",
+     "refin",
+     "fieles",
+     "malos",
+     "cuenta",
+     "confi",
+     "roca"
+    ]
+   },
+   "model": {
+    "en": "The theme of Job is that God's permissive will is not God's absence. In the dark, when the storm strips away everything we leaned on, God is still there, refining the faith of His own, bearing patiently with the wicked to leave room for grace, and storing up a day when He will set every account right. We are given not an explanation but the Lord Himself, who is greater than the mountain and master of the storm. So the believer can rest on the Solid Rock and say, \"Though He slay me, yet will I trust Him.\"",
+    "es": "El tema de Job es que la voluntad permisiva de Dios no es la ausencia de Dios. En la oscuridad, cuando la tormenta arranca todo aquello en que nos apoyábamos, Dios sigue allí, refinando la fe de los suyos, soportando con paciencia a los malos para dejar lugar a la gracia, y guardando un día en que enderezará cada cuenta. Se nos da no una explicación sino al Señor mismo, que es mayor que la montaña y dueño de la tormenta. Así el creyente puede descansar sobre la Roca sólida y decir: \"Aunque él me matare, en él esperaré\"."
+   }
+  }
+ ]
+};

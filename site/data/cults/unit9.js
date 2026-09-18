@@ -1,11 +1,859 @@
-/* CTSCults - unit 9: per-unit configuration and content. */
-
-const UNIT = 9;
-
-const NEXT_UNIT_URL = 'CTSCultsUnit10.html';
-
-const unitTitlesEn = ["Unit 1 - What Is a Cult? The Biblical Test", "Unit 2 - The Trinity and the Deity of Christ", "Unit 3 - Jehovah's Witnesses", "Unit 4 - The Latter-day Saints", "Unit 5 - The Prosperity Gospel", "Unit 6 - Progressive Revelation: Islam and Baha'i", "Unit 7 - Eastern Religions: Hinduism and Buddhism", "Unit 8 - Roman Catholicism", `Unit ${UNIT} - Folk Religion: Santa Muerte, Spiritism and Syncretism`, `Unit ${UNIT + 1} - Witnessing to a Cult Member or Person of Another Faith`];
-
-const mcQuestions = [{"textEn": "1. Mexican folk religion is best described as:", "textEs": "1. La religión popular mexicana se describe mejor como:", "optionsEn": ["A mix (syncretism) of Christian forms with indigenous, spiritist, and occult practices", "A branch of official Catholicism", "A harmless cultural custom", "A Protestant movement"], "optionsEs": ["Una mezcla (sincretismo) de formas cristianas con prácticas indígenas, espiritistas, y ocultas", "Una rama del catolicismo oficial", "Una costumbre cultural inofensiva", "Un movimiento protestante"], "explanationEn": "Folk religion is a syncretism — Christian forms mixed with indigenous, spiritist, and occult practice.", "explanationEs": "La religión popular es un sincretismo — formas cristianas mezcladas con prácticas indígenas, espiritistas, y ocultas.", "correct": 0}, {"textEn": "2. Unlike Roman Catholicism, these folk practices are:", "textEs": "2. A diferencia del catolicismo romano, estas prácticas populares son:", "optionsEn": ["Not a Christian tradition at all, but a return to the occult and the worship of other powers", "A Christian tradition we merely differ with", "Approved by the Vatican", "Required for salvation"], "optionsEs": ["No una tradición cristiana en absoluto, sino un regreso a lo oculto y la adoración de otros poderes", "Una tradición cristiana con la que solo diferimos", "Aprobadas por el Vaticano", "Requeridas para la salvación"], "explanationEn": "This is not a Christian tradition but a return to the occult that God forbids.", "explanationEs": "Esto no es una tradición cristiana sino un regreso a lo oculto que Dios prohíbe.", "correct": 0}, {"textEn": "3. Santa Muerte is:", "textEs": "3. La Santa Muerte es:", "optionsEn": ["A folk 'saint' who is a skeletal personification of death, venerated for protection, love, money, and vengeance", "A canonized Catholic saint", "An angel", "A Bible character"], "optionsEs": ["Una 'santa' popular que es una personificación esquelética de la muerte, venerada por protección, amor, dinero, y venganza", "Una santa católica canonizada", "Un ángel", "Un personaje bíblico"], "explanationEn": "Santa Muerte is death personified, venerated as a folk 'saint' — not a real saint at all.", "explanationEs": "La Santa Muerte es la muerte personificada, venerada como 'santa' popular — no una santa real.", "correct": 0}, {"textEn": "4. The Roman Catholic Church itself regards the cult of Santa Muerte as:", "textEs": "4. La Iglesia Católica Romana misma considera el culto a la Santa Muerte como:", "optionsEn": ["A beautiful devotion", "Incompatible with Christianity, and has condemned it", "A form of the Mass", "Devotion to Mary"], "optionsEs": ["Una hermosa devoción", "Incompatible con el cristianismo, y lo ha condenado", "Una forma de la Misa", "Devoción a María"], "explanationEn": "Even the Catholic Church condemns Santa Muerte as incompatible with Christianity.", "explanationEs": "Aun la Iglesia Católica condena la Santa Muerte como incompatible con el cristianismo.", "correct": 1}, {"textEn": "5. The deep irony of venerating Santa Muerte is that devotees give worship to:", "textEs": "5. La profunda ironía de venerar a la Santa Muerte es que los devotos rinden adoración a:", "optionsEn": ["A living saint", "An angel of light", "Death — the very enemy that Christ defeated", "The Virgin"], "optionsEs": ["Una santa viva", "Un ángel de luz", "La muerte — el enemigo mismo que Cristo venció", "La Virgen"], "explanationEn": "They bow to death — the last enemy Christ came to destroy.", "explanationEs": "Se postran ante la muerte — el postrer enemigo que Cristo vino a destruir.", "correct": 2}, {"textEn": "6. Espiritismo (spiritism) centers on:", "textEs": "6. El espiritismo se centra en:", "optionsEn": ["Reading the Bible", "Singing hymns", "Fasting", "Communicating with the spirits of the dead through mediums"], "optionsEs": ["Leer la Biblia", "Cantar himnos", "Ayunar", "Comunicarse con los espíritus de los muertos por medio de médiums"], "explanationEn": "Spiritism seeks to consult the spirits of the dead through mediums.", "explanationEs": "El espiritismo busca consultar a los espíritus de los muertos por medio de médiums.", "correct": 3}, {"textEn": "7. The Bible's word for consulting the dead is:", "textEs": "7. La palabra de la Biblia para consultar a los muertos es:", "optionsEn": ["Necromancy, which Scripture forbids", "Prayer", "Worship", "Prophecy"], "optionsEs": ["Necromancia, que la Escritura prohíbe", "Oración", "Adoración", "Profecía"], "explanationEn": "Consulting the dead is necromancy, which Scripture absolutely forbids.", "explanationEs": "Consultar a los muertos es necromancia, que la Escritura prohíbe absolutamente.", "correct": 0}, {"textEn": "8. In curanderismo, the practice becomes occult and forbidden when it moves from simple herbal remedy to:", "textEs": "8. En el curanderismo, la práctica se vuelve oculta y prohibida cuando pasa del simple remedio de hierbas a:", "optionsEn": ["Invoking spirits, divining diagnoses, and ritual power", "Drinking water", "Resting", "Eating food"], "optionsEs": ["Invocar espíritus, diagnosticar por adivinación, y el poder ritual", "Beber agua", "Descansar", "Comer alimentos"], "explanationEn": "Herbs are neutral; the line is crossed when spirits are invoked and divination used.", "explanationEs": "Las hierbas son neutrales; la línea se cruza cuando se invocan espíritus y se usa la adivinación.", "correct": 0}, {"textEn": "9. Brujería involves spells, hexes, love-binding (amarres), and curses — what Scripture plainly calls:", "textEs": "9. La brujería involucra hechizos, maleficios, amarres, y maldiciones — lo que la Escritura llama claramente:", "optionsEn": ["Wisdom", "Medicine", "Counsel", "Sorcery and witchcraft, works of the flesh"], "optionsEs": ["Sabiduría", "Medicina", "Consejo", "Hechicería y brujería, obras de la carne"], "explanationEn": "Scripture names sorcery among the works of the flesh that shut men out of the kingdom.", "explanationEs": "La Escritura nombra la hechicería entre las obras de la carne que cierran el reino a los hombres.", "correct": 3}, {"textEn": "10. Deuteronomy 18:10-12 lists divination, sorcery, mediums, and calling up the dead, and calls all who do these things:", "textEs": "10. Deuteronomio 18:10-12 enumera la adivinación, la hechicería, los médiums, y consultar a los muertos, y llama a todos los que hacen estas cosas:", "optionsEn": ["Wise", "An abomination to the LORD", "Blessed", "Prophets"], "optionsEs": ["Sabios", "Abominación para con Jehová", "Bienaventurados", "Profetas"], "explanationEn": "God calls all who do these things an abomination to the LORD.", "explanationEs": "Dios llama a todos los que hacen estas cosas abominación para con Jehová.", "correct": 1}, {"textEn": "11. According to Deuteronomy 18, it was for these very occult practices that God:", "textEs": "11. Según Deuteronomio 18, fue por estas mismas prácticas ocultas que Dios:", "optionsEn": ["Rewarded the nations", "Stayed silent", "Drove out the nations before Israel in judgment", "Sent more prophets"], "optionsEs": ["Recompensó a las naciones", "Guardó silencio", "Echó a las naciones delante de Israel en juicio", "Envió más profetas"], "explanationEn": "It was for these abominations that God drove the nations out of the land in judgment.", "explanationEs": "Fue por estas abominaciones que Dios echó a las naciones de la tierra en juicio.", "correct": 2}, {"textEn": "12. When the Ephesians turned to Christ (Acts 19:18-19), they showed a clean break with the occult by:", "textEs": "12. Cuando los efesios se volvieron a Cristo (Hechos 19:18-19), mostraron una ruptura limpia con lo oculto al:", "optionsEn": ["Keeping their charms hidden", "Selling their spell books", "Consulting one last medium", "Burning their magic books publicly"], "optionsEs": ["Guardar ocultos sus amuletos", "Vender sus libros de hechizos", "Consultar a un último médium", "Quemar sus libros de magia públicamente"], "explanationEn": "They burned their magic books publicly — a decisive, clean break with the occult.", "explanationEs": "Quemaron sus libros de magia públicamente — una ruptura decisiva y limpia con lo oculto.", "correct": 3}, {"textEn": "13. Are these powers merely empty superstition? Scripture says that behind idols:", "textEs": "13. ¿Son estos poderes mera superstición vacía? La Escritura dice que detrás de los ídolos:", "optionsEn": ["There is nothing at all", "Are demons, so the traffic is real (1 Corinthians 10:20)", "Are angels", "Are the saints"], "optionsEs": ["No hay nada en absoluto", "Están los demonios, así que el tráfico es real (1 Corintios 10:20)", "Están los ángeles", "Están los santos"], "explanationEn": "Behind idols stand demons, so the traffic is real — not empty superstition.", "explanationEs": "Detrás de los ídolos están los demonios, así que el tráfico es real — no superstición vacía.", "correct": 1}, {"textEn": "14. Because the powers are real, folk religion does not protect people; it:", "textEs": "14. Porque los poderes son reales, la religión popular no protege a las personas; las:", "optionsEn": ["Heals them fully", "Is perfectly safe", "Enslaves them and traffics with what can destroy", "Pleases God"], "optionsEs": ["Sana por completo", "Es perfectamente segura", "Esclaviza y trafica con lo que puede destruir", "Agrada a Dios"], "explanationEn": "Folk religion does not protect but enslaves, trafficking with what can destroy.", "explanationEs": "La religión popular no protege sino que esclaviza, traficando con lo que puede destruir.", "correct": 2}, {"textEn": "15. Colossians 2:15 says that at the cross Christ:", "textEs": "15. Colosenses 2:15 dice que en la cruz Cristo:", "optionsEn": ["Was defeated by the powers", "Ignored the powers", "Made peace with the powers", "Disarmed the principalities and powers and triumphed over them"], "optionsEs": ["Fue vencido por los poderes", "Ignoró a los poderes", "Hizo paz con los poderes", "Despojó a los principados y potestades y triunfó sobre ellos"], "explanationEn": "At the cross Christ disarmed the powers and triumphed over them openly.", "explanationEs": "En la cruz Cristo despojó a los poderes y triunfó sobre ellos abiertamente.", "correct": 3}, {"textEn": "16. Hebrews 2:14-15 gives the direct answer to the fear of death behind Santa Muerte: Christ destroyed the one who had the power of death and:", "textEs": "16. Hebreos 2:14-15 da la respuesta directa al temor de la muerte detrás de la Santa Muerte: Cristo destruyó al que tenía el imperio de la muerte y:", "optionsEn": ["Left us in fear", "Frees those who through fear of death were subject to bondage", "Became death", "Fled from death"], "optionsEs": ["Nos dejó en temor", "Libra a los que por el temor de la muerte estaban sujetos a servidumbre", "Se convirtió en muerte", "Huyó de la muerte"], "explanationEn": "Christ frees those who through fear of death were all their lifetime in bondage.", "explanationEs": "Cristo libra a los que por el temor de la muerte estaban toda la vida en servidumbre.", "correct": 1}, {"textEn": "17. 1 John 3:8 says the Son of God was manifested that He might:", "textEs": "17. 1 Juan 3:8 dice que el Hijo de Dios apareció para:", "optionsEn": ["Start a religion", "Teach ethics", "Destroy the works of the devil", "Collect offerings"], "optionsEs": ["Comenzar una religión", "Enseñar ética", "Deshacer las obras del diablo", "Recoger ofrendas"], "explanationEn": "The Son of God was manifested to destroy the works of the devil.", "explanationEs": "El Hijo de Dios apareció para deshacer las obras del diablo.", "correct": 2}, {"textEn": "18. The gospel does not offer people a stronger spell or a better charm, but:", "textEs": "18. El evangelio no ofrece a las personas un hechizo más fuerte ni un mejor amuleto, sino:", "optionsEn": ["A higher price to pay", "A new amulet", "Another spirit to consult", "A finished victory in Christ, received freely with no bargain"], "optionsEs": ["Un precio más alto que pagar", "Un nuevo amuleto", "Otro espíritu que consultar", "Una victoria consumada en Cristo, recibida gratuitamente sin trato"], "explanationEn": "The gospel is not stronger magic but a finished victory in Christ, received freely.", "explanationEs": "El evangelio no es magia más fuerte sino una victoria consumada en Cristo, recibida gratuitamente.", "correct": 3}, {"textEn": "19. Because God demands exclusive worship, the folk habit of covering all bases — the true God plus other powers 'just in case' — is:", "textEs": "19. Porque Dios demanda adoración exclusiva, la costumbre popular de cubrir todo — el Dios verdadero más otros poderes 'por si acaso' — es:", "optionsEn": ["Wise", "Forbidden; no one can serve two masters", "Acceptable", "Encouraged"], "optionsEs": ["Sabia", "Prohibida; nadie puede servir a dos amos", "Aceptable", "Recomendada"], "explanationEn": "Covering all bases is forbidden; no one can serve two masters.", "explanationEs": "Cubrir todo está prohibido; nadie puede servir a dos amos.", "correct": 1}, {"textEn": "20. Our aim toward those bound in folk religion, who are often poor, sick, and frightened, is:", "textEs": "20. Nuestro fin hacia los atados en la religión popular, que a menudo son pobres, enfermos, y temerosos, es:", "optionsEn": ["Contempt", "To leave them enslaved", "Compassion — to bring them the real protection of the living God and freedom in Christ", "Mockery"], "optionsEs": ["El desprecio", "Dejarlos esclavizados", "Compasión — traerles la protección real del Dios vivo y la libertad en Cristo", "La burla"], "explanationEn": "We come with compassion, bringing the real protection of the living God and freedom in Christ.", "explanationEs": "Venimos con compasión, trayendo la protección real del Dios vivo y la libertad en Cristo.", "correct": 2}];
-
-const kwQuestions = [{"textEn": "21. Explain what Mexican folk religion is (syncretism) and why it is not a Christian tradition but a return to the occult that God forbids.", "textEs": "21. Explique qué es la religión popular mexicana (sincretismo) y por qué no es una tradición cristiana sino un regreso a lo oculto que Dios prohíbe.", "kw_en": ["syncretism", "occult", "folk", "forbidden", "abomination", "powers", "mixing", "god"], "kw_es": ["sincretismo", "oculto", "popular", "prohibe", "abominaci", "poderes", "mezcla", "dios"], "modelEn": "Mexican folk religion is a syncretism, a mixing of Christian forms and Catholic images with indigenous, spiritist, and occult practices. It is not a Christian tradition with which we merely disagree, but a return to the very things the living God has forbidden, dressed in familiar clothing. It includes Santa Muerte, spiritism, curanderismo, brujería, and divination, and in God's own word these are named as abomination. Behind the forms stand other powers, not the true God, and Scripture treats this traffic as real and dangerous, not empty. So folk religion cannot save; it enslaves, and it stands under God's verdict of abomination. It is rebellion against the God who demands exclusive worship, however Christian its outward clothing may appear.", "modelEs": "La religión popular mexicana es un sincretismo, una mezcla de formas cristianas e imágenes católicas con prácticas indígenas, espiritistas, y ocultas. No es una tradición cristiana con la que solo diferimos, sino un regreso a las mismas cosas que el Dios vivo ha prohibido, vestido con ropa familiar. Incluye la Santa Muerte, el espiritismo, el curanderismo, la brujería, y la adivinación, y en la propia palabra de Dios estas son nombradas como abominación. Detrás de las formas están otros poderes, no el Dios verdadero, y la Escritura trata este tráfico como real y peligroso, no vacío. Así que la religión popular no puede salvar; esclaviza, y está bajo el veredicto de Dios de abominación. Es rebelión contra el Dios que demanda adoración exclusiva, por muy cristiana que parezca su ropa exterior."}, {"textEn": "22. Describe Santa Muerte fairly, and explain the biblical problem with venerating death.", "textEs": "22. Describa a la Santa Muerte justamente, y explique el problema bíblico de venerar a la muerte.", "kw_en": ["death", "santa", "venerate", "protection", "fear", "christ", "defeated", "idol"], "kw_es": ["muerte", "santa", "venera", "protecci", "temor", "cristo", "venci", "demonio"], "modelEn": "Santa Muerte, Holy Death, is a skeletal figure venerated as a folk saint, prayed to for protection, love, money, healing, and even vengeance, and embraced especially by the poor, prisoners, and the violent trades. But she is no saint; she is death itself, personified and adored, and even the Catholic Church condemns her cult. The biblical problem is profound: the Christian faith proclaims that death is the last enemy, the very thing Christ came to destroy and has defeated, yet Santa Muerte invites people to bow and pray to that enemy. To seek life and protection from death is to beg the executioner for mercy. And behind the image stands not a kindly mother but a demon and the enemy of our souls. So this is not devotion to a saint but worship of death, which Christ has already conquered.", "modelEs": "La Santa Muerte es una figura esquelética venerada como una santa popular, a la que se ora por protección, amor, dinero, sanidad, y aun venganza, y abrazada especialmente por los pobres, los presos, y los oficios violentos. Pero no es santa alguna; es la muerte misma, personificada y adorada, y aun la Iglesia Católica condena su culto. El problema bíblico es profundo: la fe cristiana proclama que la muerte es el postrer enemigo, la cosa misma que Cristo vino a destruir y ha vencido, y sin embargo la Santa Muerte invita a la gente a postrarse y orar a ese enemigo. Buscar vida y protección de la muerte es rogar misericordia al verdugo. Y detrás de la imagen no está una madre bondadosa sino un demonio y el enemigo de nuestras almas. Así que esto no es devoción a una santa sino adoración de la muerte, que Cristo ya ha vencido, y libra del temor a los suyos."}, {"textEn": "23. Explain the biblical prohibition of spiritism, necromancy, sorcery, and divination (Deuteronomy 18).", "textEs": "23. Explique la prohibición bíblica del espiritismo, la necromancia, la hechicería, y la adivinación (Deuteronomio 18).", "kw_en": ["deuteronomy", "divination", "sorcery", "mediums", "dead", "abomination", "forbid", "spirits"], "kw_es": ["deuteronomio", "adivinaci", "hechiceri", "muertos", "abominaci", "prohibe", "consultar", "dios"], "modelEn": "Deuteronomy 18 gathers nearly the whole dark world of folk religion into a single list and pronounces God's verdict. It forbids witchcraft, divination, soothsaying, sorcery, conjuring spells, consulting mediums and familiar spirits, and calling up the dead, and it says that all who do these things are an abomination to the LORD. It adds that it was for these very abominations that God drove the nations out of the land in judgment. This prohibition runs through Scripture: give no regard to mediums and familiar spirits, and you shall have no other gods before Me. So spiritism, which consults the dead, along with sorcery and divination, is not a lesser option but rebellion against God, which He calls what it is, an abomination that He absolutely forbids.", "modelEs": "Deuteronomio 18 reúne casi todo el mundo oscuro de la religión popular en una sola lista y pronuncia el veredicto de Dios. Prohíbe la hechicería, la adivinación, el agüero, la magia, los hechizos, consultar a médiums y espíritus familiares, y llamar a los muertos, y dice que todos los que hacen estas cosas son abominación para con Jehová. Añade que fue por estas mismas abominaciones que Dios echó a las naciones de la tierra en juicio. Esta prohibición corre por la Escritura: no os volváis a los encantadores ni a los adivinos, y no tendrás dioses ajenos delante de mí. Así que el espiritismo, que consulta a los muertos, junto con la hechicería y la adivinación, no es una opción menor sino rebelión contra Dios, que Él llama lo que es, una abominación que prohíbe absolutamente."}, {"textEn": "24. Explain that these powers are not empty superstition (1 Corinthians 10:20), and why that makes folk religion dangerous rather than harmless.", "textEs": "24. Explique que estos poderes no son superstición vacía (1 Corintios 10:20), y por qué eso hace la religión popular peligrosa en lugar de inofensiva.", "kw_en": ["demons", "real", "idols", "powers", "dangerous", "enslave", "superstition", "destroy"], "kw_es": ["demonios", "real", "poderes", "peligro", "esclaviza", "destru", "protege", "dioses"], "modelEn": "Some object that folk religion is mere superstition, that amulets and spells have no power and do no harm. But Scripture does not grant that comfort. Paul says that behind idols stand demons: what the Gentiles sacrifice, they sacrifice to demons and not to God. So the traffic is real; the powers are real. And that is precisely what makes folk religion dangerous rather than harmless. Those who dabble in it are not merely playing a game but binding themselves to real demonic powers. Far from protecting people, it enslaves them and traffics with what can destroy them. So we cannot dismiss these practices as empty; they are dealings with the demonic, and Scripture warns us to have nothing to do with them and to flee to Christ, who has conquered the powers.", "modelEs": "Algunos objetan que la religión popular es mera superstición, que los amuletos y hechizos no tienen poder y no hacen daño. Pero la Escritura no concede ese consuelo. Pablo dice que detrás de los ídolos están los demonios: lo que los gentiles sacrifican, a los demonios lo sacrifican, y no a Dios. Así que el tráfico es real; los poderes son reales. Y eso es precisamente lo que hace la religión popular peligrosa en lugar de inofensiva. Los que juguetean con ella no están meramente jugando sino atándose a poderes demoníacos reales. Lejos de proteger a las personas, las esclaviza y trafica con lo que puede destruirlas. Así que no podemos descartar estas prácticas como vacías; son tratos con lo demoníaco, y la Escritura nos advierte no tener nada que ver con ellas y huir a Cristo, que ha vencido a los poderes y no a otros dioses."}, {"textEn": "25. From Scripture, show Christ's victory over the powers (Colossians 2:15; 1 John 3:8) and over death and its fear (Hebrews 2:14-15).", "textEs": "25. Desde la Escritura, muestre la victoria de Cristo sobre los poderes (Colosenses 2:15; 1 Juan 3:8) y sobre la muerte y su temor (Hebreos 2:14-15).", "kw_en": ["christ", "cross", "disarmed", "powers", "death", "fear", "destroy", "devil"], "kw_es": ["cristo", "cruz", "desarm", "poderes", "muerte", "temor", "destruir", "diablo"], "modelEn": "Scripture proclaims Christ's total victory over the very powers folk religion fears and flatters. On the cross, having disarmed the principalities and powers, He made a public spectacle of them, triumphing over them in it. For this purpose the Son of God was manifested, that He might destroy the works of the devil. So the powers people bargain with are already defeated. And to the fear of death that drives a frightened soul to the altar of Santa Muerte, the answer is Christ, who shared our flesh and blood that through death He might destroy the one who had the power of death, that is, the devil, and free those who through fear of death were all their lifetime in bondage. So Christ has disarmed the powers, destroyed the works of the devil, defeated death, and broken the fear that enslaves.", "modelEs": "La Escritura proclama la victoria total de Cristo sobre los poderes mismos que la religión popular teme y halaga. En la cruz, habiendo despojado a los principados y potestades, los exhibió públicamente, triunfando sobre ellos en ella. Para esto apareció el Hijo de Dios, para deshacer las obras del diablo. Así que los poderes con los que la gente negocia ya están vencidos. Y al temor de la muerte que lleva a un alma asustada al altar de la Santa Muerte, la respuesta es Cristo, que participó de nuestra carne y sangre para destruir por la muerte al que tenía el imperio de la muerte, esto es, al diablo, y librar a los que por el temor de la muerte estaban toda la vida en servidumbre. Así que Cristo ha desarmado a los poderes, deshecho las obras del diablo, vencido la muerte, y roto el temor que esclaviza."}, {"textEn": "26. Explain why the gospel is not a stronger spell but a finished victory, and what a clean break with the occult looks like (Acts 19).", "textEs": "26. Explique por qué el evangelio no es un hechizo más fuerte sino una victoria consumada, y cómo se ve una ruptura limpia con lo oculto (Hechos 19).", "kw_en": ["gospel", "spell", "victory", "finished", "break", "burn", "occult", "free"], "kw_es": ["evangelio", "hechizo", "victoria", "consumada", "ruptura", "quemar", "oculto", "libre"], "modelEn": "The gospel is not a stronger spell, a more powerful saint, or a better charm to fight the old ones; it is not superior magic at all. It is a finished victory in Christ, into which a person enters not by bargaining or paying a price to a power, but by surrender and trust in the One who has already paid and already won. And that entrance requires a clean break with the occult. When the Ephesians turned to Christ, those who had practiced magic brought their books together and burned them in the sight of all, a fortune in occult books turned to ash, because a soul cannot serve two masters and Christ will not share an altar with demons. So it must be still: the amulets renounced, the images removed, the practices forsaken, and the whole allegiance handed over to Christ alone, who makes us free.", "modelEs": "El evangelio no es un hechizo más fuerte, un santo más poderoso, ni un mejor amuleto para combatir a los viejos; no es magia superior en absoluto. Es una victoria consumada en Cristo, en la cual una persona entra no por negociar ni pagar un precio a un poder, sino por rendirse y confiar en Aquel que ya ha pagado y ya ha vencido. Y esa entrada requiere una ruptura limpia con lo oculto. Cuando los efesios se volvieron a Cristo, los que habían practicado la magia trajeron los libros y los quemaron delante de todos, una fortuna en libros ocultos vuelta ceniza, porque un alma no puede servir a dos amos y Cristo no compartirá un altar con demonios. Así debe ser todavía: los amuletos renunciados, las imágenes quitadas, las prácticas abandonadas, y toda la lealtad entregada a Cristo solo, que nos hace libres."}, {"textEn": "27. Explain why covering all bases — the true God plus other powers 'just in case' — is forbidden (exclusive worship; two masters).", "textEs": "27. Explique por qué cubrir todo — el Dios verdadero más otros poderes 'por si acaso' — está prohibido (adoración exclusiva; dos amos).", "kw_en": ["exclusive", "worship", "god", "masters", "two", "forbidden", "powers", "serve"], "kw_es": ["exclusiva", "adoraci", "dios", "amos", "dos", "prohibe", "poderes", "servir"], "modelEn": "Folk religion often keeps the true God while adding other powers just in case, covering all the bases. But God forbids this, because He demands exclusive worship. He says, you shall have no other gods before Me, and He will not share His glory with another. Jesus said that no one can serve two masters. So to worship God and also to seek help from Santa Muerte, the spirits, or the brujo is not a harmless addition but a betrayal of the exclusive allegiance God requires. Christ will not share an altar with demons. So the gospel does not add Christ to our other powers; it calls us to renounce them and serve God alone. To try to serve both is to serve neither faithfully, and it remains forbidden.", "modelEs": "La religión popular a menudo mantiene al Dios verdadero mientras añade otros poderes por si acaso, cubriendo todo. Pero Dios prohíbe esto, porque demanda adoración exclusiva. Dice, no tendrás dioses ajenos delante de mí, y no dará su gloria a otro. Jesús dijo que nadie puede servir a dos amos. Así que adorar a Dios y también buscar ayuda de la Santa Muerte, los espíritus, o el brujo no es una añadidura inofensiva sino una traición a la lealtad exclusiva que Dios requiere. Cristo no compartirá un altar con demonios. Así que el evangelio no añade a Cristo a nuestros otros poderes; nos llama a renunciar a ellos y servir a Dios solo. Intentar servir a ambos es no servir fielmente a ninguno, y permanece prohibido."}, {"textEn": "28. Explain the difference between morally-neutral folk medicine (herbs) and the occult elements woven into folk healing.", "textEs": "28. Explique la diferencia entre la medicina popular moralmente neutral (hierbas) y los elementos ocultos entretejidos en la sanación popular.", "kw_en": ["herbs", "medicine", "neutral", "occult", "spirits", "divination", "invoke", "difference"], "kw_es": ["hierbas", "medicina", "neutral", "oculto", "invocar", "adivinaci", "diferencia", "ritual"], "modelEn": "We must be fair and make a real difference here. A remedy of herbs is simply folk medicine, and there is no sin in a tea; such herbal knowledge is morally neutral, like any medicine. So we do not condemn folk remedies as such. But curanderismo seldom stops at herbs. It moves quickly to the limpia that cleanses by ritual and spirit, to a diagnosis given by divination, and to the invoking of saints and spirits for supernatural power, and there it has crossed the line into the occult and the forbidden. So the difference is between neutral herbal medicine, which is allowed, and the spiritual invocation, ritual, and divination woven into folk healing, which are occult and forbidden. We keep what is only medicine and renounce what invokes spirits or seeks hidden knowledge by divination.", "modelEs": "Debemos ser justos y hacer una diferencia real aquí. Un remedio de hierbas es simplemente medicina popular, y no hay pecado en un té; tal conocimiento de hierbas es moralmente neutral, como cualquier medicina. Así que no condenamos los remedios populares como tales. Pero el curanderismo pocas veces se detiene en las hierbas. Se mueve rápidamente a la limpia que purifica por ritual y espíritu, a un diagnóstico dado por adivinación, y a la invocación de santos y espíritus para poder sobrenatural, y allí ha cruzado la línea a lo oculto y lo prohibido. Así que la diferencia es entre la medicina de hierbas neutral, que es permitida, y la invocación espiritual, el ritual, y la adivinación entretejidos en la sanación popular, que son ocultos y prohibidos. Guardamos lo que es solo medicina y renunciamos a lo que invoca espíritus o busca conocimiento oculto por adivinación."}, {"textEn": "29. Describe the redemptive aim toward people bound in folk religion — who they often are, and what we bring them.", "textEs": "29. Describa el fin redentor hacia las personas atadas en la religión popular — quiénes son a menudo, y qué les traemos.", "kw_en": ["compassion", "poor", "fear", "free", "christ", "protection", "enslaved", "love"], "kw_es": ["compasi", "pobre", "temor", "libre", "cristo", "protecci", "esclavi", "amor"], "modelEn": "The sharpest words in this unit are aimed at the darkness, never at the people bound by it. Those who turn to folk religion are so often the ones the world has failed: the poor who cannot pay a doctor, the sick who have run out of hope, the mother terrified for a son in danger, the abandoned who found no help in any church. We do not sneer at them; we grieve for them with compassion, because they are seeking protection from what can only destroy them and are enslaved by fear. To them we bring not a rival superstition but the living God, who actually hears, heals, and protects, and who has conquered the death and the powers they fear, and He gives freely with no price. This is the most urgent evangelism of all, the freeing of captives. So we go with clear truth and deep love, longing to see the chains fall, the fear lifted, and the one who bowed to death stand upright and free in Christ.", "modelEs": "Las palabras más agudas de esta unidad apuntan a las tinieblas, nunca a las personas atadas por ellas. Los que se vuelven a la religión popular son tan a menudo aquellos a quienes el mundo ha fallado: el pobre que no puede pagar un médico, el enfermo que se ha quedado sin esperanza, la madre aterrada por un hijo en peligro, el abandonado que no halló ayuda en ninguna iglesia. No nos burlamos de ellos; nos dolemos por ellos con compasión, porque buscan protección de lo que solo puede destruirlos y están esclavizados por el temor. A ellos traemos no una superstición rival sino al Dios vivo, que de veras oye, sana, y protege, y que ha vencido la muerte y los poderes que temen, y Él da gratuitamente sin precio. Este es el evangelismo más urgente de todos, la liberación de cautivos. Así que vamos con verdad clara y profundo amor, anhelando ver caer las cadenas, levantarse el temor, y al que se postró ante la muerte ponerse de pie y libre en Cristo."}, {"textEn": `30. Summarize Unit ${UNIT}: what folk religion is, God's verdict, Christ's victory, and the redemptive aim.`, "textEs": `30. Resuma la Unidad ${UNIT}: qué es la religión popular, el veredicto de Dios, la victoria de Cristo, y el fin redentor.`, "kw_en": ["folk", "occult", "forbidden", "christ", "victory", "death", "free", "gospel"], "kw_es": ["popular", "oculto", "prohibe", "cristo", "victoria", "muerte", "libre", "evangelio"], "modelEn": `Unit ${UNIT} examines Mexican folk religion, a syncretism that mixes Christian forms with Santa Muerte, spiritism, curanderismo, brujería, and divination. This is not a Christian tradition but a return to the occult, and God's verdict is plain: in Deuteronomy 18 He calls all these practices an abomination and forbids them, for behind the idols stand real demons. Yet the gospel is the thunder of victory: at the cross Christ disarmed the powers, destroyed the works of the devil, and by His own death defeated death itself and freed those enslaved by the fear of it. The gospel is not a stronger spell but a finished victory requiring a clean break with the occult. And the aim is redemptive: with compassion for people who are often poor and frightened, we bring them the living God and freedom in Christ.`, "modelEs": `La Unidad ${UNIT} examina la religión popular mexicana, un sincretismo que mezcla formas cristianas con la Santa Muerte, el espiritismo, el curanderismo, la brujería, y la adivinación. Esto no es una tradición cristiana sino un regreso a lo oculto, y el veredicto de Dios es claro: en Deuteronomio 18 llama a todas estas prácticas abominación y las prohíbe, pues detrás de los ídolos están demonios reales. Sin embargo, el evangelio es el trueno de victoria: en la cruz Cristo despojó a los poderes, deshizo las obras del diablo, y por su propia muerte venció la muerte misma y libró a los esclavizados por el temor de ella. El evangelio no es un hechizo más fuerte sino una victoria consumada que requiere una ruptura limpia con lo oculto. Y el fin es redentor: con compasión por personas que a menudo son pobres y temerosas, les traemos al Dios vivo y la libertad en Cristo.`}];
+/* CTSCults — unit 9. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "cults",
+ "unit": 9,
+ "totalUnits": 10,
+ "filePrefix": "CTSCults",
+ "prevHref": "CTSCultsUnit8.html",
+ "nextHref": "CTSCultsUnit10.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - What Is a Cult? The Biblical Test",
+   "Unit 2 - The Trinity and the Deity of Christ",
+   "Unit 3 - Jehovah's Witnesses",
+   "Unit 4 - The Latter-day Saints",
+   "Unit 5 - The Prosperity Gospel",
+   "Unit 6 - Progressive Revelation: Islam and Baha'i",
+   "Unit 7 - Eastern Religions: Hinduism and Buddhism",
+   "Unit 8 - Roman Catholicism",
+   "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism",
+   "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"
+  ],
+  "es": [
+   "Unit 1 - What Is a Cult? The Biblical Test",
+   "Unit 2 - The Trinity and the Deity of Christ",
+   "Unit 3 - Jehovah's Witnesses",
+   "Unit 4 - The Latter-day Saints",
+   "Unit 5 - The Prosperity Gospel",
+   "Unit 6 - Progressive Revelation: Islam and Baha'i",
+   "Unit 7 - Eastern Religions: Hinduism and Buddhism",
+   "Unit 8 - Roman Catholicism",
+   "Unit 9 - Folk Religion: Santa Muerte, Spiritism and Syncretism",
+   "Unit 10 - Witnessing to a Cult Member or Person of Another Faith"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "Mexican folk religion is best described as:",
+    "es": "La religión popular mexicana se describe mejor como:"
+   },
+   "options": {
+    "en": [
+     "A mix (syncretism) of Christian forms with indigenous, spiritist, and occult practices",
+     "A branch of official Catholicism",
+     "A harmless cultural custom",
+     "A Protestant movement"
+    ],
+    "es": [
+     "Una mezcla (sincretismo) de formas cristianas con prácticas indígenas, espiritistas, y ocultas",
+     "Una rama del catolicismo oficial",
+     "Una costumbre cultural inofensiva",
+     "Un movimiento protestante"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Folk religion is a syncretism — Christian forms mixed with indigenous, spiritist, and occult practice.",
+    "es": "La religión popular es un sincretismo — formas cristianas mezcladas con prácticas indígenas, espiritistas, y ocultas."
+   }
+  },
+  {
+   "stem": {
+    "en": "Unlike Roman Catholicism, these folk practices are:",
+    "es": "A diferencia del catolicismo romano, estas prácticas populares son:"
+   },
+   "options": {
+    "en": [
+     "Not a Christian tradition at all, but a return to the occult and the worship of other powers",
+     "A Christian tradition we merely differ with",
+     "Approved by the Vatican",
+     "Required for salvation"
+    ],
+    "es": [
+     "No una tradición cristiana en absoluto, sino un regreso a lo oculto y la adoración de otros poderes",
+     "Una tradición cristiana con la que solo diferimos",
+     "Aprobadas por el Vaticano",
+     "Requeridas para la salvación"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "This is not a Christian tradition but a return to the occult that God forbids.",
+    "es": "Esto no es una tradición cristiana sino un regreso a lo oculto que Dios prohíbe."
+   }
+  },
+  {
+   "stem": {
+    "en": "Santa Muerte is:",
+    "es": "La Santa Muerte es:"
+   },
+   "options": {
+    "en": [
+     "A folk 'saint' who is a skeletal personification of death, venerated for protection, love, money, and vengeance",
+     "A canonized Catholic saint",
+     "An angel",
+     "A Bible character"
+    ],
+    "es": [
+     "Una 'santa' popular que es una personificación esquelética de la muerte, venerada por protección, amor, dinero, y venganza",
+     "Una santa católica canonizada",
+     "Un ángel",
+     "Un personaje bíblico"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Santa Muerte is death personified, venerated as a folk 'saint' — not a real saint at all.",
+    "es": "La Santa Muerte es la muerte personificada, venerada como 'santa' popular — no una santa real."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Roman Catholic Church itself regards the cult of Santa Muerte as:",
+    "es": "La Iglesia Católica Romana misma considera el culto a la Santa Muerte como:"
+   },
+   "options": {
+    "en": [
+     "A beautiful devotion",
+     "Incompatible with Christianity, and has condemned it",
+     "A form of the Mass",
+     "Devotion to Mary"
+    ],
+    "es": [
+     "Una hermosa devoción",
+     "Incompatible con el cristianismo, y lo ha condenado",
+     "Una forma de la Misa",
+     "Devoción a María"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Even the Catholic Church condemns Santa Muerte as incompatible with Christianity.",
+    "es": "Aun la Iglesia Católica condena la Santa Muerte como incompatible con el cristianismo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The deep irony of venerating Santa Muerte is that devotees give worship to:",
+    "es": "La profunda ironía de venerar a la Santa Muerte es que los devotos rinden adoración a:"
+   },
+   "options": {
+    "en": [
+     "A living saint",
+     "An angel of light",
+     "Death — the very enemy that Christ defeated",
+     "The Virgin"
+    ],
+    "es": [
+     "Una santa viva",
+     "Un ángel de luz",
+     "La muerte — el enemigo mismo que Cristo venció",
+     "La Virgen"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "They bow to death — the last enemy Christ came to destroy.",
+    "es": "Se postran ante la muerte — el postrer enemigo que Cristo vino a destruir."
+   }
+  },
+  {
+   "stem": {
+    "en": "Espiritismo (spiritism) centers on:",
+    "es": "El espiritismo se centra en:"
+   },
+   "options": {
+    "en": [
+     "Reading the Bible",
+     "Singing hymns",
+     "Fasting",
+     "Communicating with the spirits of the dead through mediums"
+    ],
+    "es": [
+     "Leer la Biblia",
+     "Cantar himnos",
+     "Ayunar",
+     "Comunicarse con los espíritus de los muertos por medio de médiums"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Spiritism seeks to consult the spirits of the dead through mediums.",
+    "es": "El espiritismo busca consultar a los espíritus de los muertos por medio de médiums."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Bible's word for consulting the dead is:",
+    "es": "La palabra de la Biblia para consultar a los muertos es:"
+   },
+   "options": {
+    "en": [
+     "Necromancy, which Scripture forbids",
+     "Prayer",
+     "Worship",
+     "Prophecy"
+    ],
+    "es": [
+     "Necromancia, que la Escritura prohíbe",
+     "Oración",
+     "Adoración",
+     "Profecía"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Consulting the dead is necromancy, which Scripture absolutely forbids.",
+    "es": "Consultar a los muertos es necromancia, que la Escritura prohíbe absolutamente."
+   }
+  },
+  {
+   "stem": {
+    "en": "In curanderismo, the practice becomes occult and forbidden when it moves from simple herbal remedy to:",
+    "es": "En el curanderismo, la práctica se vuelve oculta y prohibida cuando pasa del simple remedio de hierbas a:"
+   },
+   "options": {
+    "en": [
+     "Invoking spirits, divining diagnoses, and ritual power",
+     "Drinking water",
+     "Resting",
+     "Eating food"
+    ],
+    "es": [
+     "Invocar espíritus, diagnosticar por adivinación, y el poder ritual",
+     "Beber agua",
+     "Descansar",
+     "Comer alimentos"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Herbs are neutral; the line is crossed when spirits are invoked and divination used.",
+    "es": "Las hierbas son neutrales; la línea se cruza cuando se invocan espíritus y se usa la adivinación."
+   }
+  },
+  {
+   "stem": {
+    "en": "Brujería involves spells, hexes, love-binding (amarres), and curses — what Scripture plainly calls:",
+    "es": "La brujería involucra hechizos, maleficios, amarres, y maldiciones — lo que la Escritura llama claramente:"
+   },
+   "options": {
+    "en": [
+     "Wisdom",
+     "Medicine",
+     "Counsel",
+     "Sorcery and witchcraft, works of the flesh"
+    ],
+    "es": [
+     "Sabiduría",
+     "Medicina",
+     "Consejo",
+     "Hechicería y brujería, obras de la carne"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Scripture names sorcery among the works of the flesh that shut men out of the kingdom.",
+    "es": "La Escritura nombra la hechicería entre las obras de la carne que cierran el reino a los hombres."
+   }
+  },
+  {
+   "stem": {
+    "en": "Deuteronomy 18:10-12 lists divination, sorcery, mediums, and calling up the dead, and calls all who do these things:",
+    "es": "Deuteronomio 18:10-12 enumera la adivinación, la hechicería, los médiums, y consultar a los muertos, y llama a todos los que hacen estas cosas:"
+   },
+   "options": {
+    "en": [
+     "Wise",
+     "An abomination to the LORD",
+     "Blessed",
+     "Prophets"
+    ],
+    "es": [
+     "Sabios",
+     "Abominación para con Jehová",
+     "Bienaventurados",
+     "Profetas"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "God calls all who do these things an abomination to the LORD.",
+    "es": "Dios llama a todos los que hacen estas cosas abominación para con Jehová."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Deuteronomy 18, it was for these very occult practices that God:",
+    "es": "Según Deuteronomio 18, fue por estas mismas prácticas ocultas que Dios:"
+   },
+   "options": {
+    "en": [
+     "Rewarded the nations",
+     "Stayed silent",
+     "Drove out the nations before Israel in judgment",
+     "Sent more prophets"
+    ],
+    "es": [
+     "Recompensó a las naciones",
+     "Guardó silencio",
+     "Echó a las naciones delante de Israel en juicio",
+     "Envió más profetas"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "It was for these abominations that God drove the nations out of the land in judgment.",
+    "es": "Fue por estas abominaciones que Dios echó a las naciones de la tierra en juicio."
+   }
+  },
+  {
+   "stem": {
+    "en": "When the Ephesians turned to Christ (Acts 19:18-19), they showed a clean break with the occult by:",
+    "es": "Cuando los efesios se volvieron a Cristo (Hechos 19:18-19), mostraron una ruptura limpia con lo oculto al:"
+   },
+   "options": {
+    "en": [
+     "Keeping their charms hidden",
+     "Selling their spell books",
+     "Consulting one last medium",
+     "Burning their magic books publicly"
+    ],
+    "es": [
+     "Guardar ocultos sus amuletos",
+     "Vender sus libros de hechizos",
+     "Consultar a un último médium",
+     "Quemar sus libros de magia públicamente"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "They burned their magic books publicly — a decisive, clean break with the occult.",
+    "es": "Quemaron sus libros de magia públicamente — una ruptura decisiva y limpia con lo oculto."
+   }
+  },
+  {
+   "stem": {
+    "en": "Are these powers merely empty superstition? Scripture says that behind idols:",
+    "es": "¿Son estos poderes mera superstición vacía? La Escritura dice que detrás de los ídolos:"
+   },
+   "options": {
+    "en": [
+     "There is nothing at all",
+     "Are demons, so the traffic is real (1 Corinthians 10:20)",
+     "Are angels",
+     "Are the saints"
+    ],
+    "es": [
+     "No hay nada en absoluto",
+     "Están los demonios, así que el tráfico es real (1 Corintios 10:20)",
+     "Están los ángeles",
+     "Están los santos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Behind idols stand demons, so the traffic is real — not empty superstition.",
+    "es": "Detrás de los ídolos están los demonios, así que el tráfico es real — no superstición vacía."
+   }
+  },
+  {
+   "stem": {
+    "en": "Because the powers are real, folk religion does not protect people; it:",
+    "es": "Porque los poderes son reales, la religión popular no protege a las personas; las:"
+   },
+   "options": {
+    "en": [
+     "Heals them fully",
+     "Is perfectly safe",
+     "Enslaves them and traffics with what can destroy",
+     "Pleases God"
+    ],
+    "es": [
+     "Sana por completo",
+     "Es perfectamente segura",
+     "Esclaviza y trafica con lo que puede destruir",
+     "Agrada a Dios"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Folk religion does not protect but enslaves, trafficking with what can destroy.",
+    "es": "La religión popular no protege sino que esclaviza, traficando con lo que puede destruir."
+   }
+  },
+  {
+   "stem": {
+    "en": "Colossians 2:15 says that at the cross Christ:",
+    "es": "Colosenses 2:15 dice que en la cruz Cristo:"
+   },
+   "options": {
+    "en": [
+     "Was defeated by the powers",
+     "Ignored the powers",
+     "Made peace with the powers",
+     "Disarmed the principalities and powers and triumphed over them"
+    ],
+    "es": [
+     "Fue vencido por los poderes",
+     "Ignoró a los poderes",
+     "Hizo paz con los poderes",
+     "Despojó a los principados y potestades y triunfó sobre ellos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "At the cross Christ disarmed the powers and triumphed over them openly.",
+    "es": "En la cruz Cristo despojó a los poderes y triunfó sobre ellos abiertamente."
+   }
+  },
+  {
+   "stem": {
+    "en": "Hebrews 2:14-15 gives the direct answer to the fear of death behind Santa Muerte: Christ destroyed the one who had the power of death and:",
+    "es": "Hebreos 2:14-15 da la respuesta directa al temor de la muerte detrás de la Santa Muerte: Cristo destruyó al que tenía el imperio de la muerte y:"
+   },
+   "options": {
+    "en": [
+     "Left us in fear",
+     "Frees those who through fear of death were subject to bondage",
+     "Became death",
+     "Fled from death"
+    ],
+    "es": [
+     "Nos dejó en temor",
+     "Libra a los que por el temor de la muerte estaban sujetos a servidumbre",
+     "Se convirtió en muerte",
+     "Huyó de la muerte"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Christ frees those who through fear of death were all their lifetime in bondage.",
+    "es": "Cristo libra a los que por el temor de la muerte estaban toda la vida en servidumbre."
+   }
+  },
+  {
+   "stem": {
+    "en": "1 John 3:8 says the Son of God was manifested that He might:",
+    "es": "1 Juan 3:8 dice que el Hijo de Dios apareció para:"
+   },
+   "options": {
+    "en": [
+     "Start a religion",
+     "Teach ethics",
+     "Destroy the works of the devil",
+     "Collect offerings"
+    ],
+    "es": [
+     "Comenzar una religión",
+     "Enseñar ética",
+     "Deshacer las obras del diablo",
+     "Recoger ofrendas"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Son of God was manifested to destroy the works of the devil.",
+    "es": "El Hijo de Dios apareció para deshacer las obras del diablo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The gospel does not offer people a stronger spell or a better charm, but:",
+    "es": "El evangelio no ofrece a las personas un hechizo más fuerte ni un mejor amuleto, sino:"
+   },
+   "options": {
+    "en": [
+     "A higher price to pay",
+     "A new amulet",
+     "Another spirit to consult",
+     "A finished victory in Christ, received freely with no bargain"
+    ],
+    "es": [
+     "Un precio más alto que pagar",
+     "Un nuevo amuleto",
+     "Otro espíritu que consultar",
+     "Una victoria consumada en Cristo, recibida gratuitamente sin trato"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The gospel is not stronger magic but a finished victory in Christ, received freely.",
+    "es": "El evangelio no es magia más fuerte sino una victoria consumada en Cristo, recibida gratuitamente."
+   }
+  },
+  {
+   "stem": {
+    "en": "Because God demands exclusive worship, the folk habit of covering all bases — the true God plus other powers 'just in case' — is:",
+    "es": "Porque Dios demanda adoración exclusiva, la costumbre popular de cubrir todo — el Dios verdadero más otros poderes 'por si acaso' — es:"
+   },
+   "options": {
+    "en": [
+     "Wise",
+     "Forbidden; no one can serve two masters",
+     "Acceptable",
+     "Encouraged"
+    ],
+    "es": [
+     "Sabia",
+     "Prohibida; nadie puede servir a dos amos",
+     "Aceptable",
+     "Recomendada"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Covering all bases is forbidden; no one can serve two masters.",
+    "es": "Cubrir todo está prohibido; nadie puede servir a dos amos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Our aim toward those bound in folk religion, who are often poor, sick, and frightened, is:",
+    "es": "Nuestro fin hacia los atados en la religión popular, que a menudo son pobres, enfermos, y temerosos, es:"
+   },
+   "options": {
+    "en": [
+     "Contempt",
+     "To leave them enslaved",
+     "Compassion — to bring them the real protection of the living God and freedom in Christ",
+     "Mockery"
+    ],
+    "es": [
+     "El desprecio",
+     "Dejarlos esclavizados",
+     "Compasión — traerles la protección real del Dios vivo y la libertad en Cristo",
+     "La burla"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "We come with compassion, bringing the real protection of the living God and freedom in Christ.",
+    "es": "Venimos con compasión, trayendo la protección real del Dios vivo y la libertad en Cristo."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain what Mexican folk religion is (syncretism) and why it is not a Christian tradition but a return to the occult that God forbids.",
+    "es": "Explique qué es la religión popular mexicana (sincretismo) y por qué no es una tradición cristiana sino un regreso a lo oculto que Dios prohíbe."
+   },
+   "keywords": {
+    "en": [
+     "syncretism",
+     "occult",
+     "folk",
+     "forbidden",
+     "abomination",
+     "powers",
+     "mixing",
+     "god"
+    ],
+    "es": [
+     "sincretismo",
+     "oculto",
+     "popular",
+     "prohibe",
+     "abominaci",
+     "poderes",
+     "mezcla",
+     "dios"
+    ]
+   },
+   "model": {
+    "en": "Mexican folk religion is a syncretism, a mixing of Christian forms and Catholic images with indigenous, spiritist, and occult practices. It is not a Christian tradition with which we merely disagree, but a return to the very things the living God has forbidden, dressed in familiar clothing. It includes Santa Muerte, spiritism, curanderismo, brujería, and divination, and in God's own word these are named as abomination. Behind the forms stand other powers, not the true God, and Scripture treats this traffic as real and dangerous, not empty. So folk religion cannot save; it enslaves, and it stands under God's verdict of abomination. It is rebellion against the God who demands exclusive worship, however Christian its outward clothing may appear.",
+    "es": "La religión popular mexicana es un sincretismo, una mezcla de formas cristianas e imágenes católicas con prácticas indígenas, espiritistas, y ocultas. No es una tradición cristiana con la que solo diferimos, sino un regreso a las mismas cosas que el Dios vivo ha prohibido, vestido con ropa familiar. Incluye la Santa Muerte, el espiritismo, el curanderismo, la brujería, y la adivinación, y en la propia palabra de Dios estas son nombradas como abominación. Detrás de las formas están otros poderes, no el Dios verdadero, y la Escritura trata este tráfico como real y peligroso, no vacío. Así que la religión popular no puede salvar; esclaviza, y está bajo el veredicto de Dios de abominación. Es rebelión contra el Dios que demanda adoración exclusiva, por muy cristiana que parezca su ropa exterior."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe Santa Muerte fairly, and explain the biblical problem with venerating death.",
+    "es": "Describa a la Santa Muerte justamente, y explique el problema bíblico de venerar a la muerte."
+   },
+   "keywords": {
+    "en": [
+     "death",
+     "santa",
+     "venerate",
+     "protection",
+     "fear",
+     "christ",
+     "defeated",
+     "idol"
+    ],
+    "es": [
+     "muerte",
+     "santa",
+     "venera",
+     "protecci",
+     "temor",
+     "cristo",
+     "venci",
+     "demonio"
+    ]
+   },
+   "model": {
+    "en": "Santa Muerte, Holy Death, is a skeletal figure venerated as a folk saint, prayed to for protection, love, money, healing, and even vengeance, and embraced especially by the poor, prisoners, and the violent trades. But she is no saint; she is death itself, personified and adored, and even the Catholic Church condemns her cult. The biblical problem is profound: the Christian faith proclaims that death is the last enemy, the very thing Christ came to destroy and has defeated, yet Santa Muerte invites people to bow and pray to that enemy. To seek life and protection from death is to beg the executioner for mercy. And behind the image stands not a kindly mother but a demon and the enemy of our souls. So this is not devotion to a saint but worship of death, which Christ has already conquered.",
+    "es": "La Santa Muerte es una figura esquelética venerada como una santa popular, a la que se ora por protección, amor, dinero, sanidad, y aun venganza, y abrazada especialmente por los pobres, los presos, y los oficios violentos. Pero no es santa alguna; es la muerte misma, personificada y adorada, y aun la Iglesia Católica condena su culto. El problema bíblico es profundo: la fe cristiana proclama que la muerte es el postrer enemigo, la cosa misma que Cristo vino a destruir y ha vencido, y sin embargo la Santa Muerte invita a la gente a postrarse y orar a ese enemigo. Buscar vida y protección de la muerte es rogar misericordia al verdugo. Y detrás de la imagen no está una madre bondadosa sino un demonio y el enemigo de nuestras almas. Así que esto no es devoción a una santa sino adoración de la muerte, que Cristo ya ha vencido, y libra del temor a los suyos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the biblical prohibition of spiritism, necromancy, sorcery, and divination (Deuteronomy 18).",
+    "es": "Explique la prohibición bíblica del espiritismo, la necromancia, la hechicería, y la adivinación (Deuteronomio 18)."
+   },
+   "keywords": {
+    "en": [
+     "deuteronomy",
+     "divination",
+     "sorcery",
+     "mediums",
+     "dead",
+     "abomination",
+     "forbid",
+     "spirits"
+    ],
+    "es": [
+     "deuteronomio",
+     "adivinaci",
+     "hechiceri",
+     "muertos",
+     "abominaci",
+     "prohibe",
+     "consultar",
+     "dios"
+    ]
+   },
+   "model": {
+    "en": "Deuteronomy 18 gathers nearly the whole dark world of folk religion into a single list and pronounces God's verdict. It forbids witchcraft, divination, soothsaying, sorcery, conjuring spells, consulting mediums and familiar spirits, and calling up the dead, and it says that all who do these things are an abomination to the LORD. It adds that it was for these very abominations that God drove the nations out of the land in judgment. This prohibition runs through Scripture: give no regard to mediums and familiar spirits, and you shall have no other gods before Me. So spiritism, which consults the dead, along with sorcery and divination, is not a lesser option but rebellion against God, which He calls what it is, an abomination that He absolutely forbids.",
+    "es": "Deuteronomio 18 reúne casi todo el mundo oscuro de la religión popular en una sola lista y pronuncia el veredicto de Dios. Prohíbe la hechicería, la adivinación, el agüero, la magia, los hechizos, consultar a médiums y espíritus familiares, y llamar a los muertos, y dice que todos los que hacen estas cosas son abominación para con Jehová. Añade que fue por estas mismas abominaciones que Dios echó a las naciones de la tierra en juicio. Esta prohibición corre por la Escritura: no os volváis a los encantadores ni a los adivinos, y no tendrás dioses ajenos delante de mí. Así que el espiritismo, que consulta a los muertos, junto con la hechicería y la adivinación, no es una opción menor sino rebelión contra Dios, que Él llama lo que es, una abominación que prohíbe absolutamente."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain that these powers are not empty superstition (1 Corinthians 10:20), and why that makes folk religion dangerous rather than harmless.",
+    "es": "Explique que estos poderes no son superstición vacía (1 Corintios 10:20), y por qué eso hace la religión popular peligrosa en lugar de inofensiva."
+   },
+   "keywords": {
+    "en": [
+     "demons",
+     "real",
+     "idols",
+     "powers",
+     "dangerous",
+     "enslave",
+     "superstition",
+     "destroy"
+    ],
+    "es": [
+     "demonios",
+     "real",
+     "poderes",
+     "peligro",
+     "esclaviza",
+     "destru",
+     "protege",
+     "dioses"
+    ]
+   },
+   "model": {
+    "en": "Some object that folk religion is mere superstition, that amulets and spells have no power and do no harm. But Scripture does not grant that comfort. Paul says that behind idols stand demons: what the Gentiles sacrifice, they sacrifice to demons and not to God. So the traffic is real; the powers are real. And that is precisely what makes folk religion dangerous rather than harmless. Those who dabble in it are not merely playing a game but binding themselves to real demonic powers. Far from protecting people, it enslaves them and traffics with what can destroy them. So we cannot dismiss these practices as empty; they are dealings with the demonic, and Scripture warns us to have nothing to do with them and to flee to Christ, who has conquered the powers.",
+    "es": "Algunos objetan que la religión popular es mera superstición, que los amuletos y hechizos no tienen poder y no hacen daño. Pero la Escritura no concede ese consuelo. Pablo dice que detrás de los ídolos están los demonios: lo que los gentiles sacrifican, a los demonios lo sacrifican, y no a Dios. Así que el tráfico es real; los poderes son reales. Y eso es precisamente lo que hace la religión popular peligrosa en lugar de inofensiva. Los que juguetean con ella no están meramente jugando sino atándose a poderes demoníacos reales. Lejos de proteger a las personas, las esclaviza y trafica con lo que puede destruirlas. Así que no podemos descartar estas prácticas como vacías; son tratos con lo demoníaco, y la Escritura nos advierte no tener nada que ver con ellas y huir a Cristo, que ha vencido a los poderes y no a otros dioses."
+   }
+  },
+  {
+   "prompt": {
+    "en": "From Scripture, show Christ's victory over the powers (Colossians 2:15; 1 John 3:8) and over death and its fear (Hebrews 2:14-15).",
+    "es": "Desde la Escritura, muestre la victoria de Cristo sobre los poderes (Colosenses 2:15; 1 Juan 3:8) y sobre la muerte y su temor (Hebreos 2:14-15)."
+   },
+   "keywords": {
+    "en": [
+     "christ",
+     "cross",
+     "disarmed",
+     "powers",
+     "death",
+     "fear",
+     "destroy",
+     "devil"
+    ],
+    "es": [
+     "cristo",
+     "cruz",
+     "desarm",
+     "poderes",
+     "muerte",
+     "temor",
+     "destruir",
+     "diablo"
+    ]
+   },
+   "model": {
+    "en": "Scripture proclaims Christ's total victory over the very powers folk religion fears and flatters. On the cross, having disarmed the principalities and powers, He made a public spectacle of them, triumphing over them in it. For this purpose the Son of God was manifested, that He might destroy the works of the devil. So the powers people bargain with are already defeated. And to the fear of death that drives a frightened soul to the altar of Santa Muerte, the answer is Christ, who shared our flesh and blood that through death He might destroy the one who had the power of death, that is, the devil, and free those who through fear of death were all their lifetime in bondage. So Christ has disarmed the powers, destroyed the works of the devil, defeated death, and broken the fear that enslaves.",
+    "es": "La Escritura proclama la victoria total de Cristo sobre los poderes mismos que la religión popular teme y halaga. En la cruz, habiendo despojado a los principados y potestades, los exhibió públicamente, triunfando sobre ellos en ella. Para esto apareció el Hijo de Dios, para deshacer las obras del diablo. Así que los poderes con los que la gente negocia ya están vencidos. Y al temor de la muerte que lleva a un alma asustada al altar de la Santa Muerte, la respuesta es Cristo, que participó de nuestra carne y sangre para destruir por la muerte al que tenía el imperio de la muerte, esto es, al diablo, y librar a los que por el temor de la muerte estaban toda la vida en servidumbre. Así que Cristo ha desarmado a los poderes, deshecho las obras del diablo, vencido la muerte, y roto el temor que esclaviza."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why the gospel is not a stronger spell but a finished victory, and what a clean break with the occult looks like (Acts 19).",
+    "es": "Explique por qué el evangelio no es un hechizo más fuerte sino una victoria consumada, y cómo se ve una ruptura limpia con lo oculto (Hechos 19)."
+   },
+   "keywords": {
+    "en": [
+     "gospel",
+     "spell",
+     "victory",
+     "finished",
+     "break",
+     "burn",
+     "occult",
+     "free"
+    ],
+    "es": [
+     "evangelio",
+     "hechizo",
+     "victoria",
+     "consumada",
+     "ruptura",
+     "quemar",
+     "oculto",
+     "libre"
+    ]
+   },
+   "model": {
+    "en": "The gospel is not a stronger spell, a more powerful saint, or a better charm to fight the old ones; it is not superior magic at all. It is a finished victory in Christ, into which a person enters not by bargaining or paying a price to a power, but by surrender and trust in the One who has already paid and already won. And that entrance requires a clean break with the occult. When the Ephesians turned to Christ, those who had practiced magic brought their books together and burned them in the sight of all, a fortune in occult books turned to ash, because a soul cannot serve two masters and Christ will not share an altar with demons. So it must be still: the amulets renounced, the images removed, the practices forsaken, and the whole allegiance handed over to Christ alone, who makes us free.",
+    "es": "El evangelio no es un hechizo más fuerte, un santo más poderoso, ni un mejor amuleto para combatir a los viejos; no es magia superior en absoluto. Es una victoria consumada en Cristo, en la cual una persona entra no por negociar ni pagar un precio a un poder, sino por rendirse y confiar en Aquel que ya ha pagado y ya ha vencido. Y esa entrada requiere una ruptura limpia con lo oculto. Cuando los efesios se volvieron a Cristo, los que habían practicado la magia trajeron los libros y los quemaron delante de todos, una fortuna en libros ocultos vuelta ceniza, porque un alma no puede servir a dos amos y Cristo no compartirá un altar con demonios. Así debe ser todavía: los amuletos renunciados, las imágenes quitadas, las prácticas abandonadas, y toda la lealtad entregada a Cristo solo, que nos hace libres."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why covering all bases — the true God plus other powers 'just in case' — is forbidden (exclusive worship; two masters).",
+    "es": "Explique por qué cubrir todo — el Dios verdadero más otros poderes 'por si acaso' — está prohibido (adoración exclusiva; dos amos)."
+   },
+   "keywords": {
+    "en": [
+     "exclusive",
+     "worship",
+     "god",
+     "masters",
+     "two",
+     "forbidden",
+     "powers",
+     "serve"
+    ],
+    "es": [
+     "exclusiva",
+     "adoraci",
+     "dios",
+     "amos",
+     "dos",
+     "prohibe",
+     "poderes",
+     "servir"
+    ]
+   },
+   "model": {
+    "en": "Folk religion often keeps the true God while adding other powers just in case, covering all the bases. But God forbids this, because He demands exclusive worship. He says, you shall have no other gods before Me, and He will not share His glory with another. Jesus said that no one can serve two masters. So to worship God and also to seek help from Santa Muerte, the spirits, or the brujo is not a harmless addition but a betrayal of the exclusive allegiance God requires. Christ will not share an altar with demons. So the gospel does not add Christ to our other powers; it calls us to renounce them and serve God alone. To try to serve both is to serve neither faithfully, and it remains forbidden.",
+    "es": "La religión popular a menudo mantiene al Dios verdadero mientras añade otros poderes por si acaso, cubriendo todo. Pero Dios prohíbe esto, porque demanda adoración exclusiva. Dice, no tendrás dioses ajenos delante de mí, y no dará su gloria a otro. Jesús dijo que nadie puede servir a dos amos. Así que adorar a Dios y también buscar ayuda de la Santa Muerte, los espíritus, o el brujo no es una añadidura inofensiva sino una traición a la lealtad exclusiva que Dios requiere. Cristo no compartirá un altar con demonios. Así que el evangelio no añade a Cristo a nuestros otros poderes; nos llama a renunciar a ellos y servir a Dios solo. Intentar servir a ambos es no servir fielmente a ninguno, y permanece prohibido."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the difference between morally-neutral folk medicine (herbs) and the occult elements woven into folk healing.",
+    "es": "Explique la diferencia entre la medicina popular moralmente neutral (hierbas) y los elementos ocultos entretejidos en la sanación popular."
+   },
+   "keywords": {
+    "en": [
+     "herbs",
+     "medicine",
+     "neutral",
+     "occult",
+     "spirits",
+     "divination",
+     "invoke",
+     "difference"
+    ],
+    "es": [
+     "hierbas",
+     "medicina",
+     "neutral",
+     "oculto",
+     "invocar",
+     "adivinaci",
+     "diferencia",
+     "ritual"
+    ]
+   },
+   "model": {
+    "en": "We must be fair and make a real difference here. A remedy of herbs is simply folk medicine, and there is no sin in a tea; such herbal knowledge is morally neutral, like any medicine. So we do not condemn folk remedies as such. But curanderismo seldom stops at herbs. It moves quickly to the limpia that cleanses by ritual and spirit, to a diagnosis given by divination, and to the invoking of saints and spirits for supernatural power, and there it has crossed the line into the occult and the forbidden. So the difference is between neutral herbal medicine, which is allowed, and the spiritual invocation, ritual, and divination woven into folk healing, which are occult and forbidden. We keep what is only medicine and renounce what invokes spirits or seeks hidden knowledge by divination.",
+    "es": "Debemos ser justos y hacer una diferencia real aquí. Un remedio de hierbas es simplemente medicina popular, y no hay pecado en un té; tal conocimiento de hierbas es moralmente neutral, como cualquier medicina. Así que no condenamos los remedios populares como tales. Pero el curanderismo pocas veces se detiene en las hierbas. Se mueve rápidamente a la limpia que purifica por ritual y espíritu, a un diagnóstico dado por adivinación, y a la invocación de santos y espíritus para poder sobrenatural, y allí ha cruzado la línea a lo oculto y lo prohibido. Así que la diferencia es entre la medicina de hierbas neutral, que es permitida, y la invocación espiritual, el ritual, y la adivinación entretejidos en la sanación popular, que son ocultos y prohibidos. Guardamos lo que es solo medicina y renunciamos a lo que invoca espíritus o busca conocimiento oculto por adivinación."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the redemptive aim toward people bound in folk religion — who they often are, and what we bring them.",
+    "es": "Describa el fin redentor hacia las personas atadas en la religión popular — quiénes son a menudo, y qué les traemos."
+   },
+   "keywords": {
+    "en": [
+     "compassion",
+     "poor",
+     "fear",
+     "free",
+     "christ",
+     "protection",
+     "enslaved",
+     "love"
+    ],
+    "es": [
+     "compasi",
+     "pobre",
+     "temor",
+     "libre",
+     "cristo",
+     "protecci",
+     "esclavi",
+     "amor"
+    ]
+   },
+   "model": {
+    "en": "The sharpest words in this unit are aimed at the darkness, never at the people bound by it. Those who turn to folk religion are so often the ones the world has failed: the poor who cannot pay a doctor, the sick who have run out of hope, the mother terrified for a son in danger, the abandoned who found no help in any church. We do not sneer at them; we grieve for them with compassion, because they are seeking protection from what can only destroy them and are enslaved by fear. To them we bring not a rival superstition but the living God, who actually hears, heals, and protects, and who has conquered the death and the powers they fear, and He gives freely with no price. This is the most urgent evangelism of all, the freeing of captives. So we go with clear truth and deep love, longing to see the chains fall, the fear lifted, and the one who bowed to death stand upright and free in Christ.",
+    "es": "Las palabras más agudas de esta unidad apuntan a las tinieblas, nunca a las personas atadas por ellas. Los que se vuelven a la religión popular son tan a menudo aquellos a quienes el mundo ha fallado: el pobre que no puede pagar un médico, el enfermo que se ha quedado sin esperanza, la madre aterrada por un hijo en peligro, el abandonado que no halló ayuda en ninguna iglesia. No nos burlamos de ellos; nos dolemos por ellos con compasión, porque buscan protección de lo que solo puede destruirlos y están esclavizados por el temor. A ellos traemos no una superstición rival sino al Dios vivo, que de veras oye, sana, y protege, y que ha vencido la muerte y los poderes que temen, y Él da gratuitamente sin precio. Este es el evangelismo más urgente de todos, la liberación de cautivos. Así que vamos con verdad clara y profundo amor, anhelando ver caer las cadenas, levantarse el temor, y al que se postró ante la muerte ponerse de pie y libre en Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize Unit 9: what folk religion is, God's verdict, Christ's victory, and the redemptive aim.",
+    "es": "Resuma la Unidad 9: qué es la religión popular, el veredicto de Dios, la victoria de Cristo, y el fin redentor."
+   },
+   "keywords": {
+    "en": [
+     "folk",
+     "occult",
+     "forbidden",
+     "christ",
+     "victory",
+     "death",
+     "free",
+     "gospel"
+    ],
+    "es": [
+     "popular",
+     "oculto",
+     "prohibe",
+     "cristo",
+     "victoria",
+     "muerte",
+     "libre",
+     "evangelio"
+    ]
+   },
+   "model": {
+    "en": "Unit 9 examines Mexican folk religion, a syncretism that mixes Christian forms with Santa Muerte, spiritism, curanderismo, brujería, and divination. This is not a Christian tradition but a return to the occult, and God's verdict is plain: in Deuteronomy 18 He calls all these practices an abomination and forbids them, for behind the idols stand real demons. Yet the gospel is the thunder of victory: at the cross Christ disarmed the powers, destroyed the works of the devil, and by His own death defeated death itself and freed those enslaved by the fear of it. The gospel is not a stronger spell but a finished victory requiring a clean break with the occult. And the aim is redemptive: with compassion for people who are often poor and frightened, we bring them the living God and freedom in Christ.",
+    "es": "La Unidad 9 examina la religión popular mexicana, un sincretismo que mezcla formas cristianas con la Santa Muerte, el espiritismo, el curanderismo, la brujería, y la adivinación. Esto no es una tradición cristiana sino un regreso a lo oculto, y el veredicto de Dios es claro: en Deuteronomio 18 llama a todas estas prácticas abominación y las prohíbe, pues detrás de los ídolos están demonios reales. Sin embargo, el evangelio es el trueno de victoria: en la cruz Cristo despojó a los poderes, deshizo las obras del diablo, y por su propia muerte venció la muerte misma y libró a los esclavizados por el temor de ella. El evangelio no es un hechizo más fuerte sino una victoria consumada que requiere una ruptura limpia con lo oculto. Y el fin es redentor: con compasión por personas que a menudo son pobres y temerosas, les traemos al Dios vivo y la libertad en Cristo."
+   }
+  }
+ ]
+};

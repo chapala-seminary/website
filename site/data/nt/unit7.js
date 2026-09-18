@@ -1,123 +1,795 @@
-/* CTSNT - unit 7: per-unit configuration and content. */
-
-const UNIT = 7;
-
-const NEXT_URL = 'CTSNTUnit8.html';
-
-const PREV_URL = 'CTSNTUnit6.html';
-
-const mcQuestions = [
-    { textEn: "1. Who is the author of Romans, 1-2 Corinthians, and Galatians?", textEs: "1. ¿Quién es el autor de Romanos, 1-2 Corintios y Gálatas?",
-      optionsEn: ["Peter the apostle", "John the apostle", "James the brother of Jesus", "Paul the apostle"],
-      optionsEs: ["Pedro el apóstol", "Juan el apóstol", "Jacobo hermano de Jesús", "Pablo el apóstol"],
-      explanationEn: "Paul wrote Romans, 1–2 Corinthians, and Galatians — his three most argument-driven letters, the closest the NT comes to systematic theology.", explanationEs: "Pablo escribió Romanos, 1–2 Corintios y Gálatas — sus tres cartas más argumentativas, lo más cercano que tiene el NT a la teología sistemática.", correct: 3 },
-    { textEn: "2. The key verse of Romans, declaring Paul's confidence in the gospel, is:", textEs: "2. El versículo clave de Romanos, declarando la confianza de Pablo en el evangelio, es:",
-      optionsEn: ["Romans 1:16", "Romans 3:23", "Romans 8:1", "Romans 12:1"],
-      optionsEs: ["Romanos 1:16", "Romanos 3:23", "Romanos 8:1", "Romanos 12:1"],
-      explanationEn: "The key verse of Romans is 1:16 — Paul is not ashamed of the gospel, the power of God to salvation for everyone who believes.", explanationEs: "El versículo clave de Romanos es 1:16 — Pablo no se avergüenza del evangelio, potencia de Dios para salvación a todo aquel que cree.", correct: 0 },
-    { textEn: "3. Paul wrote Romans from which city?", textEs: "3. Pablo escribió Romanos desde cuál ciudad?",
-      optionsEn: ["Antioch", "Corinth", "Ephesus", "Jerusalem"],
-      optionsEs: ["Antioquía", "Corinto", "Éfeso", "Jerusalén"],
-      explanationEn: "Paul wrote Romans from Corinth around AD 57 to a church he had never visited, to be known by his gospel before his face.", explanationEs: "Pablo escribió Romanos desde Corinto cerca del año 57 a una iglesia que nunca había visitado, para ser conocido por su evangelio antes que por su rostro.", correct: 1 },
-    { textEn: "4. Romans 1-8 primarily deals with which great verb of salvation?", textEs: "4. Romanos 1-8 trata principalmente con cuál gran verbo de la salvación?",
-      optionsEn: ["Sanctification", "Glorification", "Justification", "Predestination"],
-      optionsEs: ["Santificación", "Glorificación", "Justificación", "Predestinación"],
-      explanationEn: "Romans 3:23 says all have sinned and fall short of the glory of God, after Paul shows Gentile, moralist, and Jew all guilty.", explanationEs: "Romanos 3:23 dice que todos pecaron y están destituidos de la gloria de Dios, tras mostrar Pablo culpables al gentil, al moralista y al judío.", correct: 2 },
-    { textEn: "5. 1 Corinthians was written to address problems Paul heard about through:", textEs: "5. 1 Corintios fue escrita para tratar problemas que Pablo oyó a través de:",
-      optionsEn: ["The household of Chloe", "Apollos", "Timothy", "Silas"],
-      optionsEs: ["Los de Cloé", "Apolos", "Timoteo", "Silas"],
-      explanationEn: "Romans 1–8 deals with justification — how a sinner is declared righteous in the courtroom of heaven, freely by grace.", explanationEs: "Romanos 1–8 trata de la justificación — cómo un pecador es declarado justo en la sala del tribunal del cielo, gratuitamente por gracia.", correct: 0 },
-    { textEn: "6. Paul founded the church at Corinth on his:", textEs: "6. Pablo fundó la iglesia de Corinto en su:",
-      optionsEn: ["First missionary journey", "Second missionary journey", "Third missionary journey", "Journey to Rome"],
-      optionsEs: ["Primer viaje misionero", "Segundo viaje misionero", "Tercer viaje misionero", "Viaje a Roma"],
-      explanationEn: "Romans 9–11 wrestles with the place of Israel in God's redemptive plan, between justification and practical living.", explanationEs: "Romanos 9–11 lucha con el lugar de Israel en el plan redentor de Dios, entre la justificación y la vida práctica.", correct: 1 },
-    { textEn: "7. 1 Corinthians 13 is famously known as the chapter of:", textEs: "7. 1 Corintios 13 es famosamente conocido como el capítulo de:",
-      optionsEn: ["Faith", "Hope", "Love", "Salvation"],
-      optionsEs: ["La fe", "La esperanza", "El amor", "La salvación"],
-      explanationEn: "Romans converted Augustine in a Milan garden and lit Luther's Reformation and Wesley's warmed heart at Aldersgate.", explanationEs: "Romanos convirtió a Agustín en un jardín de Milán y encendió la Reforma de Lutero y el corazón calentado de Wesley en Aldersgate.", correct: 2 },
-    { textEn: "8. The longest sustained argument on resurrection in the New Testament is:", textEs: "8. El argumento sostenido más largo sobre la resurrección en el Nuevo Testamento es:",
-      optionsEn: ["Romans 6", "Romans 8", "1 Corinthians 13", "1 Corinthians 15"],
-      optionsEs: ["Romanos 6", "Romanos 8", "1 Corintios 13", "1 Corintios 15"],
-      explanationEn: "Paul wrote 1 Corinthians from Ephesus around AD 55 to a divided, struggling church he had founded and stayed in eighteen months.", explanationEs: "Pablo escribió 1 Corintios desde Éfeso cerca del año 55 a una iglesia dividida y en lucha que había fundado y donde se quedó dieciocho meses.", correct: 3 },
-    { textEn: "9. Paul's most extended teaching on Christian giving is found in:", textEs: "9. La enseñanza más extensa de Pablo sobre la dádiva cristiana se encuentra en:",
-      optionsEn: ["2 Corinthians 8-9", "Romans 12", "Galatians 6", "1 Corinthians 16"],
-      optionsEs: ["2 Corintios 8-9", "Romanos 12", "Gálatas 6", "1 Corintios 16"],
-      explanationEn: "Paul addressed the divisions, immorality, and lawsuits he had heard of by the household of Chloe (1 Cor 1–6).", explanationEs: "Pablo abordó las divisiones, la inmoralidad y los pleitos de que había oído por los de Cloé (1 Cor 1–6).", correct: 0 },
-    { textEn: "10. The Lord's response to Paul's prayer about the 'thorn in the flesh' was:", textEs: "10. La respuesta del Señor a la oración de Pablo sobre el 'aguijón en la carne' fue:",
-      optionsEn: ["I will remove it from you", "My grace is sufficient for you", "Pray harder", "It was sent by Satan"],
-      optionsEs: ["Te lo quitaré", "Bástate mi gracia", "Ora con más fuerza", "Fue enviado por Satanás"],
-      explanationEn: "The key verse of 1 Corinthians is 10:23 — all things are lawful, but not all edify; liberty must serve love.", explanationEs: "El versículo clave de 1 Corintios es 10:23 — todo es lícito, mas no todo edifica; la libertad debe servir al amor.", correct: 1 },
-    { textEn: "11. Galatians was written primarily to combat the false teaching of:", textEs: "11. Gálatas fue escrita principalmente para combatir la falsa enseñanza de:",
-      optionsEn: ["Gnostics", "Stoics", "Judaizers", "Epicureans"],
-      optionsEs: ["Gnósticos", "Estoicos", "Judaizantes", "Epicúreos"],
-      explanationEn: "First Corinthians 12 pictures the church as the body of Christ — many members, each necessary, each belonging.", explanationEs: "Primera de Corintios 12 pinta a la iglesia como el cuerpo de Cristo — muchos miembros, cada uno necesario, cada uno perteneciente.", correct: 2 },
-    { textEn: "12. The Judaizers taught that Christians must also be:", textEs: "12. Los judaizantes enseñaban que los cristianos también debían ser:",
-      optionsEn: ["Baptized in the Jordan", "Educated in Greek", "Sent to Jerusalem", "Circumcised and keep the Law of Moses"],
-      optionsEs: ["Bautizados en el Jordán", "Educados en griego", "Enviados a Jerusalén", "Circuncidados y guardar la Ley de Moisés"],
-      explanationEn: "First Corinthians 13, the famous love chapter, makes love the supreme gift, without which the gifted believer is nothing.", explanationEs: "Primera de Corintios 13, el famoso capítulo del amor, hace del amor el don supremo, sin el cual el creyente dotado no es nada.", correct: 3 },
-    { textEn: "13. The key verse of Galatians declares 'I have been crucified with Christ' and is found at:", textEs: "13. El versículo clave de Gálatas declara 'Con Cristo estoy juntamente crucificado' y se encuentra en:",
-      optionsEn: ["Galatians 2:20", "Galatians 3:13", "Galatians 5:1", "Galatians 6:14"],
-      optionsEs: ["Gálatas 2:20", "Gálatas 3:13", "Gálatas 5:1", "Gálatas 6:14"],
-      explanationEn: "First Corinthians 15 is the longest sustained argument on the resurrection in the New Testament, anchoring all of Corinth's chaos.", explanationEs: "Primera de Corintios 15 es el argumento sostenido más largo sobre la resurrección en el Nuevo Testamento, anclando todo el caos de Corinto.", correct: 0 },
-    { textEn: "14. The 'fruit of the Spirit' is found in Galatians 5:22-23 and begins with:", textEs: "14. El 'fruto del Espíritu' se encuentra en Gálatas 5:22-23 y comienza con:",
-      optionsEn: ["Joy", "Love", "Peace", "Faith"],
-      optionsEs: ["Gozo", "Amor", "Paz", "Fe"],
-      explanationEn: "Second Corinthians is Paul's most personal letter, his open heart, written from Macedonia around AD 56 after deep affliction.", explanationEs: "Segunda de Corintios es la carta más personal de Pablo, su corazón abierto, escrita desde Macedonia cerca del año 56 tras profunda aflicción.", correct: 1 },
-    { textEn: "15. Paul calls Galatians 'a different gospel' because the Judaizers added:", textEs: "15. Pablo llama a Gálatas 'otro evangelio' porque los judaizantes añadieron:",
-      optionsEn: ["Greek philosophy", "Mystery religion", "Works of the Law to faith", "Roman ceremonies"],
-      optionsEs: ["Filosofía griega", "Religión de misterios", "Obras de la Ley a la fe", "Ceremonias romanas"],
-      explanationEn: "Second Corinthians 8–9 gives the NT's fullest teaching on giving, where 'God loves a cheerful giver' (9:7) is found.", explanationEs: "Segunda de Corintios 8–9 da la enseñanza más plena del NT sobre la dádiva, donde está 'Dios ama al dador alegre' (9:7).", correct: 2 },
-    { textEn: "16. Augustine was famously converted by reading which passage in Romans?", textEs: "16. Agustín fue famosamente convertido leyendo cuál pasaje en Romanos?",
-      optionsEn: ["Romans 3:23", "Romans 6:23", "Romans 10:9", "Romans 13:13-14"],
-      optionsEs: ["Romanos 3:23", "Romanos 6:23", "Romanos 10:9", "Romanos 13:13-14"],
-      explanationEn: "Paul's thorn in the flesh taught him 'My grace is sufficient for you, for My strength is made perfect in weakness' (12:9).", explanationEs: "El aguijón en la carne de Pablo le enseñó 'Bástate mi gracia, porque mi potencia en la flaqueza se perfecciona' (12:9).", correct: 3 },
-    { textEn: "17. Martin Luther's understanding of justification by faith came largely from:", textEs: "17. La comprensión de Martín Lutero sobre la justificación por la fe vino principalmente de:",
-      optionsEn: ["Romans 1:17", "1 Corinthians 13", "Galatians 5:1", "Ephesians 2:8"],
-      optionsEs: ["Romanos 1:17", "1 Corintios 13", "Gálatas 5:1", "Efesios 2:8"],
-      explanationEn: "Galatians answers the Judaizers, who said converts must be circumcised and keep the law to be truly saved.", explanationEs: "Gálatas responde a los judaizantes, que decían que los convertidos debían circuncidarse y guardar la ley para ser verdaderamente salvos.", correct: 0 },
-    { textEn: "18. John Wesley's heart was 'strangely warmed' while hearing Luther's preface to:", textEs: "18. El corazón de Juan Wesley fue 'extrañamente calentado' mientras oía el prefacio de Lutero a:",
-      optionsEn: ["The Gospel of John", "Romans", "Galatians", "Hebrews"],
-      optionsEs: ["El Evangelio de Juan", "Romanos", "Gálatas", "Hebreos"],
-      explanationEn: "Galatians is the one Paul letter with no thanksgiving; he marvels they so soon turned to a different gospel (1:6).", explanationEs: "Gálatas es la única carta de Pablo sin acción de gracias; se maravilla de que tan pronto se volvieran a otro evangelio (1:6).", correct: 1 },
-    { textEn: "19. Paul uses which extended metaphor to describe how the local church should function in 1 Corinthians 12?", textEs: "19. Pablo usa cuál metáfora extendida para describir cómo debe funcionar la iglesia local en 1 Corintios 12?",
-      optionsEn: ["A vine and branches", "A building of stones", "A human body with many members", "An army with many ranks"],
-      optionsEs: ["Una vid y ramas", "Un edificio de piedras", "Un cuerpo humano con muchos miembros", "Un ejército con muchos rangos"],
-      explanationEn: "The key verse of Galatians is 2:20 — 'I have been crucified with Christ; it is no longer I who live, but Christ lives in me.'", explanationEs: "El versículo clave de Gálatas es 2:20 — 'Con Cristo estoy juntamente crucificado; y vivo, no ya yo, mas vive Cristo en mí'.", correct: 2 },
-    { textEn: "20. The unifying theme that runs through Romans, Corinthians, and Galatians is best summarized as:", textEs: "20. El tema unificador que corre por Romanos, Corintios y Gálatas se resume mejor como:",
-      optionsEn: ["Eschatology", "Holiness", "Suffering", "Liberty"],
-      optionsEs: ["Escatología", "Santidad", "Sufrimiento", "Libertad"],
-      explanationEn: "The theme uniting the three letters is liberty: from condemnation in Romans, in the Body in Corinthians, through grace in Galatians.", explanationEs: "El tema que une las tres cartas es la libertad: de la condenación en Romanos, en el Cuerpo en Corintios, por la gracia en Gálatas.", correct: 3 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain the three-part structure of Romans 1-8 (justification), 9-11 (Israel), and 12-16 (Christian living). How do they fit together?", textEs: "21. Explique la estructura tripartita de Romanos 1-8 (justificación), 9-11 (Israel), y 12-16 (vida cristiana). ¿Cómo encajan?",
-      kw_en: ["justification", "israel", "practical", "structure", "romans", "salvation"], kw_es: ["justificacion", "israel", "practica", "estructura", "romanos", "salvacion"],
-      modelEn: "Romans follows the great verbs of salvation in a clear structure. Chapters 1–8 set out justification, showing the whole race guilty and then declared righteous freely by grace through Christ. Chapters 9–11 wrestle with Israel's place in God's redemptive plan. Chapters 12–16 turn practical, landing the soaring theology on how a Christian lives the next morning.", modelEs: "Romanos sigue los grandes verbos de la salvación en una estructura clara. Los capítulos 1–8 exponen la justificación, mostrando a toda la raza culpable y luego declarada justa gratuitamente por gracia mediante Cristo. Los capítulos 9–11 luchan con el lugar de Israel en el plan redentor de Dios. Los capítulos 12–16 se vuelven prácticos, aterrizando la elevada teología en cómo vive el cristiano la mañana siguiente." },
-    { textEn: "22. Discuss the historical significance of Romans for Augustine, Luther, and Wesley. What does this tell us about the book?", textEs: "22. Discuta el significado histórico de Romanos para Agustín, Lutero y Wesley. ¿Qué nos dice esto sobre el libro?",
-      kw_en: ["augustine", "luther", "wesley", "reformation", "revival", "history"], kw_es: ["agustin", "lutero", "wesley", "reforma", "avivamiento", "historia"],
-      modelEn: "Romans has lit the fire of revival across history. Augustine was converted reading it in a Milan garden; Luther, lecturing on Romans 1:17, came to see the just shall live by faith, and the Reformation was born; and Wesley felt his heart strangely warmed hearing Luther's preface to Romans on Aldersgate Street. The same pages have kindled awakening after awakening.", modelEs: "Romanos ha encendido el fuego del avivamiento a lo largo de la historia. Agustín se convirtió leyéndola en un jardín de Milán; Lutero, enseñando sobre Romanos 1:17, llegó a ver que el justo por la fe vivirá, y nació la Reforma; y Wesley sintió su corazón extrañamente calentado al oír el prefacio de Lutero a Romanos en la calle Aldersgate. Las mismas páginas han encendido avivamiento tras avivamiento." },
-    { textEn: "23. Compare the tone and purpose of 1 Corinthians (instruction manual) with 2 Corinthians (open heart). Why both letters?", textEs: "23. Compare el tono y propósito de 1 Corintios (manual de instrucciones) con 2 Corintios (corazón abierto). ¿Por qué ambas cartas?",
-      kw_en: ["instruction", "personal", "pastoral", "corinth", "problems", "defense"], kw_es: ["instruccion", "personal", "pastoral", "corinto", "problemas", "defensa"],
-      modelEn: "First Corinthians is Paul's instruction manual, answering the problems of a divided Corinth point by point with practical correction. Second Corinthians is his open, personal heart, more pastoral than instructional, written after affliction and pain. Where the first letter instructs the church, the second defends his ministry against critics and false apostles and bares his own weakness.", modelEs: "Primera de Corintios es el manual de instrucciones de Pablo, respondiendo a los problemas de un Corinto dividido punto por punto con corrección práctica. Segunda de Corintios es su corazón abierto y personal, más pastoral que instructivo, escrita tras la aflicción y el dolor. Donde la primera carta instruye a la iglesia, la segunda defiende su ministerio contra críticos y falsos apóstoles y desnuda su propia debilidad." },
-    { textEn: "24. Apply the body metaphor of 1 Corinthians 12 to the local church today. What three principles emerge?", textEs: "24. Aplique la metáfora del cuerpo de 1 Corintios 12 a la iglesia local hoy. ¿Cuáles tres principios emergen?",
-      kw_en: ["body", "diversity", "every member", "love", "function", "gifts"], kw_es: ["cuerpo", "diversidad", "cada miembro", "amor", "funcion", "dones"],
-      modelEn: "The body metaphor of 1 Corinthians 12 teaches that the church is one body of many members with different gifts. Diversity is the design, not a problem, for the eye is not better than the foot; every member matters, including the hidden ones; and love is the only force that holds the body together so each part can function. A church applies it by valuing every member's gift in love.", modelEs: "La metáfora del cuerpo de 1 Corintios 12 enseña que la iglesia es un cuerpo de muchos miembros con diferentes dones. La diversidad es el diseño, no un problema, pues el ojo no es mejor que el pie; cada miembro importa, incluso los ocultos; y el amor es la única fuerza que mantiene unido al cuerpo para que cada parte funcione. Una iglesia lo aplica valorando en amor el don de cada miembro." },
-    { textEn: "25. Explain why love (1 Corinthians 13) is called the 'nervous system' of the Body of Christ and the supreme spiritual gift.", textEs: "25. Explique por qué el amor (1 Corintios 13) es llamado el 'sistema nervioso' del Cuerpo de Cristo y el supremo don espiritual.",
-      kw_en: ["love", "supreme", "gift", "13", "without", "nothing"], kw_es: ["amor", "supremo", "don", "13", "sin", "nada"],
-      modelEn: "Love is the nervous system of the body because 1 Corinthians 13 names it the supreme gift, the one that makes every other gift work. Paul says that without love even prophecy, knowledge, and mountain-moving faith leave him nothing. Add the love of chapter 13 to the body of chapter 12 and you have the functional church; remove love and the body falls apart.", modelEs: "El amor es el sistema nervioso del cuerpo porque 1 Corintios 13 lo nombra el don supremo, el que hace funcionar a todos los demás dones. Pablo dice que sin amor aun la profecía, el conocimiento y la fe que mueve montañas lo dejan sin nada. Añada el amor del capítulo 13 al cuerpo del capítulo 12 y tiene la iglesia funcional; quite el amor y el cuerpo se desmorona." },
-    { textEn: "26. Trace Paul's argument for resurrection in 1 Corinthians 15. Why is the bodily resurrection of Christ non-negotiable?", textEs: "26. Trace el argumento de Pablo a favor de la resurrección en 1 Corintios 15. ¿Por qué la resurrección corporal de Cristo es innegociable?",
-      kw_en: ["resurrection", "witnesses", "first fruits", "death", "victory", "futile"], kw_es: ["resurreccion", "testigos", "primicias", "muerte", "victoria", "vana"],
-      modelEn: "Paul argues for the resurrection in 1 Corinthians 15 first from history: Christ died, was buried, rose, and appeared to many witnesses still living. Then he draws the line — if Christ is not risen, the faith is futile and we are still in our sins. But because Christ is risen as the first fruits, the believer has a coming resurrection, and Paul shouts to death that its sting and victory are gone.", modelEs: "Pablo argumenta a favor de la resurrección en 1 Corintios 15 primero desde la historia: Cristo murió, fue sepultado, resucitó y apareció a muchos testigos aún vivos. Luego traza la línea — si Cristo no resucitó, la fe es vana y aún estamos en nuestros pecados. Pero porque Cristo resucitó como las primicias, el creyente tiene una resurrección venidera, y Pablo clama a la muerte que su aguijón y su victoria se han ido." },
-    { textEn: "27. Discuss the heresy of the Judaizers in Galatians. Why was Paul so fierce in his response?", textEs: "27. Discuta la herejía de los judaizantes en Gálatas. ¿Por qué fue Pablo tan feroz en su respuesta?",
-      kw_en: ["judaizers", "circumcision", "law", "different gospel", "another gospel", "anathema"], kw_es: ["judaizantes", "circuncision", "ley", "evangelio diferente", "otro evangelio", "anatema"],
-      modelEn: "The Judaizers told Paul's converts that faith in Christ was only a start and they must also be circumcised and keep the law to be saved. Paul was fierce because this was a different gospel that added works to grace and so destroyed the gospel itself. He pronounced anathema on anyone preaching it, since to add the law to Christ is to lose Christ.", modelEs: "Los judaizantes decían a los convertidos de Pablo que la fe en Cristo era solo un comienzo y que también debían circuncidarse y guardar la ley para ser salvos. Pablo fue feroz porque esto era otro evangelio que añadía obras a la gracia y así destruía el evangelio mismo. Pronunció anatema sobre cualquiera que lo predicara, pues añadir la ley a Cristo es perder a Cristo." },
-    { textEn: "28. Apply Galatians 2:20 ('I have been crucified with Christ') to the daily life of the believer. What does it mean practically?", textEs: "28. Aplique Gálatas 2:20 ('Con Cristo estoy juntamente crucificado') a la vida diaria del creyente. ¿Qué significa prácticamente?",
-      kw_en: ["crucified", "christ in me", "faith", "daily", "self", "new life"], kw_es: ["crucificado", "cristo en mi", "fe", "diariamente", "yo", "vida nueva"],
-      modelEn: "Galatians 2:20 applies to daily life as the pattern of the believer's existence: I have been crucified with Christ, so the old self no longer reigns, and the new life is Christ living in me. Each day is lived by faith in the Son of God who loved me and gave Himself for me, the self dethroned and Christ enthroned in its place.", modelEs: "Gálatas 2:20 se aplica a la vida diaria como el patrón de la existencia del creyente: con Cristo estoy juntamente crucificado, así que el viejo yo ya no reina, y la nueva vida es Cristo viviendo en mí. Cada día se vive por la fe en el Hijo de Dios que me amó y se entregó por mí, destronado el yo y entronizado Cristo en su lugar." },
-    { textEn: "29. Explain how the unifying theme of 'liberty' connects Romans (liberty from), Corinthians (liberty in), and Galatians (liberty through).", textEs: "29. Explique cómo el tema unificador de la 'libertad' conecta Romanos (libertad de), Corintios (libertad en), y Gálatas (libertad por).",
-      kw_en: ["liberty", "condemnation", "body", "grace", "romans", "galatians"], kw_es: ["libertad", "condenacion", "cuerpo", "gracia", "romanos", "galatas"],
-      modelEn: "The theme of liberty connects all three letters. Romans gives liberty from condemnation, the chains of guilt falling off in chapter 8. The Corinthians give liberty in the Body, the freedom to be different and serve in love. Galatians gives liberty through grace, freedom from trying to earn what Christ already purchased. Three letters, one liberty, one Christ.", modelEs: "El tema de la libertad conecta las tres cartas. Romanos da libertad de la condenación, cayendo las cadenas de la culpa en el capítulo 8. Corintios da libertad en el Cuerpo, la libertad de ser diferente y servir en amor. Gálatas da libertad por la gracia, libertad de tratar de ganar lo que Cristo ya compró. Tres cartas, una libertad, un Cristo." },
-    { textEn: "30. Synthesize: Why are Romans, Corinthians, and Galatians considered the heart of Paul's gospel for the Christian church?", textEs: "30. Sintetice: ¿Por qué se consideran Romanos, Corintios y Gálatas el corazón del evangelio de Pablo para la iglesia cristiana?",
-      kw_en: ["paul", "gospel", "doctrine", "practical", "liberty", "grace", "church"], kw_es: ["pablo", "evangelio", "doctrina", "practica", "libertad", "gracia", "iglesia"],
-      modelEn: "These three are the doctrinal heart of Paul because together they give the gospel whole: Romans sets out the doctrine of how a sinner is justified by grace, the Corinthians show that doctrine made practical in the life of the church, and Galatians guards the liberty of grace against every attempt to add works. Paul's mind on fire with grace gives the church its doctrine, its practice, and its freedom.", modelEs: "Estas tres son el corazón doctrinal de Pablo porque juntas dan el evangelio entero: Romanos expone la doctrina de cómo un pecador es justificado por gracia, los Corintios muestran esa doctrina hecha práctica en la vida de la iglesia, y Gálatas guarda la libertad de la gracia contra todo intento de añadir obras. La mente de Pablo encendida con la gracia da a la iglesia su doctrina, su práctica y su libertad." }
-];
+/* CTSNT — unit 7. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "nt",
+ "unit": 7,
+ "totalUnits": 12,
+ "filePrefix": "CTSNT",
+ "prevHref": "CTSNTUnit6.html",
+ "nextHref": "CTSNTUnit8.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Who is the author of Romans, 1-2 Corinthians, and Galatians?",
+    "es": "¿Quién es el autor de Romanos, 1-2 Corintios y Gálatas?"
+   },
+   "options": {
+    "en": [
+     "Peter the apostle",
+     "John the apostle",
+     "James the brother of Jesus",
+     "Paul the apostle"
+    ],
+    "es": [
+     "Pedro el apóstol",
+     "Juan el apóstol",
+     "Jacobo hermano de Jesús",
+     "Pablo el apóstol"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Paul wrote Romans, 1–2 Corinthians, and Galatians — his three most argument-driven letters, the closest the NT comes to systematic theology.",
+    "es": "Pablo escribió Romanos, 1–2 Corintios y Gálatas — sus tres cartas más argumentativas, lo más cercano que tiene el NT a la teología sistemática."
+   }
+  },
+  {
+   "stem": {
+    "en": "The key verse of Romans, declaring Paul's confidence in the gospel, is:",
+    "es": "El versículo clave de Romanos, declarando la confianza de Pablo en el evangelio, es:"
+   },
+   "options": {
+    "en": [
+     "Romans 1:16",
+     "Romans 3:23",
+     "Romans 8:1",
+     "Romans 12:1"
+    ],
+    "es": [
+     "Romanos 1:16",
+     "Romanos 3:23",
+     "Romanos 8:1",
+     "Romanos 12:1"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The key verse of Romans is 1:16 — Paul is not ashamed of the gospel, the power of God to salvation for everyone who believes.",
+    "es": "El versículo clave de Romanos es 1:16 — Pablo no se avergüenza del evangelio, potencia de Dios para salvación a todo aquel que cree."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul wrote Romans from which city?",
+    "es": "Pablo escribió Romanos desde cuál ciudad?"
+   },
+   "options": {
+    "en": [
+     "Antioch",
+     "Corinth",
+     "Ephesus",
+     "Jerusalem"
+    ],
+    "es": [
+     "Antioquía",
+     "Corinto",
+     "Éfeso",
+     "Jerusalén"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Paul wrote Romans from Corinth around AD 57 to a church he had never visited, to be known by his gospel before his face.",
+    "es": "Pablo escribió Romanos desde Corinto cerca del año 57 a una iglesia que nunca había visitado, para ser conocido por su evangelio antes que por su rostro."
+   }
+  },
+  {
+   "stem": {
+    "en": "Romans 1-8 primarily deals with which great verb of salvation?",
+    "es": "Romanos 1-8 trata principalmente con cuál gran verbo de la salvación?"
+   },
+   "options": {
+    "en": [
+     "Sanctification",
+     "Glorification",
+     "Justification",
+     "Predestination"
+    ],
+    "es": [
+     "Santificación",
+     "Glorificación",
+     "Justificación",
+     "Predestinación"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Romans 3:23 says all have sinned and fall short of the glory of God, after Paul shows Gentile, moralist, and Jew all guilty.",
+    "es": "Romanos 3:23 dice que todos pecaron y están destituidos de la gloria de Dios, tras mostrar Pablo culpables al gentil, al moralista y al judío."
+   }
+  },
+  {
+   "stem": {
+    "en": "1 Corinthians was written to address problems Paul heard about through:",
+    "es": "1 Corintios fue escrita para tratar problemas que Pablo oyó a través de:"
+   },
+   "options": {
+    "en": [
+     "The household of Chloe",
+     "Apollos",
+     "Timothy",
+     "Silas"
+    ],
+    "es": [
+     "Los de Cloé",
+     "Apolos",
+     "Timoteo",
+     "Silas"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Romans 1–8 deals with justification — how a sinner is declared righteous in the courtroom of heaven, freely by grace.",
+    "es": "Romanos 1–8 trata de la justificación — cómo un pecador es declarado justo en la sala del tribunal del cielo, gratuitamente por gracia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul founded the church at Corinth on his:",
+    "es": "Pablo fundó la iglesia de Corinto en su:"
+   },
+   "options": {
+    "en": [
+     "First missionary journey",
+     "Second missionary journey",
+     "Third missionary journey",
+     "Journey to Rome"
+    ],
+    "es": [
+     "Primer viaje misionero",
+     "Segundo viaje misionero",
+     "Tercer viaje misionero",
+     "Viaje a Roma"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Romans 9–11 wrestles with the place of Israel in God's redemptive plan, between justification and practical living.",
+    "es": "Romanos 9–11 lucha con el lugar de Israel en el plan redentor de Dios, entre la justificación y la vida práctica."
+   }
+  },
+  {
+   "stem": {
+    "en": "1 Corinthians 13 is famously known as the chapter of:",
+    "es": "1 Corintios 13 es famosamente conocido como el capítulo de:"
+   },
+   "options": {
+    "en": [
+     "Faith",
+     "Hope",
+     "Love",
+     "Salvation"
+    ],
+    "es": [
+     "La fe",
+     "La esperanza",
+     "El amor",
+     "La salvación"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Romans converted Augustine in a Milan garden and lit Luther's Reformation and Wesley's warmed heart at Aldersgate.",
+    "es": "Romanos convirtió a Agustín en un jardín de Milán y encendió la Reforma de Lutero y el corazón calentado de Wesley en Aldersgate."
+   }
+  },
+  {
+   "stem": {
+    "en": "The longest sustained argument on resurrection in the New Testament is:",
+    "es": "El argumento sostenido más largo sobre la resurrección en el Nuevo Testamento es:"
+   },
+   "options": {
+    "en": [
+     "Romans 6",
+     "Romans 8",
+     "1 Corinthians 13",
+     "1 Corinthians 15"
+    ],
+    "es": [
+     "Romanos 6",
+     "Romanos 8",
+     "1 Corintios 13",
+     "1 Corintios 15"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Paul wrote 1 Corinthians from Ephesus around AD 55 to a divided, struggling church he had founded and stayed in eighteen months.",
+    "es": "Pablo escribió 1 Corintios desde Éfeso cerca del año 55 a una iglesia dividida y en lucha que había fundado y donde se quedó dieciocho meses."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul's most extended teaching on Christian giving is found in:",
+    "es": "La enseñanza más extensa de Pablo sobre la dádiva cristiana se encuentra en:"
+   },
+   "options": {
+    "en": [
+     "2 Corinthians 8-9",
+     "Romans 12",
+     "Galatians 6",
+     "1 Corinthians 16"
+    ],
+    "es": [
+     "2 Corintios 8-9",
+     "Romanos 12",
+     "Gálatas 6",
+     "1 Corintios 16"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Paul addressed the divisions, immorality, and lawsuits he had heard of by the household of Chloe (1 Cor 1–6).",
+    "es": "Pablo abordó las divisiones, la inmoralidad y los pleitos de que había oído por los de Cloé (1 Cor 1–6)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Lord's response to Paul's prayer about the 'thorn in the flesh' was:",
+    "es": "La respuesta del Señor a la oración de Pablo sobre el 'aguijón en la carne' fue:"
+   },
+   "options": {
+    "en": [
+     "I will remove it from you",
+     "My grace is sufficient for you",
+     "Pray harder",
+     "It was sent by Satan"
+    ],
+    "es": [
+     "Te lo quitaré",
+     "Bástate mi gracia",
+     "Ora con más fuerza",
+     "Fue enviado por Satanás"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The key verse of 1 Corinthians is 10:23 — all things are lawful, but not all edify; liberty must serve love.",
+    "es": "El versículo clave de 1 Corintios es 10:23 — todo es lícito, mas no todo edifica; la libertad debe servir al amor."
+   }
+  },
+  {
+   "stem": {
+    "en": "Galatians was written primarily to combat the false teaching of:",
+    "es": "Gálatas fue escrita principalmente para combatir la falsa enseñanza de:"
+   },
+   "options": {
+    "en": [
+     "Gnostics",
+     "Stoics",
+     "Judaizers",
+     "Epicureans"
+    ],
+    "es": [
+     "Gnósticos",
+     "Estoicos",
+     "Judaizantes",
+     "Epicúreos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "First Corinthians 12 pictures the church as the body of Christ — many members, each necessary, each belonging.",
+    "es": "Primera de Corintios 12 pinta a la iglesia como el cuerpo de Cristo — muchos miembros, cada uno necesario, cada uno perteneciente."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Judaizers taught that Christians must also be:",
+    "es": "Los judaizantes enseñaban que los cristianos también debían ser:"
+   },
+   "options": {
+    "en": [
+     "Baptized in the Jordan",
+     "Educated in Greek",
+     "Sent to Jerusalem",
+     "Circumcised and keep the Law of Moses"
+    ],
+    "es": [
+     "Bautizados en el Jordán",
+     "Educados en griego",
+     "Enviados a Jerusalén",
+     "Circuncidados y guardar la Ley de Moisés"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "First Corinthians 13, the famous love chapter, makes love the supreme gift, without which the gifted believer is nothing.",
+    "es": "Primera de Corintios 13, el famoso capítulo del amor, hace del amor el don supremo, sin el cual el creyente dotado no es nada."
+   }
+  },
+  {
+   "stem": {
+    "en": "The key verse of Galatians declares 'I have been crucified with Christ' and is found at:",
+    "es": "El versículo clave de Gálatas declara 'Con Cristo estoy juntamente crucificado' y se encuentra en:"
+   },
+   "options": {
+    "en": [
+     "Galatians 2:20",
+     "Galatians 3:13",
+     "Galatians 5:1",
+     "Galatians 6:14"
+    ],
+    "es": [
+     "Gálatas 2:20",
+     "Gálatas 3:13",
+     "Gálatas 5:1",
+     "Gálatas 6:14"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "First Corinthians 15 is the longest sustained argument on the resurrection in the New Testament, anchoring all of Corinth's chaos.",
+    "es": "Primera de Corintios 15 es el argumento sostenido más largo sobre la resurrección en el Nuevo Testamento, anclando todo el caos de Corinto."
+   }
+  },
+  {
+   "stem": {
+    "en": "The 'fruit of the Spirit' is found in Galatians 5:22-23 and begins with:",
+    "es": "El 'fruto del Espíritu' se encuentra en Gálatas 5:22-23 y comienza con:"
+   },
+   "options": {
+    "en": [
+     "Joy",
+     "Love",
+     "Peace",
+     "Faith"
+    ],
+    "es": [
+     "Gozo",
+     "Amor",
+     "Paz",
+     "Fe"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Second Corinthians is Paul's most personal letter, his open heart, written from Macedonia around AD 56 after deep affliction.",
+    "es": "Segunda de Corintios es la carta más personal de Pablo, su corazón abierto, escrita desde Macedonia cerca del año 56 tras profunda aflicción."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul calls Galatians 'a different gospel' because the Judaizers added:",
+    "es": "Pablo llama a Gálatas 'otro evangelio' porque los judaizantes añadieron:"
+   },
+   "options": {
+    "en": [
+     "Greek philosophy",
+     "Mystery religion",
+     "Works of the Law to faith",
+     "Roman ceremonies"
+    ],
+    "es": [
+     "Filosofía griega",
+     "Religión de misterios",
+     "Obras de la Ley a la fe",
+     "Ceremonias romanas"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Second Corinthians 8–9 gives the NT's fullest teaching on giving, where 'God loves a cheerful giver' (9:7) is found.",
+    "es": "Segunda de Corintios 8–9 da la enseñanza más plena del NT sobre la dádiva, donde está 'Dios ama al dador alegre' (9:7)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Augustine was famously converted by reading which passage in Romans?",
+    "es": "Agustín fue famosamente convertido leyendo cuál pasaje en Romanos?"
+   },
+   "options": {
+    "en": [
+     "Romans 3:23",
+     "Romans 6:23",
+     "Romans 10:9",
+     "Romans 13:13-14"
+    ],
+    "es": [
+     "Romanos 3:23",
+     "Romanos 6:23",
+     "Romanos 10:9",
+     "Romanos 13:13-14"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Paul's thorn in the flesh taught him 'My grace is sufficient for you, for My strength is made perfect in weakness' (12:9).",
+    "es": "El aguijón en la carne de Pablo le enseñó 'Bástate mi gracia, porque mi potencia en la flaqueza se perfecciona' (12:9)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Martin Luther's understanding of justification by faith came largely from:",
+    "es": "La comprensión de Martín Lutero sobre la justificación por la fe vino principalmente de:"
+   },
+   "options": {
+    "en": [
+     "Romans 1:17",
+     "1 Corinthians 13",
+     "Galatians 5:1",
+     "Ephesians 2:8"
+    ],
+    "es": [
+     "Romanos 1:17",
+     "1 Corintios 13",
+     "Gálatas 5:1",
+     "Efesios 2:8"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Galatians answers the Judaizers, who said converts must be circumcised and keep the law to be truly saved.",
+    "es": "Gálatas responde a los judaizantes, que decían que los convertidos debían circuncidarse y guardar la ley para ser verdaderamente salvos."
+   }
+  },
+  {
+   "stem": {
+    "en": "John Wesley's heart was 'strangely warmed' while hearing Luther's preface to:",
+    "es": "El corazón de Juan Wesley fue 'extrañamente calentado' mientras oía el prefacio de Lutero a:"
+   },
+   "options": {
+    "en": [
+     "The Gospel of John",
+     "Romans",
+     "Galatians",
+     "Hebrews"
+    ],
+    "es": [
+     "El Evangelio de Juan",
+     "Romanos",
+     "Gálatas",
+     "Hebreos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Galatians is the one Paul letter with no thanksgiving; he marvels they so soon turned to a different gospel (1:6).",
+    "es": "Gálatas es la única carta de Pablo sin acción de gracias; se maravilla de que tan pronto se volvieran a otro evangelio (1:6)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul uses which extended metaphor to describe how the local church should function in 1 Corinthians 12?",
+    "es": "Pablo usa cuál metáfora extendida para describir cómo debe funcionar la iglesia local en 1 Corintios 12?"
+   },
+   "options": {
+    "en": [
+     "A vine and branches",
+     "A building of stones",
+     "A human body with many members",
+     "An army with many ranks"
+    ],
+    "es": [
+     "Una vid y ramas",
+     "Un edificio de piedras",
+     "Un cuerpo humano con muchos miembros",
+     "Un ejército con muchos rangos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The key verse of Galatians is 2:20 — 'I have been crucified with Christ; it is no longer I who live, but Christ lives in me.'",
+    "es": "El versículo clave de Gálatas es 2:20 — 'Con Cristo estoy juntamente crucificado; y vivo, no ya yo, mas vive Cristo en mí'."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unifying theme that runs through Romans, Corinthians, and Galatians is best summarized as:",
+    "es": "El tema unificador que corre por Romanos, Corintios y Gálatas se resume mejor como:"
+   },
+   "options": {
+    "en": [
+     "Eschatology",
+     "Holiness",
+     "Suffering",
+     "Liberty"
+    ],
+    "es": [
+     "Escatología",
+     "Santidad",
+     "Sufrimiento",
+     "Libertad"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The theme uniting the three letters is liberty: from condemnation in Romans, in the Body in Corinthians, through grace in Galatians.",
+    "es": "El tema que une las tres cartas es la libertad: de la condenación en Romanos, en el Cuerpo en Corintios, por la gracia en Gálatas."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain the three-part structure of Romans 1-8 (justification), 9-11 (Israel), and 12-16 (Christian living). How do they fit together?",
+    "es": "Explique la estructura tripartita de Romanos 1-8 (justificación), 9-11 (Israel), y 12-16 (vida cristiana). ¿Cómo encajan?"
+   },
+   "keywords": {
+    "en": [
+     "justification",
+     "israel",
+     "practical",
+     "structure",
+     "romans",
+     "salvation"
+    ],
+    "es": [
+     "justificacion",
+     "israel",
+     "practica",
+     "estructura",
+     "romanos",
+     "salvacion"
+    ]
+   },
+   "model": {
+    "en": "Romans follows the great verbs of salvation in a clear structure. Chapters 1–8 set out justification, showing the whole race guilty and then declared righteous freely by grace through Christ. Chapters 9–11 wrestle with Israel's place in God's redemptive plan. Chapters 12–16 turn practical, landing the soaring theology on how a Christian lives the next morning.",
+    "es": "Romanos sigue los grandes verbos de la salvación en una estructura clara. Los capítulos 1–8 exponen la justificación, mostrando a toda la raza culpable y luego declarada justa gratuitamente por gracia mediante Cristo. Los capítulos 9–11 luchan con el lugar de Israel en el plan redentor de Dios. Los capítulos 12–16 se vuelven prácticos, aterrizando la elevada teología en cómo vive el cristiano la mañana siguiente."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Discuss the historical significance of Romans for Augustine, Luther, and Wesley. What does this tell us about the book?",
+    "es": "Discuta el significado histórico de Romanos para Agustín, Lutero y Wesley. ¿Qué nos dice esto sobre el libro?"
+   },
+   "keywords": {
+    "en": [
+     "augustine",
+     "luther",
+     "wesley",
+     "reformation",
+     "revival",
+     "history"
+    ],
+    "es": [
+     "agustin",
+     "lutero",
+     "wesley",
+     "reforma",
+     "avivamiento",
+     "historia"
+    ]
+   },
+   "model": {
+    "en": "Romans has lit the fire of revival across history. Augustine was converted reading it in a Milan garden; Luther, lecturing on Romans 1:17, came to see the just shall live by faith, and the Reformation was born; and Wesley felt his heart strangely warmed hearing Luther's preface to Romans on Aldersgate Street. The same pages have kindled awakening after awakening.",
+    "es": "Romanos ha encendido el fuego del avivamiento a lo largo de la historia. Agustín se convirtió leyéndola en un jardín de Milán; Lutero, enseñando sobre Romanos 1:17, llegó a ver que el justo por la fe vivirá, y nació la Reforma; y Wesley sintió su corazón extrañamente calentado al oír el prefacio de Lutero a Romanos en la calle Aldersgate. Las mismas páginas han encendido avivamiento tras avivamiento."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Compare the tone and purpose of 1 Corinthians (instruction manual) with 2 Corinthians (open heart). Why both letters?",
+    "es": "Compare el tono y propósito de 1 Corintios (manual de instrucciones) con 2 Corintios (corazón abierto). ¿Por qué ambas cartas?"
+   },
+   "keywords": {
+    "en": [
+     "instruction",
+     "personal",
+     "pastoral",
+     "corinth",
+     "problems",
+     "defense"
+    ],
+    "es": [
+     "instruccion",
+     "personal",
+     "pastoral",
+     "corinto",
+     "problemas",
+     "defensa"
+    ]
+   },
+   "model": {
+    "en": "First Corinthians is Paul's instruction manual, answering the problems of a divided Corinth point by point with practical correction. Second Corinthians is his open, personal heart, more pastoral than instructional, written after affliction and pain. Where the first letter instructs the church, the second defends his ministry against critics and false apostles and bares his own weakness.",
+    "es": "Primera de Corintios es el manual de instrucciones de Pablo, respondiendo a los problemas de un Corinto dividido punto por punto con corrección práctica. Segunda de Corintios es su corazón abierto y personal, más pastoral que instructivo, escrita tras la aflicción y el dolor. Donde la primera carta instruye a la iglesia, la segunda defiende su ministerio contra críticos y falsos apóstoles y desnuda su propia debilidad."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Apply the body metaphor of 1 Corinthians 12 to the local church today. What three principles emerge?",
+    "es": "Aplique la metáfora del cuerpo de 1 Corintios 12 a la iglesia local hoy. ¿Cuáles tres principios emergen?"
+   },
+   "keywords": {
+    "en": [
+     "body",
+     "diversity",
+     "every member",
+     "love",
+     "function",
+     "gifts"
+    ],
+    "es": [
+     "cuerpo",
+     "diversidad",
+     "cada miembro",
+     "amor",
+     "funcion",
+     "dones"
+    ]
+   },
+   "model": {
+    "en": "The body metaphor of 1 Corinthians 12 teaches that the church is one body of many members with different gifts. Diversity is the design, not a problem, for the eye is not better than the foot; every member matters, including the hidden ones; and love is the only force that holds the body together so each part can function. A church applies it by valuing every member's gift in love.",
+    "es": "La metáfora del cuerpo de 1 Corintios 12 enseña que la iglesia es un cuerpo de muchos miembros con diferentes dones. La diversidad es el diseño, no un problema, pues el ojo no es mejor que el pie; cada miembro importa, incluso los ocultos; y el amor es la única fuerza que mantiene unido al cuerpo para que cada parte funcione. Una iglesia lo aplica valorando en amor el don de cada miembro."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why love (1 Corinthians 13) is called the 'nervous system' of the Body of Christ and the supreme spiritual gift.",
+    "es": "Explique por qué el amor (1 Corintios 13) es llamado el 'sistema nervioso' del Cuerpo de Cristo y el supremo don espiritual."
+   },
+   "keywords": {
+    "en": [
+     "love",
+     "supreme",
+     "gift",
+     "13",
+     "without",
+     "nothing"
+    ],
+    "es": [
+     "amor",
+     "supremo",
+     "don",
+     "13",
+     "sin",
+     "nada"
+    ]
+   },
+   "model": {
+    "en": "Love is the nervous system of the body because 1 Corinthians 13 names it the supreme gift, the one that makes every other gift work. Paul says that without love even prophecy, knowledge, and mountain-moving faith leave him nothing. Add the love of chapter 13 to the body of chapter 12 and you have the functional church; remove love and the body falls apart.",
+    "es": "El amor es el sistema nervioso del cuerpo porque 1 Corintios 13 lo nombra el don supremo, el que hace funcionar a todos los demás dones. Pablo dice que sin amor aun la profecía, el conocimiento y la fe que mueve montañas lo dejan sin nada. Añada el amor del capítulo 13 al cuerpo del capítulo 12 y tiene la iglesia funcional; quite el amor y el cuerpo se desmorona."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Trace Paul's argument for resurrection in 1 Corinthians 15. Why is the bodily resurrection of Christ non-negotiable?",
+    "es": "Trace el argumento de Pablo a favor de la resurrección en 1 Corintios 15. ¿Por qué la resurrección corporal de Cristo es innegociable?"
+   },
+   "keywords": {
+    "en": [
+     "resurrection",
+     "witnesses",
+     "first fruits",
+     "death",
+     "victory",
+     "futile"
+    ],
+    "es": [
+     "resurreccion",
+     "testigos",
+     "primicias",
+     "muerte",
+     "victoria",
+     "vana"
+    ]
+   },
+   "model": {
+    "en": "Paul argues for the resurrection in 1 Corinthians 15 first from history: Christ died, was buried, rose, and appeared to many witnesses still living. Then he draws the line — if Christ is not risen, the faith is futile and we are still in our sins. But because Christ is risen as the first fruits, the believer has a coming resurrection, and Paul shouts to death that its sting and victory are gone.",
+    "es": "Pablo argumenta a favor de la resurrección en 1 Corintios 15 primero desde la historia: Cristo murió, fue sepultado, resucitó y apareció a muchos testigos aún vivos. Luego traza la línea — si Cristo no resucitó, la fe es vana y aún estamos en nuestros pecados. Pero porque Cristo resucitó como las primicias, el creyente tiene una resurrección venidera, y Pablo clama a la muerte que su aguijón y su victoria se han ido."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Discuss the heresy of the Judaizers in Galatians. Why was Paul so fierce in his response?",
+    "es": "Discuta la herejía de los judaizantes en Gálatas. ¿Por qué fue Pablo tan feroz en su respuesta?"
+   },
+   "keywords": {
+    "en": [
+     "judaizers",
+     "circumcision",
+     "law",
+     "different gospel",
+     "another gospel",
+     "anathema"
+    ],
+    "es": [
+     "judaizantes",
+     "circuncision",
+     "ley",
+     "evangelio diferente",
+     "otro evangelio",
+     "anatema"
+    ]
+   },
+   "model": {
+    "en": "The Judaizers told Paul's converts that faith in Christ was only a start and they must also be circumcised and keep the law to be saved. Paul was fierce because this was a different gospel that added works to grace and so destroyed the gospel itself. He pronounced anathema on anyone preaching it, since to add the law to Christ is to lose Christ.",
+    "es": "Los judaizantes decían a los convertidos de Pablo que la fe en Cristo era solo un comienzo y que también debían circuncidarse y guardar la ley para ser salvos. Pablo fue feroz porque esto era otro evangelio que añadía obras a la gracia y así destruía el evangelio mismo. Pronunció anatema sobre cualquiera que lo predicara, pues añadir la ley a Cristo es perder a Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Apply Galatians 2:20 ('I have been crucified with Christ') to the daily life of the believer. What does it mean practically?",
+    "es": "Aplique Gálatas 2:20 ('Con Cristo estoy juntamente crucificado') a la vida diaria del creyente. ¿Qué significa prácticamente?"
+   },
+   "keywords": {
+    "en": [
+     "crucified",
+     "christ in me",
+     "faith",
+     "daily",
+     "self",
+     "new life"
+    ],
+    "es": [
+     "crucificado",
+     "cristo en mi",
+     "fe",
+     "diariamente",
+     "yo",
+     "vida nueva"
+    ]
+   },
+   "model": {
+    "en": "Galatians 2:20 applies to daily life as the pattern of the believer's existence: I have been crucified with Christ, so the old self no longer reigns, and the new life is Christ living in me. Each day is lived by faith in the Son of God who loved me and gave Himself for me, the self dethroned and Christ enthroned in its place.",
+    "es": "Gálatas 2:20 se aplica a la vida diaria como el patrón de la existencia del creyente: con Cristo estoy juntamente crucificado, así que el viejo yo ya no reina, y la nueva vida es Cristo viviendo en mí. Cada día se vive por la fe en el Hijo de Dios que me amó y se entregó por mí, destronado el yo y entronizado Cristo en su lugar."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how the unifying theme of 'liberty' connects Romans (liberty from), Corinthians (liberty in), and Galatians (liberty through).",
+    "es": "Explique cómo el tema unificador de la 'libertad' conecta Romanos (libertad de), Corintios (libertad en), y Gálatas (libertad por)."
+   },
+   "keywords": {
+    "en": [
+     "liberty",
+     "condemnation",
+     "body",
+     "grace",
+     "romans",
+     "galatians"
+    ],
+    "es": [
+     "libertad",
+     "condenacion",
+     "cuerpo",
+     "gracia",
+     "romanos",
+     "galatas"
+    ]
+   },
+   "model": {
+    "en": "The theme of liberty connects all three letters. Romans gives liberty from condemnation, the chains of guilt falling off in chapter 8. The Corinthians give liberty in the Body, the freedom to be different and serve in love. Galatians gives liberty through grace, freedom from trying to earn what Christ already purchased. Three letters, one liberty, one Christ.",
+    "es": "El tema de la libertad conecta las tres cartas. Romanos da libertad de la condenación, cayendo las cadenas de la culpa en el capítulo 8. Corintios da libertad en el Cuerpo, la libertad de ser diferente y servir en amor. Gálatas da libertad por la gracia, libertad de tratar de ganar lo que Cristo ya compró. Tres cartas, una libertad, un Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Synthesize: Why are Romans, Corinthians, and Galatians considered the heart of Paul's gospel for the Christian church?",
+    "es": "Sintetice: ¿Por qué se consideran Romanos, Corintios y Gálatas el corazón del evangelio de Pablo para la iglesia cristiana?"
+   },
+   "keywords": {
+    "en": [
+     "paul",
+     "gospel",
+     "doctrine",
+     "practical",
+     "liberty",
+     "grace",
+     "church"
+    ],
+    "es": [
+     "pablo",
+     "evangelio",
+     "doctrina",
+     "practica",
+     "libertad",
+     "gracia",
+     "iglesia"
+    ]
+   },
+   "model": {
+    "en": "These three are the doctrinal heart of Paul because together they give the gospel whole: Romans sets out the doctrine of how a sinner is justified by grace, the Corinthians show that doctrine made practical in the life of the church, and Galatians guards the liberty of grace against every attempt to add works. Paul's mind on fire with grace gives the church its doctrine, its practice, and its freedom.",
+    "es": "Estas tres son el corazón doctrinal de Pablo porque juntas dan el evangelio entero: Romanos expone la doctrina de cómo un pecador es justificado por gracia, los Corintios muestran esa doctrina hecha práctica en la vida de la iglesia, y Gálatas guarda la libertad de la gracia contra todo intento de añadir obras. La mente de Pablo encendida con la gracia da a la iglesia su doctrina, su práctica y su libertad."
+   }
+  }
+ ]
+};

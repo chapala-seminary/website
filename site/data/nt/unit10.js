@@ -1,123 +1,793 @@
-/* CTSNT - unit 10: per-unit configuration and content. */
-
-const UNIT = 10;
-
-const NEXT_URL = 'CTSNTUnit11.html';
-
-const PREV_URL = 'CTSNTUnit9.html';
-
-const mcQuestions = [
-    { textEn: "1. The 'Pastoral Epistles' refer to which three New Testament letters?", textEs: "1. Las 'Epístolas Pastorales' se refieren a cuáles tres cartas del Nuevo Testamento?",
-      optionsEn: ["Hebrews, James, 1 Peter", "Romans, Galatians, Ephesians", "Philippians, Colossians, Philemon", "1 Timothy, Titus, 2 Timothy"],
-      optionsEs: ["Hebreos, Santiago, 1 Pedro", "Romanos, Gálatas, Efesios", "Filipenses, Colosenses, Filemón", "1 Timoteo, Tito, 2 Timoteo"],
-      explanationEn: "The Pastoral Epistles are 1 Timothy, Titus, and 2 Timothy, Paul's letters to younger pastors rather than congregations.", explanationEs: "Las epístolas pastorales son 1 Timoteo, Tito y 2 Timoteo, las cartas de Pablo a pastores más jóvenes en vez de a congregaciones.", correct: 3 },
-    { textEn: "2. The chronological order of the Pastoral Epistles' writing is generally:", textEs: "2. El orden cronológico de la escritura de las Epístolas Pastorales generalmente es:",
-      optionsEn: ["2 Timothy first; then 1 Timothy and Titus", "1 Timothy and Titus first (~AD 63-65); 2 Timothy last (~AD 66-67)", "All three written simultaneously from Rome", "Titus first; then 1 and 2 Timothy together"],
-      optionsEs: ["2 Timoteo primero; luego 1 Timoteo y Tito", "1 Timoteo y Tito primero (~63-65 d.C.); 2 Timoteo último (~66-67 d.C.)", "Las tres escritas simultáneamente desde Roma", "Tito primero; luego 1 y 2 Timoteo juntos"],
-      explanationEn: "The order of writing is 1 Timothy and Titus from the field (AD 63–65), then 2 Timothy from the dungeon (AD 66–67).", explanationEs: "El orden de escritura es 1 Timoteo y Tito desde el campo (63–65 d.C.), luego 2 Timoteo desde el calabozo (66–67 d.C.).", correct: 1 },
-    { textEn: "3. 2 Timothy was written from which location?", textEs: "3. 2 Timoteo fue escrita desde cuál ubicación?",
-      optionsEn: ["The Mamertine dungeon in Rome", "Antioch", "The rented house in Rome", "Corinth"],
-      optionsEs: ["El calabozo Mamertino en Roma", "Antioquía", "La casa alquilada en Roma", "Corinto"],
-      explanationEn: "The one mission of all three letters is to guard the deposit of the gospel and pass it intact to the next generation.", explanationEs: "La única misión de las tres cartas es guardar el depósito del evangelio y pasarlo intacto a la próxima generación.", correct: 0 },
-    { textEn: "4. The Greek word 'paratheke' used in the Pastoral Epistles means:", textEs: "4. La palabra griega 'paratheke' usada en las Epístolas Pastorales significa:",
-      optionsEn: ["Sermon", "Wisdom", "Treasure / deposit entrusted to a faithful banker", "Tradition"],
-      optionsEs: ["Sermón", "Sabiduría", "Tesoro / depósito confiado a un banquero fiel", "Tradición"],
-      explanationEn: "The Greek word for the deposit is paratheke, a treasure entrusted to a faithful banker; the gospel is that deposit.", explanationEs: "La palabra griega para el depósito es paratheke, un tesoro confiado a un banquero fiel; el evangelio es ese depósito.", correct: 2 },
-    { textEn: "5. The key verse of 1 Timothy calls the church the 'house of God' and:", textEs: "5. El versículo clave de 1 Timoteo llama a la iglesia 'casa de Dios' y:",
-      optionsEn: ["The lampstand of the world", "The pillar and ground of the truth", "The bride of Christ", "The flock of God"],
-      optionsEs: ["El candelero del mundo", "Columna y apoyo de la verdad", "La esposa de Cristo", "La grey de Dios"],
-      explanationEn: "First Timothy was written to Timothy at Ephesus, a large established church undermined by false teachers from within.", explanationEs: "Primera de Timoteo fue escrita a Timoteo en Éfeso, una iglesia grande y establecida socavada por falsos maestros desde dentro.", correct: 1 },
-    { textEn: "6. The most important chapter for selecting elders and deacons is:", textEs: "6. El capítulo más importante para escoger ancianos y diáconos es:",
-      optionsEn: ["1 Timothy 3", "1 Timothy 5", "Titus 1", "2 Timothy 2"],
-      optionsEs: ["1 Timoteo 3", "1 Timoteo 5", "Tito 1", "2 Timoteo 2"],
-      explanationEn: "First Timothy 3 gives the qualifications of elders and deacons, the key administrative chapter for choosing church leaders.", explanationEs: "Primera de Timoteo 3 da las cualidades de obispos y diáconos, el capítulo administrativo clave para escoger líderes de la iglesia.", correct: 0 },
-    { textEn: "7. Titus was left to organize churches on which island?", textEs: "7. Tito fue dejado para organizar iglesias en cuál isla?",
-      optionsEn: ["Cyprus", "Patmos", "Malta", "Crete"],
-      optionsEs: ["Chipre", "Patmos", "Malta", "Creta"],
-      explanationEn: "First Timothy 3:15 calls the church the house of God and the pillar and ground of the truth — both a family and a support.", explanationEs: "Primera de Timoteo 3:15 llama a la iglesia la casa de Dios y columna y apoyo de la verdad — a la vez familia y sostén.", correct: 3 },
-    { textEn: "8. The Greek word for 'adorn' in Titus 2:10 ('that they may adorn the doctrine') is:", textEs: "8. La palabra griega para 'adornar' en Tito 2:10 ('para que adornen la doctrina') es:",
-      optionsEn: ["Doxazo", "Lampo", "Kosmeo (root of 'cosmetic')", "Phaino"],
-      optionsEs: ["Doxazo", "Lampo", "Kosmeo (raíz de 'cosmético')", "Phaino"],
-      explanationEn: "Titus was sent to Crete, whose own poet Epimenides called Cretans liars, evil beasts, lazy gluttons, a rough mission field.", explanationEs: "Tito fue enviado a Creta, cuyo propio poeta Epimenides llamó a los cretenses mentirosos, malas bestias, glotones ociosos, un campo difícil.", correct: 2 },
-    { textEn: "9. The 'blessed hope' passage uniting past, present, and future of salvation is found in:", textEs: "9. El pasaje de la 'bendita esperanza' que une el pasado, presente y futuro de la salvación se encuentra en:",
-      optionsEn: ["1 Timothy 3:16", "2 Timothy 4:6-8", "Titus 3:5-7", "Titus 2:11-14"],
-      optionsEs: ["1 Timoteo 3:16", "2 Timoteo 4:6-8", "Tito 3:5-7", "Tito 2:11-14"],
-      explanationEn: "Titus 2:10 says believers adorn the doctrine of God; the Greek kosmeo, root of 'cosmetic,' means their lives beautify the gospel.", explanationEs: "Tito 2:10 dice que los creyentes adornan la doctrina de Dios; el griego kosmeo, raíz de 'cosmético', significa que sus vidas embellecen el evangelio.", correct: 3 },
-    { textEn: "10. The Greek word translated 'inspiration of God' in 2 Timothy 3:16 is:", textEs: "10. La palabra griega traducida 'inspirada divinamente' en 2 Timoteo 3:16 es:",
-      optionsEn: ["Logos", "Theopneustos (God-breathed)", "Doxa", "Hagios"],
-      optionsEs: ["Logos", "Theopneustos (respirada por Dios)", "Doxa", "Hagios"],
-      explanationEn: "Titus targets sound doctrine, good works, and the blessed hope — appointing elders, teaching godly living, awaiting Christ.", explanationEs: "Tito apunta a la sana doctrina, las buenas obras y la esperanza bienaventurada — nombrar ancianos, enseñar vida piadosa, esperar a Cristo.", correct: 1 },
-    { textEn: "11. Paul's great discipleship formula 'commit these to faithful men who will be able to teach others also' is found in:", textEs: "11. La gran fórmula de discipulado de Pablo 'encarga á los hombres fieles que serán idóneos para enseñar también á otros' se encuentra en:",
-      optionsEn: ["2 Timothy 2:2", "Titus 2:2", "2 Timothy 1:6", "1 Timothy 4:12"],
-      optionsEs: ["2 Timoteo 2:2", "Tito 2:2", "2 Timoteo 1:6", "1 Timoteo 4:12"],
-      explanationEn: "Titus 2:11–14 spans the grace that appeared (Bethlehem), godly living (Calvary applied), and the blessed hope (His return).", explanationEs: "Tito 2:11–14 abarca la gracia que apareció (Belén), la vida piadosa (Calvario aplicado) y la esperanza bienaventurada (Su regreso).", correct: 0 },
-    { textEn: "12. The companion who deserted Paul 'having loved this present world' was:", textEs: "12. El compañero que desamparó a Pablo 'amando este siglo' fue:",
-      optionsEn: ["Hymenaeus", "Philetus", "Demas", "Crescens"],
-      optionsEs: ["Himeneo", "Fileto", "Demas", "Crescente"],
-      explanationEn: "Second Timothy was written from the Mamertine dungeon in Rome, with Paul's death sentence already pronounced.", explanationEs: "Segunda de Timoteo fue escrita desde el calabozo Mamertino en Roma, con la sentencia de muerte de Pablo ya pronunciada.", correct: 2 },
-    { textEn: "13. The four-fold alliterative tragedy of Demas can be traced as:", textEs: "13. La tragedia cuádruple aliterada de Demas se puede trazar como:",
-      optionsEn: ["Dutiful, Distracted, Defected, Died", "Born, baptized, blessed, buried", "Saved, struggled, sinned, suffered", "Called, chosen, corrupted, condemned"],
-      optionsEs: ["Diligente, Distraído, Desertó, Desapareció", "Nació, bautizado, bendecido, sepultado", "Salvo, luchó, pecó, sufrió", "Llamado, escogido, corrompido, condenado"],
-      explanationEn: "Second Timothy stacks four charges: be unashamed, be strong in grace, continue in what you learned, and preach the word.", explanationEs: "Segunda de Timoteo apila cuatro encargos: no avergonzarse, ser fuerte en la gracia, continuar en lo aprendido, y predicar la Palabra.", correct: 0 },
-    { textEn: "14. In contrast to Demas, who was restored to Paul's inner circle by the end of 2 Timothy?", textEs: "14. En contraste con Demas, ¿quién fue restaurado al círculo íntimo de Pablo al final de 2 Timoteo?",
-      optionsEn: ["Silas", "Apollos", "John Mark", "Aquila"],
-      optionsEs: ["Silas", "Apolos", "Juan Marcos", "Aquila"],
-      explanationEn: "Second Timothy 2:2 gives the discipleship formula: what Paul taught Timothy, commit to faithful men who will teach others.", explanationEs: "Segunda de Timoteo 2:2 da la fórmula del discipulado: lo que Pablo enseñó a Timoteo, encárgalo a hombres fieles que enseñen a otros.", correct: 2 },
-    { textEn: "15. The famous 'last days' warning that men will have 'a form of godliness but denying its power' is found in:", textEs: "15. La famosa advertencia de los 'últimos días' de que los hombres tendrán 'apariencia de piedad mas habiendo negado la eficacia de ella' se encuentra en:",
-      optionsEn: ["1 Timothy 4:1", "Titus 3:1", "2 Thessalonians 2:3", "2 Timothy 3:5"],
-      optionsEs: ["1 Timoteo 4:1", "Tito 3:1", "2 Tesalonicenses 2:3", "2 Timoteo 3:5"],
-      explanationEn: "Demas forsook Paul, having loved this present world, and departed for Thessalonica (2 Timothy 4:10).", explanationEs: "Demas desamparó a Pablo, amando este mundo presente, y se fue a Tesalónica (2 Timoteo 4:10).", correct: 3 },
-    { textEn: "16. Paul's final triumphant declaration 'I have fought the good fight, I have finished the race, I have kept the faith' is in:", textEs: "16. La declaración triunfante final de Pablo 'He peleado la buena batalla, he acabado la carrera, he guardado la fe' está en:",
-      optionsEn: ["2 Timothy 4:7", "1 Timothy 6:12", "Titus 3:5", "Philippians 4:13"],
-      optionsEs: ["2 Timoteo 4:7", "1 Timoteo 6:12", "Tito 3:5", "Filipenses 4:13"],
-      explanationEn: "In the same chapter Demas walks out, Paul asks for Mark, once a deserter, now useful for ministry — some defect, some are restored.", explanationEs: "En el mismo capítulo en que Demas se va, Pablo pide a Marcos, antes desertor, ahora útil para el ministerio — algunos desertan, algunos son restaurados.", correct: 1 },
-    { textEn: "17. Paul says the crown of righteousness will be given not only to him but also to:", textEs: "17. Pablo dice que la corona de justicia será dada no solo a él sino también a:",
-      optionsEn: ["All who have suffered for Christ", "All who have been baptized", "All who are martyred", "All who have loved His appearing"],
-      optionsEs: ["Todos los que han sufrido por Cristo", "Todos los que han sido bautizados", "Todos los que son martirizados", "Todos los que han amado su venida"],
-      explanationEn: "Second Timothy 3 warns that perilous times will come in the last days, with people having a form of godliness but denying its power.", explanationEs: "Segunda de Timoteo 3 advierte que vendrán tiempos peligrosos en los últimos días, con gente que tiene apariencia de piedad pero niega su poder.", correct: 3 },
-    { textEn: "18. The unifying mission of all three Pastoral Epistles is:", textEs: "18. La misión unificadora de las tres Epístolas Pastorales es:",
-      optionsEn: ["Building larger congregations", "Guarding the deposit and passing it intact to the next generation", "Practicing church discipline", "Preparing for martyrdom"],
-      optionsEs: ["Construir congregaciones más grandes", "Guardar el depósito y pasarlo intacto a la siguiente generación", "Practicar la disciplina de la iglesia", "Prepararse para el martirio"],
-      explanationEn: "Second Timothy 3:16 says all Scripture is theopneustos, God-breathed — breathed from the mouth of God, not merely inspired like a poem.", explanationEs: "Segunda de Timoteo 3:16 dice que toda la Escritura es theopneustos, inspirada por Dios — exhalada de la boca de Dios, no solo inspirada como un poema.", correct: 1 },
-    { textEn: "19. The Old Testament prophet whose plumb line vision illustrates the testing of doctrine is:", textEs: "19. El profeta del Antiguo Testamento cuya visión de la plomada ilustra la prueba de la doctrina es:",
-      optionsEn: ["Amos", "Jeremiah", "Ezekiel", "Isaiah"],
-      optionsEs: ["Amós", "Jeremías", "Ezequiel", "Isaías"],
-      explanationEn: "God-breathed Scripture is profitable for doctrine, reproof, correction, and instruction, equipping the man of God for every good work.", explanationEs: "La Escritura inspirada por Dios es útil para enseñar, redargüir, corregir e instruir, equipando al hombre de Dios para toda buena obra.", correct: 0 },
-    { textEn: "20. The Spanish word 'esperanza' uniquely combines which three English meanings?", textEs: "20. La palabra española 'esperanza' combina únicamente cuáles tres significados ingleses?",
-      optionsEn: ["Faith, love, joy", "Pray, fast, give", "Wait, hope, expect", "Watch, serve, witness"],
-      optionsEs: ["Fe, amor, gozo", "Orar, ayunar, dar", "Esperar, confiar, contar con", "Velar, servir, testificar"],
-      explanationEn: "Paul's final words in 2 Timothy 4:7 — I have fought the good fight, finished the race, kept the faith — await the crown of righteousness.", explanationEs: "Las palabras finales de Pablo en 2 Timoteo 4:7 — he peleado la buena batalla, acabado la carrera, guardado la fe — esperan la corona de justicia.", correct: 2 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain the historical setting of each Pastoral Epistle. Why is the dating sequence (1 Timothy, Titus, then 2 Timothy) significant?", textEs: "21. Explique el contexto histórico de cada Epístola Pastoral. ¿Por qué es importante la secuencia de fechas (1 Timoteo, Tito, luego 2 Timoteo)?",
-      kw_en: ["timothy", "titus", "mamertine", "ephesus", "crete", "dungeon"], kw_es: ["timoteo", "tito", "mamertina", "efeso", "creta", "calabozo"],
-      modelEn: "Each Pastoral Epistle has its own setting. First Timothy went to Timothy at Ephesus, an established church troubled by false teachers; Titus went to Titus on the rough mission field of Crete; and Second Timothy was written to Timothy from the Mamertine dungeon in Rome, where Paul awaited execution. The dating matters because it shows Paul released after Acts 28, writing the first two from the field and the last from the death cell.", modelEs: "Cada epístola pastoral tiene su propio entorno. Primera de Timoteo fue a Timoteo en Éfeso, una iglesia establecida turbada por falsos maestros; Tito fue a Tito en el difícil campo misionero de Creta; y Segunda de Timoteo fue escrita a Timoteo desde el calabozo Mamertino en Roma, donde Pablo esperaba la ejecución. La datación importa porque muestra a Pablo liberado tras Hechos 28, escribiendo las primeras dos desde el campo y la última desde la celda de la muerte." },
-    { textEn: "22. Trace the meaning of the Greek word 'paratheke' (deposit) and discuss how it functions as the central image of the Pastoral Epistles.", textEs: "22. Trace el significado de la palabra griega 'paratheke' (depósito) y discuta cómo funciona como la imagen central de las Epístolas Pastorales.",
-      kw_en: ["paratheke", "deposit", "banker", "gospel", "guard", "treasure"], kw_es: ["paratheke", "deposito", "banquero", "evangelio", "guardar", "tesoro"],
-      modelEn: "The Greek word paratheke means a treasure entrusted to a faithful banker. The gospel is that deposit, and Timothy, Titus, and every pastor after them are the bankers charged to guard it. Paul commands them to guard the deposit, keeping the treasure intact and unaltered. The image teaches that the gospel is not ours to change but ours to keep and hand on whole.", modelEs: "La palabra griega paratheke significa un tesoro confiado a un banquero fiel. El evangelio es ese depósito, y Timoteo, Tito y todo pastor después de ellos son los banqueros encargados de guardarlo. Pablo les manda guardar el depósito, manteniendo el tesoro intacto e inalterado. La imagen enseña que el evangelio no es nuestro para cambiarlo sino nuestro para guardarlo y entregarlo entero." },
-    { textEn: "23. Discuss the importance of 1 Timothy 3:15 ('the church... the pillar and ground of the truth'). What does it teach about the church?", textEs: "23. Discuta la importancia de 1 Timoteo 3:15 ('la iglesia... columna y apoyo de la verdad'). ¿Qué enseña sobre la iglesia?",
-      kw_en: ["3:15", "house", "pillar", "truth", "church", "living god"], kw_es: ["3:15", "casa", "columna", "verdad", "iglesia", "dios vivo"],
-      modelEn: "First Timothy 3:15 calls the church both the house of God and the pillar and ground of the truth. As a house she is a family and a home; as a pillar she is a structural support holding up the truth in a falling world. The church of the living God is both at once, and the task is to keep the house warm and the pillar straight.", modelEs: "Primera de Timoteo 3:15 llama a la iglesia a la vez la casa de Dios y columna y apoyo de la verdad. Como casa es una familia y un hogar; como columna es un sostén estructural que sostiene la verdad en un mundo que se derrumba. La iglesia del Dios vivo es ambas cosas a la vez, y la tarea es mantener la casa cálida y la columna derecha." },
-    { textEn: "24. Explain the three-fold structure of Titus (sound doctrine, good works, blessed hope) and its connection to Titus 2:11-14.", textEs: "24. Explique la estructura triple de Tito (sana doctrina, buenas obras, bendita esperanza) y su conexión con Tito 2:11-14.",
-      kw_en: ["doctrine", "works", "hope", "grace", "appeared", "blessed"], kw_es: ["doctrina", "obras", "esperanza", "gracia", "aparecio", "bienaventurada"],
-      modelEn: "Titus has a three-fold structure: sound doctrine, good works, and the blessed hope. Titus is to appoint elders who hold sound doctrine, to teach every group to live good works that adorn the gospel, and to anchor it all in the grace of God that has appeared and the blessed hope of Christ's return. Past grace, present godliness, and future hope hold together in one strategy.", modelEs: "Tito tiene una estructura triple: sana doctrina, buenas obras y la esperanza bienaventurada. Tito ha de nombrar ancianos que sostengan la sana doctrina, enseñar a cada grupo a vivir buenas obras que adornen el evangelio, y anclarlo todo en la gracia de Dios que ha aparecido y la esperanza bienaventurada del regreso de Cristo. La gracia pasada, la piedad presente y la esperanza futura se sostienen en una sola estrategia." },
-    { textEn: "25. Apply the Spanish wordplay of 'esperanza' (wait/hope/expect) to Titus 2:13. How does it deepen the Christian's expectation of Christ's return?", textEs: "25. Aplique el juego de palabras español de 'esperanza' (esperar/confiar/contar con) a Tito 2:13. ¿Cómo profundiza la expectativa cristiana del regreso de Cristo?",
-      kw_en: ["esperanza", "wait", "hope", "expect", "blessed", "appearing"], kw_es: ["esperanza", "esperar", "espera", "aguardar", "bienaventurada", "aparicion"],
-      modelEn: "The Spanish word esperanza captures Titus 2:13 in one verb. Esperar means to wait, esperanza means hope, and to esperar something also means to expect it, so the believer waiting for the Lord is hoping for Him and expecting Him at once. The blessed hope is not waiting without hope, nor hope without expectation; it is all three together as we look for His glorious appearing.", modelEs: "La palabra esperanza capta Tito 2:13 en un solo verbo. Esperar significa aguardar, esperanza significa la confianza, y esperar algo también significa contar con ello, así que el creyente que espera al Señor lo aguarda y cuenta con Él a la vez. La esperanza bienaventurada no es aguardar sin confianza, ni confianza sin expectativa; es las tres juntas al buscar Su gloriosa aparición." },
-    { textEn: "26. Discuss the doctrine of inspiration in 2 Timothy 3:16-17. What does 'theopneustos' (God-breathed) teach about the Bible?", textEs: "26. Discuta la doctrina de la inspiración en 2 Timoteo 3:16-17. ¿Qué enseña 'theopneustos' (respirada por Dios) sobre la Biblia?",
-      kw_en: ["theopneustos", "god-breathed", "inspiration", "scripture", "profitable", "complete"], kw_es: ["theopneustos", "inspirada por dios", "inspiracion", "escritura", "util", "completo"],
-      modelEn: "Second Timothy 3:16–17 teaches the doctrine of inspiration. All Scripture is theopneustos, God-breathed, breathed out of the mouth of God Himself rather than merely inspired the way a poem is. Because it is God-breathed, Scripture is profitable for doctrine, reproof, correction, and instruction, so that the man of God may be complete and equipped for every good work.", modelEs: "Segunda de Timoteo 3:16–17 enseña la doctrina de la inspiración. Toda la Escritura es theopneustos, inspirada por Dios, exhalada de la boca de Dios mismo en vez de meramente inspirada como un poema. Porque es inspirada por Dios, la Escritura es útil para enseñar, redargüir, corregir e instruir, para que el hombre de Dios sea perfecto y equipado para toda buena obra." },
-    { textEn: "27. Trace the four-stage tragedy of Demas (Dutiful, Distracted, Defected, Died). What pastoral warning does it give to the believer?", textEs: "27. Trace la tragedia de cuatro etapas de Demas (Diligente, Distraído, Desertó, Desapareció). ¿Qué advertencia pastoral le da al creyente?",
-      kw_en: ["demas", "dutiful", "distracted", "defected", "world", "warning"], kw_es: ["demas", "cumplidor", "distraido", "desertor", "mundo", "advertencia"],
-      modelEn: "The tragedy of Demas runs in four stages. He was dutiful at first, a fellow worker named with Mark and Luke; then distracted, having loved this present world; then he defected, leaving Paul in the dungeon; and finally he died to the ministry, never mentioned again. His story is a warning that a believer need not announce a defection but can simply drift after the world until he is gone.", modelEs: "La tragedia de Demas corre en cuatro etapas. Al principio fue diligente, un colaborador nombrado con Marcos y Lucas; luego distraído, amando este mundo presente; luego desertó, dejando a Pablo en el calabozo; y al fin murió para el ministerio, sin volver a ser mencionado. Su historia es una advertencia de que un creyente no necesita anunciar una deserción sino que puede simplemente derivar tras el mundo hasta desaparecer." },
-    { textEn: "28. Apply the driver's instructor illustration ('the car goes where the eyes are looking') to spiritual discipleship.", textEs: "28. Aplique la ilustración del instructor de manejo ('el carro va a donde miran los ojos') al discipulado espiritual.",
-      kw_en: ["eyes", "looking", "drift", "demas", "watch", "heart"], kw_es: ["ojos", "mirando", "desviarse", "demas", "velar", "corazon"],
-      modelEn: "The principle is that the car goes where the eyes are looking. A driver who merely glances at what he should not drifts toward it without turning the wheel. So Demas did not resign; he looked at the present world and his life drifted after his gaze. Paul's opposite charge is to watch in all things, for where the heart looks is where the life will go, and the believer must keep his eyes on the Lord.", modelEs: "El principio es que el auto va donde miran los ojos. Un conductor que solo echa un vistazo a lo que no debe deriva hacia ello sin girar el volante. Así Demas no renunció; miró el mundo presente y su vida derivó tras su mirada. El encargo opuesto de Pablo es velar en todo, pues donde mira el corazón es donde irá la vida, y el creyente debe mantener los ojos en el Señor." },
-    { textEn: "29. Explain the contrast between Demas (who departed) and John Mark (who was restored). What does this teach about Christian failure and recovery?", textEs: "29. Explique el contraste entre Demas (que partió) y Juan Marcos (que fue restaurado). ¿Qué enseña esto sobre el fracaso y la recuperación cristianas?",
-      kw_en: ["demas", "mark", "restoration", "useful", "ministry", "failure"], kw_es: ["demas", "marcos", "restauracion", "util", "ministerio", "fracaso"],
-      modelEn: "In the same chapter Demas departs, Paul asks for John Mark, who had once deserted at Perga and seemed disqualified, but is now useful for ministry. The contrast refuses to let either story be the whole picture: some defect like Demas, and some are restored like Mark. Past failure does not have to be final, for the deposit is guarded by faithful men, and faithful men include the restored.", modelEs: "En el mismo capítulo en que Demas se va, Pablo pide a Juan Marcos, que una vez había desertado en Perge y parecía descalificado, pero ahora es útil para el ministerio. El contraste se niega a dejar que cualquiera de las dos historias sea el cuadro completo: algunos desertan como Demas, y algunos son restaurados como Marcos. El fracaso pasado no tiene que ser final, pues el depósito lo guardan hombres fieles, y los hombres fieles incluyen a los restaurados." },
-    { textEn: "30. Synthesize: What is the legacy of Paul's final words in 2 Timothy 4:6-8? How does the closing chapter shape the Christian's view of life and death?", textEs: "30. Sintetice: ¿Cuál es el legado de las palabras finales de Pablo en 2 Timoteo 4:6-8? ¿Cómo da forma el capítulo final a la visión cristiana de la vida y la muerte?",
-      kw_en: ["fought", "finished", "kept", "crown", "appearing", "departure"], kw_es: ["peleado", "acabado", "guardado", "corona", "aparicion", "partida"],
-      modelEn: "Paul's final words in 2 Timothy 4:6–8 are his legacy. Knowing his departure was at hand, he wrote three perfect-tense verbs over his life: I have fought the good fight, I have finished the race, I have kept the faith. The crown of righteousness is laid up for him, and not for him only but for all who have loved Christ's appearing — so the legacy belongs to every faithful believer.", modelEs: "Las palabras finales de Pablo en 2 Timoteo 4:6–8 son su legado. Sabiendo que su partida estaba cercana, escribió tres verbos en tiempo perfecto sobre su vida: he peleado la buena batalla, he acabado la carrera, he guardado la fe. La corona de justicia le está guardada, y no solo a él sino a todos los que han amado la aparición de Cristo — así que el legado pertenece a todo creyente fiel." }
-];
+/* CTSNT — unit 10. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "nt",
+ "unit": 10,
+ "totalUnits": 12,
+ "filePrefix": "CTSNT",
+ "prevHref": "CTSNTUnit9.html",
+ "nextHref": "CTSNTUnit11.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "The 'Pastoral Epistles' refer to which three New Testament letters?",
+    "es": "Las 'Epístolas Pastorales' se refieren a cuáles tres cartas del Nuevo Testamento?"
+   },
+   "options": {
+    "en": [
+     "Hebrews, James, 1 Peter",
+     "Romans, Galatians, Ephesians",
+     "Philippians, Colossians, Philemon",
+     "1 Timothy, Titus, 2 Timothy"
+    ],
+    "es": [
+     "Hebreos, Santiago, 1 Pedro",
+     "Romanos, Gálatas, Efesios",
+     "Filipenses, Colosenses, Filemón",
+     "1 Timoteo, Tito, 2 Timoteo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Pastoral Epistles are 1 Timothy, Titus, and 2 Timothy, Paul's letters to younger pastors rather than congregations.",
+    "es": "Las epístolas pastorales son 1 Timoteo, Tito y 2 Timoteo, las cartas de Pablo a pastores más jóvenes en vez de a congregaciones."
+   }
+  },
+  {
+   "stem": {
+    "en": "The chronological order of the Pastoral Epistles' writing is generally:",
+    "es": "El orden cronológico de la escritura de las Epístolas Pastorales generalmente es:"
+   },
+   "options": {
+    "en": [
+     "2 Timothy first; then 1 Timothy and Titus",
+     "1 Timothy and Titus first (~AD 63-65); 2 Timothy last (~AD 66-67)",
+     "All three written simultaneously from Rome",
+     "Titus first; then 1 and 2 Timothy together"
+    ],
+    "es": [
+     "2 Timoteo primero; luego 1 Timoteo y Tito",
+     "1 Timoteo y Tito primero (~63-65 d.C.); 2 Timoteo último (~66-67 d.C.)",
+     "Las tres escritas simultáneamente desde Roma",
+     "Tito primero; luego 1 y 2 Timoteo juntos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The order of writing is 1 Timothy and Titus from the field (AD 63–65), then 2 Timothy from the dungeon (AD 66–67).",
+    "es": "El orden de escritura es 1 Timoteo y Tito desde el campo (63–65 d.C.), luego 2 Timoteo desde el calabozo (66–67 d.C.)."
+   }
+  },
+  {
+   "stem": {
+    "en": "2 Timothy was written from which location?",
+    "es": "2 Timoteo fue escrita desde cuál ubicación?"
+   },
+   "options": {
+    "en": [
+     "The Mamertine dungeon in Rome",
+     "Antioch",
+     "The rented house in Rome",
+     "Corinth"
+    ],
+    "es": [
+     "El calabozo Mamertino en Roma",
+     "Antioquía",
+     "La casa alquilada en Roma",
+     "Corinto"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The one mission of all three letters is to guard the deposit of the gospel and pass it intact to the next generation.",
+    "es": "La única misión de las tres cartas es guardar el depósito del evangelio y pasarlo intacto a la próxima generación."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Greek word 'paratheke' used in the Pastoral Epistles means:",
+    "es": "La palabra griega 'paratheke' usada en las Epístolas Pastorales significa:"
+   },
+   "options": {
+    "en": [
+     "Sermon",
+     "Wisdom",
+     "Treasure / deposit entrusted to a faithful banker",
+     "Tradition"
+    ],
+    "es": [
+     "Sermón",
+     "Sabiduría",
+     "Tesoro / depósito confiado a un banquero fiel",
+     "Tradición"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Greek word for the deposit is paratheke, a treasure entrusted to a faithful banker; the gospel is that deposit.",
+    "es": "La palabra griega para el depósito es paratheke, un tesoro confiado a un banquero fiel; el evangelio es ese depósito."
+   }
+  },
+  {
+   "stem": {
+    "en": "The key verse of 1 Timothy calls the church the 'house of God' and:",
+    "es": "El versículo clave de 1 Timoteo llama a la iglesia 'casa de Dios' y:"
+   },
+   "options": {
+    "en": [
+     "The lampstand of the world",
+     "The pillar and ground of the truth",
+     "The bride of Christ",
+     "The flock of God"
+    ],
+    "es": [
+     "El candelero del mundo",
+     "Columna y apoyo de la verdad",
+     "La esposa de Cristo",
+     "La grey de Dios"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "First Timothy was written to Timothy at Ephesus, a large established church undermined by false teachers from within.",
+    "es": "Primera de Timoteo fue escrita a Timoteo en Éfeso, una iglesia grande y establecida socavada por falsos maestros desde dentro."
+   }
+  },
+  {
+   "stem": {
+    "en": "The most important chapter for selecting elders and deacons is:",
+    "es": "El capítulo más importante para escoger ancianos y diáconos es:"
+   },
+   "options": {
+    "en": [
+     "1 Timothy 3",
+     "1 Timothy 5",
+     "Titus 1",
+     "2 Timothy 2"
+    ],
+    "es": [
+     "1 Timoteo 3",
+     "1 Timoteo 5",
+     "Tito 1",
+     "2 Timoteo 2"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "First Timothy 3 gives the qualifications of elders and deacons, the key administrative chapter for choosing church leaders.",
+    "es": "Primera de Timoteo 3 da las cualidades de obispos y diáconos, el capítulo administrativo clave para escoger líderes de la iglesia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Titus was left to organize churches on which island?",
+    "es": "Tito fue dejado para organizar iglesias en cuál isla?"
+   },
+   "options": {
+    "en": [
+     "Cyprus",
+     "Patmos",
+     "Malta",
+     "Crete"
+    ],
+    "es": [
+     "Chipre",
+     "Patmos",
+     "Malta",
+     "Creta"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "First Timothy 3:15 calls the church the house of God and the pillar and ground of the truth — both a family and a support.",
+    "es": "Primera de Timoteo 3:15 llama a la iglesia la casa de Dios y columna y apoyo de la verdad — a la vez familia y sostén."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Greek word for 'adorn' in Titus 2:10 ('that they may adorn the doctrine') is:",
+    "es": "La palabra griega para 'adornar' en Tito 2:10 ('para que adornen la doctrina') es:"
+   },
+   "options": {
+    "en": [
+     "Doxazo",
+     "Lampo",
+     "Kosmeo (root of 'cosmetic')",
+     "Phaino"
+    ],
+    "es": [
+     "Doxazo",
+     "Lampo",
+     "Kosmeo (raíz de 'cosmético')",
+     "Phaino"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Titus was sent to Crete, whose own poet Epimenides called Cretans liars, evil beasts, lazy gluttons, a rough mission field.",
+    "es": "Tito fue enviado a Creta, cuyo propio poeta Epimenides llamó a los cretenses mentirosos, malas bestias, glotones ociosos, un campo difícil."
+   }
+  },
+  {
+   "stem": {
+    "en": "The 'blessed hope' passage uniting past, present, and future of salvation is found in:",
+    "es": "El pasaje de la 'bendita esperanza' que une el pasado, presente y futuro de la salvación se encuentra en:"
+   },
+   "options": {
+    "en": [
+     "1 Timothy 3:16",
+     "2 Timothy 4:6-8",
+     "Titus 3:5-7",
+     "Titus 2:11-14"
+    ],
+    "es": [
+     "1 Timoteo 3:16",
+     "2 Timoteo 4:6-8",
+     "Tito 3:5-7",
+     "Tito 2:11-14"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Titus 2:10 says believers adorn the doctrine of God; the Greek kosmeo, root of 'cosmetic,' means their lives beautify the gospel.",
+    "es": "Tito 2:10 dice que los creyentes adornan la doctrina de Dios; el griego kosmeo, raíz de 'cosmético', significa que sus vidas embellecen el evangelio."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Greek word translated 'inspiration of God' in 2 Timothy 3:16 is:",
+    "es": "La palabra griega traducida 'inspirada divinamente' en 2 Timoteo 3:16 es:"
+   },
+   "options": {
+    "en": [
+     "Logos",
+     "Theopneustos (God-breathed)",
+     "Doxa",
+     "Hagios"
+    ],
+    "es": [
+     "Logos",
+     "Theopneustos (respirada por Dios)",
+     "Doxa",
+     "Hagios"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Titus targets sound doctrine, good works, and the blessed hope — appointing elders, teaching godly living, awaiting Christ.",
+    "es": "Tito apunta a la sana doctrina, las buenas obras y la esperanza bienaventurada — nombrar ancianos, enseñar vida piadosa, esperar a Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul's great discipleship formula 'commit these to faithful men who will be able to teach others also' is found in:",
+    "es": "La gran fórmula de discipulado de Pablo 'encarga á los hombres fieles que serán idóneos para enseñar también á otros' se encuentra en:"
+   },
+   "options": {
+    "en": [
+     "2 Timothy 2:2",
+     "Titus 2:2",
+     "2 Timothy 1:6",
+     "1 Timothy 4:12"
+    ],
+    "es": [
+     "2 Timoteo 2:2",
+     "Tito 2:2",
+     "2 Timoteo 1:6",
+     "1 Timoteo 4:12"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Titus 2:11–14 spans the grace that appeared (Bethlehem), godly living (Calvary applied), and the blessed hope (His return).",
+    "es": "Tito 2:11–14 abarca la gracia que apareció (Belén), la vida piadosa (Calvario aplicado) y la esperanza bienaventurada (Su regreso)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The companion who deserted Paul 'having loved this present world' was:",
+    "es": "El compañero que desamparó a Pablo 'amando este siglo' fue:"
+   },
+   "options": {
+    "en": [
+     "Hymenaeus",
+     "Philetus",
+     "Demas",
+     "Crescens"
+    ],
+    "es": [
+     "Himeneo",
+     "Fileto",
+     "Demas",
+     "Crescente"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Second Timothy was written from the Mamertine dungeon in Rome, with Paul's death sentence already pronounced.",
+    "es": "Segunda de Timoteo fue escrita desde el calabozo Mamertino en Roma, con la sentencia de muerte de Pablo ya pronunciada."
+   }
+  },
+  {
+   "stem": {
+    "en": "The four-fold alliterative tragedy of Demas can be traced as:",
+    "es": "La tragedia cuádruple aliterada de Demas se puede trazar como:"
+   },
+   "options": {
+    "en": [
+     "Dutiful, Distracted, Defected, Died",
+     "Born, baptized, blessed, buried",
+     "Saved, struggled, sinned, suffered",
+     "Called, chosen, corrupted, condemned"
+    ],
+    "es": [
+     "Diligente, Distraído, Desertó, Desapareció",
+     "Nació, bautizado, bendecido, sepultado",
+     "Salvo, luchó, pecó, sufrió",
+     "Llamado, escogido, corrompido, condenado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Second Timothy stacks four charges: be unashamed, be strong in grace, continue in what you learned, and preach the word.",
+    "es": "Segunda de Timoteo apila cuatro encargos: no avergonzarse, ser fuerte en la gracia, continuar en lo aprendido, y predicar la Palabra."
+   }
+  },
+  {
+   "stem": {
+    "en": "In contrast to Demas, who was restored to Paul's inner circle by the end of 2 Timothy?",
+    "es": "En contraste con Demas, ¿quién fue restaurado al círculo íntimo de Pablo al final de 2 Timoteo?"
+   },
+   "options": {
+    "en": [
+     "Silas",
+     "Apollos",
+     "John Mark",
+     "Aquila"
+    ],
+    "es": [
+     "Silas",
+     "Apolos",
+     "Juan Marcos",
+     "Aquila"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Second Timothy 2:2 gives the discipleship formula: what Paul taught Timothy, commit to faithful men who will teach others.",
+    "es": "Segunda de Timoteo 2:2 da la fórmula del discipulado: lo que Pablo enseñó a Timoteo, encárgalo a hombres fieles que enseñen a otros."
+   }
+  },
+  {
+   "stem": {
+    "en": "The famous 'last days' warning that men will have 'a form of godliness but denying its power' is found in:",
+    "es": "La famosa advertencia de los 'últimos días' de que los hombres tendrán 'apariencia de piedad mas habiendo negado la eficacia de ella' se encuentra en:"
+   },
+   "options": {
+    "en": [
+     "1 Timothy 4:1",
+     "Titus 3:1",
+     "2 Thessalonians 2:3",
+     "2 Timothy 3:5"
+    ],
+    "es": [
+     "1 Timoteo 4:1",
+     "Tito 3:1",
+     "2 Tesalonicenses 2:3",
+     "2 Timoteo 3:5"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Demas forsook Paul, having loved this present world, and departed for Thessalonica (2 Timothy 4:10).",
+    "es": "Demas desamparó a Pablo, amando este mundo presente, y se fue a Tesalónica (2 Timoteo 4:10)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul's final triumphant declaration 'I have fought the good fight, I have finished the race, I have kept the faith' is in:",
+    "es": "La declaración triunfante final de Pablo 'He peleado la buena batalla, he acabado la carrera, he guardado la fe' está en:"
+   },
+   "options": {
+    "en": [
+     "2 Timothy 4:7",
+     "1 Timothy 6:12",
+     "Titus 3:5",
+     "Philippians 4:13"
+    ],
+    "es": [
+     "2 Timoteo 4:7",
+     "1 Timoteo 6:12",
+     "Tito 3:5",
+     "Filipenses 4:13"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "In the same chapter Demas walks out, Paul asks for Mark, once a deserter, now useful for ministry — some defect, some are restored.",
+    "es": "En el mismo capítulo en que Demas se va, Pablo pide a Marcos, antes desertor, ahora útil para el ministerio — algunos desertan, algunos son restaurados."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul says the crown of righteousness will be given not only to him but also to:",
+    "es": "Pablo dice que la corona de justicia será dada no solo a él sino también a:"
+   },
+   "options": {
+    "en": [
+     "All who have suffered for Christ",
+     "All who have been baptized",
+     "All who are martyred",
+     "All who have loved His appearing"
+    ],
+    "es": [
+     "Todos los que han sufrido por Cristo",
+     "Todos los que han sido bautizados",
+     "Todos los que son martirizados",
+     "Todos los que han amado su venida"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Second Timothy 3 warns that perilous times will come in the last days, with people having a form of godliness but denying its power.",
+    "es": "Segunda de Timoteo 3 advierte que vendrán tiempos peligrosos en los últimos días, con gente que tiene apariencia de piedad pero niega su poder."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unifying mission of all three Pastoral Epistles is:",
+    "es": "La misión unificadora de las tres Epístolas Pastorales es:"
+   },
+   "options": {
+    "en": [
+     "Building larger congregations",
+     "Guarding the deposit and passing it intact to the next generation",
+     "Practicing church discipline",
+     "Preparing for martyrdom"
+    ],
+    "es": [
+     "Construir congregaciones más grandes",
+     "Guardar el depósito y pasarlo intacto a la siguiente generación",
+     "Practicar la disciplina de la iglesia",
+     "Prepararse para el martirio"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Second Timothy 3:16 says all Scripture is theopneustos, God-breathed — breathed from the mouth of God, not merely inspired like a poem.",
+    "es": "Segunda de Timoteo 3:16 dice que toda la Escritura es theopneustos, inspirada por Dios — exhalada de la boca de Dios, no solo inspirada como un poema."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Old Testament prophet whose plumb line vision illustrates the testing of doctrine is:",
+    "es": "El profeta del Antiguo Testamento cuya visión de la plomada ilustra la prueba de la doctrina es:"
+   },
+   "options": {
+    "en": [
+     "Amos",
+     "Jeremiah",
+     "Ezekiel",
+     "Isaiah"
+    ],
+    "es": [
+     "Amós",
+     "Jeremías",
+     "Ezequiel",
+     "Isaías"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "God-breathed Scripture is profitable for doctrine, reproof, correction, and instruction, equipping the man of God for every good work.",
+    "es": "La Escritura inspirada por Dios es útil para enseñar, redargüir, corregir e instruir, equipando al hombre de Dios para toda buena obra."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Spanish word 'esperanza' uniquely combines which three English meanings?",
+    "es": "La palabra española 'esperanza' combina únicamente cuáles tres significados ingleses?"
+   },
+   "options": {
+    "en": [
+     "Faith, love, joy",
+     "Pray, fast, give",
+     "Wait, hope, expect",
+     "Watch, serve, witness"
+    ],
+    "es": [
+     "Fe, amor, gozo",
+     "Orar, ayunar, dar",
+     "Esperar, confiar, contar con",
+     "Velar, servir, testificar"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Paul's final words in 2 Timothy 4:7 — I have fought the good fight, finished the race, kept the faith — await the crown of righteousness.",
+    "es": "Las palabras finales de Pablo en 2 Timoteo 4:7 — he peleado la buena batalla, acabado la carrera, guardado la fe — esperan la corona de justicia."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain the historical setting of each Pastoral Epistle. Why is the dating sequence (1 Timothy, Titus, then 2 Timothy) significant?",
+    "es": "Explique el contexto histórico de cada Epístola Pastoral. ¿Por qué es importante la secuencia de fechas (1 Timoteo, Tito, luego 2 Timoteo)?"
+   },
+   "keywords": {
+    "en": [
+     "timothy",
+     "titus",
+     "mamertine",
+     "ephesus",
+     "crete",
+     "dungeon"
+    ],
+    "es": [
+     "timoteo",
+     "tito",
+     "mamertina",
+     "efeso",
+     "creta",
+     "calabozo"
+    ]
+   },
+   "model": {
+    "en": "Each Pastoral Epistle has its own setting. First Timothy went to Timothy at Ephesus, an established church troubled by false teachers; Titus went to Titus on the rough mission field of Crete; and Second Timothy was written to Timothy from the Mamertine dungeon in Rome, where Paul awaited execution. The dating matters because it shows Paul released after Acts 28, writing the first two from the field and the last from the death cell.",
+    "es": "Cada epístola pastoral tiene su propio entorno. Primera de Timoteo fue a Timoteo en Éfeso, una iglesia establecida turbada por falsos maestros; Tito fue a Tito en el difícil campo misionero de Creta; y Segunda de Timoteo fue escrita a Timoteo desde el calabozo Mamertino en Roma, donde Pablo esperaba la ejecución. La datación importa porque muestra a Pablo liberado tras Hechos 28, escribiendo las primeras dos desde el campo y la última desde la celda de la muerte."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Trace the meaning of the Greek word 'paratheke' (deposit) and discuss how it functions as the central image of the Pastoral Epistles.",
+    "es": "Trace el significado de la palabra griega 'paratheke' (depósito) y discuta cómo funciona como la imagen central de las Epístolas Pastorales."
+   },
+   "keywords": {
+    "en": [
+     "paratheke",
+     "deposit",
+     "banker",
+     "gospel",
+     "guard",
+     "treasure"
+    ],
+    "es": [
+     "paratheke",
+     "deposito",
+     "banquero",
+     "evangelio",
+     "guardar",
+     "tesoro"
+    ]
+   },
+   "model": {
+    "en": "The Greek word paratheke means a treasure entrusted to a faithful banker. The gospel is that deposit, and Timothy, Titus, and every pastor after them are the bankers charged to guard it. Paul commands them to guard the deposit, keeping the treasure intact and unaltered. The image teaches that the gospel is not ours to change but ours to keep and hand on whole.",
+    "es": "La palabra griega paratheke significa un tesoro confiado a un banquero fiel. El evangelio es ese depósito, y Timoteo, Tito y todo pastor después de ellos son los banqueros encargados de guardarlo. Pablo les manda guardar el depósito, manteniendo el tesoro intacto e inalterado. La imagen enseña que el evangelio no es nuestro para cambiarlo sino nuestro para guardarlo y entregarlo entero."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Discuss the importance of 1 Timothy 3:15 ('the church... the pillar and ground of the truth'). What does it teach about the church?",
+    "es": "Discuta la importancia de 1 Timoteo 3:15 ('la iglesia... columna y apoyo de la verdad'). ¿Qué enseña sobre la iglesia?"
+   },
+   "keywords": {
+    "en": [
+     "3:15",
+     "house",
+     "pillar",
+     "truth",
+     "church",
+     "living god"
+    ],
+    "es": [
+     "3:15",
+     "casa",
+     "columna",
+     "verdad",
+     "iglesia",
+     "dios vivo"
+    ]
+   },
+   "model": {
+    "en": "First Timothy 3:15 calls the church both the house of God and the pillar and ground of the truth. As a house she is a family and a home; as a pillar she is a structural support holding up the truth in a falling world. The church of the living God is both at once, and the task is to keep the house warm and the pillar straight.",
+    "es": "Primera de Timoteo 3:15 llama a la iglesia a la vez la casa de Dios y columna y apoyo de la verdad. Como casa es una familia y un hogar; como columna es un sostén estructural que sostiene la verdad en un mundo que se derrumba. La iglesia del Dios vivo es ambas cosas a la vez, y la tarea es mantener la casa cálida y la columna derecha."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the three-fold structure of Titus (sound doctrine, good works, blessed hope) and its connection to Titus 2:11-14.",
+    "es": "Explique la estructura triple de Tito (sana doctrina, buenas obras, bendita esperanza) y su conexión con Tito 2:11-14."
+   },
+   "keywords": {
+    "en": [
+     "doctrine",
+     "works",
+     "hope",
+     "grace",
+     "appeared",
+     "blessed"
+    ],
+    "es": [
+     "doctrina",
+     "obras",
+     "esperanza",
+     "gracia",
+     "aparecio",
+     "bienaventurada"
+    ]
+   },
+   "model": {
+    "en": "Titus has a three-fold structure: sound doctrine, good works, and the blessed hope. Titus is to appoint elders who hold sound doctrine, to teach every group to live good works that adorn the gospel, and to anchor it all in the grace of God that has appeared and the blessed hope of Christ's return. Past grace, present godliness, and future hope hold together in one strategy.",
+    "es": "Tito tiene una estructura triple: sana doctrina, buenas obras y la esperanza bienaventurada. Tito ha de nombrar ancianos que sostengan la sana doctrina, enseñar a cada grupo a vivir buenas obras que adornen el evangelio, y anclarlo todo en la gracia de Dios que ha aparecido y la esperanza bienaventurada del regreso de Cristo. La gracia pasada, la piedad presente y la esperanza futura se sostienen en una sola estrategia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Apply the Spanish wordplay of 'esperanza' (wait/hope/expect) to Titus 2:13. How does it deepen the Christian's expectation of Christ's return?",
+    "es": "Aplique el juego de palabras español de 'esperanza' (esperar/confiar/contar con) a Tito 2:13. ¿Cómo profundiza la expectativa cristiana del regreso de Cristo?"
+   },
+   "keywords": {
+    "en": [
+     "esperanza",
+     "wait",
+     "hope",
+     "expect",
+     "blessed",
+     "appearing"
+    ],
+    "es": [
+     "esperanza",
+     "esperar",
+     "espera",
+     "aguardar",
+     "bienaventurada",
+     "aparicion"
+    ]
+   },
+   "model": {
+    "en": "The Spanish word esperanza captures Titus 2:13 in one verb. Esperar means to wait, esperanza means hope, and to esperar something also means to expect it, so the believer waiting for the Lord is hoping for Him and expecting Him at once. The blessed hope is not waiting without hope, nor hope without expectation; it is all three together as we look for His glorious appearing.",
+    "es": "La palabra esperanza capta Tito 2:13 en un solo verbo. Esperar significa aguardar, esperanza significa la confianza, y esperar algo también significa contar con ello, así que el creyente que espera al Señor lo aguarda y cuenta con Él a la vez. La esperanza bienaventurada no es aguardar sin confianza, ni confianza sin expectativa; es las tres juntas al buscar Su gloriosa aparición."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Discuss the doctrine of inspiration in 2 Timothy 3:16-17. What does 'theopneustos' (God-breathed) teach about the Bible?",
+    "es": "Discuta la doctrina de la inspiración en 2 Timoteo 3:16-17. ¿Qué enseña 'theopneustos' (respirada por Dios) sobre la Biblia?"
+   },
+   "keywords": {
+    "en": [
+     "theopneustos",
+     "god-breathed",
+     "inspiration",
+     "scripture",
+     "profitable",
+     "complete"
+    ],
+    "es": [
+     "theopneustos",
+     "inspirada por dios",
+     "inspiracion",
+     "escritura",
+     "util",
+     "completo"
+    ]
+   },
+   "model": {
+    "en": "Second Timothy 3:16–17 teaches the doctrine of inspiration. All Scripture is theopneustos, God-breathed, breathed out of the mouth of God Himself rather than merely inspired the way a poem is. Because it is God-breathed, Scripture is profitable for doctrine, reproof, correction, and instruction, so that the man of God may be complete and equipped for every good work.",
+    "es": "Segunda de Timoteo 3:16–17 enseña la doctrina de la inspiración. Toda la Escritura es theopneustos, inspirada por Dios, exhalada de la boca de Dios mismo en vez de meramente inspirada como un poema. Porque es inspirada por Dios, la Escritura es útil para enseñar, redargüir, corregir e instruir, para que el hombre de Dios sea perfecto y equipado para toda buena obra."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Trace the four-stage tragedy of Demas (Dutiful, Distracted, Defected, Died). What pastoral warning does it give to the believer?",
+    "es": "Trace la tragedia de cuatro etapas de Demas (Diligente, Distraído, Desertó, Desapareció). ¿Qué advertencia pastoral le da al creyente?"
+   },
+   "keywords": {
+    "en": [
+     "demas",
+     "dutiful",
+     "distracted",
+     "defected",
+     "world",
+     "warning"
+    ],
+    "es": [
+     "demas",
+     "cumplidor",
+     "distraido",
+     "desertor",
+     "mundo",
+     "advertencia"
+    ]
+   },
+   "model": {
+    "en": "The tragedy of Demas runs in four stages. He was dutiful at first, a fellow worker named with Mark and Luke; then distracted, having loved this present world; then he defected, leaving Paul in the dungeon; and finally he died to the ministry, never mentioned again. His story is a warning that a believer need not announce a defection but can simply drift after the world until he is gone.",
+    "es": "La tragedia de Demas corre en cuatro etapas. Al principio fue diligente, un colaborador nombrado con Marcos y Lucas; luego distraído, amando este mundo presente; luego desertó, dejando a Pablo en el calabozo; y al fin murió para el ministerio, sin volver a ser mencionado. Su historia es una advertencia de que un creyente no necesita anunciar una deserción sino que puede simplemente derivar tras el mundo hasta desaparecer."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Apply the driver's instructor illustration ('the car goes where the eyes are looking') to spiritual discipleship.",
+    "es": "Aplique la ilustración del instructor de manejo ('el carro va a donde miran los ojos') al discipulado espiritual."
+   },
+   "keywords": {
+    "en": [
+     "eyes",
+     "looking",
+     "drift",
+     "demas",
+     "watch",
+     "heart"
+    ],
+    "es": [
+     "ojos",
+     "mirando",
+     "desviarse",
+     "demas",
+     "velar",
+     "corazon"
+    ]
+   },
+   "model": {
+    "en": "The principle is that the car goes where the eyes are looking. A driver who merely glances at what he should not drifts toward it without turning the wheel. So Demas did not resign; he looked at the present world and his life drifted after his gaze. Paul's opposite charge is to watch in all things, for where the heart looks is where the life will go, and the believer must keep his eyes on the Lord.",
+    "es": "El principio es que el auto va donde miran los ojos. Un conductor que solo echa un vistazo a lo que no debe deriva hacia ello sin girar el volante. Así Demas no renunció; miró el mundo presente y su vida derivó tras su mirada. El encargo opuesto de Pablo es velar en todo, pues donde mira el corazón es donde irá la vida, y el creyente debe mantener los ojos en el Señor."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the contrast between Demas (who departed) and John Mark (who was restored). What does this teach about Christian failure and recovery?",
+    "es": "Explique el contraste entre Demas (que partió) y Juan Marcos (que fue restaurado). ¿Qué enseña esto sobre el fracaso y la recuperación cristianas?"
+   },
+   "keywords": {
+    "en": [
+     "demas",
+     "mark",
+     "restoration",
+     "useful",
+     "ministry",
+     "failure"
+    ],
+    "es": [
+     "demas",
+     "marcos",
+     "restauracion",
+     "util",
+     "ministerio",
+     "fracaso"
+    ]
+   },
+   "model": {
+    "en": "In the same chapter Demas departs, Paul asks for John Mark, who had once deserted at Perga and seemed disqualified, but is now useful for ministry. The contrast refuses to let either story be the whole picture: some defect like Demas, and some are restored like Mark. Past failure does not have to be final, for the deposit is guarded by faithful men, and faithful men include the restored.",
+    "es": "En el mismo capítulo en que Demas se va, Pablo pide a Juan Marcos, que una vez había desertado en Perge y parecía descalificado, pero ahora es útil para el ministerio. El contraste se niega a dejar que cualquiera de las dos historias sea el cuadro completo: algunos desertan como Demas, y algunos son restaurados como Marcos. El fracaso pasado no tiene que ser final, pues el depósito lo guardan hombres fieles, y los hombres fieles incluyen a los restaurados."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Synthesize: What is the legacy of Paul's final words in 2 Timothy 4:6-8? How does the closing chapter shape the Christian's view of life and death?",
+    "es": "Sintetice: ¿Cuál es el legado de las palabras finales de Pablo en 2 Timoteo 4:6-8? ¿Cómo da forma el capítulo final a la visión cristiana de la vida y la muerte?"
+   },
+   "keywords": {
+    "en": [
+     "fought",
+     "finished",
+     "kept",
+     "crown",
+     "appearing",
+     "departure"
+    ],
+    "es": [
+     "peleado",
+     "acabado",
+     "guardado",
+     "corona",
+     "aparicion",
+     "partida"
+    ]
+   },
+   "model": {
+    "en": "Paul's final words in 2 Timothy 4:6–8 are his legacy. Knowing his departure was at hand, he wrote three perfect-tense verbs over his life: I have fought the good fight, I have finished the race, I have kept the faith. The crown of righteousness is laid up for him, and not for him only but for all who have loved Christ's appearing — so the legacy belongs to every faithful believer.",
+    "es": "Las palabras finales de Pablo en 2 Timoteo 4:6–8 son su legado. Sabiendo que su partida estaba cercana, escribió tres verbos en tiempo perfecto sobre su vida: he peleado la buena batalla, he acabado la carrera, he guardado la fe. La corona de justicia le está guardada, y no solo a él sino a todos los que han amado la aparición de Cristo — así que el legado pertenece a todo creyente fiel."
+   }
+  }
+ ]
+};

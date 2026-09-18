@@ -1,11 +1,861 @@
-/* CTSBibleCharacters2 - unit 8: per-unit configuration and content. */
-
-const UNIT = 8;
-
-const NEXT_UNIT_URL = 'CTSBibleCharacters2Unit9.html';
-
-const unitTitlesEn = ["Unit 1 - Jonah — The Prophet Who Ran from God", "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife", "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful", "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God", "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word", "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark", "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep", `Unit ${UNIT} - Thomas — The Doubter Who Made the Great Confession`, `Unit ${UNIT + 1} - Lazarus — The Dead Man Jesus Called Back to Life`, "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ", "Unit 11 - Paul — From Persecutor to Apostle of Grace"];
-
-const mcQuestions = [{"textEn":"1. What was Thomas's other name?","textEs":"1. ¿Cuál era el otro nombre de Tomás?","optionsEn":["Didymus, the Twin", "Nathanael", "Bartholomew", "Cephas"],"optionsEs":["Dídimo, el Mellizo", "Natanael", "Bartolomé", "Cefas"],"explanationEn":"Thomas is called Didymus, meaning \"the Twin.\"","explanationEs":"A Tomás se le llama Dídimo, que significa «el Mellizo».","correct":0},{"textEn":"2. What did Thomas say in John 11:16, showing his courage?","textEs":"2. ¿Qué dijo Tomás en Juan 11:16, mostrando su valor?","optionsEn":["\"I will never leave You\"", "\"Let us also go, that we may die with Him\"", "\"Send me, Lord\"", "\"I am ready to fight\""],"optionsEs":["«Nunca te dejaré»", "«Vamos también nosotros, para que muramos con él»", "«Envíame, Señor»", "«Estoy listo para pelear»"],"explanationEn":"When others held back in fear, Thomas was willing to die at Jesus' side.","explanationEs":"Cuando los demás retrocedían de miedo, Tomás estaba dispuesto a morir al lado de Jesús.","correct":1},{"textEn":"3. What honest question did Thomas ask in John 14:5?","textEs":"3. ¿Qué pregunta honesta hizo Tomás en Juan 14:5?","optionsEn":["\"Why must You suffer?\"", "\"When will the kingdom come?\"", "\"Who is the greatest?\"", "\"Lord, we do not know where You are going, and how can we know the way?\""],"optionsEs":["«¿Por qué debes sufrir?»", "«¿Cuándo vendrá el reino?»", "«¿Quién es el mayor?»", "«Señor, no sabemos a dónde vas; ¿cómo, pues, podemos saber el camino?»"],"explanationEn":"His honesty drew from Jesus the words, \"I am the way, the truth, and the life.\"","explanationEs":"Su honestidad sacó de Jesús las palabras: «Yo soy el camino, la verdad y la vida».","correct":3},{"textEn":"4. Why did Thomas miss the risen Jesus' first appearance?","textEs":"4. ¿Por qué se perdió Tomás la primera aparición del Jesús resucitado?","optionsEn":["He had returned to fishing", "He had denied the Lord", "He was absent when Jesus first appeared to the disciples", "He was imprisoned"],"optionsEs":["Había vuelto a pescar", "Había negado al Señor", "Estaba ausente cuando Jesús se apareció por primera vez a los discípulos", "Estaba encarcelado"],"explanationEn":"Thomas was not with the others when the risen Lord first came.","explanationEs":"Tomás no estaba con los demás cuando el Señor resucitado vino por primera vez.","correct":2},{"textEn":"5. What was Thomas's condition for believing?","textEs":"5. ¿Cuál era la condición de Tomás para creer?","optionsEn":["\"Unless I see the print of the nails... I will not believe\"", "The testimony of the women", "An empty tomb", "A word from an angel"],"optionsEs":["«Si no viere la señal de los clavos... no creeré»", "El testimonio de las mujeres", "Una tumba vacía", "Una palabra de un ángel"],"explanationEn":"He demanded to see and touch the wounds himself.","explanationEs":"Exigió ver y tocar las heridas él mismo.","correct":0},{"textEn":"6. Why did the resurrection make no sense to Thomas?","textEs":"6. ¿Por qué no tenía sentido la resurrección para Tomás?","optionsEn":["He had never heard of Jesus", "He thought Jesus had only fainted", "Dead men do not rise", "He doubted the disciples existed"],"optionsEs":["Nunca había oído de Jesús", "Pensaba que Jesús solo se había desmayado", "Los muertos no resucitan", "Dudaba que los discípulos existieran"],"explanationEn":"He had watched his Lord die; the report seemed impossible.","explanationEs":"Había visto morir a su Señor; el reporte parecía imposible.","correct":2},{"textEn":"7. How long did Thomas remain in grief and doubt?","textEs":"7. ¿Cuánto tiempo permaneció Tomás en aflicción y duda?","optionsEn":["A single hour", "A whole week (about eight days)", "Forty days", "Three years"],"optionsEs":["Una sola hora", "Una semana entera (unos ocho días)", "Cuarenta días", "Tres años"],"explanationEn":"For a whole week he could not share his friends' joy.","explanationEs":"Por una semana entera no pudo compartir el gozo de sus amigos.","correct":1},{"textEn":"8. What did Jesus do when He came again?","textEs":"8. ¿Qué hizo Jesús cuando vino de nuevo?","optionsEn":["He rebuked Thomas before all", "He ignored Thomas", "He sent Thomas away", "He went straight to Thomas, saying, \"Reach your finger here\""],"optionsEs":["Reprendió a Tomás delante de todos", "Ignoró a Tomás", "Envió a Tomás lejos", "Fue directo a Tomás, diciendo: «Mete tu dedo aquí»"],"explanationEn":"With tenderness Jesus offered Thomas the very proof he had demanded.","explanationEs":"Con ternura Jesús le ofreció a Tomás la misma prueba que había exigido.","correct":3},{"textEn":"9. What did Jesus say to Thomas?","textEs":"9. ¿Qué le dijo Jesús a Tomás?","optionsEn":["\"Your faith has failed\"", "\"Do not be unbelieving, but believing\"", "\"Why are you weeping?\"", "\"Depart from Me\""],"optionsEs":["«Tu fe ha fallado»", "«No seas incrédulo, sino creyente»", "«¿Por qué lloras?»", "«Apártate de mí»"],"explanationEn":"The risen Lord met the honest doubter at the point of his doubt.","explanationEs":"El Señor resucitado encontró al doliente honesto en el punto de su duda.","correct":1},{"textEn":"10. What was Thomas's great confession?","textEs":"10. ¿Cuál fue la gran confesión de Tomás?","optionsEn":["\"Truly this was the Son of God\"", "\"You are the Christ\"", "\"My Lord and my God!\"", "\"I believe; help my unbelief\""],"optionsEs":["«Verdaderamente éste era el Hijo de Dios»", "«Tú eres el Cristo»", "«¡Señor mío, y Dios mío!»", "«Creo; ayuda mi incredulidad»"],"explanationEn":"Face to face with the living Christ, his doubt collapsed into worship.","explanationEs":"Cara a cara con el Cristo viviente, su duda se desplomó en adoración.","correct":2},{"textEn":"11. What does Thomas's confession declare about Jesus?","textEs":"11. ¿Qué declara la confesión de Tomás acerca de Jesús?","optionsEn":["That Jesus was a prophet only", "That Jesus was only a teacher", "That Jesus was an angel", "His deity — that Jesus is both Lord and God"],"optionsEs":["Que Jesús era solo un profeta", "Que Jesús era solo un maestro", "Que Jesús era un ángel", "Su deidad — que Jesús es tanto Señor como Dios"],"explanationEn":"\"My Lord and my God\" is the clearest confession of Christ's deity in the Gospels.","explanationEs":"«Señor mío, y Dios mío» es la confesión más clara de la deidad de Cristo en los Evangelios.","correct":3},{"textEn":"12. What blessing did Jesus pronounce?","textEs":"12. ¿Qué bendición pronunció Jesús?","optionsEn":["\"Blessed are those who have not seen and yet have believed\"", "\"Blessed are those who see signs\"", "\"Blessed are the rich\"", "\"Blessed are the strong\""],"optionsEs":["«Bienaventurados los que no vieron, y creyeron»", "«Bienaventurados los que ven señales»", "«Bienaventurados los ricos»", "«Bienaventurados los fuertes»"],"explanationEn":"This blessing reaches across the centuries and lands on us.","explanationEs":"Esta bendición cruza los siglos y cae sobre nosotros.","correct":0},{"textEn":"13. Who does that blessing include?","textEs":"13. ¿A quiénes incluye esa bendición?","optionsEn":["Only the eleven apostles", "Only the Jews", "No one living today", "Us — those who believe without having seen"],"optionsEs":["Solo a los once apóstoles", "Solo a los judíos", "A nadie que viva hoy", "A nosotros — los que creen sin haber visto"],"explanationEn":"We have never seen the risen Lord, yet we believe, and Jesus calls us blessed.","explanationEs":"Nunca hemos visto al Señor resucitado, y sin embargo creemos, y Jesús nos llama bienaventurados.","correct":3},{"textEn":"14. According to \"Eyes of the Heart,\" how does our faith compare?","textEs":"14. Según «Los Ojos del Corazón», ¿cómo se compara nuestra fe?","optionsEn":["In some ways it is greater, resting on Christ rather than on sight", "It is weaker than Thomas's", "It is identical to Thomas's", "It is impossible without seeing"],"optionsEs":["En cierto sentido es mayor, descansando en Cristo más que en la vista", "Es más débil que la de Tomás", "Es idéntica a la de Tomás", "Es imposible sin ver"],"explanationEn":"Thomas believed because he saw; we believe with the eyes of the heart.","explanationEs":"Tomás creyó porque vio; nosotros creemos con los ojos del corazón.","correct":0},{"textEn":"15. What does our faith rest on?","textEs":"15. ¿En qué descansa nuestra fe?","optionsEn":["Our own feelings", "Christ and the eyewitness testimony of those who saw Him, not on our having seen", "Visible proof we demand", "Nothing at all"],"optionsEs":["En nuestros propios sentimientos", "En Cristo y el testimonio ocular de los que lo vieron, no en nuestro haber visto", "En la prueba visible que exigimos", "En nada en absoluto"],"explanationEn":"John wrote of what they heard, saw, and handled, so that we could be sure (1 John 1:1-3).","explanationEs":"Juan escribió de lo que oyeron, vieron y palparon, para que estuviéramos seguros (1 Juan 1:1-3).","correct":1},{"textEn":"16. What is \"the Thomas Doubt\"?","textEs":"16. ¿Qué es «la Duda de Tomás»?","optionsEn":["Doubting one's own ability", "Doubting other people", "Doubting the faith itself — whether it is even true", "Doubting the weather"],"optionsEs":["Dudar de la propia capacidad", "Dudar de otras personas", "Dudar de la fe misma — si es siquiera verdad", "Dudar del clima"],"explanationEn":"Most honest believers face this kind of doubt at some point.","explanationEs":"La mayoría de los creyentes honestos enfrentan esta clase de duda en algún momento.","correct":2},{"textEn":"17. What answers the Thomas Doubt?","textEs":"17. ¿Qué responde a la Duda de Tomás?","optionsEn":["Human willpower", "Ignoring the questions", "A clever philosophy", "The resurrection — the fact that Jesus rose, of which the apostles were witnesses"],"optionsEs":["La fuerza de voluntad humana", "Ignorar las preguntas", "Una filosofía ingeniosa", "La resurrección — el hecho de que Jesús resucitó, de lo cual los apóstoles fueron testigos"],"explanationEn":"That fact made the doubting Thomas fall in awe and call Jesus his God.","explanationEs":"Aquel hecho hizo que el dudoso Tomás cayera con asombro y llamara a Jesús su Dios.","correct":3},{"textEn":"18. Who was Frank Morison?","textEs":"18. ¿Quién era Frank Morison?","optionsEn":["A skeptical writer who set out to disprove the resurrection but was persuaded against his will of it", "A disciple of Jesus", "A Roman soldier at the cross", "A modern pastor"],"optionsEs":["Un escritor escéptico que se propuso refutar la resurrección pero fue persuadido contra su voluntad de ella", "Un discípulo de Jesús", "Un soldado romano en la cruz", "Un pastor moderno"],"explanationEn":"His book Who Moved the Stone? opens with \"The Book That Refused to Be Written.\"","explanationEs":"Su libro ¿Quién movió la piedra? comienza con «El libro que se negó a ser escrito».","correct":0},{"textEn":"19. How did Rick answer his old friend who said, \"You could be wrong\"?","textEs":"19. ¿Cómo respondió Rick a su viejo amigo que dijo «Podrías estar equivocado»?","optionsEn":["\"You must be silent\"", "\"Then I will stop believing\"", "\"You could be right. But even if I am, I've lost nothing — Jesus has given me a better life. But if you are wrong...\"", "\"Prove it to me\""],"optionsEs":["«Debes callar»", "«Entonces dejaré de creer»", "«Podrías tener razón. Pero aun si la tengo, no he perdido nada — Jesús me ha dado una vida mejor. Pero si tú estás equivocado...»", "«Demuéstramelo»"],"explanationEn":"There is everything to gain in trusting Christ and everything to lose in refusing Him.","explanationEs":"Hay todo que ganar en confiar en Cristo y todo que perder en rechazarlo.","correct":2},{"textEn":"20. What is the central theme of Thomas's life?","textEs":"20. ¿Cuál es el tema central de la vida de Tomás?","optionsEn":["Doubt always ends in unbelief", "Doubt is not where faith must end; brought to the risen Christ, the doubter becomes the worshiper", "Only those who see can believe", "Questions are sinful"],"optionsEs":["La duda siempre termina en incredulidad", "La duda no es donde la fe debe terminar; llevada al Cristo resucitado, el dudoso se vuelve adorador", "Solo los que ven pueden creer", "Las preguntas son pecado"],"explanationEn":"Bring your honest questions to the risen Christ, and doubt can become worship.","explanationEs":"Lleva tus preguntas honestas al Cristo resucitado, y la duda puede volverse adoración.","correct":1}];
-
-const kwQuestions = [{"textEn":"21. What do John 11:16 and 14:5 show about Thomas before his doubt?","textEs":"21. ¿Qué muestran Juan 11:16 y 14:5 acerca de Tomás antes de su duda?","kw_en":["courage","loyal","die","honest","question","way","cynic","thomas"],"kw_es":["valor","leal","morir","honest","pregunta","camino","cinico","tomas"],"modelEn":"Before his famous doubt, Thomas showed courage and loyalty. When Jesus set out for dangerous Judea to raise Lazarus, it was Thomas who said, \"Let us also go, that we may die with Him.\" Later, in the upper room, he honestly admitted, \"Lord, we do not know where You are going, and how can we know the way?\" — drawing from Jesus the words \"I am the way, the truth, and the life.\" Thomas was no cynic but a brave, honest man who would not pretend to believe what he did not yet understand.","modelEs":"Antes de su famosa duda, Tomás mostró valor y lealtad. Cuando Jesús partió hacia la peligrosa Judea a resucitar a Lázaro, fue Tomás quien dijo: \"Vamos también nosotros, para que muramos con él\". Más tarde, en el aposento alto, admitió honestamente: \"Señor, no sabemos a dónde vas; ¿cómo podemos saber el camino?\" — sacando de Jesús las palabras \"Yo soy el camino, la verdad y la vida\". Tomás no era un cínico sino un hombre valiente y honesto que no pretendería creer lo que aún no entendía."},{"textEn":"22. Describe Thomas's doubt.","textEs":"22. Describe la duda de Tomás.","kw_en":["absent","see","nails","believe","week","dead","rise","grief"],"kw_es":["ausente","ver","clavos","creer","semana","muertos","resucit","afligi"],"modelEn":"Thomas was absent when the risen Jesus first appeared to the disciples, and he could not believe their report. He said, \"Unless I see in His hands the print of the nails... I will not believe.\" We should be fair to him: dead men do not rise, and he had watched his Lord die, so he was guarding a broken heart against another disappointment. For one whole week he stayed in grief and doubt, surrounded by rejoicing friends yet unable to share their joy.","modelEs":"Tomás estaba ausente cuando el Jesús resucitado se apareció por primera vez a los discípulos, y no podía creer su reporte. Dijo: \"Si no viere en sus manos la señal de los clavos... no creeré\". Debemos ser justos con él: los muertos no resucitan, y él había visto morir a su Señor, así que guardaba un corazón quebrantado de otra desilusión. Por una semana entera permaneció en aflicción y duda, rodeado de amigos que se regocijaban pero incapaz de compartir su gozo."},{"textEn":"23. Describe the encounter and Thomas's confession.","textEs":"23. Describe el encuentro y la confesión de Tomás.","kw_en":["jesus","came","finger","unbelieving","believing","confession","lord","god"],"kw_es":["jesus","vino","dedo","incredulo","creyente","confesion","senor","dios"],"modelEn":"Eight days later Jesus came again through shut doors and went straight to Thomas, offering the very proof he had demanded: \"Reach your finger here... Do not be unbelieving, but believing.\" Jesus had heard every word of Thomas's doubt though He had not been visibly present. Face to face with the living Christ, Thomas no longer needed to touch anything; his doubt collapsed into worship. He made the greatest confession any disciple ever made: \"My Lord and my God!\"","modelEs":"Ocho días después Jesús vino de nuevo a través de las puertas cerradas y fue directo a Tomás, ofreciéndole la misma prueba que había exigido: \"Mete tu dedo aquí... no seas incrédulo, sino creyente\". Jesús había oído cada palabra de la duda de Tomás aunque no había estado visiblemente presente. Cara a cara con el Cristo viviente, Tomás ya no necesitó tocar nada; su duda se desplomó en adoración. Hizo la mayor confesión que jamás hizo un discípulo: \"¡Señor mío, y Dios mío!\"."},{"textEn":"24. What does \"My Lord and my God\" declare about Jesus?","textEs":"24. ¿Qué declara «Señor mío, y Dios mío» acerca de Jesús?","kw_en":["deity","god","lord","jesus","confession","highest","clear","gospels"],"kw_es":["deidad","dios","senor","jesus","confesion","alta","clara","evangelios"],"modelEn":"\"My Lord and my God\" is the highest declaration of who Jesus is — not merely Lord, but God. It affirms the full deity of Christ. The man we call \"doubting Thomas\" gave us the clearest confession of Christ's deity in all four Gospels. His doubt, brought to the risen Christ, had become the deepest faith, and it confesses Jesus as God Himself.","modelEs":"\"Señor mío, y Dios mío\" es la más alta declaración de quién es Jesús — no meramente Señor, sino Dios. Afirma la plena deidad de Cristo. El hombre que llamamos \"Tomás el incrédulo\" nos dio la más clara confesión de la deidad de Cristo en los cuatro Evangelios. Su duda, llevada al Cristo resucitado, se había vuelto la fe más profunda, y confiesa a Jesús como Dios mismo."},{"textEn":"25. What blessing did Jesus give, and who does it include?","textEs":"25. ¿Qué bendición dio Jesús, y a quiénes incluye?","kw_en":["blessed","not","seen","believed","us","faith","jesus","heart"],"kw_es":["bienaventurados","no","vieron","creyeron","nosotros","fe","jesus","corazon"],"modelEn":"Jesus said, \"Because you have seen Me, you have believed. Blessed are those who have not seen and yet have believed.\" That blessing is for us, who have never seen the risen Lord with our eyes yet believe. In some ways ours is a greater faith than Thomas's, for he believed because he saw, while we believe with the eyes of the heart. We rest not on sight but on Christ Himself and the testimony of those who saw.","modelEs":"Jesús dijo: \"Porque me has visto, creíste; bienaventurados los que no vieron, y creyeron\". Esa bendición es para nosotros, que nunca hemos visto al Señor resucitado con nuestros ojos y sin embargo creemos. En cierto sentido la nuestra es una fe mayor que la de Tomás, pues él creyó porque vio, mientras que nosotros creemos con los ojos del corazón. Descansamos no en la vista sino en Cristo mismo y el testimonio de los que vieron."},{"textEn":"26. According to \"Eyes of the Heart,\" what does our faith rest on?","textEs":"26. Según «Los Ojos del Corazón», ¿en qué descansa nuestra fe?","kw_en":["eyewitness","testimony","christ","rest","john","saw","handled","sure"],"kw_es":["ocular","testimonio","cristo","descans","juan","vieron","palpar","seguro"],"modelEn":"Our faith does not float in the air; it rests on Christ Himself and on the solid ground of eyewitness testimony. John, who was in that room, wrote of what they had heard, seen with their eyes, and handled with their hands concerning the Word of life, declaring it so that we could be sure. The apostles saw, touched, and ate with the risen Christ, and then died rather than deny what they had seen. That is the foundation our faith stands on.","modelEs":"Nuestra fe no flota en el aire; descansa sobre Cristo mismo y sobre el terreno sólido del testimonio ocular. Juan, que estaba en aquel cuarto, escribió de lo que habían oído, visto con sus ojos y palpado con sus manos tocante al Verbo de vida, anunciándolo para que pudiéramos estar seguros. Los apóstoles vieron, tocaron y comieron con el Cristo resucitado, y luego murieron antes que negar lo que habían visto. Ese es el fundamento sobre el que se levanta nuestra fe."},{"textEn":"27. What is the Thomas Doubt, and what answers it?","textEs":"27. ¿Qué es la Duda de Tomás, y qué la responde?","kw_en":["faith","true","doubt","resurrection","rose","witness","fact","answer"],"kw_es":["fe","verdad","duda","resurreccion","resucit","testigo","hecho","respuesta"],"modelEn":"The Thomas doubt is the doubt that questions the faith itself — whether any of it is even true. Most honest believers face it at some point. The answer to it is the same fact that turned Thomas from a doubter into a worshiper: the resurrection. Jesus rose from the dead, and His apostles were witnesses of it. That fact caused the doubting Thomas to fall in awe at the feet of his Savior and call Him his God.","modelEs":"La duda de Tomás es la duda que cuestiona la fe misma — si algo de ella es siquiera verdad. La mayoría de los creyentes honestos la enfrentan en algún momento. La respuesta a ella es el mismo hecho que convirtió a Tomás de dudoso en adorador: la resurrección. Jesús resucitó de los muertos, y sus apóstoles fueron testigos de ello. Aquel hecho hizo que el dudoso Tomás cayera con asombro a los pies de su Salvador y lo llamara su Dios."},{"textEn":"28. Who was Frank Morison, and what happened?","textEs":"28. ¿Quién era Frank Morison, y qué sucedió?","kw_en":["morison","skeptic","disprove","resurrection","evidence","persuaded","stone","book"],"kw_es":["morison","esceptico","refutar","resurreccion","evidencia","persuadi","piedra","libro"],"modelEn":"Frank Morison, the pen name of an English writer, was convinced the resurrection was a fabrication and set out to write a book disproving it. But as he examined the evidence by the strict tests of a court of law, he found himself persuaded against his will of the bodily resurrection of Jesus. The book he finally wrote, Who Moved the Stone?, opens with a chapter titled \"The Book That Refused to Be Written.\" The man who tried to bury the resurrection ended up defending it.","modelEs":"Frank Morison, el seudónimo de un escritor inglés, estaba convencido de que la resurrección era una invención y se propuso escribir un libro que la refutara. Pero al examinar la evidencia por las estrictas pruebas de un tribunal de justicia, se halló persuadido contra su voluntad de la resurrección corporal de Jesús. El libro que al fin escribió, ¿Quién movió la piedra?, comienza con un capítulo titulado \"El libro que se negó a ser escrito\". El hombre que trató de sepultar la resurrección terminó defendiéndola."},{"textEn":"29. How did Rick answer the \"you could be wrong\" objection?","textEs":"29. ¿Cómo respondió Rick a la objeción «podrías estar equivocado»?","kw_en":["rick","wrong","right","lost","life","hell","gain","risk"],"kw_es":["rick","equivocado","razon","perdido","vida","infierno","ganar","riesgo"],"modelEn":"When Rick was witnessing to an old friend, the friend shrugged and said, \"You could be wrong.\" Rick answered, \"You're right — I could be. But even if I am, I haven't lost anything; Jesus has given me a far better life than I had before. But if you are wrong, you are going to spend a very long time in hell.\" His point was that there is everything to gain in trusting the risen Christ and everything to lose in turning Him away.","modelEs":"Cuando Rick testificaba a un viejo amigo, el amigo se encogió de hombros y dijo: \"Podrías estar equivocado\". Rick respondió: \"Tienes razón — podría estarlo. Pero aun si lo estoy, no he perdido nada; Jesús me ha dado una vida mucho mejor que la que tenía antes. Pero si tú estás equivocado, vas a pasar muchísimo tiempo en el infierno\". Su punto era que hay todo que ganar en confiar en el Cristo resucitado y todo que perder en rechazarlo."},{"textEn":"30. What does Thomas teach the honest doubter?","textEs":"30. ¿Qué enseña Tomás al que duda honestamente?","kw_en":["doubt","end","bring","risen","christ","worshiper","question","evidence"],"kw_es":["duda","fin","llev","resucitado","cristo","adorador","pregunta","evidencia"],"modelEn":"The lesson of Thomas is that doubt is not where faith must end. Honest questions should not be hidden or allowed to harden into unbelief; they should be brought, as Thomas brought his, into the presence of the risen Christ and His evidence. The same Lord who came back a second time for one doubting disciple will meet us at the point of our doubt. And when He does, the questions that kept us at a distance can become the very confession that brings us to our knees: \"My Lord and my God.\"","modelEs":"La lección de Tomás es que la duda no es donde la fe debe terminar. Las preguntas honestas no deben esconderse ni dejarse endurecer en incredulidad; deben llevarse, como Tomás llevó las suyas, a la presencia del Cristo resucitado y de su evidencia. El mismo Señor que volvió una segunda vez por un discípulo dudoso nos encontrará en el punto de nuestra duda. Y cuando lo haga, las preguntas que nos mantuvieron a distancia pueden volverse la misma confesión que nos lleva de rodillas: \"Señor mío, y Dios mío\"."}];
+/* CTSBibleCharacters2 — unit 8. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "biblecharacters2",
+ "unit": 8,
+ "totalUnits": 11,
+ "filePrefix": "CTSBibleCharacters2",
+ "prevHref": "CTSBibleCharacters2Unit7.html",
+ "nextHref": "CTSBibleCharacters2Unit9.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - Jonah — The Prophet Who Ran from God",
+   "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife",
+   "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful",
+   "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God",
+   "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word",
+   "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark",
+   "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep",
+   "Unit 8 - Thomas — The Doubter Who Made the Great Confession",
+   "Unit 9 - Lazarus — The Dead Man Jesus Called Back to Life",
+   "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ",
+   "Unit 11 - Paul — From Persecutor to Apostle of Grace"
+  ],
+  "es": [
+   "Unit 1 - Jonah — The Prophet Who Ran from God",
+   "Unit 2 - Hosea — The Prophet Who Loved an Unfaithful Wife",
+   "Unit 3 - Jeremiah — The Weeping Prophet Who Stayed Faithful",
+   "Unit 4 - Esther — For Such a Time as This: The Hidden Providence of God",
+   "Unit 5 - Ezra — A Fresh New Start, the Scribe Who Restored God’s Word",
+   "Unit 6 - John the Baptist — The Forerunner Who Doubted in the Dark",
+   "Unit 7 - Peter — From Fisherman to the Rock Who Feeds the Sheep",
+   "Unit 8 - Thomas — The Doubter Who Made the Great Confession",
+   "Unit 9 - Lazarus — The Dead Man Jesus Called Back to Life",
+   "Unit 10 - Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ",
+   "Unit 11 - Paul — From Persecutor to Apostle of Grace"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "What was Thomas's other name?",
+    "es": "¿Cuál era el otro nombre de Tomás?"
+   },
+   "options": {
+    "en": [
+     "Didymus, the Twin",
+     "Nathanael",
+     "Bartholomew",
+     "Cephas"
+    ],
+    "es": [
+     "Dídimo, el Mellizo",
+     "Natanael",
+     "Bartolomé",
+     "Cefas"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Thomas is called Didymus, meaning \"the Twin.\"",
+    "es": "A Tomás se le llama Dídimo, que significa «el Mellizo»."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Thomas say in John 11:16, showing his courage?",
+    "es": "¿Qué dijo Tomás en Juan 11:16, mostrando su valor?"
+   },
+   "options": {
+    "en": [
+     "\"I will never leave You\"",
+     "\"Let us also go, that we may die with Him\"",
+     "\"Send me, Lord\"",
+     "\"I am ready to fight\""
+    ],
+    "es": [
+     "«Nunca te dejaré»",
+     "«Vamos también nosotros, para que muramos con él»",
+     "«Envíame, Señor»",
+     "«Estoy listo para pelear»"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "When others held back in fear, Thomas was willing to die at Jesus' side.",
+    "es": "Cuando los demás retrocedían de miedo, Tomás estaba dispuesto a morir al lado de Jesús."
+   }
+  },
+  {
+   "stem": {
+    "en": "What honest question did Thomas ask in John 14:5?",
+    "es": "¿Qué pregunta honesta hizo Tomás en Juan 14:5?"
+   },
+   "options": {
+    "en": [
+     "\"Why must You suffer?\"",
+     "\"When will the kingdom come?\"",
+     "\"Who is the greatest?\"",
+     "\"Lord, we do not know where You are going, and how can we know the way?\""
+    ],
+    "es": [
+     "«¿Por qué debes sufrir?»",
+     "«¿Cuándo vendrá el reino?»",
+     "«¿Quién es el mayor?»",
+     "«Señor, no sabemos a dónde vas; ¿cómo, pues, podemos saber el camino?»"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "His honesty drew from Jesus the words, \"I am the way, the truth, and the life.\"",
+    "es": "Su honestidad sacó de Jesús las palabras: «Yo soy el camino, la verdad y la vida»."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why did Thomas miss the risen Jesus' first appearance?",
+    "es": "¿Por qué se perdió Tomás la primera aparición del Jesús resucitado?"
+   },
+   "options": {
+    "en": [
+     "He had returned to fishing",
+     "He had denied the Lord",
+     "He was absent when Jesus first appeared to the disciples",
+     "He was imprisoned"
+    ],
+    "es": [
+     "Había vuelto a pescar",
+     "Había negado al Señor",
+     "Estaba ausente cuando Jesús se apareció por primera vez a los discípulos",
+     "Estaba encarcelado"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Thomas was not with the others when the risen Lord first came.",
+    "es": "Tomás no estaba con los demás cuando el Señor resucitado vino por primera vez."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was Thomas's condition for believing?",
+    "es": "¿Cuál era la condición de Tomás para creer?"
+   },
+   "options": {
+    "en": [
+     "\"Unless I see the print of the nails... I will not believe\"",
+     "The testimony of the women",
+     "An empty tomb",
+     "A word from an angel"
+    ],
+    "es": [
+     "«Si no viere la señal de los clavos... no creeré»",
+     "El testimonio de las mujeres",
+     "Una tumba vacía",
+     "Una palabra de un ángel"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "He demanded to see and touch the wounds himself.",
+    "es": "Exigió ver y tocar las heridas él mismo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why did the resurrection make no sense to Thomas?",
+    "es": "¿Por qué no tenía sentido la resurrección para Tomás?"
+   },
+   "options": {
+    "en": [
+     "He had never heard of Jesus",
+     "He thought Jesus had only fainted",
+     "Dead men do not rise",
+     "He doubted the disciples existed"
+    ],
+    "es": [
+     "Nunca había oído de Jesús",
+     "Pensaba que Jesús solo se había desmayado",
+     "Los muertos no resucitan",
+     "Dudaba que los discípulos existieran"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "He had watched his Lord die; the report seemed impossible.",
+    "es": "Había visto morir a su Señor; el reporte parecía imposible."
+   }
+  },
+  {
+   "stem": {
+    "en": "How long did Thomas remain in grief and doubt?",
+    "es": "¿Cuánto tiempo permaneció Tomás en aflicción y duda?"
+   },
+   "options": {
+    "en": [
+     "A single hour",
+     "A whole week (about eight days)",
+     "Forty days",
+     "Three years"
+    ],
+    "es": [
+     "Una sola hora",
+     "Una semana entera (unos ocho días)",
+     "Cuarenta días",
+     "Tres años"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "For a whole week he could not share his friends' joy.",
+    "es": "Por una semana entera no pudo compartir el gozo de sus amigos."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Jesus do when He came again?",
+    "es": "¿Qué hizo Jesús cuando vino de nuevo?"
+   },
+   "options": {
+    "en": [
+     "He rebuked Thomas before all",
+     "He ignored Thomas",
+     "He sent Thomas away",
+     "He went straight to Thomas, saying, \"Reach your finger here\""
+    ],
+    "es": [
+     "Reprendió a Tomás delante de todos",
+     "Ignoró a Tomás",
+     "Envió a Tomás lejos",
+     "Fue directo a Tomás, diciendo: «Mete tu dedo aquí»"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "With tenderness Jesus offered Thomas the very proof he had demanded.",
+    "es": "Con ternura Jesús le ofreció a Tomás la misma prueba que había exigido."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Jesus say to Thomas?",
+    "es": "¿Qué le dijo Jesús a Tomás?"
+   },
+   "options": {
+    "en": [
+     "\"Your faith has failed\"",
+     "\"Do not be unbelieving, but believing\"",
+     "\"Why are you weeping?\"",
+     "\"Depart from Me\""
+    ],
+    "es": [
+     "«Tu fe ha fallado»",
+     "«No seas incrédulo, sino creyente»",
+     "«¿Por qué lloras?»",
+     "«Apártate de mí»"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The risen Lord met the honest doubter at the point of his doubt.",
+    "es": "El Señor resucitado encontró al doliente honesto en el punto de su duda."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was Thomas's great confession?",
+    "es": "¿Cuál fue la gran confesión de Tomás?"
+   },
+   "options": {
+    "en": [
+     "\"Truly this was the Son of God\"",
+     "\"You are the Christ\"",
+     "\"My Lord and my God!\"",
+     "\"I believe; help my unbelief\""
+    ],
+    "es": [
+     "«Verdaderamente éste era el Hijo de Dios»",
+     "«Tú eres el Cristo»",
+     "«¡Señor mío, y Dios mío!»",
+     "«Creo; ayuda mi incredulidad»"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Face to face with the living Christ, his doubt collapsed into worship.",
+    "es": "Cara a cara con el Cristo viviente, su duda se desplomó en adoración."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Thomas's confession declare about Jesus?",
+    "es": "¿Qué declara la confesión de Tomás acerca de Jesús?"
+   },
+   "options": {
+    "en": [
+     "That Jesus was a prophet only",
+     "That Jesus was only a teacher",
+     "That Jesus was an angel",
+     "His deity — that Jesus is both Lord and God"
+    ],
+    "es": [
+     "Que Jesús era solo un profeta",
+     "Que Jesús era solo un maestro",
+     "Que Jesús era un ángel",
+     "Su deidad — que Jesús es tanto Señor como Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "\"My Lord and my God\" is the clearest confession of Christ's deity in the Gospels.",
+    "es": "«Señor mío, y Dios mío» es la confesión más clara de la deidad de Cristo en los Evangelios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What blessing did Jesus pronounce?",
+    "es": "¿Qué bendición pronunció Jesús?"
+   },
+   "options": {
+    "en": [
+     "\"Blessed are those who have not seen and yet have believed\"",
+     "\"Blessed are those who see signs\"",
+     "\"Blessed are the rich\"",
+     "\"Blessed are the strong\""
+    ],
+    "es": [
+     "«Bienaventurados los que no vieron, y creyeron»",
+     "«Bienaventurados los que ven señales»",
+     "«Bienaventurados los ricos»",
+     "«Bienaventurados los fuertes»"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "This blessing reaches across the centuries and lands on us.",
+    "es": "Esta bendición cruza los siglos y cae sobre nosotros."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who does that blessing include?",
+    "es": "¿A quiénes incluye esa bendición?"
+   },
+   "options": {
+    "en": [
+     "Only the eleven apostles",
+     "Only the Jews",
+     "No one living today",
+     "Us — those who believe without having seen"
+    ],
+    "es": [
+     "Solo a los once apóstoles",
+     "Solo a los judíos",
+     "A nadie que viva hoy",
+     "A nosotros — los que creen sin haber visto"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "We have never seen the risen Lord, yet we believe, and Jesus calls us blessed.",
+    "es": "Nunca hemos visto al Señor resucitado, y sin embargo creemos, y Jesús nos llama bienaventurados."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to \"Eyes of the Heart,\" how does our faith compare?",
+    "es": "Según «Los Ojos del Corazón», ¿cómo se compara nuestra fe?"
+   },
+   "options": {
+    "en": [
+     "In some ways it is greater, resting on Christ rather than on sight",
+     "It is weaker than Thomas's",
+     "It is identical to Thomas's",
+     "It is impossible without seeing"
+    ],
+    "es": [
+     "En cierto sentido es mayor, descansando en Cristo más que en la vista",
+     "Es más débil que la de Tomás",
+     "Es idéntica a la de Tomás",
+     "Es imposible sin ver"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Thomas believed because he saw; we believe with the eyes of the heart.",
+    "es": "Tomás creyó porque vio; nosotros creemos con los ojos del corazón."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does our faith rest on?",
+    "es": "¿En qué descansa nuestra fe?"
+   },
+   "options": {
+    "en": [
+     "Our own feelings",
+     "Christ and the eyewitness testimony of those who saw Him, not on our having seen",
+     "Visible proof we demand",
+     "Nothing at all"
+    ],
+    "es": [
+     "En nuestros propios sentimientos",
+     "En Cristo y el testimonio ocular de los que lo vieron, no en nuestro haber visto",
+     "En la prueba visible que exigimos",
+     "En nada en absoluto"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "John wrote of what they heard, saw, and handled, so that we could be sure (1 John 1:1-3).",
+    "es": "Juan escribió de lo que oyeron, vieron y palparon, para que estuviéramos seguros (1 Juan 1:1-3)."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is \"the Thomas Doubt\"?",
+    "es": "¿Qué es «la Duda de Tomás»?"
+   },
+   "options": {
+    "en": [
+     "Doubting one's own ability",
+     "Doubting other people",
+     "Doubting the faith itself — whether it is even true",
+     "Doubting the weather"
+    ],
+    "es": [
+     "Dudar de la propia capacidad",
+     "Dudar de otras personas",
+     "Dudar de la fe misma — si es siquiera verdad",
+     "Dudar del clima"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Most honest believers face this kind of doubt at some point.",
+    "es": "La mayoría de los creyentes honestos enfrentan esta clase de duda en algún momento."
+   }
+  },
+  {
+   "stem": {
+    "en": "What answers the Thomas Doubt?",
+    "es": "¿Qué responde a la Duda de Tomás?"
+   },
+   "options": {
+    "en": [
+     "Human willpower",
+     "Ignoring the questions",
+     "A clever philosophy",
+     "The resurrection — the fact that Jesus rose, of which the apostles were witnesses"
+    ],
+    "es": [
+     "La fuerza de voluntad humana",
+     "Ignorar las preguntas",
+     "Una filosofía ingeniosa",
+     "La resurrección — el hecho de que Jesús resucitó, de lo cual los apóstoles fueron testigos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "That fact made the doubting Thomas fall in awe and call Jesus his God.",
+    "es": "Aquel hecho hizo que el dudoso Tomás cayera con asombro y llamara a Jesús su Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who was Frank Morison?",
+    "es": "¿Quién era Frank Morison?"
+   },
+   "options": {
+    "en": [
+     "A skeptical writer who set out to disprove the resurrection but was persuaded against his will of it",
+     "A disciple of Jesus",
+     "A Roman soldier at the cross",
+     "A modern pastor"
+    ],
+    "es": [
+     "Un escritor escéptico que se propuso refutar la resurrección pero fue persuadido contra su voluntad de ella",
+     "Un discípulo de Jesús",
+     "Un soldado romano en la cruz",
+     "Un pastor moderno"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "His book Who Moved the Stone? opens with \"The Book That Refused to Be Written.\"",
+    "es": "Su libro ¿Quién movió la piedra? comienza con «El libro que se negó a ser escrito»."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did Rick answer his old friend who said, \"You could be wrong\"?",
+    "es": "¿Cómo respondió Rick a su viejo amigo que dijo «Podrías estar equivocado»?"
+   },
+   "options": {
+    "en": [
+     "\"You must be silent\"",
+     "\"Then I will stop believing\"",
+     "\"You could be right. But even if I am, I've lost nothing — Jesus has given me a better life. But if you are wrong...\"",
+     "\"Prove it to me\""
+    ],
+    "es": [
+     "«Debes callar»",
+     "«Entonces dejaré de creer»",
+     "«Podrías tener razón. Pero aun si la tengo, no he perdido nada — Jesús me ha dado una vida mejor. Pero si tú estás equivocado...»",
+     "«Demuéstramelo»"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "There is everything to gain in trusting Christ and everything to lose in refusing Him.",
+    "es": "Hay todo que ganar en confiar en Cristo y todo que perder en rechazarlo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the central theme of Thomas's life?",
+    "es": "¿Cuál es el tema central de la vida de Tomás?"
+   },
+   "options": {
+    "en": [
+     "Doubt always ends in unbelief",
+     "Doubt is not where faith must end; brought to the risen Christ, the doubter becomes the worshiper",
+     "Only those who see can believe",
+     "Questions are sinful"
+    ],
+    "es": [
+     "La duda siempre termina en incredulidad",
+     "La duda no es donde la fe debe terminar; llevada al Cristo resucitado, el dudoso se vuelve adorador",
+     "Solo los que ven pueden creer",
+     "Las preguntas son pecado"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Bring your honest questions to the risen Christ, and doubt can become worship.",
+    "es": "Lleva tus preguntas honestas al Cristo resucitado, y la duda puede volverse adoración."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "What do John 11:16 and 14:5 show about Thomas before his doubt?",
+    "es": "¿Qué muestran Juan 11:16 y 14:5 acerca de Tomás antes de su duda?"
+   },
+   "keywords": {
+    "en": [
+     "courage",
+     "loyal",
+     "die",
+     "honest",
+     "question",
+     "way",
+     "cynic",
+     "thomas"
+    ],
+    "es": [
+     "valor",
+     "leal",
+     "morir",
+     "honest",
+     "pregunta",
+     "camino",
+     "cinico",
+     "tomas"
+    ]
+   },
+   "model": {
+    "en": "Before his famous doubt, Thomas showed courage and loyalty. When Jesus set out for dangerous Judea to raise Lazarus, it was Thomas who said, \"Let us also go, that we may die with Him.\" Later, in the upper room, he honestly admitted, \"Lord, we do not know where You are going, and how can we know the way?\" — drawing from Jesus the words \"I am the way, the truth, and the life.\" Thomas was no cynic but a brave, honest man who would not pretend to believe what he did not yet understand.",
+    "es": "Antes de su famosa duda, Tomás mostró valor y lealtad. Cuando Jesús partió hacia la peligrosa Judea a resucitar a Lázaro, fue Tomás quien dijo: \"Vamos también nosotros, para que muramos con él\". Más tarde, en el aposento alto, admitió honestamente: \"Señor, no sabemos a dónde vas; ¿cómo podemos saber el camino?\" — sacando de Jesús las palabras \"Yo soy el camino, la verdad y la vida\". Tomás no era un cínico sino un hombre valiente y honesto que no pretendería creer lo que aún no entendía."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe Thomas's doubt.",
+    "es": "Describe la duda de Tomás."
+   },
+   "keywords": {
+    "en": [
+     "absent",
+     "see",
+     "nails",
+     "believe",
+     "week",
+     "dead",
+     "rise",
+     "grief"
+    ],
+    "es": [
+     "ausente",
+     "ver",
+     "clavos",
+     "creer",
+     "semana",
+     "muertos",
+     "resucit",
+     "afligi"
+    ]
+   },
+   "model": {
+    "en": "Thomas was absent when the risen Jesus first appeared to the disciples, and he could not believe their report. He said, \"Unless I see in His hands the print of the nails... I will not believe.\" We should be fair to him: dead men do not rise, and he had watched his Lord die, so he was guarding a broken heart against another disappointment. For one whole week he stayed in grief and doubt, surrounded by rejoicing friends yet unable to share their joy.",
+    "es": "Tomás estaba ausente cuando el Jesús resucitado se apareció por primera vez a los discípulos, y no podía creer su reporte. Dijo: \"Si no viere en sus manos la señal de los clavos... no creeré\". Debemos ser justos con él: los muertos no resucitan, y él había visto morir a su Señor, así que guardaba un corazón quebrantado de otra desilusión. Por una semana entera permaneció en aflicción y duda, rodeado de amigos que se regocijaban pero incapaz de compartir su gozo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the encounter and Thomas's confession.",
+    "es": "Describe el encuentro y la confesión de Tomás."
+   },
+   "keywords": {
+    "en": [
+     "jesus",
+     "came",
+     "finger",
+     "unbelieving",
+     "believing",
+     "confession",
+     "lord",
+     "god"
+    ],
+    "es": [
+     "jesus",
+     "vino",
+     "dedo",
+     "incredulo",
+     "creyente",
+     "confesion",
+     "senor",
+     "dios"
+    ]
+   },
+   "model": {
+    "en": "Eight days later Jesus came again through shut doors and went straight to Thomas, offering the very proof he had demanded: \"Reach your finger here... Do not be unbelieving, but believing.\" Jesus had heard every word of Thomas's doubt though He had not been visibly present. Face to face with the living Christ, Thomas no longer needed to touch anything; his doubt collapsed into worship. He made the greatest confession any disciple ever made: \"My Lord and my God!\"",
+    "es": "Ocho días después Jesús vino de nuevo a través de las puertas cerradas y fue directo a Tomás, ofreciéndole la misma prueba que había exigido: \"Mete tu dedo aquí... no seas incrédulo, sino creyente\". Jesús había oído cada palabra de la duda de Tomás aunque no había estado visiblemente presente. Cara a cara con el Cristo viviente, Tomás ya no necesitó tocar nada; su duda se desplomó en adoración. Hizo la mayor confesión que jamás hizo un discípulo: \"¡Señor mío, y Dios mío!\"."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does \"My Lord and my God\" declare about Jesus?",
+    "es": "¿Qué declara «Señor mío, y Dios mío» acerca de Jesús?"
+   },
+   "keywords": {
+    "en": [
+     "deity",
+     "god",
+     "lord",
+     "jesus",
+     "confession",
+     "highest",
+     "clear",
+     "gospels"
+    ],
+    "es": [
+     "deidad",
+     "dios",
+     "senor",
+     "jesus",
+     "confesion",
+     "alta",
+     "clara",
+     "evangelios"
+    ]
+   },
+   "model": {
+    "en": "\"My Lord and my God\" is the highest declaration of who Jesus is — not merely Lord, but God. It affirms the full deity of Christ. The man we call \"doubting Thomas\" gave us the clearest confession of Christ's deity in all four Gospels. His doubt, brought to the risen Christ, had become the deepest faith, and it confesses Jesus as God Himself.",
+    "es": "\"Señor mío, y Dios mío\" es la más alta declaración de quién es Jesús — no meramente Señor, sino Dios. Afirma la plena deidad de Cristo. El hombre que llamamos \"Tomás el incrédulo\" nos dio la más clara confesión de la deidad de Cristo en los cuatro Evangelios. Su duda, llevada al Cristo resucitado, se había vuelto la fe más profunda, y confiesa a Jesús como Dios mismo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What blessing did Jesus give, and who does it include?",
+    "es": "¿Qué bendición dio Jesús, y a quiénes incluye?"
+   },
+   "keywords": {
+    "en": [
+     "blessed",
+     "not",
+     "seen",
+     "believed",
+     "us",
+     "faith",
+     "jesus",
+     "heart"
+    ],
+    "es": [
+     "bienaventurados",
+     "no",
+     "vieron",
+     "creyeron",
+     "nosotros",
+     "fe",
+     "jesus",
+     "corazon"
+    ]
+   },
+   "model": {
+    "en": "Jesus said, \"Because you have seen Me, you have believed. Blessed are those who have not seen and yet have believed.\" That blessing is for us, who have never seen the risen Lord with our eyes yet believe. In some ways ours is a greater faith than Thomas's, for he believed because he saw, while we believe with the eyes of the heart. We rest not on sight but on Christ Himself and the testimony of those who saw.",
+    "es": "Jesús dijo: \"Porque me has visto, creíste; bienaventurados los que no vieron, y creyeron\". Esa bendición es para nosotros, que nunca hemos visto al Señor resucitado con nuestros ojos y sin embargo creemos. En cierto sentido la nuestra es una fe mayor que la de Tomás, pues él creyó porque vio, mientras que nosotros creemos con los ojos del corazón. Descansamos no en la vista sino en Cristo mismo y el testimonio de los que vieron."
+   }
+  },
+  {
+   "prompt": {
+    "en": "According to \"Eyes of the Heart,\" what does our faith rest on?",
+    "es": "Según «Los Ojos del Corazón», ¿en qué descansa nuestra fe?"
+   },
+   "keywords": {
+    "en": [
+     "eyewitness",
+     "testimony",
+     "christ",
+     "rest",
+     "john",
+     "saw",
+     "handled",
+     "sure"
+    ],
+    "es": [
+     "ocular",
+     "testimonio",
+     "cristo",
+     "descans",
+     "juan",
+     "vieron",
+     "palpar",
+     "seguro"
+    ]
+   },
+   "model": {
+    "en": "Our faith does not float in the air; it rests on Christ Himself and on the solid ground of eyewitness testimony. John, who was in that room, wrote of what they had heard, seen with their eyes, and handled with their hands concerning the Word of life, declaring it so that we could be sure. The apostles saw, touched, and ate with the risen Christ, and then died rather than deny what they had seen. That is the foundation our faith stands on.",
+    "es": "Nuestra fe no flota en el aire; descansa sobre Cristo mismo y sobre el terreno sólido del testimonio ocular. Juan, que estaba en aquel cuarto, escribió de lo que habían oído, visto con sus ojos y palpado con sus manos tocante al Verbo de vida, anunciándolo para que pudiéramos estar seguros. Los apóstoles vieron, tocaron y comieron con el Cristo resucitado, y luego murieron antes que negar lo que habían visto. Ese es el fundamento sobre el que se levanta nuestra fe."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the Thomas Doubt, and what answers it?",
+    "es": "¿Qué es la Duda de Tomás, y qué la responde?"
+   },
+   "keywords": {
+    "en": [
+     "faith",
+     "true",
+     "doubt",
+     "resurrection",
+     "rose",
+     "witness",
+     "fact",
+     "answer"
+    ],
+    "es": [
+     "fe",
+     "verdad",
+     "duda",
+     "resurreccion",
+     "resucit",
+     "testigo",
+     "hecho",
+     "respuesta"
+    ]
+   },
+   "model": {
+    "en": "The Thomas doubt is the doubt that questions the faith itself — whether any of it is even true. Most honest believers face it at some point. The answer to it is the same fact that turned Thomas from a doubter into a worshiper: the resurrection. Jesus rose from the dead, and His apostles were witnesses of it. That fact caused the doubting Thomas to fall in awe at the feet of his Savior and call Him his God.",
+    "es": "La duda de Tomás es la duda que cuestiona la fe misma — si algo de ella es siquiera verdad. La mayoría de los creyentes honestos la enfrentan en algún momento. La respuesta a ella es el mismo hecho que convirtió a Tomás de dudoso en adorador: la resurrección. Jesús resucitó de los muertos, y sus apóstoles fueron testigos de ello. Aquel hecho hizo que el dudoso Tomás cayera con asombro a los pies de su Salvador y lo llamara su Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Who was Frank Morison, and what happened?",
+    "es": "¿Quién era Frank Morison, y qué sucedió?"
+   },
+   "keywords": {
+    "en": [
+     "morison",
+     "skeptic",
+     "disprove",
+     "resurrection",
+     "evidence",
+     "persuaded",
+     "stone",
+     "book"
+    ],
+    "es": [
+     "morison",
+     "esceptico",
+     "refutar",
+     "resurreccion",
+     "evidencia",
+     "persuadi",
+     "piedra",
+     "libro"
+    ]
+   },
+   "model": {
+    "en": "Frank Morison, the pen name of an English writer, was convinced the resurrection was a fabrication and set out to write a book disproving it. But as he examined the evidence by the strict tests of a court of law, he found himself persuaded against his will of the bodily resurrection of Jesus. The book he finally wrote, Who Moved the Stone?, opens with a chapter titled \"The Book That Refused to Be Written.\" The man who tried to bury the resurrection ended up defending it.",
+    "es": "Frank Morison, el seudónimo de un escritor inglés, estaba convencido de que la resurrección era una invención y se propuso escribir un libro que la refutara. Pero al examinar la evidencia por las estrictas pruebas de un tribunal de justicia, se halló persuadido contra su voluntad de la resurrección corporal de Jesús. El libro que al fin escribió, ¿Quién movió la piedra?, comienza con un capítulo titulado \"El libro que se negó a ser escrito\". El hombre que trató de sepultar la resurrección terminó defendiéndola."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How did Rick answer the \"you could be wrong\" objection?",
+    "es": "¿Cómo respondió Rick a la objeción «podrías estar equivocado»?"
+   },
+   "keywords": {
+    "en": [
+     "rick",
+     "wrong",
+     "right",
+     "lost",
+     "life",
+     "hell",
+     "gain",
+     "risk"
+    ],
+    "es": [
+     "rick",
+     "equivocado",
+     "razon",
+     "perdido",
+     "vida",
+     "infierno",
+     "ganar",
+     "riesgo"
+    ]
+   },
+   "model": {
+    "en": "When Rick was witnessing to an old friend, the friend shrugged and said, \"You could be wrong.\" Rick answered, \"You're right — I could be. But even if I am, I haven't lost anything; Jesus has given me a far better life than I had before. But if you are wrong, you are going to spend a very long time in hell.\" His point was that there is everything to gain in trusting the risen Christ and everything to lose in turning Him away.",
+    "es": "Cuando Rick testificaba a un viejo amigo, el amigo se encogió de hombros y dijo: \"Podrías estar equivocado\". Rick respondió: \"Tienes razón — podría estarlo. Pero aun si lo estoy, no he perdido nada; Jesús me ha dado una vida mucho mejor que la que tenía antes. Pero si tú estás equivocado, vas a pasar muchísimo tiempo en el infierno\". Su punto era que hay todo que ganar en confiar en el Cristo resucitado y todo que perder en rechazarlo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does Thomas teach the honest doubter?",
+    "es": "¿Qué enseña Tomás al que duda honestamente?"
+   },
+   "keywords": {
+    "en": [
+     "doubt",
+     "end",
+     "bring",
+     "risen",
+     "christ",
+     "worshiper",
+     "question",
+     "evidence"
+    ],
+    "es": [
+     "duda",
+     "fin",
+     "llev",
+     "resucitado",
+     "cristo",
+     "adorador",
+     "pregunta",
+     "evidencia"
+    ]
+   },
+   "model": {
+    "en": "The lesson of Thomas is that doubt is not where faith must end. Honest questions should not be hidden or allowed to harden into unbelief; they should be brought, as Thomas brought his, into the presence of the risen Christ and His evidence. The same Lord who came back a second time for one doubting disciple will meet us at the point of our doubt. And when He does, the questions that kept us at a distance can become the very confession that brings us to our knees: \"My Lord and my God.\"",
+    "es": "La lección de Tomás es que la duda no es donde la fe debe terminar. Las preguntas honestas no deben esconderse ni dejarse endurecer en incredulidad; deben llevarse, como Tomás llevó las suyas, a la presencia del Cristo resucitado y de su evidencia. El mismo Señor que volvió una segunda vez por un discípulo dudoso nos encontrará en el punto de nuestra duda. Y cuando lo haga, las preguntas que nos mantuvieron a distancia pueden volverse la misma confesión que nos lleva de rodillas: \"Señor mío, y Dios mío\"."
+   }
+  }
+ ]
+};

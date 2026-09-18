@@ -1,153 +1,859 @@
-/* CTSApol - unit 10: per-unit configuration and content. */
-
-const UNIT = 10;
-
-const NEXT_UNIT_URL = 'CTSApolCertificate.html';
-
-const unitTitlesEn = [
-    "Unit 1 - The Reason for the Hope",
-    "Unit 2 - The Design of the Heavens",
-    "Unit 3 - Revelation and the Witness Within",
-    "Unit 4 - The Problem of Evil and Suffering",
-    "Unit 5 - The Reliability of Scripture",
-    "Unit 6 - The Person and Claims of Christ",
-    "Unit 7 - The Resurrection and the Changed Skeptics",
-    "Unit 8 - Science, Chance, and the Limits of Naturalism",
-    "Unit 9 - Other Religions and Worldviews",
-    `Unit ${UNIT} - Apologetics in Practice`
-];
-
-const mcQuestions = [
-    { textEn: `1. Unit ${UNIT} returns to the verse the whole course began with:`, textEs: `1. La Unidad ${UNIT} vuelve al versículo con que comenzó todo el curso:`,
-      optionsEn: ["Genesis 1:1", "1 Peter 3:15", "Psalm 23", "Romans 12:2"],
-      optionsEs: ["Génesis 1:1", "1 Pedro 3:15", "Salmo 23", "Romanos 12:2"], explanationEn: "The course opened and now closes on Peter's charge to give a reasoned defense.", explanationEs: "El curso abrió y ahora cierra con la orden de Pedro de dar una defensa razonada.", correct: 1 },
-    { textEn: "2. The unit says this last unit is not about the arrows but about:", textEs: "2. La unidad dice que esta última unidad no se trata de las flechas sino:",
-      optionsEn: ["The target", "The quiver", "The bow", "The archer"],
-      optionsEs: ["El blanco", "La aljaba", "El arco", "El arquero"], explanationEn: "Having gathered the reasons, the focus turns to the character of the one who gives them.", explanationEs: "Habiendo reunido las razones, el enfoque pasa al carácter de quien las da.", correct: 3 },
-    { textEn: "3. The five words the unit says most apologists forget are:", textEs: "3. Las cinco palabras que la unidad dice que la mayoría de los apologistas olvidan son:",
-      optionsEn: ["'Always be ready'", "'A reason for hope'", "'With meekness and fear'", "'Sanctify the Lord God'"],
-      optionsEs: ["'Estad siempre preparados'", "'Razón de la esperanza'", "'Con mansedumbre y reverencia'", "'Santificad al Señor Dios'"], explanationEn: "How we make the defense matters as much as the defense itself.", explanationEs: "Cómo hacemos la defensa importa tanto como la defensa misma.", correct: 2 },
-    { textEn: "4. The unit warns that a believer armed with evidence can:", textEs: "4. La unidad advierte que un creyente armado de evidencia puede:",
-      optionsEn: ["Win every argument and lose the very soul he argued for", "Never be wrong", "Skip the gospel", "Convert anyone instantly"],
-      optionsEs: ["Ganar todos los argumentos y perder el alma misma por la que argumentaba", "Nunca equivocarse", "Saltarse el evangelio", "Convertir a cualquiera al instante"], explanationEn: "Cornering and humiliating a person only thickens the wall around the heart.", explanationEs: "Acorralar y humillar a una persona solo engruesa el muro alrededor del corazón.", correct: 0 },
-    { textEn: "5. The unit says the goal of apologetics is never to win an argument but to:", textEs: "5. La unidad dice que la meta de la apologética nunca es ganar un argumento sino:",
-      optionsEn: ["Build a reputation", "Prove cleverness", "Silence critics", "Win a brother"],
-      optionsEs: ["Construir una reputación", "Probar el ingenio", "Silenciar a los críticos", "Ganar a un hermano"], explanationEn: "We hand bread to a beggar; we do not fling it in a starving man's face.", explanationEs: "Entregamos pan a un mendigo; no se lo arrojamos en la cara a un hambriento.", correct: 3 },
-    { textEn: "6. The unit says the first apologetic anyone meets is:", textEs: "6. La unidad dice que la primera apologética que cualquiera encuentra es:",
-      optionsEn: ["A famous book", "You yourself — your life", "A clever website", "A church building"],
-      optionsEs: ["Un libro famoso", "Usted mismo — su vida", "Un sitio web ingenioso", "Un edificio de iglesia"], explanationEn: "The world has grown deaf to sermons but never yet to a life.", explanationEs: "El mundo se ha vuelto sordo a los sermones pero todavía no a una vida.", correct: 1 },
-    { textEn: "7. The old saying quoted in the unit is that your walk and talk both talk, but:", textEs: "7. El viejo dicho citado en la unidad es que su andar y su hablar ambos hablan, pero:",
-      optionsEn: ["Your walk talks louder than your talk talks", "Silence is golden", "Talk is cheap", "Actions are optional"],
-      optionsEs: ["Su andar habla más fuerte que su hablar", "El silencio es oro", "Hablar es fácil", "Las acciones son opcionales"], explanationEn: "The strongest evidence is a life that cannot be explained apart from God.", explanationEs: "La evidencia más fuerte es una vida que no se puede explicar aparte de Dios.", correct: 0 },
-    { textEn: "8. The quiet refrain beneath every unit of the course has been that the evidence:", textEs: "8. El estribillo callado debajo de cada unidad del curso ha sido que la evidencia:",
-      optionsEn: ["Proves everything beyond doubt", "Replaces the need for faith", "Carries a person to the door but cannot drag him through it", "Is unnecessary"],
-      optionsEs: ["Prueba todo más allá de la duda", "Reemplaza la necesidad de la fe", "Lleva a una persona hasta la puerta pero no puede arrastrarla a través de ella", "Es innecesaria"], explanationEn: "The last step is a movement of the will, which no argument can perform.", explanationEs: "El último paso es un movimiento de la voluntad, que ningún argumento puede realizar.", correct: 2 },
-    { textEn: "9. The unit says you cannot reason a man into the kingdom any more than you can:", textEs: "9. La unidad dice que no se puede razonar a un hombre para meterlo en el reino, como tampoco se puede:",
-      optionsEn: ["Argue a man into being loved", "Teach a man to read", "Build a house in a day", "Win a footrace sitting down"],
-      optionsEs: ["Argumentar a un hombre para que sea amado", "Enseñar a un hombre a leer", "Construir una casa en un día", "Ganar una carrera sentado"], explanationEn: "The crossing of the threshold is between the soul and God, not a feat of logic.", explanationEs: "El cruce del umbral es entre el alma y Dios, no una hazaña de la lógica.", correct: 0 },
-    { textEn: "10. Remembering the limits of evidence guards the apologist against two errors:", textEs: "10. Recordar los límites de la evidencia guarda al apologista de dos errores:",
-      optionsEn: ["Laziness and pride", "Trusting his cleverness instead of the Spirit, and bearing a burden never his", "Silence and noise", "Doubt and certainty"],
-      optionsEs: ["Pereza y orgullo", "Confiar en su ingenio en lugar del Espíritu, y cargar un peso que nunca fue suyo", "Silencio y ruido", "Duda y certeza"], explanationEn: "Clear the path and open the door; the crossing belongs to the soul and God.", explanationEs: "Despeje el camino y abra la puerta; el cruce le pertenece al alma y a Dios.", correct: 1 },
-    { textEn: "11. The 'wager' the unit describes says that on the question of God, no one is permitted to:", textEs: "11. La 'apuesta' que la unidad describe dice que en la cuestión de Dios, a nadie se le permite:",
-      optionsEn: ["Ask questions", "Change his mind", "Read the evidence", "Stay neutral — you must wager your one life"],
-      optionsEs: ["Hacer preguntas", "Cambiar de opinión", "Leer la evidencia", "Quedarse neutral — debe apostar su única vida"], explanationEn: "You are in the game whether you like it or not and must bet on an answer.", explanationEs: "Está en el juego le guste o no y debe apostar a una respuesta.", correct: 3 },
-    { textEn: "12. According to the wager, if you bet your life on Christ and were somehow wrong, you would have:", textEs: "12. Según la apuesta, si apostara su vida a Cristo y de algún modo se equivocara, habría:",
-      optionsEn: ["Lost everything", "Wasted your whole life", "Lost very little — years spent in love, purpose, and clean hope", "Been cruelly deceived"],
-      optionsEs: ["Perdido todo", "Desperdiciado toda su vida", "Perdido muy poco — años pasados en amor, propósito y limpia esperanza", "Sido cruelmente engañado"], explanationEn: "But betting against Christ and being wrong loses everything that can be lost.", explanationEs: "Pero apostar contra Cristo y equivocarse pierde todo lo que se puede perder.", correct: 2 },
-    { textEn: "13. The wager connects back to a claim made in Unit 1, that:", textEs: "13. La apuesta conecta con una afirmación hecha en la Unidad 1, que:",
-      optionsEn: ["Faith is irrational", "Science disproves God", "Only scholars can believe", "Everyone lives by faith — the atheist too makes a wager he cannot prove"],
-      optionsEs: ["La fe es irracional", "La ciencia refuta a Dios", "Solo los eruditos pueden creer", "Todos viven por fe — el ateo también hace una apuesta que no puede probar"], explanationEn: "The course began and ends by exposing that unbelief is itself a wager.", explanationEs: "El curso comenzó y termina exponiendo que la incredulidad es ella misma una apuesta.", correct: 3 },
-    { textEn: "14. To the worry that betting on Christ is only a 'fire escape' for the next world, the unit replies:", textEs: "14. A la inquietud de que apostar a Cristo es solo una 'escalera de incendios' para el otro mundo, la unidad responde:",
-      optionsEn: ["Theology forbids the question", "Only the afterlife matters", "The gospel produces a good life now, not only a good death", "Nothing changes in this life"],
-      optionsEs: ["La teología prohíbe la pregunta", "Solo importa la otra vida", "El evangelio produce una buena vida ahora, no solo una buena muerte", "Nada cambia en esta vida"], explanationEn: "The treasure is found in large measure on the road itself, not only at its end.", explanationEs: "El tesoro se halla en gran medida en el camino mismo, no solo en su fin.", correct: 2 },
-    { textEn: "15. The unit offers the observation about surrendered lives but is careful to say it is:", textEs: "15. La unidad ofrece la observación sobre las vidas entregadas pero tiene cuidado de decir que:",
-      optionsEn: ["Airtight proof", "Not airtight proof — there are sour Christians and sunny unbelievers", "Irrelevant", "Only true of pastors"],
-      optionsEs: ["Prueba hermética", "No es prueba hermética — hay cristianos agrios e incrédulos alegres", "Irrelevante", "Solo cierto de los pastores"], explanationEn: "Honest about exceptions, yet across the whole, the gospel produces a good life.", explanationEs: "Honesto sobre las excepciones, y aun así en conjunto, el evangelio produce una buena vida.", correct: 1 },
-    { textEn: "16. The unit notes that Peter says to give a reason not for the rules or the inherited religion, but for the:", textEs: "16. La unidad nota que Pedro dice dar razón no de las reglas ni de la religión heredada, sino de la:",
-      optionsEn: ["Hope", "Doctrine", "Ritual", "Tradition"],
-      optionsEs: ["Esperanza", "Doctrina", "Ritual", "Tradición"], explanationEn: "At the bottom of all the evidence lies not a syllogism but a hope.", explanationEs: "En el fondo de toda la evidencia no yace un silogismo sino una esperanza.", correct: 0 },
-    { textEn: "17. The unit says the hope at the bottom of the whole course has a name, and the name is:", textEs: "17. La unidad dice que la esperanza en el fondo de todo el curso tiene un nombre, y el nombre es:",
-      optionsEn: ["Reason", "Jesus", "The Church", "Evidence"],
-      optionsEs: ["La Razón", "Jesús", "La Iglesia", "La Evidencia"], explanationEn: "Every clue was a finger pointing to Him; the defense only clears the path to see Him.", explanationEs: "Cada pista fue un dedo señalándolo a Él; la defensa solo despeja el camino para verlo.", correct: 1 },
-    { textEn: "18. Revelation 3:20 pictures Christ standing at the door and:", textEs: "18. Apocalipsis 3:20 muestra a Cristo de pie ante la puerta y:",
-      optionsEn: ["Knocking — the latch is on the inside", "Breaking it down", "Walking away", "Locking it"],
-      optionsEs: ["Llamando — el pestillo está por dentro", "Derribándola", "Alejándose", "Cerrándola con llave"], explanationEn: "He knocks but does not force it; only the one inside can lift the latch.", explanationEs: "Él llama pero no la fuerza; solo el que está adentro puede levantar el pestillo.", correct: 0 },
-    { textEn: "19. The unit says all the evidence of the course has really been:", textEs: "19. La unidad dice que toda la evidencia del curso en realidad ha sido:",
-      optionsEn: ["A way to win debates", "A proof that ends faith", "The sound of Christ's knocking, growing clearer unit by unit", "A list to memorize"],
-      optionsEs: ["Una manera de ganar debates", "Una prueba que termina la fe", "El sonido del llamado de Cristo, volviéndose más claro unidad por unidad", "Una lista para memorizar"], explanationEn: "The defense was never an end in itself but a clearing of the path to Him.", explanationEs: "La defensa nunca fue un fin en sí misma sino un despeje del camino hacia Él.", correct: 2 },
-    { textEn: "20. The course ends by turning its central question from others back onto the reader:", textEs: "20. El curso termina volviendo su pregunta central de los demás hacia el lector:",
-      optionsEn: ["When will the end come?", "How old is the earth?", "Which church is best?", "Who do you say that He is — and will you open the door?"],
-      optionsEs: ["¿Cuándo vendrá el fin?", "¿Qué edad tiene la tierra?", "¿Cuál iglesia es mejor?", "¿Quién dice usted que es Él — y abrirá la puerta?"], explanationEn: "The defense given to others becomes the most personal question for the defender.", explanationEs: "La defensa dada a otros se vuelve la pregunta más personal para el defensor.", correct: 3 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Why does the unit say this final unit is about the archer, not the arrows, and how does it return to 1 Peter 3:15?",
-      textEs: "21. ¿Por qué dice la unidad que esta última unidad se trata del arquero, no de las flechas, y cómo vuelve a 1 Pedro 3:15?",
-      kw_en: ["archer", "arrow", "peter", "defense", "meekness", "reason", "hope", "character"],
-      kw_es: ["arquero", "flecha", "pedro", "defensa", "mansedumbre", "razón", "esperanza", "carácter"],
-      modelEn: "The unit returns to 1 Peter 3:15, the same verse that opened the course, where Peter charges us to be always ready to give a defense, a reason for the hope within us. Across nine units we filled our quiver with arrows of evidence, but this last unit is about the archer rather than the arrows, that is, about the character of the one who gives the defense. The reason is that Peter did not stop at being ready with an answer; he added five small words most defenders forget, with meekness and fear. How we make the defense matters as much as the defense itself. So the capstone shifts attention from the content of our arguments to the spirit and the life of the person making them, because a true reason for the hope must be carried by a humble and loving heart.",
-      modelEs: "La unidad vuelve a 1 Pedro 3:15, el mismo versículo que abrió el curso, donde Pedro nos ordena estar siempre preparados para dar una defensa, una razón de la esperanza que hay en nosotros. A través de nueve unidades llenamos nuestra aljaba de flechas de evidencia, pero esta última unidad se trata del arquero y no de las flechas, es decir, del carácter de quien da la defensa. La razón es que Pedro no se detuvo en estar listo con una respuesta; añadió cinco palabras pequeñas que la mayoría de los defensores olvidan, con mansedumbre y reverencia. Cómo hacemos la defensa importa tanto como la defensa misma. Así que el capstone cambia la atención del contenido de nuestros argumentos al espíritu y la vida de quien los hace, porque una verdadera razón de la esperanza debe ser llevada por un corazón humilde y amoroso." },
-
-    { textEn: "22. Explain the danger Peter's words 'with meekness' guard against in apologetics.",
-      textEs: "22. Explique el peligro contra el que las palabras de Pedro 'con mansedumbre' protegen en la apologética.",
-      kw_en: ["meekness", "argument", "soul", "win", "brother", "humiliat", "arrogance", "love"],
-      kw_es: ["mansedumbre", "argumento", "alma", "ganar", "hermano", "humill", "arrogancia", "amor"],
-      modelEn: "Peter's words with meekness guard against the strange danger that a believer can win every argument and yet lose the very soul he was arguing for. The unit describes a defender armed with evidence who corners an unbeliever, answers every objection, and walks away victorious, having gained a debate and lost a person; the humiliated unbeliever only digs in deeper and the wall around his heart grows. So the goal of apologetics is never to win an argument but to win a brother. We are not prosecuting an enemy but handing bread to a beggar, and one does not fling bread in a starving man's face. An answer given in arrogance, however true, is a door slammed, while the very same answer given in love is a door opened. Meekness keeps the truth from becoming a weapon.",
-      modelEs: "Las palabras de Pedro con mansedumbre protegen contra el extraño peligro de que un creyente pueda ganar todos los argumentos y sin embargo perder el alma misma por la que argumentaba. La unidad describe a un defensor armado de evidencia que acorrala a un incrédulo, responde a cada objeción, y se aleja victorioso, habiendo ganado un debate y perdido a una persona; el incrédulo humillado solo se atrinchera más hondo y el muro alrededor de su corazón crece. Así que la meta de la apologética nunca es ganar un argumento sino ganar a un hermano. No estamos procesando a un enemigo sino entregando pan a un mendigo, y uno no le arroja el pan en la cara a un hambriento. Una respuesta dada con arrogancia, por verdadera que sea, es una puerta cerrada de golpe, mientras que esa misma respuesta dada con amor es una puerta abierta. La mansedumbre evita que la verdad se vuelva un arma." },
-
-    { textEn: "23. Explain why the unit says the defender's own life is the first apologetic.",
-      textEs: "23. Explique por qué la unidad dice que la propia vida del defensor es la primera apologética.",
-      kw_en: ["life", "first", "apologetic", "walk", "talk", "watch", "deaf", "evidence"],
-      kw_es: ["vida", "primera", "apologética", "andar", "hablar", "observa", "sordo", "evidencia"],
-      modelEn: "The unit says you yourself are the first apologetic anyone meets, because long before a watching neighbor weighs your arguments he weighs your life. He notices whether the man who preaches love is patient with his children, whether the woman who speaks of joy is bitter, and whether the hope you describe has made you kinder and steadier. The world has heard many sermons and grown deaf to most of them, but it has never grown deaf to a life. As the old saying goes, your walk talks and your talk talks, but your walk talks louder than your talk. So the strongest evidence we ever offer is not a fact we recite but a life that cannot be explained apart from God, and we must make sure the argument of our living does not contradict the argument of our lips.",
-      modelEs: "La unidad dice que usted mismo es la primera apologética que cualquiera encuentra, porque mucho antes de que un vecino que observa sopese sus argumentos sopesa su vida. Nota si el hombre que predica el amor es paciente con sus hijos, si la mujer que habla de gozo es amargada, y si la esperanza que describe lo ha hecho más amable y más firme. El mundo ha oído muchos sermones y se ha vuelto sordo a la mayoría, pero nunca se ha vuelto sordo a una vida. Como dice el viejo dicho, su andar habla y su hablar habla, pero su andar habla más fuerte que su hablar. Así que la evidencia más fuerte que jamás ofrecemos no es un dato que recitamos sino una vida que no se puede explicar aparte de Dios, y debemos asegurarnos de que el argumento de nuestro vivir no contradiga el argumento de nuestros labios." },
-
-    { textEn: "24. Restate the course's quiet refrain about what evidence can and cannot do, and the two errors it guards against.",
-      textEs: "24. Reformule el estribillo callado del curso sobre lo que la evidencia puede y no puede hacer, y los dos errores que evita.",
-      kw_en: ["evidence", "door", "drag", "will", "reason", "spirit", "burden", "path"],
-      kw_es: ["evidencia", "puerta", "arrastrar", "voluntad", "razón", "espíritu", "carga", "camino"],
-      modelEn: "The quiet refrain beneath every unit is that the evidence carries a man to the door but cannot drag him through it. The heavens can show a Designer, the tomb a risen Lord, the documents a trustworthy record, and together they strip away excuses and bring a person face to face with the question; but the last step is not an inch of logic, it is a movement of the will and a bowing of the heart, and no argument can perform it. You cannot reason a man into the kingdom any more than you can argue him into being loved. Remembering this guards against two errors: trusting your own cleverness instead of the Spirit, and taking onto yourself a burden that was never yours. Your task is to clear the path and open the door, while the crossing of the threshold remains between the soul and God.",
-      modelEs: "El estribillo callado debajo de cada unidad es que la evidencia lleva a un hombre hasta la puerta pero no puede arrastrarlo a través de ella. Los cielos pueden mostrar un Diseñador, la tumba un Señor resucitado, los documentos un registro digno de confianza, y juntos quitan las excusas y ponen a la persona cara a cara con la pregunta; pero el último paso no es una pulgada de lógica, es un movimiento de la voluntad y una inclinación del corazón, y ningún argumento puede realizarlo. No se puede razonar a un hombre para meterlo en el reino como tampoco se puede argumentar para que sea amado. Recordar esto evita dos errores: confiar en el propio ingenio en lugar del Espíritu, y tomar sobre uno una carga que nunca fue suya. Su tarea es despejar el camino y abrir la puerta, mientras que el cruce del umbral permanece entre el alma y Dios." },
-
-    { textEn: "25. Explain the 'wager' the unit presents and how it connects to Unit 1's claim that everyone lives by faith.",
-      textEs: "25. Explique la 'apuesta' que presenta la unidad y cómo conecta con la afirmación de la Unidad 1 de que todos viven por fe.",
-      kw_en: ["wager", "neutral", "bet", "life", "lose", "gain", "faith", "atheist"],
-      kw_es: ["apuesta", "neutral", "apostar", "vida", "perder", "ganar", "fe", "ateo"],
-      modelEn: "The unit presents a wager from a wise old thinker, who observed that on the question of God no one is permitted to stay neutral; you are in the game whether you like it or not and must bet your one life on an answer. Weigh it as a reasonable person weighs a bet. If you wager your life on Christ and are somehow wrong, you lose very little, having spent your years in love, purpose, and clean hope. But if you bet against Christ and are wrong, you lose everything that can be lost; and if you are right about Christ, you gain a Father, a home, and a joy death cannot touch. This connects directly to Unit 1's claim that everyone lives by faith, for the atheist too is making a wager he cannot prove. The wager simply lays bare that unbelief is itself a bet, and asks which way you will stake your one and only life.",
-      modelEs: "La unidad presenta una apuesta de un sabio y viejo pensador, que observó que en la cuestión de Dios a nadie se le permite quedarse neutral; usted está en el juego le guste o no y debe apostar su única vida a una respuesta. Sopéselo como una persona razonable sopesa una apuesta. Si apuesta su vida a Cristo y de algún modo se equivoca, pierde muy poco, habiendo pasado sus años en amor, propósito y limpia esperanza. Pero si apuesta contra Cristo y se equivoca, pierde todo lo que se puede perder; y si tiene razón acerca de Cristo, gana un Padre, un hogar, y un gozo que la muerte no puede tocar. Esto conecta directamente con la afirmación de la Unidad 1 de que todos viven por fe, pues el ateo también está haciendo una apuesta que no puede probar. La apuesta simplemente deja al desnudo que la incredulidad es ella misma una apuesta, y pregunta de qué lado apostará su única vida." },
-
-    { textEn: "26. Explain the 'happiest and healthiest' point and the honest caveat the unit attaches to it.",
-      textEs: "26. Explique el punto de los 'más felices y sanos' y la salvedad honesta que la unidad le añade.",
-      kw_en: ["life", "surrender", "forgive", "steady", "good", "caveat", "proof", "road"],
-      kw_es: ["vida", "entregad", "perdon", "firmeza", "buena", "salvedad", "prueba", "camino"],
-      modelEn: "Lest anyone think betting on Christ is only a fire escape for the next world, the unit observes what it does in this one. Those who have surrendered their lives to Christ are, by and large, the people you would most want beside you in trouble: they tend to forgive when they could hate, keep their promises, and carry hope into the cancer ward and peace into the prison cell. There is a steadiness and sweetness about a surrendered life that the world cannot manufacture and secretly envies. But the unit attaches an honest caveat: this is not airtight proof, for there are sour Christians and sunny unbelievers, and we have met both. Taken across the whole, however, the pattern is plain, that the gospel produces not only a good death but a good life. The treasure is found in large measure on the road itself, not only at its end.",
-      modelEs: "Para que nadie piense que apostar a Cristo es solo una escalera de incendios para el otro mundo, la unidad observa lo que hace en este. Los que han entregado su vida a Cristo son, en general, las personas que más querría a su lado en la dificultad: suelen perdonar cuando podrían odiar, cumplir sus promesas, y llevar esperanza a la sala del cáncer y paz a la celda de la prisión. Hay una firmeza y una dulzura en una vida entregada que el mundo no puede fabricar y en secreto envidia. Pero la unidad añade una salvedad honesta: esto no es prueba hermética, pues hay cristianos agrios e incrédulos alegres, y hemos conocido a ambos. Tomado en conjunto, sin embargo, el patrón es claro, que el evangelio produce no solo una buena muerte sino una buena vida. El tesoro se halla en gran medida en el camino mismo, no solo en su fin." },
-
-    { textEn: "27. Why does the unit emphasize that Peter says to give a reason for the 'hope,' not the rules or the inherited religion?",
-      textEs: "27. ¿Por qué enfatiza la unidad que Pedro dice dar razón de la 'esperanza', no de las reglas ni de la religión heredada?",
-      kw_en: ["hope", "reason", "rules", "syllogism", "children", "death", "jesus", "name"],
-      kw_es: ["esperanza", "razón", "reglas", "silogismo", "hijos", "muerte", "jesús", "nombre"],
-      modelEn: "The unit emphasizes that Peter says to give a reason for the hope that is in us, not a reason for the rules that bind us or the religion we inherited. At the bottom of all our evidence and arguments lies not a syllogism but a hope: that the universe is not cold and empty but the work of a loving Mind, that we are not orphans but children, that death is not a wall but a door, and that the God who made us has come the whole way down to bring us home. Every clue in the course has been a finger pointing to that hope, and the hope has a name, and the name is Jesus. So the defense was never an end in itself; it was only a way of clearing the path so that a person could see Him plainly, and seeing Him, want Him.",
-      modelEs: "La unidad enfatiza que Pedro dice dar razón de la esperanza que hay en nosotros, no razón de las reglas que nos atan ni de la religión que heredamos. En el fondo de toda nuestra evidencia y argumentos no yace un silogismo sino una esperanza: que el universo no es frío y vacío sino la obra de una Mente amorosa, que no somos huérfanos sino hijos, que la muerte no es un muro sino una puerta, y que el Dios que nos hizo ha bajado todo el camino para llevarnos a casa. Cada pista del curso ha sido un dedo señalando esa esperanza, y la esperanza tiene un nombre, y el nombre es Jesús. Así que la defensa nunca fue un fin en sí misma; fue solo una manera de despejar el camino para que una persona pudiera verlo con claridad, y al verlo, lo quisiera." },
-
-    { textEn: "28. Explain the Revelation 3:20 image of the knock at the door and where the latch is.",
-      textEs: "28. Explique la imagen de Apocalipsis 3:20 del llamado a la puerta y dónde está el pestillo.",
-      kw_en: ["knock", "door", "latch", "inside", "force", "open", "voice", "invitation"],
-      kw_es: ["llama", "puerta", "pestillo", "dentro", "forzar", "abrir", "voz", "invitación"],
-      modelEn: "The unit ends at a door, but now it is the reader's own door. Revelation 3:20 pictures Christ saying, behold, I stand at the door and knock; if anyone hears My voice and opens the door, I will come in. The unit points out where the handle is: He knocks, but He does not break the door down, for the latch is on the inside, and only the person within can lift it. This guards the truth that the invitation never becomes coercion; God will not force His way in. All the evidence of the course has been the sound of that knocking, growing clearer unit by unit, but the opening must be done freely from the inside. So the One the student has learned to defend is now asking him the most personal question, not merely whether the claims are true, but whether he will hear the voice and open the door.",
-      modelEs: "La unidad termina en una puerta, pero ahora es la propia puerta del lector. Apocalipsis 3:20 muestra a Cristo diciendo, he aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él. La unidad señala dónde está la manija: Él llama, pero no derriba la puerta, pues el pestillo está por dentro, y solo la persona de adentro puede levantarlo. Esto guarda la verdad de que la invitación nunca se vuelve coerción; Dios no forzará su entrada. Toda la evidencia del curso ha sido el sonido de ese llamado, volviéndose más claro unidad por unidad, pero el abrir debe hacerse libremente desde adentro. Así que Aquel a quien el estudiante ha aprendido a defender ahora le hace la pregunta más personal, no meramente si las afirmaciones son verdad, sino si oirá la voz y abrirá la puerta." },
-
-    { textEn: "29. How does the unit turn the course's central question from others back onto the student?",
-      textEs: "29. ¿Cómo vuelve la unidad la pregunta central del curso de los demás hacia el estudiante?",
-      kw_en: ["question", "defend", "others", "personal", "open", "door", "believe", "decision"],
-      kw_es: ["pregunta", "defender", "demás", "personal", "abrir", "puerta", "creer", "decisión"],
-      modelEn: "Throughout the course the student has learned to bring others to the threshold, giving a reasoned defense to those who ask. But the unit turns the central question around so that it now falls on the student himself. The same Lord who stands ready to receive the seeker is standing at the door of the student's own heart. So the One he has learned to defend is asking him the oldest and most personal question of all, the question the whole course has been circling from the start: not merely whether Christ's claims are true, but whether he will open the door. The defense given to others becomes a personal decision the defender cannot avoid. The course thus ends not with an argument to deploy but with an invitation to answer, asking each reader who he says Jesus is and whether he will let Him in.",
-      modelEs: "A través del curso el estudiante ha aprendido a llevar a otros al umbral, dando una defensa razonada a los que preguntan. Pero la unidad vuelve la pregunta central de modo que ahora recae sobre el estudiante mismo. El mismo Señor que está listo para recibir al que busca está de pie ante la puerta del propio corazón del estudiante. Así que Aquel a quien ha aprendido a defender le hace la pregunta más antigua y más personal de todas, la pregunta que todo el curso ha estado rodeando desde el principio: no meramente si las afirmaciones de Cristo son verdad, sino si abrirá la puerta. La defensa dada a otros se vuelve una decisión personal que el defensor no puede evitar. El curso así termina no con un argumento para desplegar sino con una invitación para responder, preguntando a cada lector quién dice que es Jesús y si lo dejará entrar." },
-
-    { textEn: `30. Summarize the whole course's argument as Unit ${UNIT} gathers it together.`,
-      textEs: `30. Resuma el argumento de todo el curso tal como la Unidad ${UNIT} lo reúne.`,
-      kw_en: ["evidence", "door", "meekness", "life", "hope", "jesus", "wager", "invitation"],
-      kw_es: ["evidencia", "puerta", "mansedumbre", "vida", "esperanza", "jesús", "apuesta", "invitación"],
-      modelEn: `Unit ${UNIT} gathers the whole course together. Over nine units we built the evidence: design in the heavens, the witness within, the honest answer to evil, the reliability of Scripture, the person and prophecies of Christ, the resurrection and changed skeptics, the limits of naturalism, and the one Way. The capstone adds that how we give the defense matters as much as the defense, so it must be offered with meekness, and that our own life is the first apologetic. The quiet refrain is that all this evidence only carries a person to the door; it cannot force the will across. So the unit lays the wager bare, shows that the surrendered life is good now and not only later, and reminds us that Peter's reason is for the hope, whose name is Jesus. The course ends with Christ knocking, turning its question from others onto the reader as a personal invitation to open the door.`,
-      modelEs: `La Unidad ${UNIT} reúne todo el curso. A lo largo de nueve unidades construimos la evidencia: el diseño en los cielos, el testimonio interior, la respuesta honesta al mal, la confiabilidad de la Escritura, la persona y las profecías de Cristo, la resurrección y los escépticos cambiados, los límites del naturalismo, y el único Camino. El capstone añade que cómo damos la defensa importa tanto como la defensa, así que debe ofrecerse con mansedumbre, y que nuestra propia vida es la primera apologética. El estribillo callado es que toda esta evidencia solo lleva a una persona hasta la puerta; no puede forzar la voluntad a cruzarla. Así que la unidad deja la apuesta al desnudo, muestra que la vida entregada es buena ahora y no solo después, y nos recuerda que la razón de Pedro es de la esperanza, cuyo nombre es Jesús. El curso termina con Cristo llamando, volviendo su pregunta de los demás hacia el lector como una invitación personal a abrir la puerta.` }
-];
+/* CTSApol — unit 10. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "apol",
+ "unit": 10,
+ "totalUnits": 10,
+ "filePrefix": "CTSApol",
+ "prevHref": "CTSApolUnit9.html",
+ "nextHref": "CTSApolCertificate.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - The Reason for the Hope",
+   "Unit 2 - The Design of the Heavens",
+   "Unit 3 - Revelation and the Witness Within",
+   "Unit 4 - The Problem of Evil and Suffering",
+   "Unit 5 - The Reliability of Scripture",
+   "Unit 6 - The Person and Claims of Christ",
+   "Unit 7 - The Resurrection and the Changed Skeptics",
+   "Unit 8 - Science, Chance, and the Limits of Naturalism",
+   "Unit 9 - Other Religions and Worldviews",
+   "Unit 10 - Apologetics in Practice"
+  ],
+  "es": [
+   "Unit 1 - The Reason for the Hope",
+   "Unit 2 - The Design of the Heavens",
+   "Unit 3 - Revelation and the Witness Within",
+   "Unit 4 - The Problem of Evil and Suffering",
+   "Unit 5 - The Reliability of Scripture",
+   "Unit 6 - The Person and Claims of Christ",
+   "Unit 7 - The Resurrection and the Changed Skeptics",
+   "Unit 8 - Science, Chance, and the Limits of Naturalism",
+   "Unit 9 - Other Religions and Worldviews",
+   "Unit 10 - Apologetics in Practice"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "Unit 10 returns to the verse the whole course began with:",
+    "es": "La Unidad 10 vuelve al versículo con que comenzó todo el curso:"
+   },
+   "options": {
+    "en": [
+     "Genesis 1:1",
+     "1 Peter 3:15",
+     "Psalm 23",
+     "Romans 12:2"
+    ],
+    "es": [
+     "Génesis 1:1",
+     "1 Pedro 3:15",
+     "Salmo 23",
+     "Romanos 12:2"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The course opened and now closes on Peter's charge to give a reasoned defense.",
+    "es": "El curso abrió y ahora cierra con la orden de Pedro de dar una defensa razonada."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit says this last unit is not about the arrows but about:",
+    "es": "La unidad dice que esta última unidad no se trata de las flechas sino:"
+   },
+   "options": {
+    "en": [
+     "The target",
+     "The quiver",
+     "The bow",
+     "The archer"
+    ],
+    "es": [
+     "El blanco",
+     "La aljaba",
+     "El arco",
+     "El arquero"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Having gathered the reasons, the focus turns to the character of the one who gives them.",
+    "es": "Habiendo reunido las razones, el enfoque pasa al carácter de quien las da."
+   }
+  },
+  {
+   "stem": {
+    "en": "The five words the unit says most apologists forget are:",
+    "es": "Las cinco palabras que la unidad dice que la mayoría de los apologistas olvidan son:"
+   },
+   "options": {
+    "en": [
+     "'Always be ready'",
+     "'A reason for hope'",
+     "'With meekness and fear'",
+     "'Sanctify the Lord God'"
+    ],
+    "es": [
+     "'Estad siempre preparados'",
+     "'Razón de la esperanza'",
+     "'Con mansedumbre y reverencia'",
+     "'Santificad al Señor Dios'"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "How we make the defense matters as much as the defense itself.",
+    "es": "Cómo hacemos la defensa importa tanto como la defensa misma."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit warns that a believer armed with evidence can:",
+    "es": "La unidad advierte que un creyente armado de evidencia puede:"
+   },
+   "options": {
+    "en": [
+     "Win every argument and lose the very soul he argued for",
+     "Never be wrong",
+     "Skip the gospel",
+     "Convert anyone instantly"
+    ],
+    "es": [
+     "Ganar todos los argumentos y perder el alma misma por la que argumentaba",
+     "Nunca equivocarse",
+     "Saltarse el evangelio",
+     "Convertir a cualquiera al instante"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Cornering and humiliating a person only thickens the wall around the heart.",
+    "es": "Acorralar y humillar a una persona solo engruesa el muro alrededor del corazón."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit says the goal of apologetics is never to win an argument but to:",
+    "es": "La unidad dice que la meta de la apologética nunca es ganar un argumento sino:"
+   },
+   "options": {
+    "en": [
+     "Build a reputation",
+     "Prove cleverness",
+     "Silence critics",
+     "Win a brother"
+    ],
+    "es": [
+     "Construir una reputación",
+     "Probar el ingenio",
+     "Silenciar a los críticos",
+     "Ganar a un hermano"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "We hand bread to a beggar; we do not fling it in a starving man's face.",
+    "es": "Entregamos pan a un mendigo; no se lo arrojamos en la cara a un hambriento."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit says the first apologetic anyone meets is:",
+    "es": "La unidad dice que la primera apologética que cualquiera encuentra es:"
+   },
+   "options": {
+    "en": [
+     "A famous book",
+     "You yourself — your life",
+     "A clever website",
+     "A church building"
+    ],
+    "es": [
+     "Un libro famoso",
+     "Usted mismo — su vida",
+     "Un sitio web ingenioso",
+     "Un edificio de iglesia"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The world has grown deaf to sermons but never yet to a life.",
+    "es": "El mundo se ha vuelto sordo a los sermones pero todavía no a una vida."
+   }
+  },
+  {
+   "stem": {
+    "en": "The old saying quoted in the unit is that your walk and talk both talk, but:",
+    "es": "El viejo dicho citado en la unidad es que su andar y su hablar ambos hablan, pero:"
+   },
+   "options": {
+    "en": [
+     "Your walk talks louder than your talk talks",
+     "Silence is golden",
+     "Talk is cheap",
+     "Actions are optional"
+    ],
+    "es": [
+     "Su andar habla más fuerte que su hablar",
+     "El silencio es oro",
+     "Hablar es fácil",
+     "Las acciones son opcionales"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The strongest evidence is a life that cannot be explained apart from God.",
+    "es": "La evidencia más fuerte es una vida que no se puede explicar aparte de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "The quiet refrain beneath every unit of the course has been that the evidence:",
+    "es": "El estribillo callado debajo de cada unidad del curso ha sido que la evidencia:"
+   },
+   "options": {
+    "en": [
+     "Proves everything beyond doubt",
+     "Replaces the need for faith",
+     "Carries a person to the door but cannot drag him through it",
+     "Is unnecessary"
+    ],
+    "es": [
+     "Prueba todo más allá de la duda",
+     "Reemplaza la necesidad de la fe",
+     "Lleva a una persona hasta la puerta pero no puede arrastrarla a través de ella",
+     "Es innecesaria"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The last step is a movement of the will, which no argument can perform.",
+    "es": "El último paso es un movimiento de la voluntad, que ningún argumento puede realizar."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit says you cannot reason a man into the kingdom any more than you can:",
+    "es": "La unidad dice que no se puede razonar a un hombre para meterlo en el reino, como tampoco se puede:"
+   },
+   "options": {
+    "en": [
+     "Argue a man into being loved",
+     "Teach a man to read",
+     "Build a house in a day",
+     "Win a footrace sitting down"
+    ],
+    "es": [
+     "Argumentar a un hombre para que sea amado",
+     "Enseñar a un hombre a leer",
+     "Construir una casa en un día",
+     "Ganar una carrera sentado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The crossing of the threshold is between the soul and God, not a feat of logic.",
+    "es": "El cruce del umbral es entre el alma y Dios, no una hazaña de la lógica."
+   }
+  },
+  {
+   "stem": {
+    "en": "Remembering the limits of evidence guards the apologist against two errors:",
+    "es": "Recordar los límites de la evidencia guarda al apologista de dos errores:"
+   },
+   "options": {
+    "en": [
+     "Laziness and pride",
+     "Trusting his cleverness instead of the Spirit, and bearing a burden never his",
+     "Silence and noise",
+     "Doubt and certainty"
+    ],
+    "es": [
+     "Pereza y orgullo",
+     "Confiar en su ingenio en lugar del Espíritu, y cargar un peso que nunca fue suyo",
+     "Silencio y ruido",
+     "Duda y certeza"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Clear the path and open the door; the crossing belongs to the soul and God.",
+    "es": "Despeje el camino y abra la puerta; el cruce le pertenece al alma y a Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "The 'wager' the unit describes says that on the question of God, no one is permitted to:",
+    "es": "La 'apuesta' que la unidad describe dice que en la cuestión de Dios, a nadie se le permite:"
+   },
+   "options": {
+    "en": [
+     "Ask questions",
+     "Change his mind",
+     "Read the evidence",
+     "Stay neutral — you must wager your one life"
+    ],
+    "es": [
+     "Hacer preguntas",
+     "Cambiar de opinión",
+     "Leer la evidencia",
+     "Quedarse neutral — debe apostar su única vida"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "You are in the game whether you like it or not and must bet on an answer.",
+    "es": "Está en el juego le guste o no y debe apostar a una respuesta."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the wager, if you bet your life on Christ and were somehow wrong, you would have:",
+    "es": "Según la apuesta, si apostara su vida a Cristo y de algún modo se equivocara, habría:"
+   },
+   "options": {
+    "en": [
+     "Lost everything",
+     "Wasted your whole life",
+     "Lost very little — years spent in love, purpose, and clean hope",
+     "Been cruelly deceived"
+    ],
+    "es": [
+     "Perdido todo",
+     "Desperdiciado toda su vida",
+     "Perdido muy poco — años pasados en amor, propósito y limpia esperanza",
+     "Sido cruelmente engañado"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "But betting against Christ and being wrong loses everything that can be lost.",
+    "es": "Pero apostar contra Cristo y equivocarse pierde todo lo que se puede perder."
+   }
+  },
+  {
+   "stem": {
+    "en": "The wager connects back to a claim made in Unit 1, that:",
+    "es": "La apuesta conecta con una afirmación hecha en la Unidad 1, que:"
+   },
+   "options": {
+    "en": [
+     "Faith is irrational",
+     "Science disproves God",
+     "Only scholars can believe",
+     "Everyone lives by faith — the atheist too makes a wager he cannot prove"
+    ],
+    "es": [
+     "La fe es irracional",
+     "La ciencia refuta a Dios",
+     "Solo los eruditos pueden creer",
+     "Todos viven por fe — el ateo también hace una apuesta que no puede probar"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The course began and ends by exposing that unbelief is itself a wager.",
+    "es": "El curso comenzó y termina exponiendo que la incredulidad es ella misma una apuesta."
+   }
+  },
+  {
+   "stem": {
+    "en": "To the worry that betting on Christ is only a 'fire escape' for the next world, the unit replies:",
+    "es": "A la inquietud de que apostar a Cristo es solo una 'escalera de incendios' para el otro mundo, la unidad responde:"
+   },
+   "options": {
+    "en": [
+     "Theology forbids the question",
+     "Only the afterlife matters",
+     "The gospel produces a good life now, not only a good death",
+     "Nothing changes in this life"
+    ],
+    "es": [
+     "La teología prohíbe la pregunta",
+     "Solo importa la otra vida",
+     "El evangelio produce una buena vida ahora, no solo una buena muerte",
+     "Nada cambia en esta vida"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The treasure is found in large measure on the road itself, not only at its end.",
+    "es": "El tesoro se halla en gran medida en el camino mismo, no solo en su fin."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit offers the observation about surrendered lives but is careful to say it is:",
+    "es": "La unidad ofrece la observación sobre las vidas entregadas pero tiene cuidado de decir que:"
+   },
+   "options": {
+    "en": [
+     "Airtight proof",
+     "Not airtight proof — there are sour Christians and sunny unbelievers",
+     "Irrelevant",
+     "Only true of pastors"
+    ],
+    "es": [
+     "Prueba hermética",
+     "No es prueba hermética — hay cristianos agrios e incrédulos alegres",
+     "Irrelevante",
+     "Solo cierto de los pastores"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Honest about exceptions, yet across the whole, the gospel produces a good life.",
+    "es": "Honesto sobre las excepciones, y aun así en conjunto, el evangelio produce una buena vida."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit notes that Peter says to give a reason not for the rules or the inherited religion, but for the:",
+    "es": "La unidad nota que Pedro dice dar razón no de las reglas ni de la religión heredada, sino de la:"
+   },
+   "options": {
+    "en": [
+     "Hope",
+     "Doctrine",
+     "Ritual",
+     "Tradition"
+    ],
+    "es": [
+     "Esperanza",
+     "Doctrina",
+     "Ritual",
+     "Tradición"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "At the bottom of all the evidence lies not a syllogism but a hope.",
+    "es": "En el fondo de toda la evidencia no yace un silogismo sino una esperanza."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit says the hope at the bottom of the whole course has a name, and the name is:",
+    "es": "La unidad dice que la esperanza en el fondo de todo el curso tiene un nombre, y el nombre es:"
+   },
+   "options": {
+    "en": [
+     "Reason",
+     "Jesus",
+     "The Church",
+     "Evidence"
+    ],
+    "es": [
+     "La Razón",
+     "Jesús",
+     "La Iglesia",
+     "La Evidencia"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Every clue was a finger pointing to Him; the defense only clears the path to see Him.",
+    "es": "Cada pista fue un dedo señalándolo a Él; la defensa solo despeja el camino para verlo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Revelation 3:20 pictures Christ standing at the door and:",
+    "es": "Apocalipsis 3:20 muestra a Cristo de pie ante la puerta y:"
+   },
+   "options": {
+    "en": [
+     "Knocking — the latch is on the inside",
+     "Breaking it down",
+     "Walking away",
+     "Locking it"
+    ],
+    "es": [
+     "Llamando — el pestillo está por dentro",
+     "Derribándola",
+     "Alejándose",
+     "Cerrándola con llave"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "He knocks but does not force it; only the one inside can lift the latch.",
+    "es": "Él llama pero no la fuerza; solo el que está adentro puede levantar el pestillo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit says all the evidence of the course has really been:",
+    "es": "La unidad dice que toda la evidencia del curso en realidad ha sido:"
+   },
+   "options": {
+    "en": [
+     "A way to win debates",
+     "A proof that ends faith",
+     "The sound of Christ's knocking, growing clearer unit by unit",
+     "A list to memorize"
+    ],
+    "es": [
+     "Una manera de ganar debates",
+     "Una prueba que termina la fe",
+     "El sonido del llamado de Cristo, volviéndose más claro unidad por unidad",
+     "Una lista para memorizar"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The defense was never an end in itself but a clearing of the path to Him.",
+    "es": "La defensa nunca fue un fin en sí misma sino un despeje del camino hacia Él."
+   }
+  },
+  {
+   "stem": {
+    "en": "The course ends by turning its central question from others back onto the reader:",
+    "es": "El curso termina volviendo su pregunta central de los demás hacia el lector:"
+   },
+   "options": {
+    "en": [
+     "When will the end come?",
+     "How old is the earth?",
+     "Which church is best?",
+     "Who do you say that He is — and will you open the door?"
+    ],
+    "es": [
+     "¿Cuándo vendrá el fin?",
+     "¿Qué edad tiene la tierra?",
+     "¿Cuál iglesia es mejor?",
+     "¿Quién dice usted que es Él — y abrirá la puerta?"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The defense given to others becomes the most personal question for the defender.",
+    "es": "La defensa dada a otros se vuelve la pregunta más personal para el defensor."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Why does the unit say this final unit is about the archer, not the arrows, and how does it return to 1 Peter 3:15?",
+    "es": "¿Por qué dice la unidad que esta última unidad se trata del arquero, no de las flechas, y cómo vuelve a 1 Pedro 3:15?"
+   },
+   "keywords": {
+    "en": [
+     "archer",
+     "arrow",
+     "peter",
+     "defense",
+     "meekness",
+     "reason",
+     "hope",
+     "character"
+    ],
+    "es": [
+     "arquero",
+     "flecha",
+     "pedro",
+     "defensa",
+     "mansedumbre",
+     "razón",
+     "esperanza",
+     "carácter"
+    ]
+   },
+   "model": {
+    "en": "The unit returns to 1 Peter 3:15, the same verse that opened the course, where Peter charges us to be always ready to give a defense, a reason for the hope within us. Across nine units we filled our quiver with arrows of evidence, but this last unit is about the archer rather than the arrows, that is, about the character of the one who gives the defense. The reason is that Peter did not stop at being ready with an answer; he added five small words most defenders forget, with meekness and fear. How we make the defense matters as much as the defense itself. So the capstone shifts attention from the content of our arguments to the spirit and the life of the person making them, because a true reason for the hope must be carried by a humble and loving heart.",
+    "es": "La unidad vuelve a 1 Pedro 3:15, el mismo versículo que abrió el curso, donde Pedro nos ordena estar siempre preparados para dar una defensa, una razón de la esperanza que hay en nosotros. A través de nueve unidades llenamos nuestra aljaba de flechas de evidencia, pero esta última unidad se trata del arquero y no de las flechas, es decir, del carácter de quien da la defensa. La razón es que Pedro no se detuvo en estar listo con una respuesta; añadió cinco palabras pequeñas que la mayoría de los defensores olvidan, con mansedumbre y reverencia. Cómo hacemos la defensa importa tanto como la defensa misma. Así que el capstone cambia la atención del contenido de nuestros argumentos al espíritu y la vida de quien los hace, porque una verdadera razón de la esperanza debe ser llevada por un corazón humilde y amoroso."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the danger Peter's words 'with meekness' guard against in apologetics.",
+    "es": "Explique el peligro contra el que las palabras de Pedro 'con mansedumbre' protegen en la apologética."
+   },
+   "keywords": {
+    "en": [
+     "meekness",
+     "argument",
+     "soul",
+     "win",
+     "brother",
+     "humiliat",
+     "arrogance",
+     "love"
+    ],
+    "es": [
+     "mansedumbre",
+     "argumento",
+     "alma",
+     "ganar",
+     "hermano",
+     "humill",
+     "arrogancia",
+     "amor"
+    ]
+   },
+   "model": {
+    "en": "Peter's words with meekness guard against the strange danger that a believer can win every argument and yet lose the very soul he was arguing for. The unit describes a defender armed with evidence who corners an unbeliever, answers every objection, and walks away victorious, having gained a debate and lost a person; the humiliated unbeliever only digs in deeper and the wall around his heart grows. So the goal of apologetics is never to win an argument but to win a brother. We are not prosecuting an enemy but handing bread to a beggar, and one does not fling bread in a starving man's face. An answer given in arrogance, however true, is a door slammed, while the very same answer given in love is a door opened. Meekness keeps the truth from becoming a weapon.",
+    "es": "Las palabras de Pedro con mansedumbre protegen contra el extraño peligro de que un creyente pueda ganar todos los argumentos y sin embargo perder el alma misma por la que argumentaba. La unidad describe a un defensor armado de evidencia que acorrala a un incrédulo, responde a cada objeción, y se aleja victorioso, habiendo ganado un debate y perdido a una persona; el incrédulo humillado solo se atrinchera más hondo y el muro alrededor de su corazón crece. Así que la meta de la apologética nunca es ganar un argumento sino ganar a un hermano. No estamos procesando a un enemigo sino entregando pan a un mendigo, y uno no le arroja el pan en la cara a un hambriento. Una respuesta dada con arrogancia, por verdadera que sea, es una puerta cerrada de golpe, mientras que esa misma respuesta dada con amor es una puerta abierta. La mansedumbre evita que la verdad se vuelva un arma."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why the unit says the defender's own life is the first apologetic.",
+    "es": "Explique por qué la unidad dice que la propia vida del defensor es la primera apologética."
+   },
+   "keywords": {
+    "en": [
+     "life",
+     "first",
+     "apologetic",
+     "walk",
+     "talk",
+     "watch",
+     "deaf",
+     "evidence"
+    ],
+    "es": [
+     "vida",
+     "primera",
+     "apologética",
+     "andar",
+     "hablar",
+     "observa",
+     "sordo",
+     "evidencia"
+    ]
+   },
+   "model": {
+    "en": "The unit says you yourself are the first apologetic anyone meets, because long before a watching neighbor weighs your arguments he weighs your life. He notices whether the man who preaches love is patient with his children, whether the woman who speaks of joy is bitter, and whether the hope you describe has made you kinder and steadier. The world has heard many sermons and grown deaf to most of them, but it has never grown deaf to a life. As the old saying goes, your walk talks and your talk talks, but your walk talks louder than your talk. So the strongest evidence we ever offer is not a fact we recite but a life that cannot be explained apart from God, and we must make sure the argument of our living does not contradict the argument of our lips.",
+    "es": "La unidad dice que usted mismo es la primera apologética que cualquiera encuentra, porque mucho antes de que un vecino que observa sopese sus argumentos sopesa su vida. Nota si el hombre que predica el amor es paciente con sus hijos, si la mujer que habla de gozo es amargada, y si la esperanza que describe lo ha hecho más amable y más firme. El mundo ha oído muchos sermones y se ha vuelto sordo a la mayoría, pero nunca se ha vuelto sordo a una vida. Como dice el viejo dicho, su andar habla y su hablar habla, pero su andar habla más fuerte que su hablar. Así que la evidencia más fuerte que jamás ofrecemos no es un dato que recitamos sino una vida que no se puede explicar aparte de Dios, y debemos asegurarnos de que el argumento de nuestro vivir no contradiga el argumento de nuestros labios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Restate the course's quiet refrain about what evidence can and cannot do, and the two errors it guards against.",
+    "es": "Reformule el estribillo callado del curso sobre lo que la evidencia puede y no puede hacer, y los dos errores que evita."
+   },
+   "keywords": {
+    "en": [
+     "evidence",
+     "door",
+     "drag",
+     "will",
+     "reason",
+     "spirit",
+     "burden",
+     "path"
+    ],
+    "es": [
+     "evidencia",
+     "puerta",
+     "arrastrar",
+     "voluntad",
+     "razón",
+     "espíritu",
+     "carga",
+     "camino"
+    ]
+   },
+   "model": {
+    "en": "The quiet refrain beneath every unit is that the evidence carries a man to the door but cannot drag him through it. The heavens can show a Designer, the tomb a risen Lord, the documents a trustworthy record, and together they strip away excuses and bring a person face to face with the question; but the last step is not an inch of logic, it is a movement of the will and a bowing of the heart, and no argument can perform it. You cannot reason a man into the kingdom any more than you can argue him into being loved. Remembering this guards against two errors: trusting your own cleverness instead of the Spirit, and taking onto yourself a burden that was never yours. Your task is to clear the path and open the door, while the crossing of the threshold remains between the soul and God.",
+    "es": "El estribillo callado debajo de cada unidad es que la evidencia lleva a un hombre hasta la puerta pero no puede arrastrarlo a través de ella. Los cielos pueden mostrar un Diseñador, la tumba un Señor resucitado, los documentos un registro digno de confianza, y juntos quitan las excusas y ponen a la persona cara a cara con la pregunta; pero el último paso no es una pulgada de lógica, es un movimiento de la voluntad y una inclinación del corazón, y ningún argumento puede realizarlo. No se puede razonar a un hombre para meterlo en el reino como tampoco se puede argumentar para que sea amado. Recordar esto evita dos errores: confiar en el propio ingenio en lugar del Espíritu, y tomar sobre uno una carga que nunca fue suya. Su tarea es despejar el camino y abrir la puerta, mientras que el cruce del umbral permanece entre el alma y Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the 'wager' the unit presents and how it connects to Unit 1's claim that everyone lives by faith.",
+    "es": "Explique la 'apuesta' que presenta la unidad y cómo conecta con la afirmación de la Unidad 1 de que todos viven por fe."
+   },
+   "keywords": {
+    "en": [
+     "wager",
+     "neutral",
+     "bet",
+     "life",
+     "lose",
+     "gain",
+     "faith",
+     "atheist"
+    ],
+    "es": [
+     "apuesta",
+     "neutral",
+     "apostar",
+     "vida",
+     "perder",
+     "ganar",
+     "fe",
+     "ateo"
+    ]
+   },
+   "model": {
+    "en": "The unit presents a wager from a wise old thinker, who observed that on the question of God no one is permitted to stay neutral; you are in the game whether you like it or not and must bet your one life on an answer. Weigh it as a reasonable person weighs a bet. If you wager your life on Christ and are somehow wrong, you lose very little, having spent your years in love, purpose, and clean hope. But if you bet against Christ and are wrong, you lose everything that can be lost; and if you are right about Christ, you gain a Father, a home, and a joy death cannot touch. This connects directly to Unit 1's claim that everyone lives by faith, for the atheist too is making a wager he cannot prove. The wager simply lays bare that unbelief is itself a bet, and asks which way you will stake your one and only life.",
+    "es": "La unidad presenta una apuesta de un sabio y viejo pensador, que observó que en la cuestión de Dios a nadie se le permite quedarse neutral; usted está en el juego le guste o no y debe apostar su única vida a una respuesta. Sopéselo como una persona razonable sopesa una apuesta. Si apuesta su vida a Cristo y de algún modo se equivoca, pierde muy poco, habiendo pasado sus años en amor, propósito y limpia esperanza. Pero si apuesta contra Cristo y se equivoca, pierde todo lo que se puede perder; y si tiene razón acerca de Cristo, gana un Padre, un hogar, y un gozo que la muerte no puede tocar. Esto conecta directamente con la afirmación de la Unidad 1 de que todos viven por fe, pues el ateo también está haciendo una apuesta que no puede probar. La apuesta simplemente deja al desnudo que la incredulidad es ella misma una apuesta, y pregunta de qué lado apostará su única vida."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the 'happiest and healthiest' point and the honest caveat the unit attaches to it.",
+    "es": "Explique el punto de los 'más felices y sanos' y la salvedad honesta que la unidad le añade."
+   },
+   "keywords": {
+    "en": [
+     "life",
+     "surrender",
+     "forgive",
+     "steady",
+     "good",
+     "caveat",
+     "proof",
+     "road"
+    ],
+    "es": [
+     "vida",
+     "entregad",
+     "perdon",
+     "firmeza",
+     "buena",
+     "salvedad",
+     "prueba",
+     "camino"
+    ]
+   },
+   "model": {
+    "en": "Lest anyone think betting on Christ is only a fire escape for the next world, the unit observes what it does in this one. Those who have surrendered their lives to Christ are, by and large, the people you would most want beside you in trouble: they tend to forgive when they could hate, keep their promises, and carry hope into the cancer ward and peace into the prison cell. There is a steadiness and sweetness about a surrendered life that the world cannot manufacture and secretly envies. But the unit attaches an honest caveat: this is not airtight proof, for there are sour Christians and sunny unbelievers, and we have met both. Taken across the whole, however, the pattern is plain, that the gospel produces not only a good death but a good life. The treasure is found in large measure on the road itself, not only at its end.",
+    "es": "Para que nadie piense que apostar a Cristo es solo una escalera de incendios para el otro mundo, la unidad observa lo que hace en este. Los que han entregado su vida a Cristo son, en general, las personas que más querría a su lado en la dificultad: suelen perdonar cuando podrían odiar, cumplir sus promesas, y llevar esperanza a la sala del cáncer y paz a la celda de la prisión. Hay una firmeza y una dulzura en una vida entregada que el mundo no puede fabricar y en secreto envidia. Pero la unidad añade una salvedad honesta: esto no es prueba hermética, pues hay cristianos agrios e incrédulos alegres, y hemos conocido a ambos. Tomado en conjunto, sin embargo, el patrón es claro, que el evangelio produce no solo una buena muerte sino una buena vida. El tesoro se halla en gran medida en el camino mismo, no solo en su fin."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does the unit emphasize that Peter says to give a reason for the 'hope,' not the rules or the inherited religion?",
+    "es": "¿Por qué enfatiza la unidad que Pedro dice dar razón de la 'esperanza', no de las reglas ni de la religión heredada?"
+   },
+   "keywords": {
+    "en": [
+     "hope",
+     "reason",
+     "rules",
+     "syllogism",
+     "children",
+     "death",
+     "jesus",
+     "name"
+    ],
+    "es": [
+     "esperanza",
+     "razón",
+     "reglas",
+     "silogismo",
+     "hijos",
+     "muerte",
+     "jesús",
+     "nombre"
+    ]
+   },
+   "model": {
+    "en": "The unit emphasizes that Peter says to give a reason for the hope that is in us, not a reason for the rules that bind us or the religion we inherited. At the bottom of all our evidence and arguments lies not a syllogism but a hope: that the universe is not cold and empty but the work of a loving Mind, that we are not orphans but children, that death is not a wall but a door, and that the God who made us has come the whole way down to bring us home. Every clue in the course has been a finger pointing to that hope, and the hope has a name, and the name is Jesus. So the defense was never an end in itself; it was only a way of clearing the path so that a person could see Him plainly, and seeing Him, want Him.",
+    "es": "La unidad enfatiza que Pedro dice dar razón de la esperanza que hay en nosotros, no razón de las reglas que nos atan ni de la religión que heredamos. En el fondo de toda nuestra evidencia y argumentos no yace un silogismo sino una esperanza: que el universo no es frío y vacío sino la obra de una Mente amorosa, que no somos huérfanos sino hijos, que la muerte no es un muro sino una puerta, y que el Dios que nos hizo ha bajado todo el camino para llevarnos a casa. Cada pista del curso ha sido un dedo señalando esa esperanza, y la esperanza tiene un nombre, y el nombre es Jesús. Así que la defensa nunca fue un fin en sí misma; fue solo una manera de despejar el camino para que una persona pudiera verlo con claridad, y al verlo, lo quisiera."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the Revelation 3:20 image of the knock at the door and where the latch is.",
+    "es": "Explique la imagen de Apocalipsis 3:20 del llamado a la puerta y dónde está el pestillo."
+   },
+   "keywords": {
+    "en": [
+     "knock",
+     "door",
+     "latch",
+     "inside",
+     "force",
+     "open",
+     "voice",
+     "invitation"
+    ],
+    "es": [
+     "llama",
+     "puerta",
+     "pestillo",
+     "dentro",
+     "forzar",
+     "abrir",
+     "voz",
+     "invitación"
+    ]
+   },
+   "model": {
+    "en": "The unit ends at a door, but now it is the reader's own door. Revelation 3:20 pictures Christ saying, behold, I stand at the door and knock; if anyone hears My voice and opens the door, I will come in. The unit points out where the handle is: He knocks, but He does not break the door down, for the latch is on the inside, and only the person within can lift it. This guards the truth that the invitation never becomes coercion; God will not force His way in. All the evidence of the course has been the sound of that knocking, growing clearer unit by unit, but the opening must be done freely from the inside. So the One the student has learned to defend is now asking him the most personal question, not merely whether the claims are true, but whether he will hear the voice and open the door.",
+    "es": "La unidad termina en una puerta, pero ahora es la propia puerta del lector. Apocalipsis 3:20 muestra a Cristo diciendo, he aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él. La unidad señala dónde está la manija: Él llama, pero no derriba la puerta, pues el pestillo está por dentro, y solo la persona de adentro puede levantarlo. Esto guarda la verdad de que la invitación nunca se vuelve coerción; Dios no forzará su entrada. Toda la evidencia del curso ha sido el sonido de ese llamado, volviéndose más claro unidad por unidad, pero el abrir debe hacerse libremente desde adentro. Así que Aquel a quien el estudiante ha aprendido a defender ahora le hace la pregunta más personal, no meramente si las afirmaciones son verdad, sino si oirá la voz y abrirá la puerta."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the unit turn the course's central question from others back onto the student?",
+    "es": "¿Cómo vuelve la unidad la pregunta central del curso de los demás hacia el estudiante?"
+   },
+   "keywords": {
+    "en": [
+     "question",
+     "defend",
+     "others",
+     "personal",
+     "open",
+     "door",
+     "believe",
+     "decision"
+    ],
+    "es": [
+     "pregunta",
+     "defender",
+     "demás",
+     "personal",
+     "abrir",
+     "puerta",
+     "creer",
+     "decisión"
+    ]
+   },
+   "model": {
+    "en": "Throughout the course the student has learned to bring others to the threshold, giving a reasoned defense to those who ask. But the unit turns the central question around so that it now falls on the student himself. The same Lord who stands ready to receive the seeker is standing at the door of the student's own heart. So the One he has learned to defend is asking him the oldest and most personal question of all, the question the whole course has been circling from the start: not merely whether Christ's claims are true, but whether he will open the door. The defense given to others becomes a personal decision the defender cannot avoid. The course thus ends not with an argument to deploy but with an invitation to answer, asking each reader who he says Jesus is and whether he will let Him in.",
+    "es": "A través del curso el estudiante ha aprendido a llevar a otros al umbral, dando una defensa razonada a los que preguntan. Pero la unidad vuelve la pregunta central de modo que ahora recae sobre el estudiante mismo. El mismo Señor que está listo para recibir al que busca está de pie ante la puerta del propio corazón del estudiante. Así que Aquel a quien ha aprendido a defender le hace la pregunta más antigua y más personal de todas, la pregunta que todo el curso ha estado rodeando desde el principio: no meramente si las afirmaciones de Cristo son verdad, sino si abrirá la puerta. La defensa dada a otros se vuelve una decisión personal que el defensor no puede evitar. El curso así termina no con un argumento para desplegar sino con una invitación para responder, preguntando a cada lector quién dice que es Jesús y si lo dejará entrar."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize the whole course's argument as Unit 10 gathers it together.",
+    "es": "Resuma el argumento de todo el curso tal como la Unidad 10 lo reúne."
+   },
+   "keywords": {
+    "en": [
+     "evidence",
+     "door",
+     "meekness",
+     "life",
+     "hope",
+     "jesus",
+     "wager",
+     "invitation"
+    ],
+    "es": [
+     "evidencia",
+     "puerta",
+     "mansedumbre",
+     "vida",
+     "esperanza",
+     "jesús",
+     "apuesta",
+     "invitación"
+    ]
+   },
+   "model": {
+    "en": "Unit 10 gathers the whole course together. Over nine units we built the evidence: design in the heavens, the witness within, the honest answer to evil, the reliability of Scripture, the person and prophecies of Christ, the resurrection and changed skeptics, the limits of naturalism, and the one Way. The capstone adds that how we give the defense matters as much as the defense, so it must be offered with meekness, and that our own life is the first apologetic. The quiet refrain is that all this evidence only carries a person to the door; it cannot force the will across. So the unit lays the wager bare, shows that the surrendered life is good now and not only later, and reminds us that Peter's reason is for the hope, whose name is Jesus. The course ends with Christ knocking, turning its question from others onto the reader as a personal invitation to open the door.",
+    "es": "La Unidad 10 reúne todo el curso. A lo largo de nueve unidades construimos la evidencia: el diseño en los cielos, el testimonio interior, la respuesta honesta al mal, la confiabilidad de la Escritura, la persona y las profecías de Cristo, la resurrección y los escépticos cambiados, los límites del naturalismo, y el único Camino. El capstone añade que cómo damos la defensa importa tanto como la defensa, así que debe ofrecerse con mansedumbre, y que nuestra propia vida es la primera apologética. El estribillo callado es que toda esta evidencia solo lleva a una persona hasta la puerta; no puede forzar la voluntad a cruzarla. Así que la unidad deja la apuesta al desnudo, muestra que la vida entregada es buena ahora y no solo después, y nos recuerda que la razón de Pedro es de la esperanza, cuyo nombre es Jesús. El curso termina con Cristo llamando, volviendo su pregunta de los demás hacia el lector como una invitación personal a abrir la puerta."
+   }
+  }
+ ]
+};

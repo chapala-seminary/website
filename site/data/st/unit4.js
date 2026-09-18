@@ -1,156 +1,865 @@
-/* CTSST - unit 4: per-unit configuration and content. */
-
-const UNIT = 4;
-
-const NEXT_UNIT_URL = 'CTSSTUnit5.html';
-
-const unitTitlesEn = [
-    "Unit 1 - The Doctrine of Revelation",
-    "Unit 2 - The Doctrine of God",
-    "Unit 3 - The Doctrine of Christ",
-    `Unit ${UNIT} - The Holy Spirit`,
-    `Unit ${UNIT + 1} - The Doctrine of Man`,
-    "Unit 6 - Sin",
-    "Unit 7 - Salvation",
-    "Unit 8 - The Church",
-    "Unit 9 - Denominations and the Gospel",
-    "Unit 10 - Last Things",
-    "Unit 11 - Apologetics",
-    "Unit 12 - The Kingdom of God",
-    "Unit 13 - Church, State, and Nationalism"
-];
-
-const mcQuestions = [
-    { textEn: "1. The Holy Spirit is accurately defined as:", textEs: "1. El Espíritu Santo se define con precisión como:",
-      optionsEn: ["A created being", "An angel", "An impersonal force", "A divine Person"],
-      optionsEs: ["Un ser creado", "Un ángel", "Una fuerza impersonal", "Una Persona divina"], explanationEn: "The Holy Spirit is a divine Person, not an impersonal force.", explanationEs: "El Espíritu Santo es una Persona divina, no una fuerza impersonal.", correct: 3 },
-    { textEn: "2. Scripture identifies lying to the Spirit as lying to God in:", textEs: "2. La Escritura identifica mentir al Espíritu como mentir a Dios en:",
-      optionsEn: ["John 3:5", "Acts 5:3-4", "Romans 8:14", "Galatians 5:22"],
-      optionsEs: ["Juan 3:5", "Hechos 5:3-4", "Romanos 8:14", "Gálatas 5:22"], explanationEn: "Acts 5:3-4 states that lying to the Holy Spirit is lying to God.", explanationEs: "Hechos 5:3-4 declara que mentir al Espíritu Santo es mentir a Dios.", correct: 1 },
-    { textEn: "3. Which faculty allows the Spirit to be 'grieved'?", textEs: "3. ¿Qué facultad permite que el Espíritu sea 'entristecido'?",
-      optionsEn: ["Emotion", "Will", "Power", "Intellect"],
-      optionsEs: ["Emoción", "Voluntad", "Poder", "Intelecto"], explanationEn: "The Spirit has emotions and can be grieved (Ephesians 4:30).", explanationEs: "El Espíritu tiene emociones y puede ser entristecido (Efesios 4:30).", correct: 0 },
-    { textEn: "4. The Spirit's role in 'Conviction' is to:", textEs: "4. El papel del Espíritu en la 'Convicción' es:",
-      optionsEn: ["Speak in tongues", "Perform miracles", "Make the world aware of sin", "Punish sinners"],
-      optionsEs: ["Hablar en lenguas", "Realizar milagros", "Hacer que el mundo sepa del pecado", "Castigar a los pecadores"], explanationEn: "The Spirit convicts the world of sin, righteousness, and judgment (John 16:8).", explanationEs: "El Espíritu convence al mundo de pecado, justicia y juicio (Juan 16:8).", correct: 2 },
-    { textEn: "5. 'Regeneration' refers to:", textEs: "5. 'Regeneración' se refiere a:",
-      optionsEn: ["Church membership", "Baptism", "Moral improvement", "The new spiritual birth"],
-      optionsEs: ["Membresía de iglesia", "Bautismo", "Mejora moral", "El nuevo nacimiento espiritual"], explanationEn: "Regeneration is the new birth by the Spirit (Titus 3:5).", explanationEs: "La regeneración es el nuevo nacimiento por el Espíritu (Tito 3:5).", correct: 3 },
-    { textEn: "6. Where does the Spirit reside in the believer?", textEs: "6. ¿Dónde reside el Espíritu en el creyente?",
-      optionsEn: ["Beside them", "In the church building", "In heaven only", "Within their body as a temple"],
-      optionsEs: ["Junto a ellos", "En el edificio de la iglesia", "Solo en el cielo", "Dentro de su cuerpo como un templo"], explanationEn: "The believer's body is the temple of the Holy Spirit (1 Corinthians 6:19).", explanationEs: "El cuerpo del creyente es el templo del Espíritu Santo (1 Corintios 6:19).", correct: 3 },
-    { textEn: "7. The 'Seal' of the Spirit signifies:", textEs: "7. El 'Sello' del Espíritu significa:",
-      optionsEn: ["Church approval", "Temporary enthusiasm", "Ownership and a guarantee of redemption", "A second blessing"],
-      optionsEs: ["Aprobación de la iglesia", "Entusiasmo temporal", "Propiedad y una garantía de redención", "Una segunda bendición"], explanationEn: "The Spirit seals believers as a mark of ownership and guarantee (Ephesians 1:13).", explanationEs: "El Espíritu sella a los creyentes como marca de propiedad y garantía (Efesios 1:13).", correct: 2 },
-    { textEn: "8. The evidence of character transformation is called:", textEs: "8. La evidencia de la transformación del carácter se llama:",
-      optionsEn: ["Tongues", "Spiritual gifts", "The Fruit of the Spirit", "Miracles"],
-      optionsEs: ["Lenguas", "Dones espirituales", "El Fruto del Espíritu", "Milagros"], explanationEn: "The Fruit of the Spirit is the evidence of character transformation (Galatians 5:22-23).", explanationEs: "El Fruto del Espíritu es la evidencia de la transformación del carácter (Gálatas 5:22-23).", correct: 2 },
-    { textEn: "9. Spiritual gifts are primarily distributed for:", textEs: "9. Los dones espirituales se distribuyen principalmente para:",
-      optionsEn: ["Building up the church", "Showing off", "Financial gain", "Personal glory"],
-      optionsEs: ["Edificación de la iglesia", "Presumir", "Ganancia financiera", "Gloria personal"], explanationEn: "Gifts are given for the common good and building up the church.", explanationEs: "Los dones se dan para el bien común y la edificación de la iglesia.", correct: 0 },
-    { textEn: "10. Sanctification is the ongoing process of:", textEs: "10. La santificación es el proceso continuo de:",
-      optionsEn: ["Growing in holiness", "Receiving gifts", "Speaking in tongues", "Being saved from hell"],
-      optionsEs: ["Crecer en santidad", "Recibir dones", "Hablar en lenguas", "Ser salvo del infierno"], explanationEn: "Sanctification is the process of becoming more like Christ.", explanationEs: "La santificación es el proceso de llegar a ser más como Cristo.", correct: 0 },
-    { textEn: "11. The command in Ephesians 5:18 is to:", textEs: "11. El mandato en Efesios 5:18 es:",
-      optionsEn: ["Ignore the Spirit", "Be filled with the Spirit", "Quench the Spirit", "Grieve the Spirit"],
-      optionsEs: ["Ignorar el Espíritu", "Ser llenos del Espíritu", "Apagar el Espíritu", "Entristecer el Espíritu"], explanationEn: "Paul commands believers to be filled with the Spirit.", explanationEs: "Pablo ordena a los creyentes ser llenos del Espíritu.", correct: 1 },
-    { textEn: "12. To 'Quench' the Spirit means to:", textEs: "12. Apagar el Espíritu significa:",
-      optionsEn: ["Seek His guidance", "Suppress His influence", "Welcome His power", "Celebrate His gifts"],
-      optionsEs: ["Buscar Su guía", "Suprimir Su influencia", "Dar la bienvenida a Su poder", "Celebrar Sus dones"], explanationEn: "Quenching the Spirit means suppressing His influence (1 Thessalonians 5:19).", explanationEs: "Apagar el Espíritu significa suprimir Su influencia (1 Tesalonicenses 5:19).", correct: 1 },
-    { textEn: "13. Which sin involves attributing God's work to Satan?", textEs: "13. ¿Qué pecado implica atribuir la obra de Dios a Satanás?",
-      optionsEn: ["Quenching the Spirit", "Ignoring the Spirit", "Grieving the Spirit", "Blaspheming the Spirit"],
-      optionsEs: ["Apagar el Espíritu", "Ignorar el Espíritu", "Entristecer el Espíritu", "Blasfemar contra el Espíritu"], explanationEn: "Blasphemy against the Spirit attributes God's work to Satan (Mark 3:28-29).", explanationEs: "La blasfemia contra el Espíritu atribuye la obra de Dios a Satanás (Marcos 3:28-29).", correct: 3 },
-    { textEn: "14. The Spirit provides 'Assurance' by:", textEs: "14. El Espíritu proporciona 'Seguridad' al:",
-      optionsEn: ["Witnessing to our spirit that we are God's children", "Removing all trials", "Making us perfect", "Giving material wealth"],
-      optionsEs: ["Dar testimonio a nuestro espíritu de que somos hijos de Dios", "Eliminar todas las pruebas", "Hacernos perfectos", "Dar riqueza material"], explanationEn: "The Spirit bears witness that we are children of God (Romans 8:16).", explanationEs: "El Espíritu da testimonio de que somos hijos de Dios (Romanos 8:16).", correct: 0 },
-    { textEn: "15. The Spirit's role in Genesis 1:2 involved:", textEs: "15. El papel del Espíritu en Génesis 1:2 implicaba:",
-      optionsEn: ["Prophecy", "Judgment", "Creation", "Salvation"],
-      optionsEs: ["Profecía", "Juicio", "Creación", "Salvación"], explanationEn: "The Spirit hovered over the waters at creation (Genesis 1:2).", explanationEs: "El Espíritu se movía sobre la faz de las aguas en la creación (Génesis 1:2).", correct: 2 },
-    { textEn: "16. The office given for 'equipping the saints' is:", textEs: "16. El oficio dado para 'equipar a los santos' es:",
-      optionsEn: ["Prophet", "Apostle", "Pastor-teacher", "Evangelist"],
-      optionsEs: ["Profeta", "Apóstol", "Pastor-maestro", "Evangelista"], explanationEn: "Pastor-teachers are given for equipping the saints (Ephesians 4:11-12).", explanationEs: "Los pastores-maestros son dados para equipar a los santos (Efesios 4:11-12).", correct: 2 },
-    { textEn: "17. Walking in the Spirit (Galatians 5:16) results in:", textEs: "17. Andar en el Espíritu (Gálatas 5:16) resulta en:",
-      optionsEn: ["Perfect sinlessness", "Material prosperity", "Fame", "Overcoming the lusts of the flesh"],
-      optionsEs: ["Perfecta impecabilidad", "Prosperidad material", "Fama", "Vencer las pasiones de la carne"], explanationEn: "Walking in the Spirit enables us to overcome fleshly desires.", explanationEs: "Andar en el Espíritu nos capacita para vencer los deseos de la carne.", correct: 3 },
-    { textEn: "18. The distribution of gifts 'as He wills' shows His:", textEs: "18. La distribución de los dones 'como Él quiere' muestra Su:",
-      optionsEn: ["Will", "Intellect", "Weakness", "Emotion"],
-      optionsEs: ["Voluntad", "Intelecto", "Debilidad", "Emoción"], explanationEn: "The Spirit distributes gifts according to His will (1 Corinthians 12:11).", explanationEs: "El Espíritu distribuye los dones según Su voluntad (1 Corintios 12:11).", correct: 0 },
-    { textEn: "19. To 'Grieve' the Spirit refers to:", textEs: "19. 'Entristecer' al Espíritu se refiere a:",
-      optionsEn: ["Rejoicing in His presence", "Causing Him sorrow through unholy living", "Using spiritual gifts", "Seeking His guidance"],
-      optionsEs: ["Regocijarse en Su presencia", "Causarle tristeza a través de una vida impía", "Usar los dones espirituales", "Buscar Su guía"], explanationEn: "Grieving the Spirit means causing Him sorrow through sinful conduct (Ephesians 4:30).", explanationEs: "Entristecer al Espíritu significa causarle tristeza a través de una conducta pecaminosa (Efesios 4:30).", correct: 1 },
-    { textEn: "20. The Spirit is described as the 'earnest' or 'guarantee' of our inheritance. This means:", textEs: "20. El Espíritu es descrito como las 'arras' o 'garantía' de nuestra herencia. Esto significa:",
-      optionsEn: ["Our salvation is uncertain", "The Spirit is a down-payment ensuring final redemption", "We must earn our salvation", "The Spirit can be lost"],
-      optionsEs: ["Nuestra salvación es incierta", "El Espíritu es un pago inicial que asegura la redención final", "Debemos ganar nuestra salvación", "El Espíritu puede perderse"], explanationEn: "The Spirit is the guarantee of our inheritance until redemption (Ephesians 1:14).", explanationEs: "El Espíritu es las arras de nuestra herencia hasta la redención (Efesios 1:14).", correct: 1 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain the grammatical significance of John 16:13, where Jesus uses the masculine \"He\" with the neuter word \"Spirit.\" What does this teach about the Spirit's personhood?",
-      textEs: "21. Explique el significado gramatical de Juan 16:13, donde Jesús usa el masculino \"Él\" con la palabra neutra \"Espíritu.\" ¿Qué enseña esto sobre la personalidad del Espíritu?",
-      kw_en: ["masculine", "neuter", "He", "person", "personhood", "not", "force", "deliberate"],
-      kw_es: ["masculino", "neutro", "Él", "persona", "personalidad", "no", "fuerza", "deliberado"],
-      modelEn: "In John 16:13 Jesus refers to the Spirit with the masculine pronoun \"He\" even though the Greek word for Spirit is grammatically neuter. Normally the pronoun would match the neuter noun, so this deliberate mismatch is significant. It signals that the Holy Spirit is not an impersonal force or influence but a person. The teaching of the unit is that the Spirit thinks, wills, and acts as a person of the Trinity, and this grammar is one of the ways Scripture itself underlines that truth. Treating Him as a mere power or energy is therefore a mistake; He is a \"He,\" not an \"it.\"",
-      modelEs: "En Juan 16:13 Jesús se refiere al Espíritu con el pronombre masculino \"Él\" aunque la palabra griega para Espíritu es gramaticalmente neutra. Normalmente el pronombre concordaría con el sustantivo neutro, así que este desajuste deliberado es significativo. Señala que el Espíritu Santo no es una fuerza o influencia impersonal sino una persona. La enseñanza de la unidad es que el Espíritu piensa, quiere y actúa como una persona de la Trinidad, y esta gramática es una de las maneras en que la Escritura misma subraya esa verdad. Tratarlo como un mero poder o energía es por tanto un error; Él es un \"Él\", no un \"ello\"." },
-
-    { textEn: "22. Explain the relationship between the \"Seal\" and the \"Earnest\" (down payment) of the Spirit. How do they assure believers of their salvation?",
-      textEs: "22. Explique la relación entre el \"Sello\" y las \"Arras\" (pago inicial) del Espíritu. ¿Cómo aseguran a los creyentes de su salvación?",
-      kw_en: ["seal", "earnest", "down payment", "assurance", "ownership", "guarantee", "salvation", "Spirit"],
-      kw_es: ["sello", "arras", "pago inicial", "seguridad", "propiedad", "garantía", "salvación", "Espíritu"],
-      modelEn: "The unit describes the Spirit as both a Seal and an Earnest given to the believer. A seal marks ownership and security: when God seals a believer with the Spirit, He stamps that person as His own and keeps them secure. An earnest is a down payment that guarantees the full amount will follow, so the Spirit given now is God's pledge that the complete inheritance of salvation is certain to come. Together they assure believers on two fronts: the seal says you already belong to God, and the earnest says the rest of what God has promised is guaranteed. The believer's confidence rests not on feelings but on the Spirit God has placed within.",
-      modelEs: "La unidad describe al Espíritu como un Sello y unas Arras dados al creyente. Un sello marca propiedad y seguridad: cuando Dios sella a un creyente con el Espíritu, lo marca como suyo y lo guarda seguro. Las arras son un pago inicial que garantiza que la cantidad completa seguirá, así que el Espíritu dado ahora es la promesa de Dios de que la herencia completa de la salvación ciertamente vendrá. Juntos aseguran al creyente en dos frentes: el sello dice que ya perteneces a Dios, y las arras dicen que el resto de lo que Dios ha prometido está garantizado. La confianza del creyente descansa no en los sentimientos sino en el Espíritu que Dios ha puesto dentro." },
-
-    { textEn: "23. Distinguish between the Fruit of the Spirit and the Gifts of the Spirit. Which is for all believers, and which varies?",
-      textEs: "23. Distinga entre el Fruto del Espíritu y los Dones del Espíritu. ¿Cuál es para todos los creyentes, y cuál varía?",
-      kw_en: ["fruit", "gifts", "character", "service", "all", "varies", "love", "varied"],
-      kw_es: ["fruto", "dones", "carácter", "servicio", "todos", "varía", "amor", "variados"],
-      modelEn: "The unit distinguishes the Fruit of the Spirit from the Gifts of the Spirit. The fruit is the Christlike character the Spirit produces in every believer, such as love, joy, and peace, and it is meant to grow in all who walk in the Spirit. The gifts are the varied abilities the Spirit distributes for service in the body of Christ, and these differ from believer to believer. So the fruit is universal: every Christian is expected to bear it, and a lack of fruit is a sign of a deeper problem. The gifts are diverse: not every believer has the same gift, and no one has them all. Character is required of everyone; particular gifts are given as the Spirit chooses.",
-      modelEs: "La unidad distingue el Fruto del Espíritu de los Dones del Espíritu. El fruto es el carácter semejante a Cristo que el Espíritu produce en cada creyente, como el amor, el gozo y la paz, y debe crecer en todos los que andan en el Espíritu. Los dones son las habilidades variadas que el Espíritu distribuye para el servicio en el cuerpo de Cristo, y estos difieren de un creyente a otro. Así que el fruto es universal: se espera que todo cristiano lo lleve, y la falta de fruto es señal de un problema más profundo. Los dones son diversos: no todo creyente tiene el mismo don, y nadie los tiene todos. El carácter se requiere de todos; los dones particulares se dan como el Espíritu escoge." },
-
-    { textEn: "24. How does Regeneration address the problem of Total Depravity? Why is the new birth necessary?",
-      textEs: "24. ¿Cómo aborda la Regeneración el problema de la Depravación Total? ¿Por qué es necesario el nuevo nacimiento?",
-      kw_en: ["regeneration", "new birth", "depravity", "dead", "life", "necessary", "Spirit", "cannot"],
-      kw_es: ["regeneración", "nuevo nacimiento", "depravación", "muerto", "vida", "necesario", "Espíritu", "no puede"],
-      modelEn: "The unit teaches that regeneration is the miraculous impartation of life, the new birth by which the Spirit makes a person a new creation. This addresses total depravity, the condition in which the sinner is spiritually dead and unable to come to God on his own. Because a dead person cannot give himself life, no amount of human effort, education, or willpower can produce the change that is needed. The new birth is necessary precisely because the problem is not weakness but death: the Spirit must break the chains of spiritual death and impart new life. Regeneration is therefore God's work, not man's achievement, and it is the only adequate answer to depravity.",
-      modelEs: "La unidad enseña que la regeneración es la impartición milagrosa de vida, el nuevo nacimiento por el cual el Espíritu hace de una persona una nueva criatura. Esto aborda la depravación total, la condición en que el pecador está espiritualmente muerto e incapaz de venir a Dios por sí mismo. Como una persona muerta no puede darse vida a sí misma, ninguna cantidad de esfuerzo humano, educación o fuerza de voluntad puede producir el cambio necesario. El nuevo nacimiento es necesario precisamente porque el problema no es debilidad sino muerte: el Espíritu debe romper las cadenas de la muerte espiritual e impartir vida nueva. La regeneración es por tanto obra de Dios, no logro del hombre, y es la única respuesta adecuada a la depravación." },
-
-    { textEn: "25. Refute the idea of the Spirit as a \"junior partner\" in the Trinity. Use the unit's teaching to demonstrate His full deity.",
-      textEs: "25. Refute la idea del Espíritu como un \"socio menor\" en la Trinidad. Use la enseñanza de la unidad para demostrar Su plena deidad.",
-      kw_en: ["deity", "fully God", "equal", "person", "lie", "Acts", "divine", "Trinity"],
-      kw_es: ["deidad", "plenamente Dios", "igual", "persona", "mentir", "Hechos", "divino", "Trinidad"],
-      modelEn: "The idea that the Spirit is a lesser or \"junior\" member of the Trinity is mistaken, because the unit presents Him as fully God and equal in majesty with the Father and the Son. He is a divine person who possesses the attributes and does the works of God, not a secondary helper or impersonal influence. To lie to the Holy Spirit is to lie to God Himself, which shows that He is treated in Scripture as fully divine. He shares in the one name into which believers are baptized alongside the Father and the Son. So far from being a junior partner, the Spirit is co-equal and co-eternal, and to diminish Him is to diminish God.",
-      modelEs: "La idea de que el Espíritu es un miembro menor o \"socio menor\" de la Trinidad es errónea, porque la unidad lo presenta como plenamente Dios e igual en majestad con el Padre y el Hijo. Es una persona divina que posee los atributos y hace las obras de Dios, no un ayudante secundario ni una influencia impersonal. Mentir al Espíritu Santo es mentir a Dios mismo, lo que muestra que la Escritura lo trata como plenamente divino. Comparte el único nombre en el cual los creyentes son bautizados junto al Padre y al Hijo. Lejos de ser un socio menor, el Espíritu es co-igual y co-eterno, y disminuirlo es disminuir a Dios." },
-
-    { textEn: "26. Contrast the Indwelling and the Filling of the Spirit. What is the difference, and why does it matter for spiritual growth?",
-      textEs: "26. Contraste la Morada y la Llenura del Espíritu. ¿Cuál es la diferencia, y por qué importa para el crecimiento espiritual?",
-      kw_en: ["indwelling", "filling", "permanent", "control", "once", "repeated", "yielded", "growth"],
-      kw_es: ["morada", "llenura", "permanente", "control", "una vez", "repetida", "rendido", "crecimiento"],
-      modelEn: "The unit contrasts the Spirit's indwelling with His filling. Indwelling is the permanent presence of the Spirit that begins at salvation; every believer is indwelt, and this does not come and go. Filling is the ongoing, repeated experience of being under the Spirit's control as the believer yields to Him. The difference matters for spiritual growth because indwelling guarantees the Spirit is present, but filling determines how much He governs the daily life. A believer always has the Spirit, yet may not always be filled, that is, surrendered and empowered. Growth comes as the believer is repeatedly filled, continually yielding control so that the indwelling Spirit can produce fruit and direct the life.",
-      modelEs: "La unidad contrasta la morada del Espíritu con Su llenura. La morada es la presencia permanente del Espíritu que comienza en la salvación; todo creyente tiene al Espíritu morando en él, y esto no va y viene. La llenura es la experiencia continua y repetida de estar bajo el control del Espíritu a medida que el creyente se rinde a Él. La diferencia importa para el crecimiento espiritual porque la morada garantiza que el Espíritu está presente, pero la llenura determina cuánto gobierna la vida diaria. Un creyente siempre tiene al Espíritu, pero puede no estar siempre lleno, es decir, rendido y empoderado. El crecimiento viene cuando el creyente es lleno repetidamente, rindiendo continuamente el control para que el Espíritu que mora en él produzca fruto y dirija la vida." },
-
-    { textEn: "27. Explain the nature of the \"Unpardonable Sin\" (blasphemy against the Holy Spirit). Why is it described as unforgivable?",
-      textEs: "27. Explique la naturaleza del \"Pecado Imperdonable\" (la blasfemia contra el Espíritu Santo). ¿Por qué se describe como imperdonable?",
-      kw_en: ["unpardonable", "blasphemy", "rejection", "conviction", "hardened", "refuse", "final", "Spirit"],
-      kw_es: ["imperdonable", "blasfemia", "rechazo", "convicción", "endurecido", "rechazar", "final", "Espíritu"],
-      modelEn: "The unit explains the unpardonable sin as the persistent, hardened rejection of the Holy Spirit's work. Because it is the Spirit who convicts of sin and points the sinner to the Savior, to finally and decisively refuse that conviction is to cut oneself off from the very means of forgiveness. It is described as unforgivable not because God's mercy runs out, but because the person who hardens against the Spirit's witness shuts the only door through which pardon comes. The sin is therefore less a single careless word than a settled, final refusal to respond to the Spirit. The very fear of having committed it is usually evidence that one has not, since a hardened heart no longer cares.",
-      modelEs: "La unidad explica el pecado imperdonable como el rechazo persistente y endurecido de la obra del Espíritu Santo. Como es el Espíritu quien convence de pecado y señala al pecador hacia el Salvador, rechazar final y decididamente esa convicción es cortarse del medio mismo del perdón. Se describe como imperdonable no porque la misericordia de Dios se agote, sino porque la persona que se endurece contra el testimonio del Espíritu cierra la única puerta por la que viene el perdón. El pecado es por tanto menos una sola palabra descuidada que un rechazo establecido y final a responder al Espíritu. El temor mismo de haberlo cometido suele ser evidencia de que no se ha cometido, pues un corazón endurecido ya no se preocupa." },
-
-    { textEn: "28. Describe the Spirit's role in the inspiration of Scripture. How does 2 Peter 1:21 inform our view of the Bible's authority?",
-      textEs: "28. Describa el papel del Espíritu en la inspiración de la Escritura. ¿Cómo informa 2 Pedro 1:21 nuestra visión de la autoridad de la Biblia?",
-      kw_en: ["inspiration", "moved", "Spirit", "Scripture", "authority", "men", "God", "carried"],
-      kw_es: ["inspiración", "movidos", "Espíritu", "Escritura", "autoridad", "hombres", "Dios", "llevados"],
-      modelEn: "The unit teaches that the Holy Spirit is the agent of Scripture's inspiration. 2 Peter 1:21 says that prophecy never came by the will of man, but that holy men of God spoke as they were moved, or carried along, by the Holy Spirit. This means the Bible did not originate in human opinion; the Spirit superintended the writers so that what they wrote is the word of God. That informs our view of authority directly: because Scripture is Spirit-breathed, it carries God's own authority and is trustworthy and binding. We submit to the Bible not because the human authors were clever, but because the Spirit who moved them is God, so the words He produced through them are reliable and authoritative.",
-      modelEs: "La unidad enseña que el Espíritu Santo es el agente de la inspiración de la Escritura. 2 Pedro 1:21 dice que la profecía nunca vino por voluntad del hombre, sino que los santos hombres de Dios hablaron siendo movidos, o llevados, por el Espíritu Santo. Esto significa que la Biblia no se originó en la opinión humana; el Espíritu supervisó a los escritores de modo que lo que escribieron es la palabra de Dios. Eso informa nuestra visión de la autoridad directamente: como la Escritura es inspirada por el Espíritu, lleva la propia autoridad de Dios y es confiable y obligatoria. Nos sometemos a la Biblia no porque los autores humanos fueran ingeniosos, sino porque el Espíritu que los movió es Dios, así que las palabras que produjo por medio de ellos son confiables y autoritativas." },
-
-    { textEn: "29. Why is Sanctification described as \"synergistic\"? How do the Spirit and the believer cooperate?",
-      textEs: "29. ¿Por qué la Santificación se describe como \"sinérgica\"? ¿Cómo cooperan el Espíritu y el creyente?",
-      kw_en: ["synergistic", "cooperate", "Spirit", "believer", "work", "yield", "effort", "grace"],
-      kw_es: ["sinérgica", "cooperan", "Espíritu", "creyente", "obra", "rendir", "esfuerzo", "gracia"],
-      modelEn: "Sanctification is called synergistic because it involves two working together: the Holy Spirit and the believer. Unlike regeneration, which is entirely God's act on a spiritually dead person, sanctification is a process in which the Spirit empowers and the believer actively responds. The Spirit supplies the power, conviction, and direction, while the believer yields, obeys, and makes real effort to put off sin and pursue holiness. This is not salvation by works, because the power and initiative are the Spirit's; but it is not passivity either, because the believer genuinely participates. The two cooperate: God works in the believer, and the believer works out what God works in.",
-      modelEs: "La santificación se llama sinérgica porque involucra a dos obrando juntos: el Espíritu Santo y el creyente. A diferencia de la regeneración, que es enteramente el acto de Dios sobre una persona espiritualmente muerta, la santificación es un proceso en que el Espíritu empodera y el creyente responde activamente. El Espíritu provee el poder, la convicción y la dirección, mientras que el creyente se rinde, obedece y hace un esfuerzo real por dejar el pecado y buscar la santidad. Esto no es salvación por obras, porque el poder y la iniciativa son del Espíritu; pero tampoco es pasividad, porque el creyente participa genuinamente. Los dos cooperan: Dios obra en el creyente, y el creyente lleva a cabo lo que Dios obra en él." },
-
-    { textEn: "30. Contrast \"grieving\" and \"quenching\" the Spirit in the life of a church. How can a church avoid both?",
-      textEs: "30. Contraste \"contristar\" y \"apagar\" el Espíritu en la vida de una iglesia. ¿Cómo puede una iglesia evitar ambos?",
-      kw_en: ["grieve", "quench", "sin", "suppress", "holiness", "obey", "freedom", "Spirit"],
-      kw_es: ["contristar", "apagar", "pecado", "suprimir", "santidad", "obedecer", "libertad", "Espíritu"],
-      modelEn: "The unit contrasts grieving and quenching the Spirit. Grieving the Spirit has to do with sin: when believers indulge in attitudes and behavior contrary to His holiness, they wound the Spirit who dwells among them. Quenching the Spirit has to do with suppression: when a church resists or stifles what the Spirit wants to do, it puts out His fire. A church avoids grieving Him by pursuing holiness and dealing honestly with sin, and avoids quenching Him by remaining open and responsive to His leading rather than suppressing it. Both dangers must be guarded against together, because a church can be morally careless on one side or rigidly resistant on the other, and either one hinders the Spirit's work.",
-      modelEs: "La unidad contrasta contristar y apagar el Espíritu. Contristar al Espíritu tiene que ver con el pecado: cuando los creyentes se entregan a actitudes y conductas contrarias a Su santidad, hieren al Espíritu que mora entre ellos. Apagar al Espíritu tiene que ver con la supresión: cuando una iglesia resiste o sofoca lo que el Espíritu quiere hacer, apaga Su fuego. Una iglesia evita contristarlo buscando la santidad y tratando honestamente con el pecado, y evita apagarlo permaneciendo abierta y receptiva a Su dirección en lugar de suprimirla. Ambos peligros deben evitarse juntos, porque una iglesia puede ser moralmente descuidada por un lado o rígidamente resistente por el otro, y cualquiera de los dos estorba la obra del Espíritu." }
-];
+/* CTSST — unit 4. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "st",
+ "unit": 4,
+ "totalUnits": 13,
+ "filePrefix": "CTSST",
+ "prevHref": "CTSSTUnit3.html",
+ "nextHref": "CTSSTUnit5.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - The Doctrine of Revelation",
+   "Unit 2 - The Doctrine of God",
+   "Unit 3 - The Doctrine of Christ",
+   "Unit 4 - The Holy Spirit",
+   "Unit 5 - The Doctrine of Man",
+   "Unit 6 - Sin",
+   "Unit 7 - Salvation",
+   "Unit 8 - The Church",
+   "Unit 9 - Denominations and the Gospel",
+   "Unit 10 - Last Things",
+   "Unit 11 - Apologetics",
+   "Unit 12 - The Kingdom of God",
+   "Unit 13 - Church, State, and Nationalism"
+  ],
+  "es": [
+   "Unit 1 - The Doctrine of Revelation",
+   "Unit 2 - The Doctrine of God",
+   "Unit 3 - The Doctrine of Christ",
+   "Unit 4 - The Holy Spirit",
+   "Unit 5 - The Doctrine of Man",
+   "Unit 6 - Sin",
+   "Unit 7 - Salvation",
+   "Unit 8 - The Church",
+   "Unit 9 - Denominations and the Gospel",
+   "Unit 10 - Last Things",
+   "Unit 11 - Apologetics",
+   "Unit 12 - The Kingdom of God",
+   "Unit 13 - Church, State, and Nationalism"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "The Holy Spirit is accurately defined as:",
+    "es": "El Espíritu Santo se define con precisión como:"
+   },
+   "options": {
+    "en": [
+     "A created being",
+     "An angel",
+     "An impersonal force",
+     "A divine Person"
+    ],
+    "es": [
+     "Un ser creado",
+     "Un ángel",
+     "Una fuerza impersonal",
+     "Una Persona divina"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Holy Spirit is a divine Person, not an impersonal force.",
+    "es": "El Espíritu Santo es una Persona divina, no una fuerza impersonal."
+   }
+  },
+  {
+   "stem": {
+    "en": "Scripture identifies lying to the Spirit as lying to God in:",
+    "es": "La Escritura identifica mentir al Espíritu como mentir a Dios en:"
+   },
+   "options": {
+    "en": [
+     "John 3:5",
+     "Acts 5:3-4",
+     "Romans 8:14",
+     "Galatians 5:22"
+    ],
+    "es": [
+     "Juan 3:5",
+     "Hechos 5:3-4",
+     "Romanos 8:14",
+     "Gálatas 5:22"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Acts 5:3-4 states that lying to the Holy Spirit is lying to God.",
+    "es": "Hechos 5:3-4 declara que mentir al Espíritu Santo es mentir a Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which faculty allows the Spirit to be 'grieved'?",
+    "es": "¿Qué facultad permite que el Espíritu sea 'entristecido'?"
+   },
+   "options": {
+    "en": [
+     "Emotion",
+     "Will",
+     "Power",
+     "Intellect"
+    ],
+    "es": [
+     "Emoción",
+     "Voluntad",
+     "Poder",
+     "Intelecto"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Spirit has emotions and can be grieved (Ephesians 4:30).",
+    "es": "El Espíritu tiene emociones y puede ser entristecido (Efesios 4:30)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Spirit's role in 'Conviction' is to:",
+    "es": "El papel del Espíritu en la 'Convicción' es:"
+   },
+   "options": {
+    "en": [
+     "Speak in tongues",
+     "Perform miracles",
+     "Make the world aware of sin",
+     "Punish sinners"
+    ],
+    "es": [
+     "Hablar en lenguas",
+     "Realizar milagros",
+     "Hacer que el mundo sepa del pecado",
+     "Castigar a los pecadores"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Spirit convicts the world of sin, righteousness, and judgment (John 16:8).",
+    "es": "El Espíritu convence al mundo de pecado, justicia y juicio (Juan 16:8)."
+   }
+  },
+  {
+   "stem": {
+    "en": "'Regeneration' refers to:",
+    "es": "'Regeneración' se refiere a:"
+   },
+   "options": {
+    "en": [
+     "Church membership",
+     "Baptism",
+     "Moral improvement",
+     "The new spiritual birth"
+    ],
+    "es": [
+     "Membresía de iglesia",
+     "Bautismo",
+     "Mejora moral",
+     "El nuevo nacimiento espiritual"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Regeneration is the new birth by the Spirit (Titus 3:5).",
+    "es": "La regeneración es el nuevo nacimiento por el Espíritu (Tito 3:5)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Where does the Spirit reside in the believer?",
+    "es": "¿Dónde reside el Espíritu en el creyente?"
+   },
+   "options": {
+    "en": [
+     "Beside them",
+     "In the church building",
+     "In heaven only",
+     "Within their body as a temple"
+    ],
+    "es": [
+     "Junto a ellos",
+     "En el edificio de la iglesia",
+     "Solo en el cielo",
+     "Dentro de su cuerpo como un templo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The believer's body is the temple of the Holy Spirit (1 Corinthians 6:19).",
+    "es": "El cuerpo del creyente es el templo del Espíritu Santo (1 Corintios 6:19)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The 'Seal' of the Spirit signifies:",
+    "es": "El 'Sello' del Espíritu significa:"
+   },
+   "options": {
+    "en": [
+     "Church approval",
+     "Temporary enthusiasm",
+     "Ownership and a guarantee of redemption",
+     "A second blessing"
+    ],
+    "es": [
+     "Aprobación de la iglesia",
+     "Entusiasmo temporal",
+     "Propiedad y una garantía de redención",
+     "Una segunda bendición"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Spirit seals believers as a mark of ownership and guarantee (Ephesians 1:13).",
+    "es": "El Espíritu sella a los creyentes como marca de propiedad y garantía (Efesios 1:13)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The evidence of character transformation is called:",
+    "es": "La evidencia de la transformación del carácter se llama:"
+   },
+   "options": {
+    "en": [
+     "Tongues",
+     "Spiritual gifts",
+     "The Fruit of the Spirit",
+     "Miracles"
+    ],
+    "es": [
+     "Lenguas",
+     "Dones espirituales",
+     "El Fruto del Espíritu",
+     "Milagros"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Fruit of the Spirit is the evidence of character transformation (Galatians 5:22-23).",
+    "es": "El Fruto del Espíritu es la evidencia de la transformación del carácter (Gálatas 5:22-23)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Spiritual gifts are primarily distributed for:",
+    "es": "Los dones espirituales se distribuyen principalmente para:"
+   },
+   "options": {
+    "en": [
+     "Building up the church",
+     "Showing off",
+     "Financial gain",
+     "Personal glory"
+    ],
+    "es": [
+     "Edificación de la iglesia",
+     "Presumir",
+     "Ganancia financiera",
+     "Gloria personal"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Gifts are given for the common good and building up the church.",
+    "es": "Los dones se dan para el bien común y la edificación de la iglesia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Sanctification is the ongoing process of:",
+    "es": "La santificación es el proceso continuo de:"
+   },
+   "options": {
+    "en": [
+     "Growing in holiness",
+     "Receiving gifts",
+     "Speaking in tongues",
+     "Being saved from hell"
+    ],
+    "es": [
+     "Crecer en santidad",
+     "Recibir dones",
+     "Hablar en lenguas",
+     "Ser salvo del infierno"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Sanctification is the process of becoming more like Christ.",
+    "es": "La santificación es el proceso de llegar a ser más como Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The command in Ephesians 5:18 is to:",
+    "es": "El mandato en Efesios 5:18 es:"
+   },
+   "options": {
+    "en": [
+     "Ignore the Spirit",
+     "Be filled with the Spirit",
+     "Quench the Spirit",
+     "Grieve the Spirit"
+    ],
+    "es": [
+     "Ignorar el Espíritu",
+     "Ser llenos del Espíritu",
+     "Apagar el Espíritu",
+     "Entristecer el Espíritu"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Paul commands believers to be filled with the Spirit.",
+    "es": "Pablo ordena a los creyentes ser llenos del Espíritu."
+   }
+  },
+  {
+   "stem": {
+    "en": "To 'Quench' the Spirit means to:",
+    "es": "Apagar el Espíritu significa:"
+   },
+   "options": {
+    "en": [
+     "Seek His guidance",
+     "Suppress His influence",
+     "Welcome His power",
+     "Celebrate His gifts"
+    ],
+    "es": [
+     "Buscar Su guía",
+     "Suprimir Su influencia",
+     "Dar la bienvenida a Su poder",
+     "Celebrar Sus dones"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Quenching the Spirit means suppressing His influence (1 Thessalonians 5:19).",
+    "es": "Apagar el Espíritu significa suprimir Su influencia (1 Tesalonicenses 5:19)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which sin involves attributing God's work to Satan?",
+    "es": "¿Qué pecado implica atribuir la obra de Dios a Satanás?"
+   },
+   "options": {
+    "en": [
+     "Quenching the Spirit",
+     "Ignoring the Spirit",
+     "Grieving the Spirit",
+     "Blaspheming the Spirit"
+    ],
+    "es": [
+     "Apagar el Espíritu",
+     "Ignorar el Espíritu",
+     "Entristecer el Espíritu",
+     "Blasfemar contra el Espíritu"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Blasphemy against the Spirit attributes God's work to Satan (Mark 3:28-29).",
+    "es": "La blasfemia contra el Espíritu atribuye la obra de Dios a Satanás (Marcos 3:28-29)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Spirit provides 'Assurance' by:",
+    "es": "El Espíritu proporciona 'Seguridad' al:"
+   },
+   "options": {
+    "en": [
+     "Witnessing to our spirit that we are God's children",
+     "Removing all trials",
+     "Making us perfect",
+     "Giving material wealth"
+    ],
+    "es": [
+     "Dar testimonio a nuestro espíritu de que somos hijos de Dios",
+     "Eliminar todas las pruebas",
+     "Hacernos perfectos",
+     "Dar riqueza material"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Spirit bears witness that we are children of God (Romans 8:16).",
+    "es": "El Espíritu da testimonio de que somos hijos de Dios (Romanos 8:16)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Spirit's role in Genesis 1:2 involved:",
+    "es": "El papel del Espíritu en Génesis 1:2 implicaba:"
+   },
+   "options": {
+    "en": [
+     "Prophecy",
+     "Judgment",
+     "Creation",
+     "Salvation"
+    ],
+    "es": [
+     "Profecía",
+     "Juicio",
+     "Creación",
+     "Salvación"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Spirit hovered over the waters at creation (Genesis 1:2).",
+    "es": "El Espíritu se movía sobre la faz de las aguas en la creación (Génesis 1:2)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The office given for 'equipping the saints' is:",
+    "es": "El oficio dado para 'equipar a los santos' es:"
+   },
+   "options": {
+    "en": [
+     "Prophet",
+     "Apostle",
+     "Pastor-teacher",
+     "Evangelist"
+    ],
+    "es": [
+     "Profeta",
+     "Apóstol",
+     "Pastor-maestro",
+     "Evangelista"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Pastor-teachers are given for equipping the saints (Ephesians 4:11-12).",
+    "es": "Los pastores-maestros son dados para equipar a los santos (Efesios 4:11-12)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Walking in the Spirit (Galatians 5:16) results in:",
+    "es": "Andar en el Espíritu (Gálatas 5:16) resulta en:"
+   },
+   "options": {
+    "en": [
+     "Perfect sinlessness",
+     "Material prosperity",
+     "Fame",
+     "Overcoming the lusts of the flesh"
+    ],
+    "es": [
+     "Perfecta impecabilidad",
+     "Prosperidad material",
+     "Fama",
+     "Vencer las pasiones de la carne"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Walking in the Spirit enables us to overcome fleshly desires.",
+    "es": "Andar en el Espíritu nos capacita para vencer los deseos de la carne."
+   }
+  },
+  {
+   "stem": {
+    "en": "The distribution of gifts 'as He wills' shows His:",
+    "es": "La distribución de los dones 'como Él quiere' muestra Su:"
+   },
+   "options": {
+    "en": [
+     "Will",
+     "Intellect",
+     "Weakness",
+     "Emotion"
+    ],
+    "es": [
+     "Voluntad",
+     "Intelecto",
+     "Debilidad",
+     "Emoción"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Spirit distributes gifts according to His will (1 Corinthians 12:11).",
+    "es": "El Espíritu distribuye los dones según Su voluntad (1 Corintios 12:11)."
+   }
+  },
+  {
+   "stem": {
+    "en": "To 'Grieve' the Spirit refers to:",
+    "es": "'Entristecer' al Espíritu se refiere a:"
+   },
+   "options": {
+    "en": [
+     "Rejoicing in His presence",
+     "Causing Him sorrow through unholy living",
+     "Using spiritual gifts",
+     "Seeking His guidance"
+    ],
+    "es": [
+     "Regocijarse en Su presencia",
+     "Causarle tristeza a través de una vida impía",
+     "Usar los dones espirituales",
+     "Buscar Su guía"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Grieving the Spirit means causing Him sorrow through sinful conduct (Ephesians 4:30).",
+    "es": "Entristecer al Espíritu significa causarle tristeza a través de una conducta pecaminosa (Efesios 4:30)."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Spirit is described as the 'earnest' or 'guarantee' of our inheritance. This means:",
+    "es": "El Espíritu es descrito como las 'arras' o 'garantía' de nuestra herencia. Esto significa:"
+   },
+   "options": {
+    "en": [
+     "Our salvation is uncertain",
+     "The Spirit is a down-payment ensuring final redemption",
+     "We must earn our salvation",
+     "The Spirit can be lost"
+    ],
+    "es": [
+     "Nuestra salvación es incierta",
+     "El Espíritu es un pago inicial que asegura la redención final",
+     "Debemos ganar nuestra salvación",
+     "El Espíritu puede perderse"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The Spirit is the guarantee of our inheritance until redemption (Ephesians 1:14).",
+    "es": "El Espíritu es las arras de nuestra herencia hasta la redención (Efesios 1:14)."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain the grammatical significance of John 16:13, where Jesus uses the masculine \"He\" with the neuter word \"Spirit.\" What does this teach about the Spirit's personhood?",
+    "es": "Explique el significado gramatical de Juan 16:13, donde Jesús usa el masculino \"Él\" con la palabra neutra \"Espíritu.\" ¿Qué enseña esto sobre la personalidad del Espíritu?"
+   },
+   "keywords": {
+    "en": [
+     "masculine",
+     "neuter",
+     "He",
+     "person",
+     "personhood",
+     "not",
+     "force",
+     "deliberate"
+    ],
+    "es": [
+     "masculino",
+     "neutro",
+     "Él",
+     "persona",
+     "personalidad",
+     "no",
+     "fuerza",
+     "deliberado"
+    ]
+   },
+   "model": {
+    "en": "In John 16:13 Jesus refers to the Spirit with the masculine pronoun \"He\" even though the Greek word for Spirit is grammatically neuter. Normally the pronoun would match the neuter noun, so this deliberate mismatch is significant. It signals that the Holy Spirit is not an impersonal force or influence but a person. The teaching of the unit is that the Spirit thinks, wills, and acts as a person of the Trinity, and this grammar is one of the ways Scripture itself underlines that truth. Treating Him as a mere power or energy is therefore a mistake; He is a \"He,\" not an \"it.\"",
+    "es": "En Juan 16:13 Jesús se refiere al Espíritu con el pronombre masculino \"Él\" aunque la palabra griega para Espíritu es gramaticalmente neutra. Normalmente el pronombre concordaría con el sustantivo neutro, así que este desajuste deliberado es significativo. Señala que el Espíritu Santo no es una fuerza o influencia impersonal sino una persona. La enseñanza de la unidad es que el Espíritu piensa, quiere y actúa como una persona de la Trinidad, y esta gramática es una de las maneras en que la Escritura misma subraya esa verdad. Tratarlo como un mero poder o energía es por tanto un error; Él es un \"Él\", no un \"ello\"."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the relationship between the \"Seal\" and the \"Earnest\" (down payment) of the Spirit. How do they assure believers of their salvation?",
+    "es": "Explique la relación entre el \"Sello\" y las \"Arras\" (pago inicial) del Espíritu. ¿Cómo aseguran a los creyentes de su salvación?"
+   },
+   "keywords": {
+    "en": [
+     "seal",
+     "earnest",
+     "down payment",
+     "assurance",
+     "ownership",
+     "guarantee",
+     "salvation",
+     "Spirit"
+    ],
+    "es": [
+     "sello",
+     "arras",
+     "pago inicial",
+     "seguridad",
+     "propiedad",
+     "garantía",
+     "salvación",
+     "Espíritu"
+    ]
+   },
+   "model": {
+    "en": "The unit describes the Spirit as both a Seal and an Earnest given to the believer. A seal marks ownership and security: when God seals a believer with the Spirit, He stamps that person as His own and keeps them secure. An earnest is a down payment that guarantees the full amount will follow, so the Spirit given now is God's pledge that the complete inheritance of salvation is certain to come. Together they assure believers on two fronts: the seal says you already belong to God, and the earnest says the rest of what God has promised is guaranteed. The believer's confidence rests not on feelings but on the Spirit God has placed within.",
+    "es": "La unidad describe al Espíritu como un Sello y unas Arras dados al creyente. Un sello marca propiedad y seguridad: cuando Dios sella a un creyente con el Espíritu, lo marca como suyo y lo guarda seguro. Las arras son un pago inicial que garantiza que la cantidad completa seguirá, así que el Espíritu dado ahora es la promesa de Dios de que la herencia completa de la salvación ciertamente vendrá. Juntos aseguran al creyente en dos frentes: el sello dice que ya perteneces a Dios, y las arras dicen que el resto de lo que Dios ha prometido está garantizado. La confianza del creyente descansa no en los sentimientos sino en el Espíritu que Dios ha puesto dentro."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Distinguish between the Fruit of the Spirit and the Gifts of the Spirit. Which is for all believers, and which varies?",
+    "es": "Distinga entre el Fruto del Espíritu y los Dones del Espíritu. ¿Cuál es para todos los creyentes, y cuál varía?"
+   },
+   "keywords": {
+    "en": [
+     "fruit",
+     "gifts",
+     "character",
+     "service",
+     "all",
+     "varies",
+     "love",
+     "varied"
+    ],
+    "es": [
+     "fruto",
+     "dones",
+     "carácter",
+     "servicio",
+     "todos",
+     "varía",
+     "amor",
+     "variados"
+    ]
+   },
+   "model": {
+    "en": "The unit distinguishes the Fruit of the Spirit from the Gifts of the Spirit. The fruit is the Christlike character the Spirit produces in every believer, such as love, joy, and peace, and it is meant to grow in all who walk in the Spirit. The gifts are the varied abilities the Spirit distributes for service in the body of Christ, and these differ from believer to believer. So the fruit is universal: every Christian is expected to bear it, and a lack of fruit is a sign of a deeper problem. The gifts are diverse: not every believer has the same gift, and no one has them all. Character is required of everyone; particular gifts are given as the Spirit chooses.",
+    "es": "La unidad distingue el Fruto del Espíritu de los Dones del Espíritu. El fruto es el carácter semejante a Cristo que el Espíritu produce en cada creyente, como el amor, el gozo y la paz, y debe crecer en todos los que andan en el Espíritu. Los dones son las habilidades variadas que el Espíritu distribuye para el servicio en el cuerpo de Cristo, y estos difieren de un creyente a otro. Así que el fruto es universal: se espera que todo cristiano lo lleve, y la falta de fruto es señal de un problema más profundo. Los dones son diversos: no todo creyente tiene el mismo don, y nadie los tiene todos. El carácter se requiere de todos; los dones particulares se dan como el Espíritu escoge."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does Regeneration address the problem of Total Depravity? Why is the new birth necessary?",
+    "es": "¿Cómo aborda la Regeneración el problema de la Depravación Total? ¿Por qué es necesario el nuevo nacimiento?"
+   },
+   "keywords": {
+    "en": [
+     "regeneration",
+     "new birth",
+     "depravity",
+     "dead",
+     "life",
+     "necessary",
+     "Spirit",
+     "cannot"
+    ],
+    "es": [
+     "regeneración",
+     "nuevo nacimiento",
+     "depravación",
+     "muerto",
+     "vida",
+     "necesario",
+     "Espíritu",
+     "no puede"
+    ]
+   },
+   "model": {
+    "en": "The unit teaches that regeneration is the miraculous impartation of life, the new birth by which the Spirit makes a person a new creation. This addresses total depravity, the condition in which the sinner is spiritually dead and unable to come to God on his own. Because a dead person cannot give himself life, no amount of human effort, education, or willpower can produce the change that is needed. The new birth is necessary precisely because the problem is not weakness but death: the Spirit must break the chains of spiritual death and impart new life. Regeneration is therefore God's work, not man's achievement, and it is the only adequate answer to depravity.",
+    "es": "La unidad enseña que la regeneración es la impartición milagrosa de vida, el nuevo nacimiento por el cual el Espíritu hace de una persona una nueva criatura. Esto aborda la depravación total, la condición en que el pecador está espiritualmente muerto e incapaz de venir a Dios por sí mismo. Como una persona muerta no puede darse vida a sí misma, ninguna cantidad de esfuerzo humano, educación o fuerza de voluntad puede producir el cambio necesario. El nuevo nacimiento es necesario precisamente porque el problema no es debilidad sino muerte: el Espíritu debe romper las cadenas de la muerte espiritual e impartir vida nueva. La regeneración es por tanto obra de Dios, no logro del hombre, y es la única respuesta adecuada a la depravación."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Refute the idea of the Spirit as a \"junior partner\" in the Trinity. Use the unit's teaching to demonstrate His full deity.",
+    "es": "Refute la idea del Espíritu como un \"socio menor\" en la Trinidad. Use la enseñanza de la unidad para demostrar Su plena deidad."
+   },
+   "keywords": {
+    "en": [
+     "deity",
+     "fully God",
+     "equal",
+     "person",
+     "lie",
+     "Acts",
+     "divine",
+     "Trinity"
+    ],
+    "es": [
+     "deidad",
+     "plenamente Dios",
+     "igual",
+     "persona",
+     "mentir",
+     "Hechos",
+     "divino",
+     "Trinidad"
+    ]
+   },
+   "model": {
+    "en": "The idea that the Spirit is a lesser or \"junior\" member of the Trinity is mistaken, because the unit presents Him as fully God and equal in majesty with the Father and the Son. He is a divine person who possesses the attributes and does the works of God, not a secondary helper or impersonal influence. To lie to the Holy Spirit is to lie to God Himself, which shows that He is treated in Scripture as fully divine. He shares in the one name into which believers are baptized alongside the Father and the Son. So far from being a junior partner, the Spirit is co-equal and co-eternal, and to diminish Him is to diminish God.",
+    "es": "La idea de que el Espíritu es un miembro menor o \"socio menor\" de la Trinidad es errónea, porque la unidad lo presenta como plenamente Dios e igual en majestad con el Padre y el Hijo. Es una persona divina que posee los atributos y hace las obras de Dios, no un ayudante secundario ni una influencia impersonal. Mentir al Espíritu Santo es mentir a Dios mismo, lo que muestra que la Escritura lo trata como plenamente divino. Comparte el único nombre en el cual los creyentes son bautizados junto al Padre y al Hijo. Lejos de ser un socio menor, el Espíritu es co-igual y co-eterno, y disminuirlo es disminuir a Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Contrast the Indwelling and the Filling of the Spirit. What is the difference, and why does it matter for spiritual growth?",
+    "es": "Contraste la Morada y la Llenura del Espíritu. ¿Cuál es la diferencia, y por qué importa para el crecimiento espiritual?"
+   },
+   "keywords": {
+    "en": [
+     "indwelling",
+     "filling",
+     "permanent",
+     "control",
+     "once",
+     "repeated",
+     "yielded",
+     "growth"
+    ],
+    "es": [
+     "morada",
+     "llenura",
+     "permanente",
+     "control",
+     "una vez",
+     "repetida",
+     "rendido",
+     "crecimiento"
+    ]
+   },
+   "model": {
+    "en": "The unit contrasts the Spirit's indwelling with His filling. Indwelling is the permanent presence of the Spirit that begins at salvation; every believer is indwelt, and this does not come and go. Filling is the ongoing, repeated experience of being under the Spirit's control as the believer yields to Him. The difference matters for spiritual growth because indwelling guarantees the Spirit is present, but filling determines how much He governs the daily life. A believer always has the Spirit, yet may not always be filled, that is, surrendered and empowered. Growth comes as the believer is repeatedly filled, continually yielding control so that the indwelling Spirit can produce fruit and direct the life.",
+    "es": "La unidad contrasta la morada del Espíritu con Su llenura. La morada es la presencia permanente del Espíritu que comienza en la salvación; todo creyente tiene al Espíritu morando en él, y esto no va y viene. La llenura es la experiencia continua y repetida de estar bajo el control del Espíritu a medida que el creyente se rinde a Él. La diferencia importa para el crecimiento espiritual porque la morada garantiza que el Espíritu está presente, pero la llenura determina cuánto gobierna la vida diaria. Un creyente siempre tiene al Espíritu, pero puede no estar siempre lleno, es decir, rendido y empoderado. El crecimiento viene cuando el creyente es lleno repetidamente, rindiendo continuamente el control para que el Espíritu que mora en él produzca fruto y dirija la vida."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the nature of the \"Unpardonable Sin\" (blasphemy against the Holy Spirit). Why is it described as unforgivable?",
+    "es": "Explique la naturaleza del \"Pecado Imperdonable\" (la blasfemia contra el Espíritu Santo). ¿Por qué se describe como imperdonable?"
+   },
+   "keywords": {
+    "en": [
+     "unpardonable",
+     "blasphemy",
+     "rejection",
+     "conviction",
+     "hardened",
+     "refuse",
+     "final",
+     "Spirit"
+    ],
+    "es": [
+     "imperdonable",
+     "blasfemia",
+     "rechazo",
+     "convicción",
+     "endurecido",
+     "rechazar",
+     "final",
+     "Espíritu"
+    ]
+   },
+   "model": {
+    "en": "The unit explains the unpardonable sin as the persistent, hardened rejection of the Holy Spirit's work. Because it is the Spirit who convicts of sin and points the sinner to the Savior, to finally and decisively refuse that conviction is to cut oneself off from the very means of forgiveness. It is described as unforgivable not because God's mercy runs out, but because the person who hardens against the Spirit's witness shuts the only door through which pardon comes. The sin is therefore less a single careless word than a settled, final refusal to respond to the Spirit. The very fear of having committed it is usually evidence that one has not, since a hardened heart no longer cares.",
+    "es": "La unidad explica el pecado imperdonable como el rechazo persistente y endurecido de la obra del Espíritu Santo. Como es el Espíritu quien convence de pecado y señala al pecador hacia el Salvador, rechazar final y decididamente esa convicción es cortarse del medio mismo del perdón. Se describe como imperdonable no porque la misericordia de Dios se agote, sino porque la persona que se endurece contra el testimonio del Espíritu cierra la única puerta por la que viene el perdón. El pecado es por tanto menos una sola palabra descuidada que un rechazo establecido y final a responder al Espíritu. El temor mismo de haberlo cometido suele ser evidencia de que no se ha cometido, pues un corazón endurecido ya no se preocupa."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the Spirit's role in the inspiration of Scripture. How does 2 Peter 1:21 inform our view of the Bible's authority?",
+    "es": "Describa el papel del Espíritu en la inspiración de la Escritura. ¿Cómo informa 2 Pedro 1:21 nuestra visión de la autoridad de la Biblia?"
+   },
+   "keywords": {
+    "en": [
+     "inspiration",
+     "moved",
+     "Spirit",
+     "Scripture",
+     "authority",
+     "men",
+     "God",
+     "carried"
+    ],
+    "es": [
+     "inspiración",
+     "movidos",
+     "Espíritu",
+     "Escritura",
+     "autoridad",
+     "hombres",
+     "Dios",
+     "llevados"
+    ]
+   },
+   "model": {
+    "en": "The unit teaches that the Holy Spirit is the agent of Scripture's inspiration. 2 Peter 1:21 says that prophecy never came by the will of man, but that holy men of God spoke as they were moved, or carried along, by the Holy Spirit. This means the Bible did not originate in human opinion; the Spirit superintended the writers so that what they wrote is the word of God. That informs our view of authority directly: because Scripture is Spirit-breathed, it carries God's own authority and is trustworthy and binding. We submit to the Bible not because the human authors were clever, but because the Spirit who moved them is God, so the words He produced through them are reliable and authoritative.",
+    "es": "La unidad enseña que el Espíritu Santo es el agente de la inspiración de la Escritura. 2 Pedro 1:21 dice que la profecía nunca vino por voluntad del hombre, sino que los santos hombres de Dios hablaron siendo movidos, o llevados, por el Espíritu Santo. Esto significa que la Biblia no se originó en la opinión humana; el Espíritu supervisó a los escritores de modo que lo que escribieron es la palabra de Dios. Eso informa nuestra visión de la autoridad directamente: como la Escritura es inspirada por el Espíritu, lleva la propia autoridad de Dios y es confiable y obligatoria. Nos sometemos a la Biblia no porque los autores humanos fueran ingeniosos, sino porque el Espíritu que los movió es Dios, así que las palabras que produjo por medio de ellos son confiables y autoritativas."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is Sanctification described as \"synergistic\"? How do the Spirit and the believer cooperate?",
+    "es": "¿Por qué la Santificación se describe como \"sinérgica\"? ¿Cómo cooperan el Espíritu y el creyente?"
+   },
+   "keywords": {
+    "en": [
+     "synergistic",
+     "cooperate",
+     "Spirit",
+     "believer",
+     "work",
+     "yield",
+     "effort",
+     "grace"
+    ],
+    "es": [
+     "sinérgica",
+     "cooperan",
+     "Espíritu",
+     "creyente",
+     "obra",
+     "rendir",
+     "esfuerzo",
+     "gracia"
+    ]
+   },
+   "model": {
+    "en": "Sanctification is called synergistic because it involves two working together: the Holy Spirit and the believer. Unlike regeneration, which is entirely God's act on a spiritually dead person, sanctification is a process in which the Spirit empowers and the believer actively responds. The Spirit supplies the power, conviction, and direction, while the believer yields, obeys, and makes real effort to put off sin and pursue holiness. This is not salvation by works, because the power and initiative are the Spirit's; but it is not passivity either, because the believer genuinely participates. The two cooperate: God works in the believer, and the believer works out what God works in.",
+    "es": "La santificación se llama sinérgica porque involucra a dos obrando juntos: el Espíritu Santo y el creyente. A diferencia de la regeneración, que es enteramente el acto de Dios sobre una persona espiritualmente muerta, la santificación es un proceso en que el Espíritu empodera y el creyente responde activamente. El Espíritu provee el poder, la convicción y la dirección, mientras que el creyente se rinde, obedece y hace un esfuerzo real por dejar el pecado y buscar la santidad. Esto no es salvación por obras, porque el poder y la iniciativa son del Espíritu; pero tampoco es pasividad, porque el creyente participa genuinamente. Los dos cooperan: Dios obra en el creyente, y el creyente lleva a cabo lo que Dios obra en él."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Contrast \"grieving\" and \"quenching\" the Spirit in the life of a church. How can a church avoid both?",
+    "es": "Contraste \"contristar\" y \"apagar\" el Espíritu en la vida de una iglesia. ¿Cómo puede una iglesia evitar ambos?"
+   },
+   "keywords": {
+    "en": [
+     "grieve",
+     "quench",
+     "sin",
+     "suppress",
+     "holiness",
+     "obey",
+     "freedom",
+     "Spirit"
+    ],
+    "es": [
+     "contristar",
+     "apagar",
+     "pecado",
+     "suprimir",
+     "santidad",
+     "obedecer",
+     "libertad",
+     "Espíritu"
+    ]
+   },
+   "model": {
+    "en": "The unit contrasts grieving and quenching the Spirit. Grieving the Spirit has to do with sin: when believers indulge in attitudes and behavior contrary to His holiness, they wound the Spirit who dwells among them. Quenching the Spirit has to do with suppression: when a church resists or stifles what the Spirit wants to do, it puts out His fire. A church avoids grieving Him by pursuing holiness and dealing honestly with sin, and avoids quenching Him by remaining open and responsive to His leading rather than suppressing it. Both dangers must be guarded against together, because a church can be morally careless on one side or rigidly resistant on the other, and either one hinders the Spirit's work.",
+    "es": "La unidad contrasta contristar y apagar el Espíritu. Contristar al Espíritu tiene que ver con el pecado: cuando los creyentes se entregan a actitudes y conductas contrarias a Su santidad, hieren al Espíritu que mora entre ellos. Apagar al Espíritu tiene que ver con la supresión: cuando una iglesia resiste o sofoca lo que el Espíritu quiere hacer, apaga Su fuego. Una iglesia evita contristarlo buscando la santidad y tratando honestamente con el pecado, y evita apagarlo permaneciendo abierta y receptiva a Su dirección en lugar de suprimirla. Ambos peligros deben evitarse juntos, porque una iglesia puede ser moralmente descuidada por un lado o rígidamente resistente por el otro, y cualquiera de los dos estorba la obra del Espíritu."
+   }
+  }
+ ]
+};
